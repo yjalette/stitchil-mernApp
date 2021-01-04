@@ -1,0 +1,33 @@
+:root {
+    --main-color-light: #281e3a;
+    --main-color-dark:#190e2a;
+    --main-color: #170535;
+    --main-color-opacity: #17053591;
+    --outline-color: #543f7b;
+    --main-font: 'Quicksand';
+    --secondary-font: 'Candara', Sans-Serif;
+    --secondary-color: #a49bb3;
+    --light-gray-color: rgba(253, 242, 242, 0.73);
+    --white-color: #dee2e6;
+    --yellow-color: #F9F871;
+    --red-color: #e76f51;
+    --green-color: #00AF8D;
+    --accent-color: #13e2ba;
+    --light-green-color: #C0D4D0;
+    --lg-fonts: 1.5em;
+    --md-fonts: 18px;
+    --sm-fonts: 15px;
+    --font-heading: 'Rubik', sans-serif;
+    --font-body: 'Karla', sans-serif;
+    --letter-spacing: .4px;
+    --word-spacing: .2px;
+    --gradient-text: linear-gradient(300deg, var(--green-color), var(--light-green-color));
+
+    /* --bg-texture: url('https://www.transparenttextures.com/patterns/climpek.png'); */
+    --border: 1.5px dashed var(--light-gray-color);
+    --border-radius: 10px;
+    --padding-elem: .4em;
+    --padding-box: 1.5rem;
+    --padding-section: 1rem 3rem;
+    --btn-shadow: 0 0 0 4px var(--green-color), 2px 1px 6px 4px rgba(10, 10, 0, 0.5);
+}

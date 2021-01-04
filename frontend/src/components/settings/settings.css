@@ -1,0 +1,26 @@
+.settings {
+    width: 100%;
+    background-color: var(--main-color);
+    padding: var(--padding-section) 0;
+}
+
+.settings__section {
+    width: 100%;
+    border-top: none;
+    padding: var(--padding-section);
+}
+
+/* .settings button[type="submit"] {
+    margin: 1rem;
+    float: right;
+} */
+.settings__title {
+    font-size: 3rem;
+    padding: var(--padding-elem);
+}
+
+.settings__password {
+    background-color: var(--main-color);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+}

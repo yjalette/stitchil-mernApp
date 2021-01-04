@@ -1,0 +1,94 @@
+input, textarea, select {
+    width: 100%;
+}
+
+input {
+    background-color: var(--main-color);
+    padding: .25rem .5rem;
+}
+
+label, .formLabel {
+    font-size: var(--md-fonts);
+    color: var(--secondary-color);
+    letter-spacing: .1em;
+    line-height: 2em;
+    text-transform: lowercase;
+}
+
+.field-wrapper {
+    margin: .5em auto;
+    width: 100%;
+    font-size: 5px;
+}
+
+.customSelect__wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.customSelect option {
+    background-color: var(--main-color);
+}
+
+.user-input, .rbt-input {
+    font-size: var(--md-fonts);
+    outline: none;
+    height: 50px;
+    width: 100%;
+    box-shadow: inset -2px -2px 6px rgba(255, 255, 255, 0.2), inset 2px 2px 6px rgba(23, 5, 53, 0.8);
+    border-radius: var(--border-radius);
+}
+
+.range__form .user-input {
+    height: auto;
+    width: 50px;
+    background-color: var(--main-color);
+    text-align: center;
+}
+
+.range__form label::after {
+    content: "$";
+    font-size: var(--md-fonts);
+    font-weight: bold;
+    color: var(--green-color);
+    margin: 0 .2em;
+}
+
+.rbt a {
+    color: var(--white-color);
+}
+
+.rbt-input-wrapper {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    flex-wrap: wrap;
+}
+
+.rbt-input {
+    border: none;
+    background-color: transparent;
+}
+
+.rbt-token, .rbt-token button.close {
+    display: flex;
+    align-items: center;
+    padding: 0.1em;
+    color: var(--light-gray-color);
+}
+
+.rbt-input-multi {
+    height: 100%;
+}
+
+.passwordWrapper__label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.passwordWrapper__label i {
+    color: var(--accent-color);
+    margin-right: .4rem;
+    cursor: pointer;
+}

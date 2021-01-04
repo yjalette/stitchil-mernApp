@@ -1,0 +1,22 @@
+.portfolioDetails {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.portfolioDetails .commentGrid__list {
+    max-height: 350px;
+    overflow-y: auto;
+    margin: auto .4rem;
+}
+
+.portfolioDetails .commentGrid h3 {
+    margin-left: .8rem;
+}
+
+.portfolioDetails__likes {
+    /* height: 10vh; */
+    display: flex;
+    justify-content: flex-end;
+}

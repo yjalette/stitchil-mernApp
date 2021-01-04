@@ -1,0 +1,6 @@
+schema: "/graphql",
+overwrite: true
+generates:
+  ./fragmentTypes.json:
+    plugins:
+      - fragment-matcher

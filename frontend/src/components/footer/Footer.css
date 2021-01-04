@@ -1,0 +1,24 @@
+.footer {
+    /* position: absolute; */
+    /* bottom: -200px; */
+    background-color: var(--main-color-opacity);
+}
+
+.footer__elem {
+    color: var(--red-color);
+}
+
+@media (max-width: 992px) {
+    .footer {
+        overflow: visible;
+    }
+}
+
+@media (max-width: 768px) {
+    .footer {
+        /* background-color: black; */
+        margin: 0;
+    }
+}
+
+@media (max-width: 576px) {}

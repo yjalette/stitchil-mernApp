@@ -1,0 +1,77 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=Karla:wght@1,200&display=swap");
+
+h1, h2, h3, h4, h5, h6, .customHeading {
+    font-family: var(--font-heading);
+    letter-spacing: 1px;
+    word-spacing: 0.5px;
+    text-transform: capitalize;
+    line-height: 1.6em;
+}
+
+h1, h2, h3, h4 {
+    font-weight: bold;
+}
+
+p, span, ul, a {
+    font-family: var(--font-body);
+    letter-spacing: var(--letter-spacing);
+    word-spacing: var(--word-spacing);
+    line-height: 1.4em;
+}
+
+h1 {
+    font-size: 2em;
+}
+
+h2 {
+    font-size: 1.5em;
+}
+
+h3 {
+    font-size: 1.17em;
+    color: var(--light-gray-color);
+}
+
+h4 {
+    font-size: 1.12em;
+}
+
+h5 {
+    font-size: .83em;
+}
+
+h6 {
+    font-size: .75em;
+}
+
+/* h1 {
+    /* font-size: var(--h1-fonts);
+    color: var(--green-color);
+} */
+
+h2 {
+    /* font-size: 4rem; */
+    color: var(--green-color);
+}
+
+h4 {
+    width: 100%;
+    position: relative;
+    padding: var(--padding-box);
+    overflow: hidden;
+    margin: 0;
+}
+
+h5 {
+    clear: both;
+    color: var(--white-color);
+    padding: var(--padding-elem);
+}
+
+h6 {
+    color: var(--light-gray-color);
+    opacity: .95;
+    padding: var(--padding-elem);
+}

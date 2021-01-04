@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link type="text/css" href="/styles.css" rel="stylesheet">
+    <style>
+        .mainContainer {
+            display: grid;
+            place-items: center;
+            padding: 2rem;
+            background-color: #170535;
+            width: 100%;
+            height: 100%;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            line-height: 1.4em;
+            padding: 1rem 0;
+            margin: 0;
+            color: #13e2ba;
+
+        }
+
+        .subTitle {
+            color: #C0D4D0;
+            font-size: 2rem;
+        }
+
+        .clickButton {
+            color: #13e2ba;
+            background-color: transparent;
+            border: 1px solid currentColor;
+            border-radius: 10px;
+            width: 100px;
+            padding: .3rem .8rem;
+            animation: none;
+        }
+
+        .muteText {
+            color: gray;
+            font-size: 1.1rem;
+        }
+
+        .signature {}
+
+        .signature .team {
+            color: #00AF8D;
+            font-weight: bolder;
+            letter-spacing: 2px;
+            font-size: 1.5rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="mainContainer">
+        {{{body}}}
+        {{> signature}}
+    </div>
+
+</body>
+
+</html>

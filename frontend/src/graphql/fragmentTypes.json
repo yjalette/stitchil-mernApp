@@ -1,0 +1,30 @@
+{
+  "__schema": {
+    "types": [
+      {
+        "kind": "UNION",
+        "name": "AuthResult",
+        "possibleTypes": [
+          {
+            "name": "Login"
+          },
+          {
+            "name": "Error"
+          }
+        ]
+      },
+      {
+        "kind": "UNION",
+        "name": "UserResult",
+        "possibleTypes": [
+          {
+            "name": "Profile"
+          },
+          {
+            "name": "Failure"
+          }
+        ]
+      }
+    ]
+  }
+}

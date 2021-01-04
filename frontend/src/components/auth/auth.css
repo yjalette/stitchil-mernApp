@@ -1,0 +1,33 @@
+.auth .custom-btn {
+    align-self: flex-end;
+    margin: 1rem 0;
+}
+
+.auth__google-wrapper {
+    width: 100%;
+}
+
+.auth__google-btn {
+    box-shadow: none !important;
+    overflow: hidden;
+    margin: 0;
+    flex-direction: row-reverse;
+    border-radius: var(--border-radius);
+}
+
+.join__continueButton, .join__submitButton {
+    align-self: flex-end;
+}
+
+.join__continueButton, .join__backButton {
+    margin: 1.5rem 0;
+}
+
+.join__backButton {
+    align-self: flex-start;
+    flex-direction: row-reverse;
+}
+
+.auth__iconBtn {
+    float: right;
+}

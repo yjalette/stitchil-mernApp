@@ -1,0 +1,8 @@
+.contact__message {
+    background-color: var(--main-color);
+}
+
+.contact__message form {
+    display: flex;
+    flex-direction: column;
+}
