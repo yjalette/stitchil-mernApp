@@ -23,12 +23,16 @@ const userSchema = new Schema({
         type: String,
         required: false
     },
+    languages: {
+        type: Array,
+        required: false
+    },
     about: {
         type: String,
         required: false
     },
     country: {
-        type: String,
+        type: Array,
         required: false
     },
     role: {

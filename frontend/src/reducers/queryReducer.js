@@ -1,6 +1,5 @@
 
 import {
-    USER_QUERY,
     PROFILE_GIGS_QUERY,
     COMMENTS_QUERY,
     LOGIN_QUERY,
@@ -12,7 +11,8 @@ import {
     PROFILE_INTRO_QUERY,
     DESIGNER_RESUME_QUERY,
     PROFILE_PORTFOLIO_QUERY,
-    MESSAGES_QUERY
+    MESSAGES_QUERY,
+    ACCOUNT_QUERY
 } from '../graphql/queries';
 
 
@@ -25,7 +25,7 @@ export const reducer = (state, action) => {
             }
         case "ACCOUNT":
             return {
-                QUERY: USER_QUERY
+                QUERY: ACCOUNT_QUERY
             }
         case "PROFILEINTRO":
             return {

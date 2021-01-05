@@ -8,7 +8,7 @@ input {
 }
 
 label, .formLabel {
-    font-size: var(--md-fonts);
+    font-size: var(--sm-fonts);
     color: var(--secondary-color);
     letter-spacing: .1em;
     line-height: 2em;

@@ -256,10 +256,10 @@ button + button:not(.dropdown-item), i + i {
 .formButton {
     color: var(--white-color);
     width: 80px;
-    font-size: var(--md-fonts);
+    font-size: var(--sm-fonts);
     line-height: 1.3em;
-    margin: .5em;
-    padding: .1em .2em;
+    margin: .3em;
+    padding: .2em .4em;
     border: 1.8px dashed currentColor;
     border-radius: var(--border-radius);
 }
@@ -447,6 +447,51 @@ button + button:not(.dropdown-item), i + i {
     z-index: 5000;
 }
 
+.sectionHeader {
+    justify-content: flex-start;
+    padding: .8rem;
+}
+
+.sectionHeader__title {
+    width: auto;
+}
+
+.pageMenu {
+    width: 100%;
+    background-color: var(--green-color);
+    text-align: center;
+    margin: auto;
+    justify-content: space-evenly;
+}
+
+.pageMenu__item {
+    position: relative;
+    color: var(--light-gray-color) !important;
+    margin: 0;
+}
+
+.pageMenu .active {
+    background-color: var(--green-color) !important;
+
+    /* order: -1; */
+}
+
+.pageMenu .active:after {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 100px;
+    content: '';
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+    border-bottom-width: 12px;
+    border-bottom-style: solid;
+    border-bottom-color: var(--main-color-light);
+    bottom: 0;
+}
+
+
 @media only screen and (max-width: 1200px) {}
 
 @media only screen and (max-width: 1024px) {
@@ -478,6 +523,10 @@ button + button:not(.dropdown-item), i + i {
         height: 25px;
         padding: .2em;
         font-size: 12px;
+    }
+
+    .sectionHeader {
+        justify-content: center;
     }
 }
 

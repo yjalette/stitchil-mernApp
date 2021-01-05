@@ -1,8 +1,8 @@
 import React, { useEffect, useRef } from 'react'
 import { Container } from 'react-bootstrap';
 
+import useDeleteData from '../../custom_hooks/useDeleteData';
 import CustomDropdown from '../../layout/CustomDropdown';
-import useDeleteData from '../../custom_hooks/useDeleteData'
 import UserAvatar from '../../layout/media/UserAvatar'
 import MessageItem from '../message/MessageItem'
 

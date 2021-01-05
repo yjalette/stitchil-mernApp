@@ -3,13 +3,77 @@
     overflow: hidden;
 }
 
+.profileHeader {
+    background-color: var(--main-color);
+}
+
+/* .user-avatar {
+    justify-content: flex-end;
+    cursor: pointer;
+} */
+
+.profileImage-wrapper {
+    position: relative;
+}
+
+.profileImage__wrapper {
+    max-width: 200px;
+    max-height: 200px;
+    min-width: 200px;
+    min-height: 200px;
+}
+
+.coverImage__wrapper {
+    width: 100%;
+    height: 300px;
+    background-color: var(--main-color);
+}
+
+.coverImage {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    opacity: .5;
+}
+
+.profileImage {
+    height: 200px;
+    width: 200px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid var(--white-color);
+}
+
+.userImage-wrapper {
+    position: relative;
+}
+
+.userImage-wrapper .upload__icon {
+    width: 50px;
+    height: 50px;
+}
+
+.userImage__box {
+    position: absolute;
+    left: 2%;
+    z-index: 99;
+}
+
+.profileImage__wrapper .userImage__box {
+    top: 80%;
+}
+
+.coverImage__wrapper .userImage__box {
+    top: 5%;
+}
+
 .profileMsg {
     background-color: var(--main-color);
     border-radius: var(--border-radius);
     width: 80%;
 }
 
-.gallery-zoom {
+/* .gallery-zoom {
     height: 90% !important;
     overflow: hidden;
     z-index: 51;
@@ -23,7 +87,7 @@
 .gallery-zoom > img:hover {
     transform: scale3d(1.5, 1.5, 1.5);
     z-index: 101;
-}
+} */
 
 /* .profileSection .item-card .card-body {
     margin-top: 100px;
@@ -37,9 +101,10 @@
     justify-content: space-between;
 }
 
+/* 
 .profile__col {
     margin: 0.8rem auto;
-}
+} */
 
 .profile-rightComlun {
     height: 100%;
@@ -72,11 +137,6 @@
     flex-direction: column;
 }
 
-.profileTitle-wrapper {
-    justify-content: flex-start;
-    padding: .8rem;
-}
-
 .profileTitle {
     margin-right: .6rem;
     margin-bottom: 0;
@@ -104,8 +164,34 @@
     white-space: nowrap;
 }
 
+.profile .sectionHeader__title {
+    margin-bottom: 0;
+    margin-right: .5em;
+}
+
 @media (max-width: 992px) {}
 
-@media (max-width: 768px) {}
+@media (max-width: 768px) {
+    .coverImage__wrapper {
+        max-height: 200px;
+        min-height: 200px;
+    }
+
+    .coverImage {
+        height: 200px;
+    }
+
+    .profileImage__wrapper {
+        max-width: 130px;
+        max-height: 130px;
+        min-width: 130px;
+        min-height: 130px;
+    }
+
+    .profileImage {
+        width: 130px;
+        height: 130px;
+    }
+}
 
 @media (max-width: 576px) {}

@@ -17,7 +17,7 @@ const ProfilePage = () => {
 
     return (
         <div className="profile__wrapper">
-            <ProfileData logged_in_user={username === user.username} username={username} section={activeSection} />
+            <ProfileData logged_in_user={username === user.username} username={username} activeSection={activeSection} />
         </div>
     )
 }

@@ -10,7 +10,7 @@ type AuthData {
     username: String
     fullname: String
     profileImage: String
-    country: String
+    country: [String]
     provider: String
 }
 

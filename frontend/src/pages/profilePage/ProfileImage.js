@@ -5,13 +5,14 @@ import usePostData from '../../custom_hooks/usePostData';
 import useUpload from '../../custom_hooks/useUpload';
 import ProfileContext from '../../context/Profile-context';
 import { useToggle } from '../../custom_hooks/useToggle';
-import GroupButton from '../../layout/buttons/GroupButton';
+
 import IconButton from '../../layout/buttons/IconButton';
 import IconTextButton from '../../layout/buttons/IconTextButton';
+import GroupButton from '../../layout/buttons/GroupButton';
 
 const defaultImg = "https://res.cloudinary.com/dgxa9gpta/image/upload/v1602105102/background/buttons_nd9vx1.jpg"
 
-const UserImage = ({ src, image_type }) => {
+const ProfileImage = ({ src, image_type }) => {
     const { logged_in_user } = useContext(ProfileContext)
     const { file, clearUpload, getRootProps, getInputProps } = useUpload();
     const [showButtons, setShowButtons] = useToggle(false);
@@ -53,7 +54,7 @@ const UserImage = ({ src, image_type }) => {
 }
 
 
-export default UserImage
+export default ProfileImage
 
 
 

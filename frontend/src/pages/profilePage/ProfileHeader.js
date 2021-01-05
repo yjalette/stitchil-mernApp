@@ -5,11 +5,12 @@ import { useHistory } from 'react-router-dom';
 import GroupButton from '../../layout/buttons/GroupButton';
 import ClickButton from '../../layout/buttons/ClickButton';
 import { useToggle } from '../../custom_hooks/useToggle';
-import ProfileContext from '../../context/Profile-context';
-import UserMessage from './UserMessage';
-import UserImage from './UserImage';
 
-const UserHeader = ({ profile }) => {
+// import UserMessage from './UserMessage';
+import ProfileImage from './ProfileImage';
+import ProfileContext from '../../context/Profile-context';
+
+const ProfileHeader = ({ profile }) => {
     const { push } = useHistory();
     const { logged_in_user } = useContext(ProfileContext)
     const [showChat, toggleChat] = useToggle();
@@ -21,17 +22,17 @@ const UserHeader = ({ profile }) => {
 
     return (
         <Card className="profileHeader">
-            <UserImage src={profile && profile.coverImage} image_type="coverImage" />
+            <ProfileImage src={profile && profile.coverImage} image_type="coverImage" />
             <Container className="profileHeader__box">
                 <Container className="profileHeader__col justify-content-center">
-                    <UserImage src={profile && profile.profileImage} image_type="profileImage" />
+                    <ProfileImage src={profile && profile.profileImage} image_type="profileImage" />
                     <h3 className="profileHeader__title">{profile.fullname} </h3>
                 </Container>
                 <GroupButton group_class="profileHeader__col justify-content-end">
                     {!logged_in_user &&
                         <>
                             <ClickButton title="follow" />
-                            <UserMessage />
+                            {/* <UserMessage /> */}
                             {/* <ClickButton title="message" onClick={handleMessage} /> */}
                             {/* {showChat && <CreateChat />} */}
                         </>
@@ -43,4 +44,4 @@ const UserHeader = ({ profile }) => {
     )
 }
 
-export default UserHeader
+export default ProfileHeader

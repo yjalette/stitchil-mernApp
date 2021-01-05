@@ -5,10 +5,10 @@ import useForm from '../../custom_hooks/useForm';
 import usePostData from '../../custom_hooks/usePostData';
 import ProfileContext from '../../context/Profile-context';
 import ListItem from '../../layout/ListItem';
-import ProfileSectionTitle from '../../pages/profilePage/ProfileSectionTitle';
 import IconButton from '../../layout/buttons/IconButton';
 import { initState_designer } from '../../constants/initStates';
 import DesignerForm from './DesignerForm';
+import SectionHeader from '../../layout/SectionHeader';
 
 
 const DesignerSum = ({ values }) => {
@@ -31,9 +31,9 @@ const DesignerSum = ({ values }) => {
 
     return (
         <Container className="designerSum profileSection">
-            <ProfileSectionTitle title="Designer Info">
+            <SectionHeader title="Designer Info">
                 {logged_in_user && <IconButton onClick={toggleEditMode} icon_class="fa fa-edit" />}
-            </ProfileSectionTitle>
+            </SectionHeader>
             <Container className="profileSection__content">
                 {Object.keys(initState_designer).map(field => <ListItem key={field}
                     field={`${field}: `}

@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
 
-import ProfileSectionTitle from '../../pages/profilePage/ProfileSectionTitle';
 import ReviewCreate from './ReviewCreate';
 import ReviewItem from '../message/MessageItem';
 import UserAvatar from '../../layout/media/UserAvatar';
 import ReviewRating from './ReviewRating';
 import useGetData from '../../custom_hooks/useGetData';
 import EmptyResultAlert from '../../layout/alerts/EmptyResultAlert';
+import SectionHeader from '../../layout/SectionHeader';
 
 const ReviewData = ({ username, logged_in_user }) => {
     const { data, getData } = useGetData("profilereviews")
@@ -29,7 +29,7 @@ const ReviewData = ({ username, logged_in_user }) => {
     }
     return (
         <>
-            <ProfileSectionTitle title={`reviews (${values.length})`} />
+            <SectionHeader title={`reviews (${values.length})`} />
             <div className="reviewGrid">
                 {values && values.length > 0 ? values.map((item, index) => (
                     <ReviewItem key={index} item={item} comp_class="reviewItem">

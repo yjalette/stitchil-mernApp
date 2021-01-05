@@ -10,6 +10,7 @@ import AuthContext from '../../context/Auth-context';
 import GoogleButton from './GoogleButton';
 import useGetData from '../../custom_hooks/useGetData';
 
+
 const Login = ({ confirmed }) => {
     const { setUser } = useContext(AuthContext);
     const { push } = useHistory()
@@ -21,7 +22,7 @@ const Login = ({ confirmed }) => {
     }
 
     function onSubmit() {
-        getData({ variables: inputs, confirmed });
+       getData && getData({ variables: inputs, confirmed });
     }
 
 

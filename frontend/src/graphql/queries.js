@@ -5,6 +5,7 @@ export const PROFILE_INTRO_QUERY = gql`
             profile_intro(username: $username) {
                 username
                 fullname
+                languages
                 coverImage
                 profileImage
                 country
@@ -34,6 +35,20 @@ export const LOGIN_QUERY = gql`
     }
 }
     `;
+
+
+
+export const ACCOUNT_QUERY = gql`
+    query userAccount{
+        userAccount {
+            email
+            username
+            fullname
+            languages
+            country  
+    }  
+}
+`
 
 export const DESIGNER_RESUME_QUERY = gql`
     query designerResume($portfolioId: String){

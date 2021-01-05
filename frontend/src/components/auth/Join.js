@@ -44,7 +44,7 @@ const Join = () => {
                 variables: {
                     userInput: {
                         ...inputs,
-                        country: inputs.country.toString(),
+                        // country: inputs.country.toString(),
                         confirmPassword: undefined
                     }
                 }

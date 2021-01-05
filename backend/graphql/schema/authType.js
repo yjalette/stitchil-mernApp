@@ -6,6 +6,16 @@ module.exports = gql`
 
 union AuthResult = AuthData | Confirmation | Error
 
+union LoginResult = Login | Error
+
+type Login {
+    role: String
+    username: String
+    fullname: String
+    token: String
+    googleAuth: Boolean 
+
+}
 
 type Confirmation {
     emailSent: Boolean
@@ -23,14 +33,16 @@ input UserInput {
     password: String
     username: String
     role: String
-    country: String
+    country: [String]
     fullname: String
+    languages: [String]
     googleAuth: Boolean
     about: String
 }
 
 
-type Query {    
+type Query { 
+    login(email: String!, password: String, googleAuth: Boolean, confirmed: Boolean): LoginResult    
     checkIfExists(email: String): Boolean    
 }
 

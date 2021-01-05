@@ -17,6 +17,7 @@
     "axios": "^0.19.2",
     "bootstrap": "^4.5.2",
     "caniuse-lite": "^1.0.30001125",
+    "countries-list": "^2.5.6",
     "country-list": "^2.2.0",
     "domexception": "^2.0.1",
     "framer-motion": "^2.6.10",

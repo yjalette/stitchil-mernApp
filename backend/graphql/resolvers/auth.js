@@ -1,10 +1,21 @@
 const User = require("../../models/user");
 const Portfolio = require("../../models/portfolio");
 const { sendEmail } = require("../../helpers/nodemailer")
-const { createPwd, generateJWT } = require("../../helpers/creds");
+const { generateJWT, comparePwd, createPwd } = require("../../helpers/creds");
 
 module.exports = {
     Query: {
+        login: async (_, { email, password, googleAuth, confirmed }) => {
+            console.log(email, confirmed)
+            const user = await User.findOne({ email }).lean();
+            if (!user) return { code: 401, message: "User Does Not Exit" };
+            const isPwdValid = !googleAuth && await comparePwd(password, user.password);
+            if (!googleAuth && !isPwdValid) return { code: 401, message: "Wrong Password" }
+            else if (confirmed) await user.updateOne(confirmed);
+            // const result = { token: generateJWT(user._id, email), username: user.username, role: user.role, googleAuth }
+            // console.log(result)
+            return { token: generateJWT(user._id, email), username: user.username, role: user.role, googleAuth };
+        },
         checkIfExists: async ({ email }, req) => {
             const user = await User.findOne({ email }).lean();
             if (!user) return false;

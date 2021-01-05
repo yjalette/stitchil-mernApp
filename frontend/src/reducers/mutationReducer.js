@@ -7,7 +7,9 @@ import {
     CREATE_COMMENT_MUTATION,
     CREATE_GIG_MUTATION,
     UPDATE_GIG_MUTATION,
-    UPDATE_USER_MUTATION,
+    UPDATE_EMAIL_MUTATION,
+    UPDATE_GENERAL_MUTATION,
+    UPDATE_USERNAME_MUTATION,
     UPDATE_SECURITY_MUTATION,
     FORGOT_PASSWORD_MUTATION,
     CREATE_PORTFOLIO_ITEM_MUTATION,
@@ -55,10 +57,18 @@ export const reducer = (state, action) => {
             return {
                 MUTATION: CREATE_GIG_MUTATION
             }
-        case "UPDATEUSER":
+        case "UPDATEUSERNAME":
             return {
-                MUTATION: UPDATE_USER_MUTATION
+                MUTATION: UPDATE_USERNAME_MUTATION
             }
+        case "UPDATEEMAIL":
+                return {
+                    MUTATION: UPDATE_EMAIL_MUTATION
+                }
+        case "UPDATEGENERAL":
+                    return {
+                        MUTATION: UPDATE_GENERAL_MUTATION
+                    }
         case "UPDATESECURITY":
             return {
                 MUTATION: UPDATE_SECURITY_MUTATION

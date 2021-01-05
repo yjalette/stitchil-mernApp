@@ -14,6 +14,7 @@ import Settings from './components/settings/Settings';
 import Contact from './components/contact/Contact';
 import ChatPage from './pages/chatPage/ChatPage';
 import Footer from './components/footer/Footer';
+import SettingsPage from './pages/settingsPage/SettingsPage';
 
 const userObj = JSON.parse(localStorage.getItem('user'));
 
@@ -24,10 +25,7 @@ class App extends Component {
     if (prevState.user !== this.state.user) localStorage.setItem('user', JSON.stringify(this.state.user))
   }
 
-
-
   render() {
-
     return (
       <div className="App">
         <Router>
@@ -39,7 +37,7 @@ class App extends Component {
             <Route path="/confirm/:confirmType" component={ConfirmCreds} />
             <div className="page-wrapper">
               <Switch>
-                <Route path="/settings/:section" component={Settings} />
+                <Route path="/settings/:section" component={SettingsPage} />
                 <Route path="/update/:section/:token" component={Settings} />
                 <Route path="/measurements" component={MeasurementsPage} />
                 <Route path="/filter/:section/:category" component={ExplorePage} />

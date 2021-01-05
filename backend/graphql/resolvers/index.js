@@ -14,7 +14,7 @@ const resolvers = {
     LoginResult: userResolver.LoginResult,
     Response: {
         __resolveType(obj) {
-            if (obj.success) return 'Success';
+            if (obj.success) return 'Result';
             if (obj.code) return 'Failure';
             return null;
         }

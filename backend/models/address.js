@@ -20,7 +20,7 @@ const addressSchema = new Schema({
         required: false
     },
     country: {
-        type: String,
+        type: Array,
         required: false
     },
     zipCode: {

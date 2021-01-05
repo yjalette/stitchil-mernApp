@@ -3,10 +3,10 @@ import React, { useState, useEffect, useContext } from 'react';
 import ProfileItemContext from '../../context/ProfileItem-context'
 import useGetData from '../../custom_hooks/useGetData';
 import ItemGrid from './ItemGrid';
-import ProfileSectionTitle from '../../pages/profilePage/ProfileSectionTitle';
 import ItemCreate from './ItemCreate';
 import ProfileContext from '../../context/Profile-context';
 import EmptyResultAlert from '../../layout/alerts/EmptyResultAlert';
+import SectionHeader from '../../layout/SectionHeader';
 
 const ItemData = ({ comp, section, username }) => {
     const { logged_in_user } = useContext(ProfileContext);
@@ -41,9 +41,9 @@ const ItemData = ({ comp, section, username }) => {
     return (
         <ProfileItemContext.Provider value={{ updateItemCache: handleUpdate, addItemCache: handleNewItem, deleteItemCache: handleDeleteItem, comp }}>
             <section className={section}>
-                <ProfileSectionTitle title={section}>
+                <SectionHeader title={section}>
                     {logged_in_user && <ItemCreate overLimit={values && values.length > 2 ? true : false} />}
-                </ProfileSectionTitle>
+                </SectionHeader>
                 <ItemGrid values={values} />
                 {values.length === 0 && <EmptyResultAlert type={section} />}
             </section>

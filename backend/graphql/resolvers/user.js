@@ -1,29 +1,28 @@
 const User = require("../../models/user");
-const { generateJWT, comparePwd, createPwd, verifyJWT } = require("../../helpers/creds");
+const { comparePwd, createPwd, verifyJWT } = require("../../helpers/creds");
 const { uploadToCloud, deleteFile } = require("../../helpers/uploadToCloud");
 
 module.exports = {
     Query: {
-        profile_intro: async (_, { username }, req) => console.log(req.userId) || await User.findOne({ username }),
-        login: async (_, { email, password, googleAuth, confirmed }) => {
-            console.log(email, confirmed)
-            const user = await User.findOne({ email }).lean();
-            if (!user) return { code: 401, message: "User Does Not Exit" };
-            const isPwdValid = !googleAuth && await comparePwd(password, user.password);
-            if (!googleAuth && !isPwdValid) return { code: 401, message: "Wrong Password" }
-            else if (confirmed) await user.updateOne(confirmed);
-            // const result = { token: generateJWT(user._id, email), username: user.username, role: user.role, googleAuth }
-            // console.log(result)
-            return { token: generateJWT(user._id, email), username: user.username, role: user.role, googleAuth };
+        profile_intro: async (_, { username }, req) => await User.findOne({ username }),
+        userAccount: async (_, args, req) => {
+            if (!req.isUser) throw new Error('user is not authorized');
+            return await User.findById(req.userId);
         }
     },
     Mutation: {
-        updateUser: async (_, { userInput }, req) => {
-            if (!req.isUser) throw new Error('user is not authorized');
-            await User.findByIdAndUpdate(req.userId, userInput, (err, data) => {
-                if (err) throw new Error(`${err} meows`);
-                else return true
-            })
+        updateUsername: async (_, username, {userId}) => {
+           const isTaken = await User.findOne(username);
+           if (isTaken) return {"code": 401, "message": "username is taken"}
+           else return handleUpdate( userId, username)
+           
+        
+        },
+        updateEmail: async (_, email, {userId}) => {
+            handleUpdate( userId, email)
+        },
+        updateGeneral: async (_, args, {userId}) => {
+           handleUpdate(userId, args)
         },
         uploadProfileImage: async (_, { file, image_type }, req) => {
             console.log("upload====>", file, image_type)
@@ -79,5 +78,12 @@ module.exports = {
 
 
 
-
+async function handleUpdate(userId, param){
+    if (!userId) throw new Error('user is not authorized');
+    await User.findByIdAndUpdate(userId, param, (err, data) => {
+        console.log(param, data)
+        if (err) return false;
+        else return {success: true}
+    })
+}
 
