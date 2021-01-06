@@ -22,11 +22,6 @@ type Confirmation {
     emailConfirmed: Boolean
 }
 
-input PasswordInput {
-    new_password: String
-    prev_password: String
-}
-
 
 input UserInput {
     email: String

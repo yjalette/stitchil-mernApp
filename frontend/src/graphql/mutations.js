@@ -3,13 +3,35 @@ import gql from 'graphql-tag';
 
 export const UPDATE_GENERAL_MUTATION = gql`
 mutation UpdateGeneral($country: [String], $languages: [String], $fullname: String){
-    updateGeneral(country: $country, languages: $languages, fullname: $fullname) 
+    updateGeneral(country: $country, languages: $languages, fullname: $fullname){
+        ... on Result {
+            success
+           
+        }
+
+        ... on Failure {
+            message 
+            code 
+            type 
+        }
+    }
     }    
 `
 
 export const UPDATE_EMAIL_MUTATION = gql`
         mutation updateEmail($email: String){
-            updateEmail(email: $email)
+            updateEmail(email: $email){
+                ... on Result {
+                    success
+                   
+                }
+    
+                ... on Failure {
+                    message 
+                    code 
+                    type 
+                }
+            }
         }
 `
 
@@ -30,16 +52,16 @@ export const UPDATE_USERNAME_MUTATION = gql`
         }
 `
 
-export const UPDATE_SECURITY_MUTATION = gql`
-mutation UpdateSecurity($passwordInput: PasswordInput, $token: String){
-    updateSecurity(passwordInput: $passwordInput, token: $token) {      
-        ... on Success {
+export const UPDATE_PASSWORD_MUTATION = gql`
+mutation updatePassword($passwordInput: PasswordInput, $token: String){
+    updatePassword(passwordInput: $passwordInput, token: $token) {      
+        ... on Result {
             success
             message 
         }
 
         ... on Failure {
-            error 
+            message 
             code 
             type 
         }

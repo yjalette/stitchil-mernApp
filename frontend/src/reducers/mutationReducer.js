@@ -10,7 +10,7 @@ import {
     UPDATE_EMAIL_MUTATION,
     UPDATE_GENERAL_MUTATION,
     UPDATE_USERNAME_MUTATION,
-    UPDATE_SECURITY_MUTATION,
+    UPDATE_PASSWORD_MUTATION,
     FORGOT_PASSWORD_MUTATION,
     CREATE_PORTFOLIO_ITEM_MUTATION,
     UPDATE_PORTFOLIO_ITEM_MUTATION,
@@ -69,9 +69,9 @@ export const reducer = (state, action) => {
                     return {
                         MUTATION: UPDATE_GENERAL_MUTATION
                     }
-        case "UPDATESECURITY":
+        case "UPDATEPASSWORD":
             return {
-                MUTATION: UPDATE_SECURITY_MUTATION
+                MUTATION: UPDATE_PASSWORD_MUTATION
             }
         case "FORGOTPASSWORD":
             return {

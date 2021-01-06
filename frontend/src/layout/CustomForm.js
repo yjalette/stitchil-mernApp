@@ -10,8 +10,8 @@ import GroupButton from './buttons/GroupButton';
 
 const CustomForm = ({ form_class, form_msg, form_error, submitTitle, onSubmit, onCancel, children }) => (
     <Form className={`customForm ${form_class}`} onSubmit={onSubmit}>
-        {form_error && <InlineAlert content={form_error} variant="danger" alert_class="errorMsg" />}
-        {form_msg && <InlineAlert content={form_msg} variant="success" alert_class="successMsg" />}
+        {form_error && <InlineAlert content={form_error} variant="danger" alert_class="alert-danger" />}
+        {form_msg && <InlineAlert content={form_msg} variant="success" alert_class="alert-success" />}
         {children}
         <GroupButton group_class="customForm__groupButton">
             {onCancel && <CancelButton title="clear" onCancel={onCancel} />}

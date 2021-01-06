@@ -8,6 +8,7 @@ import ProfileHeader from './ProfileHeader';
 import PageMenu from '../../layout/PageMenu';
 
 const ProfileGrid = ({ resData, activeSection }) => {
+    console.log(resData)
     return (
         <section className="profile">
             <ProfileHeader profile={resData} />

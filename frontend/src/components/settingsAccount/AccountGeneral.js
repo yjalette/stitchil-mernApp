@@ -1,47 +1,53 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 
 import useForm from '../../custom_hooks/useForm';
 import usePostData from '../../custom_hooks/usePostData';
-import CustomForm from '../../layout/CustomForm';
 import FormMultipleInput from '../inputs/FormMultipleInput';
 import FormInput from '../inputs/FormInput';
+import { handleResponse } from '../../helpers/dataHelper';
+import AccountForm from './AccountForm';
 
 const initState = { fullname: "", country: [], languages: [] }
 
-const AccountGeneral = ({ values }) => {
+const AccountGeneral = ({ currValues }) => {
     const { post } = usePostData("updategeneral", onPostCompleted);
-    const { inputs, setInputs, handleChange, handleMultiChange, errors, setErrors, handleSubmit } = useForm(initState, onSubmit);
-    const [msg, setMsg] = useState("");
+    const { inputs, setInputs, handleChange, handleMultiChange, errors, setErrors, setMsg, msg, handleSubmit } = useForm(initState, onSubmit);
 
     useEffect(() => {
-        if (values) {
-            setInputs(values);
-            setMsg("");
-        }
-    }, [values])
+        if (currValues) setInputs(currValues);
+    }, [currValues])
 
-   
+    function onPostCompleted(data) {
+        handleResponse(data.updateGeneral, handleSuccess, handleFailure)
+    }
 
-    function onPostCompleted(response) {
-        if (response) {
-            return setMsg(`Information was successfully updated`);
-        }
+    function handleSuccess(success_msg){
+        setErrors({});
+        setMsg(success_msg);
+        setTimeout(()=> setMsg(""), 5000)
+    }
+
+    function handleFailure(form_error){
+        setErrors({form_error});
     }
 
     function onSubmit() {
         if (Object.keys(errors).length === 0) post({ variables: inputs });
     }
 
-    console.log(inputs)
 
-    return (
-        <CustomForm form_class="account page__box" form_msg={msg} onSubmit={handleSubmit} submitTitle="save" >
-             <FormInput label="fullname" onChange={handleChange} value={inputs["fullname"]}/>
+    return <AccountForm
+        userInputs={(<>
+        <FormInput label="fullname" onChange={handleChange} value={inputs["fullname"]}/>
             <FormMultipleInput label="languages" selected={inputs["languages"]} multiple={true}  onChange={value => handleMultiChange("languages", value)}/>
-            <FormMultipleInput label="country" selected={inputs["country"]} onChange={value => console.log(value) || handleMultiChange("country", value)}/>
+            <FormMultipleInput label="country" selected={inputs["country"]} onChange={value => handleMultiChange("country", value)}/>
 
-        </CustomForm>
-    )
+        </>)}
+        form_msg={msg} 
+        form_error={errors.form_error}
+        onSubmit={handleSubmit}
+    />
+   
 }
 
 export default AccountGeneral

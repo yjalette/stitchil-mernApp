@@ -1,7 +1,6 @@
 import React, { useContext } from 'react'
 import ProfileContext from '../../context/Profile-context'
 
-
 const ProfileSectionTitle = ({ title, children }) => {
     const { logged_in_user } = useContext(ProfileContext);
     return (

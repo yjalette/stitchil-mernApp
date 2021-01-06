@@ -22,12 +22,11 @@
     --letter-spacing: .4px;
     --word-spacing: .2px;
     --gradient-text: linear-gradient(300deg, var(--green-color), var(--light-green-color));
-
-    /* --bg-texture: url('https://www.transparenttextures.com/patterns/climpek.png'); */
     --border: 1.5px dashed var(--light-gray-color);
     --border-radius: 10px;
     --padding-elem: .4em;
     --padding-box: 1.5rem;
     --padding-section: 1rem 3rem;
     --btn-shadow: 0 0 0 4px var(--green-color), 2px 1px 6px 4px rgba(10, 10, 0, 0.5);
+    --box-shadow-red: 0 0 0 4px var(--red-color), 2px 1px 6px 4px rgba(10, 10, 0, 0.5);
 }

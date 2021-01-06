@@ -55,7 +55,7 @@ input UserInput {
 
 input PasswordInput {
     password: String
-    newPassword: String
+    new_password: String
 }
 
 
@@ -69,9 +69,6 @@ type Location {
 }
 
 
-
-
-
 type Query {   
     userAccount: Account
     profile_intro(username: String): Profile
@@ -79,10 +76,10 @@ type Query {
 }
 
 type Mutation {    
-    updateGeneral(country: [String], languages: [String], fullname: String): Boolean
-    updateEmail(email: String): Boolean
+    updateGeneral(country: [String], languages: [String], fullname: String): Response
+    updateEmail(email: String): Response
     updateUsername(username: String): Response
-    updateSecurity(passwordInput: PasswordInput, token: String): Response 
+    updatePassword(passwordInput: PasswordInput, token: String): Response 
 }
 
 `;

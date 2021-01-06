@@ -4,7 +4,9 @@ const { uploadToCloud, deleteFile } = require("../../helpers/uploadToCloud");
 
 module.exports = {
     Query: {
-        profile_intro: async (_, { username }, req) => await User.findOne({ username }),
+        profile_intro: async (_, { username }, req) => {
+           return await User.findOne({ username })
+        },
         userAccount: async (_, args, req) => {
             if (!req.isUser) throw new Error('user is not authorized');
             return await User.findById(req.userId);
@@ -12,18 +14,15 @@ module.exports = {
     },
     Mutation: {
         updateUsername: async (_, username, {userId}) => {
-           const isTaken = await User.findOne(username);
-           if (isTaken) return {"code": 401, "message": "username is taken"}
-           else return handleUpdate( userId, username)
-           
-        
+           if (await User.exists(username)) return {"code": 401, "message": "this username is already taken"};
+           return !await handleUpdate( userId, username) ? {"code": 501, "message": "please try again"} : {"success": true};
         },
         updateEmail: async (_, email, {userId}) => {
-            handleUpdate( userId, email)
+           if (await User.exists(email)) return {"code": 401, "message": "this email is already taken"};
+           return !await handleUpdate( userId, email) ? {"code": 501, "message": "please try again"} : {"success": true};
+        
         },
-        updateGeneral: async (_, args, {userId}) => {
-           handleUpdate(userId, args)
-        },
+        updateGeneral: async (_, args, {userId}) => !await handleUpdate( userId, args) ? {"code": 501, "message": "please try again"} : {"success": true},
         uploadProfileImage: async (_, { file, image_type }, req) => {
             console.log("upload====>", file, image_type)
             if (!req.isUser) throw new Error("unauthenticated user to upload file");
@@ -38,29 +37,18 @@ module.exports = {
                 throw new Error(error);
             }
         },
-        updateSecurity: async (_, { passwordInput, token }, req) => {
-            let user;
-            const { newPassword } = passwordInput;
-            if (token) {
-                let decodedToken;
-                decodedToken = verifyJWT(token);
-                user = await User.findById(decodedToken.userId);
-                if (!user) return { code: 401, error: "user does not exist" }
-            }
-            else if (passwordInput) {
-                user = await User.findById(req.userId);
-                if (!req.isUser) return { code: 401, error: "user is not authorized" }
-                if (user.password) {
-                    const isEqual = await comparePwd(passwordInput.password, user.password);
-                    if (!isEqual) return { code: 400, error: "wrong password" }
-                }
-            }
+        updatePassword: async (_, { passwordInput, token }, req) => {
+            console.log("1", passwordInput)
+            if (!token && !req.isUser) return { code: 401, error: "user is not authorized" }
+            if (token && !await User.exists(verifyJWT(token).userId)) return { code: 401, "message": "user does not exist" }
             try {
-                user.password = await createPwd(newPassword);
+                const user = await User.findById(req.userId);
+                if (user.password && !await comparePwd(passwordInput.password, user.password)) return { "code": 400, "message": "wrong password" }
+                user.password = await createPwd(passwordInput.new_password);
                 await user.save();
-                return { success: true, message: "Your New Password Was Saved" }
+                return { "success": true, "message": "Your New Password Was Saved" }
             } catch (error) {
-                return { code: 500, error: "Server Error. Please Try Again" }
+                return { code: 500, "message": "Server Error. Please Try Again" }
             }
 
         }
@@ -76,14 +64,11 @@ module.exports = {
 
 }
 
-
-
 async function handleUpdate(userId, param){
     if (!userId) throw new Error('user is not authorized');
     await User.findByIdAndUpdate(userId, param, (err, data) => {
-        console.log(param, data)
-        if (err) return false;
-        else return {success: true}
+        if (err) throw new Error(err);
     })
+    return true;
 }
 

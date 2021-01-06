@@ -4,11 +4,9 @@ import AccountEmail from './AccountEmail';
 import AccountGeneral from './AccountGeneral';
 import AccountUsername from './AccountUsername';
 
-const initState = { fullname: "", country: [], languages: [] }
-
 const AccountData = () => {
-    const [values, setValues] = useState(initState)
-    const { data, getData, updateQuery } = useGetData("account");
+    const [values, setValues] = useState({})
+    const { data, getData } = useGetData("account");
 
     useEffect(() => {
         getData();
@@ -18,14 +16,9 @@ const AccountData = () => {
         if (data) setValues(data.userAccount);
     }, [data]);
 
-    console.log(values)
     return (
         <>
-            {/* {Object.keys(values).map(val => <AccountUpdate key={val} 
-            label={val} 
-            value={values[val]} />
-            )} */}
-            <AccountGeneral values={{fullname: values.fullname, languages: values.languages, country: values.country}}/>
+            <AccountGeneral currValues={{fullname: values.fullname, languages: values.languages, country: values.country}}/>
             <AccountUsername currValue={values.username}/>
            <AccountEmail currValue={values.email}/>
         </>

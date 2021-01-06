@@ -127,26 +127,6 @@
     margin-bottom: .4rem;
 } */
 
-/* alerts */
-
-.alert-danger {
-    color: var(--red-color);
-    background-color: transparent;
-    font-size: var(--md-fonts);
-    border: none;
-}
-
-.alert-danger::before {
-    content: "\f06a";
-    font-family: FontAwesome;
-    font-size: var(--md-fonts);
-    margin-right: .3rem;
-}
-
-.emptyAlert__icon {
-    color: var(--green-color);
-    font-size: 80px;
-}
 
 /* buttons */
 button {
@@ -353,16 +333,53 @@ button + button:not(.dropdown-item), i + i {
     display: block;
     width: 100%;
     text-align: center;
-    margin-top: .5em;
+    background-color: transparent;
+    font-size: var(--md-fonts);
+    border: none;
+    margin: .2em auto;
+}
+
+.alertDemo__box{
+    background-color: var(--red-color);
+    box-shadow: var(--box-shadow-red);
+    border: 1.5px dashed var(--light-gray-color);
+    margin-bottom: 0;
+}
+
+.alert-danger {
+    color: var(--red-color);
+ 
+}
+
+.inlineAlert::before {
+    font-family: FontAwesome;
+    font-size: var(--md-fonts);
+    margin-right: .3rem;
+}
+
+.alert-danger::before {
+    content: "\f06a";
+   
+}
+
+.alert-success{
+    color: var(--green-color);
+}
+
+.alert-success::before{
+    content: "\f058";
+}
+
+.emptyAlert__icon {
+    color: var(--green-color);
+    font-size: 80px;
 }
 
 .errorMsg, .error {
     color: var(--red-color);
 }
 
-.successMsg {
-    color: var(--green-color);
-}
+
 
 /* modal */
 

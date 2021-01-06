@@ -2,31 +2,42 @@ import React, { useEffect} from 'react';
 
 import useForm from '../../custom_hooks/useForm';
 import usePostData from '../../custom_hooks/usePostData';
-import CustomForm from '../../layout/CustomForm';
 import FormInput from '../inputs/FormInput';
+import AccountForm from './AccountForm';
+import { handleResponse } from '../../helpers/dataHelper';
 
 const AccountEmail = ({ currValue }) => {
     const { post, error } = usePostData("updateemail", onPostCompleted);
-    const { inputs, setInputs, handleChange, errors, handleSubmit } = useForm({email: ""}, onSubmit);
+    const { inputs, setInputs, handleChange, errors, setErrors, setMsg, msg, handleSubmit } = useForm({email: ""}, onSubmit);
 
     useEffect(() => {
         if (currValue) setInputs({email: currValue})
     }, [currValue])
 
-    function onPostCompleted(response) {
-       
+    function onPostCompleted(data) {
+        handleResponse(data.updateEmail, handleSuccess, handleFailure)
+    }
+
+    function handleSuccess(success_msg){
+        setErrors({});
+        setMsg(success_msg);
+        setTimeout(()=> setMsg(""), 5000)
+    }
+
+    function handleFailure(form_error){
+        setErrors({form_error});
     }
 
     function onSubmit() {
-        post({ variables: inputs });
+         post({ variables: inputs });
     }
 
-
-    return (
-        <CustomForm form_class="account page__box" onSubmit={handleSubmit} submitTitle="save" >
-             <FormInput label="email" onChange={handleChange} value={inputs.email.slice(5)}/>
-        </CustomForm>
-    )
+    return <AccountForm
+    userInputs={<FormInput label="email" type="email" onChange={handleChange} value={inputs.email}/>}
+    form_msg={msg} 
+    form_error={errors.form_error}
+    onSubmit={handleSubmit}
+/>
 }
 
 export default AccountEmail
