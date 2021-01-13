@@ -26,7 +26,7 @@ const ProfileHeader = ({ profile }) => {
             <Container className="profileHeader__box">
                 <Container className="profileHeader__col justify-content-center">
                     <ProfileImage src={profile && profile.profileImage} image_type="profileImage" />
-                    <h3 className="profileHeader__title">{profile.fullname} </h3>
+                    <h2 className="profileHeader__title">{profile.fullname} </h2>
                 </Container>
                 <GroupButton group_class="profileHeader__col justify-content-end">
                     {!logged_in_user &&

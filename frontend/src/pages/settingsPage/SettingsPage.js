@@ -1,11 +1,11 @@
-import React  from 'react';
+import React from 'react';
 import { useParams } from 'react-router-dom';
 
 import "./style.css";
 import PageMenu from '../../layout/PageMenu';
 import AccountIndex from '../../components/settingsAccount/AccountIndex';
-import SecurityIndex from '../../components/settingsSecurity/SecurityIndex';
 import DemoVersionAlert from '../../layout/alerts/DemoVersionAlert';
+import SecurityPassword from '../../components/security/SecurityPassword';
 
 const SettingsPage = () => {
     const { section, token } = useParams();
@@ -15,8 +15,8 @@ const SettingsPage = () => {
             <PageMenu items={["account", "security", "notifications"]} />
             <div className="settings__section ">
                 {section === "account" && <AccountIndex />}
-                {section === "security" && <SecurityIndex />}
-                {section === "notifications" && <DemoVersionAlert/>}
+                {section === "security" && <SecurityPassword />}
+                {section === "notifications" && <DemoVersionAlert />}
             </div>
         </section>
 

@@ -1,20 +1,22 @@
+
 import React, { useContext } from 'react';
 import { Form, Container } from 'react-bootstrap';
-import { useHistory } from "react-router";
+import { useHistory, useLocation } from "react-router";
 
 import useForm from '../../custom_hooks/useForm';
 import CustomForm from '../../layout/CustomForm';
-import FormInput from '../inputs/FormInput';
+import FormInput from '../../components/inputs/FormInput';
 import { onSuccess } from './helpers'
 import AuthContext from '../../context/Auth-context';
-import GoogleButton from './GoogleButton';
-import useGetData from '../../custom_hooks/useGetData';
+import GoogleButton from './AuthGoogleBtn';
+import { LOGIN_QUERY } from './graphql/queries';
+import useLazyQueryHook from '../../custom_hooks/useLazyQueryHook';
 
-
-const Login = ({ confirmed }) => {
+const AuthLogin = ({ verifiedEmail }) => {
+    console.log(verifiedEmail)
     const { setUser } = useContext(AuthContext);
     const { push } = useHistory()
-    const { getData, data } = useGetData("login", onCompleted);
+    const { getData, data } = useLazyQueryHook(LOGIN_QUERY, onCompleted);
     const { inputs, errors, setErrors, handleChange, handleSubmit, handleCancel } = useForm({ email: "", password: "" }, onSubmit);
 
     const responseGoogle = (response) => {
@@ -22,12 +24,10 @@ const Login = ({ confirmed }) => {
     }
 
     function onSubmit() {
-       getData && getData({ variables: inputs, confirmed });
+        getData && getData({ variables: { ...inputs, verifiedEmail } });
     }
 
-
     function onCompleted(data) {
-        console.log(data)
         if (data && data.login.code) setErrors({ form_error: data.login.message });
         if (data.login.token) return onSuccess(data.login, setUser, push)
     }
@@ -35,7 +35,6 @@ const Login = ({ confirmed }) => {
     return (
         <>
             <CustomForm form_class="modal__form auth__form" onSubmit={handleSubmit} onCancel={handleCancel} form_error={errors.form_error}>
-                {/* {confirmed && <InlineAlert content="Please Login To Continue" variant="success" alert_class="successAlert" />} */}
                 <FormInput type="email" label="email" onChange={handleChange} value={inputs.email} required="true" />
                 <FormInput type="password" label="password" onChange={handleChange} value={inputs.password} required="true" />
                 <Container className="text-light flex-center justify-content-start">
@@ -43,7 +42,7 @@ const Login = ({ confirmed }) => {
                     <Form.Check label=" " type="radio" />
                 </Container>
             </CustomForm>
-            {!confirmed && <GoogleButton responseGoogle={responseGoogle} />}
+            {!verifiedEmail && <GoogleButton responseGoogle={responseGoogle} />}
         </>
     )
 
@@ -51,4 +50,4 @@ const Login = ({ confirmed }) => {
 
 
 
-export default Login;
+export default AuthLogin;

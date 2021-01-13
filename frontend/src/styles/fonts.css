@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Rubik&display=swap");
 
-@import url("https://fonts.googleapis.com/css2?family=Karla:wght@1,200&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Karla&display=swap");
 
 h1, h2, h3, h4, h5, h6, .customHeading {
     font-family: var(--font-heading);
@@ -18,7 +18,7 @@ p, span, ul, a {
     font-family: var(--font-body);
     letter-spacing: var(--letter-spacing);
     word-spacing: var(--word-spacing);
-    line-height: 1.4em;
+    line-height: 1.3em;
 }
 
 h1 {

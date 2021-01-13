@@ -28,6 +28,7 @@ label, .formLabel {
 
 .customSelect option {
     background-color: var(--main-color);
+    color: var(--secondary-color);
 }
 
 .user-input, .rbt-input {
@@ -91,4 +92,8 @@ label, .formLabel {
     color: var(--accent-color);
     margin-right: .4rem;
     cursor: pointer;
+}
+
+.multipleInput .dropdown-menu {
+    overflow-x: hidden !important;
 }

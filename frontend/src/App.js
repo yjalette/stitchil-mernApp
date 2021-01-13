@@ -9,12 +9,11 @@ import LandingPage from './pages/homePage/Landing';
 import ExplorePage from './pages/explorePage/Explore';
 import MeasurementsPage from './pages/measurements/Measurements';
 import Logout from './components/navbar/Logout';
-import ConfirmCreds from './components/auth/ConfirmCreds';
-import Settings from './components/settings/Settings';
 import Contact from './components/contact/Contact';
 import ChatPage from './pages/chatPage/ChatPage';
 import Footer from './components/footer/Footer';
 import SettingsPage from './pages/settingsPage/SettingsPage';
+import AuthPage from './pages/authPage/AuthPage';
 
 const userObj = JSON.parse(localStorage.getItem('user'));
 
@@ -33,12 +32,14 @@ class App extends Component {
             <MainNav />
             <Route exact path="/" component={LandingPage} />
             <Route path="/homepage/:page" component={LandingPage} />
+            <Route path="/auth/:authType" component={AuthPage} />
+            <Route path="/auth/:authType/:token" component={AuthPage} />
             <Route path="/explore/:section/" component={ExplorePage} />
-            <Route path="/confirm/:confirmType" component={ConfirmCreds} />
+            {/* <Route path="/confirm/:confirmType" component={ConfirmCreds} /> */}
             <div className="page-wrapper">
               <Switch>
                 <Route path="/settings/:section" component={SettingsPage} />
-                <Route path="/update/:section/:token" component={Settings} />
+                {/* <Route path="/update/:section/:token" component={Settings} /> */}
                 <Route path="/measurements" component={MeasurementsPage} />
                 <Route path="/filter/:section/:category" component={ExplorePage} />
                 <Route path="/profile/:username/:section" component={ProfilePage} />

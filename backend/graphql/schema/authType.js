@@ -19,7 +19,6 @@ type Login {
 
 type Confirmation {
     emailSent: Boolean
-    emailConfirmed: Boolean
 }
 
 
@@ -37,13 +36,13 @@ input UserInput {
 
 
 type Query { 
-    login(email: String!, password: String, googleAuth: Boolean, confirmed: Boolean): LoginResult    
+    login(email: String!, password: String, googleAuth: Boolean, verifiedEmail: Boolean): LoginResult    
     checkIfExists(email: String): Boolean    
 }
 
 type Mutation {    
     createUser(userInput: UserInput): AuthResult 
-    forgotPassword(email: String): Boolean  
+    forgotPassword(email: String): Response  
 }
 
 `;

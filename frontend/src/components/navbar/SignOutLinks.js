@@ -1,10 +1,8 @@
 import React from 'react';
+import { Nav } from 'react-bootstrap';
 
-import Auth from '../auth/AuthIndex';
-
-const SignOutLinks = () => <Auth />
+const SignOutLinks = () => <Nav.Link href="/auth/login" className="fa fa-sign-in customIcon auth__iconBtn"></Nav.Link>
 
 export default SignOutLinks;
 
 
-// <Nav.Link className="custom_icon  flex-center" href={`/auth/login`}><i className="fa fa-sign-in custom_icon" aria-hidden="true"></i></Nav.Link>

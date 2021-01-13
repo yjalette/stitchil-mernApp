@@ -127,7 +127,6 @@
     margin-bottom: .4rem;
 } */
 
-
 /* buttons */
 button {
     text-transform: capitalize;
@@ -325,21 +324,26 @@ button + button:not(.dropdown-item), i + i {
     text-transform: lowercase;
     font-size: var(--md-fonts);
     padding: .3em;
+    transition: color 2s;
+}
+
+.iconTextButton:hover {
+    color: var(--white-color);
 }
 
 /* alerts */
 
 .inlineAlert {
-    display: block;
+    /* display: block;
     width: 100%;
     text-align: center;
     background-color: transparent;
-    font-size: var(--md-fonts);
+    font-size: var(--sm-fonts);
     border: none;
-    margin: .2em auto;
+    margin: .2em auto; */
 }
 
-.alertDemo__box{
+.alertDemo__box {
     background-color: var(--red-color);
     box-shadow: var(--box-shadow-red);
     border: 1.5px dashed var(--light-gray-color);
@@ -348,7 +352,6 @@ button + button:not(.dropdown-item), i + i {
 
 .alert-danger {
     color: var(--red-color);
- 
 }
 
 .inlineAlert::before {
@@ -359,14 +362,13 @@ button + button:not(.dropdown-item), i + i {
 
 .alert-danger::before {
     content: "\f06a";
-   
 }
 
-.alert-success{
+.alert-success {
     color: var(--green-color);
 }
 
-.alert-success::before{
+.alert-success::before {
     content: "\f058";
 }
 
@@ -375,11 +377,10 @@ button + button:not(.dropdown-item), i + i {
     font-size: 80px;
 }
 
-.errorMsg, .error {
+.error {
     color: var(--red-color);
+    font-size: var(--sm-fonts);
 }
-
-
 
 /* modal */
 
@@ -482,6 +483,7 @@ button + button:not(.dropdown-item), i + i {
 }
 
 .pageMenu__item {
+    padding: .75rem;
     position: relative;
     color: var(--light-gray-color) !important;
     margin: 0;
@@ -507,7 +509,6 @@ button + button:not(.dropdown-item), i + i {
     border-bottom-color: var(--main-color-light);
     bottom: 0;
 }
-
 
 @media only screen and (max-width: 1200px) {}
 

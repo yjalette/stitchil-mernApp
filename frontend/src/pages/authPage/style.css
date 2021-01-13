@@ -16,7 +16,7 @@
 }
 
 .join__continueButton, .join__submitButton {
-    align-self: flex-end;
+    float: right;
 }
 
 .join__continueButton, .join__backButton {

@@ -1,28 +1,34 @@
 const User = require("../../models/user");
 const { comparePwd, createPwd, verifyJWT } = require("../../helpers/creds");
 const { uploadToCloud, deleteFile } = require("../../helpers/uploadToCloud");
+const { unauthorized_error,
+    server_error,
+    notUser_error,
+    wrongPwd_error,
+    emailTaken_error,
+    usernameTaken_error,
+    update_success,
+    login_redirect } = require("../../consts/client_msg");
 
 module.exports = {
     Query: {
         profile_intro: async (_, { username }, req) => {
-           return await User.findOne({ username })
+            console.log(req)
+            return await User.findOne({ username })
         },
-        userAccount: async (_, args, req) => {
-            if (!req.isUser) throw new Error('user is not authorized');
-            return await User.findById(req.userId);
-        }
+        userAccount: async (_, args, { userId }) => userId ? await User.findById(userId) : new Error('user is not authorized')
     },
     Mutation: {
-        updateUsername: async (_, username, {userId}) => {
-           if (await User.exists(username)) return {"code": 401, "message": "this username is already taken"};
-           return !await handleUpdate( userId, username) ? {"code": 501, "message": "please try again"} : {"success": true};
+        updateUsername: async (_, username, { userId }) => {
+            if (await User.exists(username)) return usernameTaken_error;
+            return await handleUpdate(userId, username);
         },
-        updateEmail: async (_, email, {userId}) => {
-           if (await User.exists(email)) return {"code": 401, "message": "this email is already taken"};
-           return !await handleUpdate( userId, email) ? {"code": 501, "message": "please try again"} : {"success": true};
-        
+        updateEmail: async (_, email, { userId }) => {
+            if (await User.exists(email)) return emailTaken_error;
+            return await handleUpdate(userId, email);
         },
-        updateGeneral: async (_, args, {userId}) => !await handleUpdate( userId, args) ? {"code": 501, "message": "please try again"} : {"success": true},
+        // updateGeneral: async (_, args, { userId }) => !await handleUpdate(userId, args) ? server_error : { "success": true },
+        updateGeneral: async (_, args, { userId }) => await handleUpdate(userId, args),
         uploadProfileImage: async (_, { file, image_type }, req) => {
             console.log("upload====>", file, image_type)
             if (!req.isUser) throw new Error("unauthenticated user to upload file");
@@ -38,17 +44,15 @@ module.exports = {
             }
         },
         updatePassword: async (_, { passwordInput, token }, req) => {
-            console.log("1", passwordInput)
-            if (!token && !req.isUser) return { code: 401, error: "user is not authorized" }
-            if (token && !await User.exists(verifyJWT(token).userId)) return { code: 401, "message": "user does not exist" }
+            if (!token && !req.isUser) return unauthorized_error
+            const user = await User.findById(token ? verifyJWT(token).userId : req.userId);
+            if (!user) return notUser_error
+            if (!token && !await comparePwd(passwordInput.password, user.password)) return wrongPwd_error;
             try {
-                const user = await User.findById(req.userId);
-                if (user.password && !await comparePwd(passwordInput.password, user.password)) return { "code": 400, "message": "wrong password" }
-                user.password = await createPwd(passwordInput.new_password);
-                await user.save();
-                return { "success": true, "message": "Your New Password Was Saved" }
+                user.updateOne({ $set: { password: await createPwd(passwordInput.new_password) } })
+                return token ? login_redirect : update_success
             } catch (error) {
-                return { code: 500, "message": "Server Error. Please Try Again" }
+                return server_error
             }
 
         }
@@ -64,11 +68,14 @@ module.exports = {
 
 }
 
-async function handleUpdate(userId, param){
-    if (!userId) throw new Error('user is not authorized');
-    await User.findByIdAndUpdate(userId, param, (err, data) => {
-        if (err) throw new Error(err);
-    })
-    return true;
+async function handleUpdate(userId, param) {
+    if (!userId) return unauthorized_error
+    try {
+        await User.findByIdAndUpdate(userId, param);
+        return update_success
+    } catch (error) {
+        return server_error
+    }
+
 }
 

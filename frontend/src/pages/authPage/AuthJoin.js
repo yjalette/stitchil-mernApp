@@ -3,21 +3,22 @@ import { Form } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 
 import useForm from '../../custom_hooks/useForm';
-import usePostData from '../../custom_hooks/usePostData';
-import JoinForm from './JoinForm';
 import { onSuccess } from './helpers'
 import AuthContext from '../../context/Auth-context';
 import AlertDismissible from '../../layout/alerts/AlertDismissible';
 import { validate } from '../../validation/validate_form';
 import { initState_join } from '../../constants/initStates';
-import GoogleButton from './GoogleButton';
+import GoogleButton from './AuthGoogleBtn';
+import useMutationHook from '../../custom_hooks/useMutationHook';
+import { SIGNUP_MUTATION } from './graphql/mutations';
+import AuthJoinForm from './AuthJoinForm';
+import CustomForm from '../../layout/CustomForm';
 
-
-const Join = () => {
+const AuthJoin = () => {
     const { push } = useHistory()
     const { setUser } = useContext(AuthContext);
-    const { inputs, setInputs, handleChange, handleSubmit, errors, setErrors } = useForm(initState_join, onSubmit);
-    const { data, post } = usePostData("join", onCompleted);
+    const { inputs, setInputs, handleChange, handleSubmit, errors, setErrors, setMsg, msg } = useForm(initState_join, onSubmit);
+    const { data, post } = useMutationHook(SIGNUP_MUTATION, onCompleted);
 
     const responseGoogle = (response) => {
         if (response.profileObj.email) {
@@ -45,7 +46,7 @@ const Join = () => {
                     userInput: {
                         ...inputs,
                         // country: inputs.country.toString(),
-                        confirmPassword: undefined
+                        confirm_password: undefined
                     }
                 }
             })
@@ -57,20 +58,26 @@ const Join = () => {
     function onCompleted(data) {
         if (data && data.createUser.code) setErrors({ form_error: data.createUser.message });
         if (data.createUser.token) return onSuccess(data.createUser, setUser, push);
+        if (data.createUser.emailSent) {
+            setMsg("We have sent an email with a confirmation link. In order to complete the sign-up process, please click the confirmation link");
+            setInputs(initState_join);
+        }
+
+        // if (data.createUser.emailSent) return push({ pathname: '/auth/login', state: { verifiedEmail: true } })
     }
 
-    if (data && data.createUser.emailSent) return <AlertDismissible text="We have sent an email with a confirmation link. In order to complete the sign-up process, please click the confirmation link" alert_class="auth-alert" />
+    // if (data && data.createUser.emailSent) return <AlertDismissible text="We have sent an email with a confirmation link. In order to complete the sign-up process, please click the confirmation link" alert_class="auth-alert" />
 
-    const form_props = { inputs, setInputs, onChange: handleChange, onSubmit: handleSubmit, errors, setErrors, validate: validate_form }
+    const form_props = { inputs, setInputs, onChange: handleChange, errors, setErrors, validate: validate_form }
 
     return (
-        <Form className="modal__form auth__form" onSubmit={handleSubmit}>
-            {errors.form_error && <span className="error">{errors.form_error}</span>}
-            <JoinForm {...form_props}>
+        <CustomForm onSubmit={handleSubmit} form_error={errors.form_error} form_msg={msg}>
+            <AuthJoinForm {...form_props}>
                 <GoogleButton responseGoogle={responseGoogle} />
-            </JoinForm>
+            </AuthJoinForm>
+        </CustomForm>
 
-        </Form>
+
     )
 }
 
@@ -79,4 +86,4 @@ const Join = () => {
 
 
 
-export default React.memo(Join)
+export default React.memo(AuthJoin)

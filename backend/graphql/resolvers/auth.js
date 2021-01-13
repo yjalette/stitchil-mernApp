@@ -2,18 +2,15 @@ const User = require("../../models/user");
 const Portfolio = require("../../models/portfolio");
 const { sendEmail } = require("../../helpers/nodemailer")
 const { generateJWT, comparePwd, createPwd } = require("../../helpers/creds");
+const { server_error, notUser_error, wrongPwd_error, emailTaken_error, usernameTaken_error } = require("../../consts/client_msg");
 
 module.exports = {
     Query: {
-        login: async (_, { email, password, googleAuth, confirmed }) => {
-            console.log(email, confirmed)
-            const user = await User.findOne({ email }).lean();
-            if (!user) return { code: 401, message: "User Does Not Exit" };
-            const isPwdValid = !googleAuth && await comparePwd(password, user.password);
-            if (!googleAuth && !isPwdValid) return { code: 401, message: "Wrong Password" }
-            else if (confirmed) await user.updateOne(confirmed);
-            // const result = { token: generateJWT(user._id, email), username: user.username, role: user.role, googleAuth }
-            // console.log(result)
+        login: async (_, { email, password, googleAuth, verifiedEmail }) => {
+            const user = await User.findOne({ email });
+            if (!user) return notUser_error;
+            if (!googleAuth && !await comparePwd(password, user.password)) return wrongPwd_error;
+            if (verifiedEmail) await user.updateOne({ $set: { verifiedEmail: true } });
             return { token: generateJWT(user._id, email), username: user.username, role: user.role, googleAuth };
         },
         checkIfExists: async ({ email }, req) => {
@@ -26,7 +23,7 @@ module.exports = {
                         from: "katya.jalette@gmail.com",
                         to: "katya.jalette@gmail.com",
                         subject: "reset password",
-                        html: `<a href=${process.env.APP_ORIGIN}/update/updateuser/${token}>click</a>`
+                        html: `${process.env.APP_ORIGIN}/update/updateuser/${token}`
                     }
 
                     return await sendEmail(mail);
@@ -42,15 +39,12 @@ module.exports = {
         createUser: async (_, { userInput }) => {
             console.log("createuser--->", userInput)
             const { email, username, role } = userInput;
-            const isUser = await User.findOne({ email });
-            if (isUser) return { "code": 401, message: "User Already Exists" };
-            const usernameTaken = await User.findOne({ username });
-            if (usernameTaken) return { "code": 401, message: "This username is already taken" };
-
+            if (await User.exists({ email })) return emailTaken_error;
+            if (await User.exists({ username })) return usernameTaken_error;
             const user = new User({
                 ...userInput,
                 password: !userInput.googleAuth ? await createPwd(userInput.password) : null,
-                confirmed: userInput.googleAuth || false,
+                verifiedEmail: userInput.googleAuth ? true : false,
                 createdAt: new Date()
             });
 
@@ -69,11 +63,10 @@ module.exports = {
                         subject: "Welcome To Stitchil!",
                         template: 'registration',
                         context: {
-                            link: 'http://localhost:3000/confirm/email'
+                            link: 'http://localhost:3000/auth/verify_email'
                         }
                     });
                 } catch (error) {
-                    console.log("err--->", error)
                     return { "code": 401, message: "Please Try Different Email Address" };
                 }
 
@@ -83,22 +76,22 @@ module.exports = {
         },
         forgotPassword: async (_, { email }, req) => {
             const user = await User.findOne({ email }).lean();
-            if (!user) return false;
-            try {
-                if (user && !req.isUser) {
-                    const token = generateJWT(user._id, email)
-                    return await sendEmail({
-                        subject: "reset password",
-                        template: "resetPwd",
-                        context: {
-                            link: `<a href=http://localhost:3000/update/updateuser/${token}>click</a>`
-                        }
-                    }
-                    );
-                }
+            console.log(notUser_error)
+            if (!user) return notUser_error;
+            const token = generateJWT(user._id, email)
 
+            try {
+                await sendEmail({
+                    subject: "reset password",
+                    template: "resetPwd",
+                    context: {
+                        link: `http://localhost:3000/auth/reset/${token}`
+                    }
+                })
+                return { success: true, message: "Please check your email for a link to create a new password" };
             } catch (error) {
-                throw new Error(error)
+                console.log(error)
+                return server_error
             }
         }
     },

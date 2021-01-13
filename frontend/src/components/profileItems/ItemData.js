@@ -45,7 +45,7 @@ const ItemData = ({ comp, section, username }) => {
                     {logged_in_user && <ItemCreate overLimit={values && values.length > 2 ? true : false} />}
                 </SectionHeader>
                 <ItemGrid values={values} />
-                {values.length === 0 && <EmptyResultAlert type={section} />}
+                {values && values.length === 0 && <EmptyResultAlert type={section} />}
             </section>
         </ProfileItemContext.Provider>
     )

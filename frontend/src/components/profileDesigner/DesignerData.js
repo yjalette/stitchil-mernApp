@@ -12,7 +12,7 @@ const DesignerData = ({ portfolioId }) => {
         if (portfolioId) getData({ variables: { portfolioId } })
     }, [portfolioId]);
 
-    return <DesignerSum values={data && data.designerResume} />
+    return <DesignerSum values={data && data.designerResume || []} />
 }
 
 export default DesignerData;

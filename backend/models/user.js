@@ -55,7 +55,7 @@ const userSchema = new Schema({
         type: Date,
         required: false
     },
-    confirmed: {
+    verifiedEmail: {
         type: Boolean
     }
 })
