@@ -8,17 +8,9 @@ const gigResolver = require('./gigs');
 const messageResolver = require('./message');
 const fileResolver = require('./file');
 const commentResolver = require('./comment');
+const exploreResolver = require('./explore');
 
 const resolvers = {
-    AuthResult: authResolver.AuthResult,
-    LoginResult: userResolver.LoginResult,
-    Response: {
-        __resolveType(obj) {
-            if (obj.success) return 'Result';
-            if (obj.code) return 'Failure';
-            return null;
-        }
-    },
     Query: {
         ...authResolver.Query,
         ...gigResolver.Query,
@@ -27,7 +19,8 @@ const resolvers = {
         ...chatResolver.Query,
         ...messageResolver.Query,
         ...commentResolver.Query,
-        ...fileResolver.Query
+        ...fileResolver.Query,
+        ...exploreResolver.Query
     },
     Mutation: {
         ...authResolver.Mutation,
@@ -38,7 +31,18 @@ const resolvers = {
         ...chatResolver.Mutation,
         ...messageResolver.Mutation,
         ...commentResolver.Mutation,
-        ...fileResolver.Mutation
+        ...fileResolver.Mutation,
+        // ...exploreResolver.Mutation
+    },
+    AuthResult: authResolver.AuthResult,
+    LoginResult: userResolver.LoginResult,
+    ExploreItem: exploreResolver.ExploreItem,
+    Response: {
+        __resolveType(obj) {
+            if (obj.success) return 'Result';
+            if (obj.code) return 'Failure';
+            return null;
+        }
     }
 };
 

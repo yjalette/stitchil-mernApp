@@ -1,11 +1,12 @@
 import React from 'react'
 import { Row, Col } from 'react-bootstrap';
 
-import ItemIndex from '../../components/profileItems/ItemIndex';
-import ReviewIndex from '../../components/profileReviews/ReviewIndex';
 import ProfileIntro from './ProfileIntro';
 import ProfileHeader from './ProfileHeader';
 import PageMenu from '../../layout/PageMenu';
+import ReviewData from './profileReviews/ReviewsData';
+import PortfolioIndex from './profilePortfolio/PortfolioIndex';
+import GigIndex from './profileGig/GigIndex';
 
 const ProfileGrid = ({ resData, activeSection }) => {
     console.log(resData)
@@ -19,9 +20,9 @@ const ProfileGrid = ({ resData, activeSection }) => {
                 <Col lg={7} className="profile__col profile-rightComlun p-0">
                     <PageMenu items={["gigs", resData.role === "designer" ? "portfolio" : null, "reviews"]} />
                     <div className={`profileSection profilSection-${activeSection}`}>
-                        {activeSection === "reviews" && <ReviewIndex />}
-                        {activeSection === "portfolio" && <ItemIndex section={activeSection} />}
-                        {activeSection === "gigs" && <ItemIndex section={activeSection} />}
+                        {activeSection === "reviews" && <ReviewData />}
+                        {activeSection === "portfolio" && <PortfolioIndex section={activeSection} />}
+                        {activeSection === "gigs" && <GigIndex section={activeSection} />}
                     </div>
                 </Col>
             </Row>

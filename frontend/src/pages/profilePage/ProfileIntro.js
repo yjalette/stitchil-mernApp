@@ -1,9 +1,9 @@
 import React from 'react';
 import { Container } from 'react-bootstrap';
 
-import DesignerData from '../../components/profileDesigner/DesignerData';
 import ListItem from '../../layout/ListItem';
 import SectionHeader from '../../layout/SectionHeader';
+import DesignerSum from './proflleDesigner/DesignerSum';
 
 const ProfileIntro = ({ profile }) => {
     const { role, country, username, language } = profile;
@@ -19,7 +19,7 @@ const ProfileIntro = ({ profile }) => {
                     <ListItem icon="https://res.cloudinary.com/dgxa9gpta/image/upload/v1602093311/Icons/info-icon_bj05ca.svg" content={`Hardcore coffee nerd. Twitter fanatic. Professional internet trailblazer. Introvert. Communicator. Problem solver.`} maxWords="30" />
                 </Container>
             </Container>
-            {profile && profile.portfolio && <DesignerData portfolioId={profile.portfolio} />}
+            {profile && profile.portfolio && <DesignerSum values={profile.portfolio} />}
         </>
     )
 }

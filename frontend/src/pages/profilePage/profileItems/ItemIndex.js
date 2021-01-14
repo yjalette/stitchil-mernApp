@@ -2,7 +2,6 @@ import React, { useReducer, useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 
 import ItemData from './ItemData';
-
 import { itemReducer } from './itemReducer';
 
 const ItemIndex = ({ section }) => {

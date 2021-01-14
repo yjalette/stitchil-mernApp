@@ -1,8 +1,8 @@
 import React from 'react';
 import { Container } from 'react-bootstrap';
 
-import useSlides from '../../custom_hooks/useSlides';
-import CustomModal from '../../layout/CustomModal';
+import useSlides from '../../../custom_hooks/useSlides';
+import CustomModal from '../../../layout/CustomModal';
 import ItemDetails from './ItemDetails';
 import ItemSum from './ItemSum';
 

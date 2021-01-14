@@ -10,8 +10,8 @@ type AuthData {
     username: String
     fullname: String
     profileImage: String
-    coverImage: String
     country: [String]
+    rating: Int
     token: String
     googleAuth: Boolean
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Image } from "react-bootstrap";
-import ImageZoom from '../../layout/media/ImageZoom';
+import ImageZoom from '../../../layout/media/ImageZoom';
 
 // import InlineAlert from "../alerts/InlineAlert";
 

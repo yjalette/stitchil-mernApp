@@ -6,7 +6,7 @@ import AuthContext from './context/Auth-context';
 import MainNav from './components/navbar/MainNav';
 import ProfilePage from './pages/profilePage/ProfilePage';
 import LandingPage from './pages/homePage/Landing';
-import ExplorePage from './pages/explorePage/Explore';
+import ExplorePage from './pages/explorePage/ExplorePage';
 import MeasurementsPage from './pages/measurements/Measurements';
 import Logout from './components/navbar/Logout';
 import Contact from './components/contact/Contact';
@@ -34,7 +34,7 @@ class App extends Component {
             <Route path="/homepage/:page" component={LandingPage} />
             <Route path="/auth/:authType" component={AuthPage} />
             <Route path="/auth/:authType/:token" component={AuthPage} />
-            <Route path="/explore/:section/" component={ExplorePage} />
+            <Route path="/explore" component={ExplorePage} />
             {/* <Route path="/confirm/:confirmType" component={ConfirmCreds} /> */}
             <div className="page-wrapper">
               <Switch>

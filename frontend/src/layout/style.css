@@ -1,7 +1,8 @@
 .listItem {
     width: 100%;
-    display: flex;
-    align-items: center;
+
+    /* display: flex;
+    align-items: center; */
     margin: .4rem 0;
 }
 
@@ -325,6 +326,10 @@ button + button:not(.dropdown-item), i + i {
     font-size: var(--md-fonts);
     padding: .3em;
     transition: color 2s;
+}
+
+.iconTextButton-red {
+    color: var(--red-color);
 }
 
 .iconTextButton:hover {

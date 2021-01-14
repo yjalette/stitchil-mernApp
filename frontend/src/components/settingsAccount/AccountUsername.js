@@ -1,12 +1,12 @@
 import React, { useEffect, useContext } from 'react';
 
 import useForm from '../../custom_hooks/useForm';
-import FormInput from '../inputs/FormInput';
-import { updateLocalStorage } from '../../helpers/localStorageHelper';
-import AuthContext from '../../context/Auth-context';
-import { handleResponse } from '../../helpers/dataHelper';
-import AccountForm from './AccountForm';
 import useMutationHook from '../../custom_hooks/useMutationHook';
+import FormInput from '../inputs/FormInput';
+import AccountForm from './AccountForm';
+import AuthContext from '../../context/Auth-context';
+import { updateLocalStorage } from '../../helpers/localStorageHelper';
+import { handleResponse } from '../../helpers/dataHelper';
 import { UPDATE_USERNAME_MUTATION } from '../../pages/settingsPage/graphql/mutations';
 
 const AccountUsername = ({ currValue }) => {
@@ -39,7 +39,10 @@ const AccountUsername = ({ currValue }) => {
     }
 
     return <AccountForm
-        userInputs={<FormInput label="username" onChange={handleChange} value={inputs.username} />}
+        userInputs={<FormInput
+            label="username"
+            onChange={handleChange}
+            value={inputs.username} />}
         form_msg={msg}
         form_error={errors.form_error}
         onSubmit={handleSubmit}

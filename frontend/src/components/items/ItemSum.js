@@ -1,36 +1,22 @@
 import React, { useContext } from 'react';
+import { Card } from 'react-bootstrap';
 
 import "./style.css"
-
 import OverlayCard from '../../layout/cards/OverlayCard';
-import CardFooter from '../../layout/cards/CardFooter';
-import CardBody from '../../layout/cards/CardBody';
-import IconButton from '../../layout/buttons/IconButton';
-import UserAvatar from '../user/UserAvatar';
-import ProfileContext from '../../context/Profile-context';
 
-const ItemSum = ({ item, onLeftBtn, onRightBtn, children }) => {
-    const { logged_in_user } = useContext(ProfileContext);
+const ItemSum = ({ item_title, item_highlights, item_img, item_footer }) => {
     return (
         <OverlayCard
-            coverImage={item.imageUrl}
-            title={item.title || item.caption.title}
-            rating={item.creator && item.creator.rating}
-            card_class="item-card"
+            coverImage={item_img}
+            title={item_title}
+            card_class="item itemSum"
         >
-            <CardBody>
-                {item.creator && <UserAvatar username={item.creator.username} profileImage={item.creator.profileImage} />}
-            </CardBody>
-            <section className="item-card__highlights">
-                {children}
-            </section>
-            <CardFooter>
-                {logged_in_user ?
-                    <IconButton icon_class="fa fa-edit" onClick={onLeftBtn} />
-                    :
-                    <IconButton icon_class="fa fa-heart" onClick={onLeftBtn} />}
-                <IconButton icon_class="fa fa-angle-double-right " onClick={onRightBtn} />
-            </CardFooter>
+            <Card.Body className="itemSum__body">
+                {item_highlights}
+            </Card.Body>
+            <Card.Footer card_class="itemSum__footer flex-center flex-column justify-content-between w-100">
+                {item_footer}
+            </Card.Footer>
         </OverlayCard>
     )
 }

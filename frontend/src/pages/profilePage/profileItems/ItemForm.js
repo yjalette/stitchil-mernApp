@@ -1,17 +1,16 @@
 import React, { useContext } from 'react';
-import { Modal } from 'react-bootstrap';
 
-import ProfileItemContext from '../../context/ProfileItem-context';
-import useSlides from '../../custom_hooks/useSlides';
-import IconButton from '../../layout/buttons/IconButton';
-import CustomForm from '../../layout/CustomForm'
-import CustomModal from '../../layout/CustomModal';
+import ProfileItemContext from '../../../context/ProfileItem-context';
+import useSlides from '../../../custom_hooks/useSlides';
+import CustomForm from '../../../layout/CustomForm';
+import CustomModal from '../../../layout/CustomModal'
 
 const ItemForm = ({ form_title, onSubmit, onCancel, form_props }) => {
     const { comp } = useContext(ProfileItemContext);
     const { activeIndex, handleBackward, handleForward } = useSlides(0, comp.ItemFormParts(form_props))
 
     return (
+
         <CustomModal
             modal_title={form_title}
             modal_class="itemForm-modal"

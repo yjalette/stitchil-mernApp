@@ -1,12 +1,12 @@
 import React, { useEffect, useContext } from 'react'
 import { useParams } from 'react-router-dom'
 
-import useForm from '../../custom_hooks/useForm'
-import useUpload from '../../custom_hooks/useUpload'
-import usePostData from '../../custom_hooks/usePostData';
+import useForm from '../../../custom_hooks/useForm'
+import useUpload from '../../../custom_hooks/useUpload'
+import usePostData from '../../../custom_hooks/usePostData';
 import ItemForm from './ItemForm';
-import ProfileItemContext from '../../context/ProfileItem-context';
-import IconButton from '../../layout/buttons/IconButton';
+import ProfileItemContext from '../../../context/ProfileItem-context';
+import IconButton from '../../../layout/buttons/IconButton';
 
 import { transformInputs, initState } from "./util"
 import ItemUpload from './ItemUpload';

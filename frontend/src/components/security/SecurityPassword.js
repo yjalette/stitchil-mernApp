@@ -1,4 +1,5 @@
 import React, { useContext } from 'react'
+import { useHistory } from 'react-router-dom';
 
 import AuthContext from '../../context/Auth-context'
 import useForm from '../../custom_hooks/useForm';
@@ -7,7 +8,6 @@ import Password from '../inputs/Password';
 import { handleResponse } from '../../helpers/dataHelper';
 import useMutationHook from '../../custom_hooks/useMutationHook';
 import { UPDATE_PASSWORD_MUTATION } from '../../pages/settingsPage/graphql/mutations';
-import { useHistory } from 'react-router-dom';
 
 const SecurityPassword = ({ token }) => {
     const { user } = useContext(AuthContext);

@@ -4,16 +4,6 @@ const { gql } = require("apollo-server-express");
 module.exports = gql`
 
 
-
-type AuthData {   
-    role: String
-    username: String
-    fullname: String
-    profileImage: String
-    country: [String]
-    provider: String
-}
-
 type Message {
     _id: String
     docId: String

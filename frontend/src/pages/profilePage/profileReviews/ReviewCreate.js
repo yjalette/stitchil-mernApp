@@ -2,14 +2,13 @@ import React, { useContext } from 'react';
 import { Container } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 
-import AuthContext from '../../context/Auth-context';
-import useForm from '../../custom_hooks/useForm';
-import usePostData from '../../custom_hooks/usePostData';
-import UserAvatar from '../../layout/media/UserAvatar';
+import useForm from '../../../custom_hooks/useForm';
+import usePostData from '../../../custom_hooks/usePostData';
+import UserAvatar from '../../../layout/media/UserAvatar';
 import ReviewRate from './ReviewRate';
-import { initState_reviews } from '../../constants/initStates';
-import MessageForm from '../message/MessageForm';
-
+import MessageForm from '../../../components/message/MessageForm';
+import { initState_reviews } from '../../../constants/initStates';
+import AuthContext from '../../../context/Auth-context';
 
 const ReviewCreate = ({ addComment }) => {
     const { username } = useParams();

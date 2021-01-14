@@ -10,7 +10,13 @@ export const PROFILE_INTRO_QUERY = gql`
                 profileImage
                 country
                 role
-                portfolio   
+                portfolio {
+                    education
+                    skills
+                    style
+                    experience
+                    about
+            }  
         }  
     }
 `

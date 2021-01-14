@@ -1,8 +1,8 @@
 import React, { useContext } from 'react'
 import { Col, Row } from 'react-bootstrap'
 
-import ProfileItemContext from '../../context/ProfileItem-context';
-import ImageZoom from '../../layout/media/ImageZoom';
+import ProfileItemContext from '../../../context/ProfileItem-context';
+import ImageZoom from '../../../layout/media/ImageZoom';
 
 const ItemDetails = ({ item, onForward, onBackward }) => {
     const { comp } = useContext(ProfileItemContext);

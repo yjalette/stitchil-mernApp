@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Col, Image, Row } from 'react-bootstrap';
 
-import ProfileItemContext from '../../context/ProfileItem-context';
+import ProfileItemContext from '../../../context/ProfileItem-context';
 import useSlides from '../../custom_hooks/useSlides';
 import CustomModal from '../../layout/CustomModal';
 import ImageZoom from '../../layout/media/ImageZoom';

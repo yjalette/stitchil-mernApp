@@ -13,7 +13,7 @@ body {
 }
 
 .App, #root {
-    height: 100vh;
+    height: 100%;
 }
 
 ::-webkit-scrollbar {
@@ -163,7 +163,6 @@ ul {
     height: 100%;
     margin: auto;
     position: relative;
-
 }
 
 .header {

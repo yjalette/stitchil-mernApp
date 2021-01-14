@@ -26,7 +26,7 @@ export const itemReducer = (state, action) => {
         }
         case "GIGS": {
             return {
-                "initState": { title: "", description: "", categories: [], garment: "", price: 0, fabrics: [], delivery: 0 },
+                "initState": { title: "", description: "", categories: [], garment: "", price: 0, fabric: [], delivery: 0 },
                 "updateMutation": "updateGig",
                 "submitItem": (inputs, file, post) => {
                     if (inputs.price) inputs.price = parseInt(inputs.price);

@@ -3,11 +3,10 @@ import { Modal } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 
 import "./style.css"
-import useDeleteData from '../../custom_hooks/useDeleteData';
-import SubmitButton from '../../layout/buttons/SubmitButton';
-import CustomModal from '../../layout/CustomModal';
-import ProfileItemContext from '../../context/ProfileItem-context';
-import AlertTimer from '../../layout/alerts/AlertTimer';
+import useDeleteData from '../../../custom_hooks/useDeleteData';
+import SubmitButton from '../../../layout/buttons/SubmitButton';
+import CustomModal from '../../../layout/CustomModal';
+import ProfileItemContext from '../../../context/ProfileItem-context';
 
 const ItemDelete = ({ itemId }) => {
     const { section } = useParams();

@@ -47,6 +47,10 @@ const gigSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'User'
     },
+    updatedAt: {
+        type: Date,
+        required: true
+    },
     createdAt: {
         type: Date,
         required: true

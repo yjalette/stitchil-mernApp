@@ -1,12 +1,12 @@
 import React from 'react';
 
-import GigDetails from '../gig/GigDetails';
-import GigHighlights from '../gig/GigHighlights';
-import PortfolioItemDetails from '../portfolio/PortfolioItemDetails';
-import PortfolioHighlights from '../portfolio/PortfolioHighlights';
-import FormInput from '../inputs/FormInput';
-import FormMultipleInput from '../inputs/FormMultipleInput';
-import FormTextarea from '../inputs/FormTextarea';
+import GigDetails from '../../../components/gig/GigDetails';
+import GigHighlights from '../../../components/gig/GigHighlights';
+import PortfolioItemDetails from '../../../components/portfolio/PortfolioItemDetails';
+import PortfolioHighlights from '../../../components/portfolio/PortfolioHighlights';
+import FormInput from '../../../components//inputs/FormInput';
+import FormMultipleInput from '../../../components/inputs/FormMultipleInput';
+import FormTextarea from '../../../components/inputs/FormTextarea';
 
 
 export const itemReducer = (state, action) => {

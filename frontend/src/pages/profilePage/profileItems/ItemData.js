@@ -1,20 +1,24 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useReducer } from 'react';
+import { useParams } from 'react-router-dom';
 
-import ProfileItemContext from '../../context/ProfileItem-context'
-import useGetData from '../../custom_hooks/useGetData';
+import { itemReducer } from './itemReducer';
 import ItemGrid from './ItemGrid';
 import ItemCreate from './ItemCreate';
-import ProfileContext from '../../context/Profile-context';
-import EmptyResultAlert from '../../layout/alerts/EmptyResultAlert';
-import SectionHeader from '../../layout/SectionHeader';
+import EmptyResultAlert from '../../../layout/alerts/EmptyResultAlert';
+import SectionHeader from '../../../layout/SectionHeader';
+import useQueryHook from '../../../custom_hooks/useQueryHook';
+import ProfileContext from '../../../context/Profile-context';
+import ProfileItemContext from '../../../context/ProfileItem-context';
 
-const ItemData = ({ comp, section, username }) => {
+const ItemData = ({ query }) => {
     const { logged_in_user } = useContext(ProfileContext);
-    const { data, error, getData, updateQuery } = useGetData(`profile${section}`);
+    const { username, section } = useParams();
+    const [comp, dispatch] = useReducer(itemReducer, section.toUpperCase());
+    const { data, updateQuery } = useQueryHook(query, { username });
     const [values, setValues] = useState([]);
 
     useEffect(() => {
-        if (section) getData({ variables: { username } });
+        if (section) dispatch({ type: section.toUpperCase() });
     }, [section]);
 
     useEffect(() => {

@@ -3,7 +3,7 @@ import { useQuery } from '@apollo/react-hooks';
 import LoadingSpinner from '../components/LoadingSpinner';
 
 const useQueryHook = (QUERY, variables, handleResponse) => {
-    const { loading, error, data, refetch, fetchMore } = useQuery(QUERY, {
+    const { loading, error, data, refetch, fetchMore, updateQuery } = useQuery(QUERY, {
         variables,
         onCompleted: (data) => handleResponse && handleResponse(data)
     });
@@ -15,7 +15,8 @@ const useQueryHook = (QUERY, variables, handleResponse) => {
         loading,
         error,
         refetch,
-        fetchMore
+        fetchMore,
+        updateQuery
     }
 }
 

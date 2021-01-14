@@ -1,12 +1,12 @@
 import React, { useContext, useEffect } from 'react'
 import { Card } from 'react-bootstrap';
 
-import ProfileContext from '../../context/Profile-context';
-import OverlayCard from '../../layout/cards/OverlayCard';
-import CardFooter from '../../layout/cards/CardFooter';
+import ProfileContext from '../../../context/Profile-context';
+import OverlayCard from '../../../layout/cards/OverlayCard';
+import CardFooter from '../../../layout/cards/CardFooter';
+import IconButton from '../../../layout/buttons/IconButton';
 import ItemDelete from './ItemDelete';
-import IconButton from '../../layout/buttons/IconButton';
-import ProfileItemContext from '../../context/ProfileItem-context';
+import ProfileItemContext from '../../../context/ProfileItem-context';
 import ItemUpdate from './ItemUpdate';
 
 const ItemSum = ({ item, index, handleSlides, children }) => {

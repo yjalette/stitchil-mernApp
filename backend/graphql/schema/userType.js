@@ -22,7 +22,15 @@ type Profile {
     profileImage: String
     coverImage: String
     role: String
-    portfolio: String
+    portfolio: DesignerResume
+}
+
+type DesignerResume {
+    style: [String]
+    skills: [String]
+    experience: [String]
+    education: [String]
+    about: String
 }
 
 type Account {

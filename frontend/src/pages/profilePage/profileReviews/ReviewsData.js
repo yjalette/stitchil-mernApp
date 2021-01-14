@@ -1,21 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { Container } from 'react-bootstrap';
+import { useParams } from 'react-router-dom';
 
 import ReviewCreate from './ReviewCreate';
-import ReviewItem from '../message/MessageItem';
-import UserAvatar from '../../layout/media/UserAvatar';
+import ReviewItem from '../../../components/message/MessageItem';
+import UserAvatar from '../../../layout/media/UserAvatar';
 import ReviewRating from './ReviewRating';
-import useGetData from '../../custom_hooks/useGetData';
-import EmptyResultAlert from '../../layout/alerts/EmptyResultAlert';
-import SectionHeader from '../../layout/SectionHeader';
+import EmptyResultAlert from '../../../layout/alerts/EmptyResultAlert';
+import SectionHeader from '../../../layout/SectionHeader';
+import useQueryHook from '../../../custom_hooks/useQueryHook';
+import { PROFILE_REVIEWS_QUERY } from '../graphql/queries';
+import ProfileContext from '../../../context/Profile-context';
 
-const ReviewData = ({ username, logged_in_user }) => {
-    const { data, getData } = useGetData("profilereviews")
+const ReviewData = () => {
+    const { logged_in_user } = useContext(ProfileContext)
+    const { username } = useParams()
+    const { data, getData } = useQueryHook(PROFILE_REVIEWS_QUERY, { variables: { username } })
     const [values, setValues] = useState([]);
-
-    useEffect(() => {
-        if (username) getData({ variables: { username } })
-    }, [username]);
 
     useEffect(() => {
         if (data) setValues(data.profile_reviews)
