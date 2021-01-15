@@ -18,7 +18,8 @@ p, span, ul, a {
     font-family: var(--font-body);
     letter-spacing: var(--letter-spacing);
     word-spacing: var(--word-spacing);
-    line-height: 1.3em;
+
+    /* line-height: 1.3em; */
 }
 
 h1 {

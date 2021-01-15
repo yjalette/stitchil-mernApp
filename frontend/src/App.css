@@ -12,8 +12,8 @@ body {
     background-image: url("https://www.transparenttextures.com/patterns/climpek.png");
 }
 
-.App, #root {
-    height: 100%;
+.App {
+    height: 100vh;
 }
 
 ::-webkit-scrollbar {
@@ -87,11 +87,8 @@ textarea {
     margin-left: 0.8em;
 }
 
-.clickText {
-    color: var(--accent-color);
-    font-size: var(--md-fonts);
-    margin: 0 .25rem;
-    cursor: pointer;
+.customLink:hover {
+    color: var(--light-gray-color);
 }
 
 .customLink::after {
@@ -109,6 +106,13 @@ textarea {
 
 .customLink:hover::after {
     transform: scaleX(1);
+}
+
+.clickText {
+    color: var(--accent-color);
+    font-size: var(--md-fonts);
+    margin: 0 .25rem;
+    cursor: pointer;
 }
 
 p {

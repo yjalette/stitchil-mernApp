@@ -34,10 +34,10 @@ class App extends Component {
             <Route path="/homepage/:page" component={LandingPage} />
             <Route path="/auth/:authType" component={AuthPage} />
             <Route path="/auth/:authType/:token" component={AuthPage} />
-            <Route path="/explore" component={ExplorePage} />
             {/* <Route path="/confirm/:confirmType" component={ConfirmCreds} /> */}
             <div className="page-wrapper">
               <Switch>
+                <Route path="/explore" component={ExplorePage} />
                 <Route path="/settings/:section" component={SettingsPage} />
                 {/* <Route path="/update/:section/:token" component={Settings} /> */}
                 <Route path="/measurements" component={MeasurementsPage} />

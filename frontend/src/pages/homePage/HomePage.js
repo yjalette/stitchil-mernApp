@@ -4,7 +4,6 @@ import { Row } from 'react-bootstrap';
 import { guarantees, howItWorks, questions, whyStitch, tagLines } from './consts';
 
 import Guarantees from './Guarantees';
-import ExploreMenu from '../explorePage/ExploreMenu';
 import CustomAccordion from '../../layout/CustomAccordion';
 import Tagline from '../../layout/Tagline';
 import RoundCard from '../../layout/cards/RoundCard';
@@ -13,7 +12,7 @@ import RoundCard from '../../layout/cards/RoundCard';
 const HomePage = ({ display }) => (
     <div className="homepage">
         <Tagline title={tagLines[display]["Unique Everything"]} />
-        <ExploreMenu />
+        {/* <ExploreMenu /> */}
         <Tagline title={tagLines[display]["How It Works"]} />
         <Row className="flex-center justify-content-around section-wrapper">
             {whyStitch[display].map(item => <RoundCard key={item.title} item={item} />)}

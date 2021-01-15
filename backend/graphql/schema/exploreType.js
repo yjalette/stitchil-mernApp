@@ -45,8 +45,14 @@ type DesignerItem implements ExploreItem {
 input Filters {
     category: [String]
     style: [String]
-    minPrice: Int
-    maxPrice: Int
+    worldwide: Boolean
+    min: Int
+    max: Int
+}
+
+input Price {
+    min: Int
+    max: Int
 }
 
 type Bid {
@@ -57,7 +63,7 @@ type Bid {
 
 
 type Query {        
-    explore_items(filters: Filters): [ExploreItem] 
+    explore_items(filters: Filters, price: Price): [ExploreItem] 
 }
 
 

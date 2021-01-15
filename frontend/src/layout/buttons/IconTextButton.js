@@ -2,8 +2,9 @@ import React from 'react'
 import { Button } from 'react-bootstrap'
 
 const IconTextButton = ({ onClick, btn_class, icon, title }) => (
-    <Button variant="" onClick={onClick} className={`iconTextButton flex-center ${btn_class}`}>{title}
-        <i className={`${icon} customIcon mx-2`} />
+    <Button variant="" value={title} onClick={onClick} className={`iconTextButton flex-center ${btn_class}`}>
+        <span className="iconTextButton__title customLink">{title}</span>
+        <i className={`${icon} iconTextButton__icon`} />
     </Button>
 )
 

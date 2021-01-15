@@ -1,16 +1,12 @@
 import React, { useEffect, useState } from 'react';
-
-import ItemList from '../../components/items/ItemList';
-import ItemSum from '../../components/items/ItemSum';
 import useQueryHook from '../../custom_hooks/useQueryHook'
-import ListItem from '../../layout/ListItem';
-import FilterOptions from './exploreFilter/FilterOptions';
-import FilterParam from './exploreFilter/FilterParam';
+import ExploreGrid from './ExploreGrid';
 import { EXPLORE_ITEMS_QUERY } from './graphql/queries'
 
 const ExploreData = () => {
     const [filters, setFilters] = useState({});
-    const { data, refetch } = useQueryHook(EXPLORE_ITEMS_QUERY, { filters });
+    const [price, setPrice] = useState({});
+    const { data, refetch } = useQueryHook(EXPLORE_ITEMS_QUERY, { filters, price });
     const [values, setValues] = useState([]);
 
     useEffect(() => {
@@ -19,31 +15,44 @@ const ExploreData = () => {
 
     useEffect(() => {
         if (refetch) refetch();
-    }, [filters]);
+    }, [filters, refetch]);
 
-    const filterSearchParam = par => {
-        setFilters()
+    useEffect(() => {
+        if (refetch) refetch();
+    }, [price, refetch]);
+
+    const handlePrice = ({ target }) => {
+        setPrice({
+            ...price,
+            [target.name]: Number(target.value)
+        })
     }
 
-    return (
-        <div>
-            <FilterOptions inputs={filters} setInputs={setFilters} />
-            <FilterParam filters={Object.values(filters)} />
-            {values && values.length > 0 && <ItemList
-                items={values}
-                showItem={(item) => <ItemSum
-                    item_title={item.title}
-                    item_img={item.imageUrl}
-                    item_highlights={(
-                        <>
-                            <ListItem field="style" content={item.style} />
-                            <ListItem field="price" content={`starts at ${item.price}$`} />
-                        </>
-                    )}
-                />}
-            />}
-        </div>
-    )
+    const handleFilter = (name, value) => {
+        setFilters({
+            ...filters,
+            [name]: filters[name] ? [...filters[name], value] : [value]
+        })
+    }
+
+    const deleteSearchParam = (key, value) => {
+        setFilters({
+            ...filters,
+            [key]: filters[key].filter(elem => elem !== value)
+        })
+    }
+
+    const clearFilters = () => setFilters({})
+
+    return <ExploreGrid
+        items={values}
+        filters={filters}
+        onFilter={handleFilter}
+        price={price}
+        onPriceChange={handlePrice}
+        deleteSearchParam={deleteSearchParam}
+        clearFilters={clearFilters}
+    />
 }
 
 
