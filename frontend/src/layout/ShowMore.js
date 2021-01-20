@@ -8,7 +8,7 @@ const ShowMore = ({ maxWords, content, content_class }) => {
     return (
         <span className={content_class || "listItem__content"}>
             {open ? content : content.slice(0, maxWords)}
-            <span className="clickText" onClick={toggle}>{open ? "(-)" : "..."}</span></span>
+            <span className="clickElem" onClick={toggle}>{open ? "(-)" : "..."}</span></span>
     )
 }
 

@@ -27,6 +27,18 @@ body {
     box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
 }
 
+a {
+    color: var(--accent-color);
+}
+
+a:active {
+    color: var(--light-gray-color);
+}
+
+a:visited {
+    color: var(--secondary-color);
+}
+
 textarea {
     white-space: pre-wrap;
     overflow-wrap: break-word;
@@ -70,6 +82,23 @@ textarea {
 
 .text-mute {
     text-transform: lowercase;
+    color: var(--secondary-color);
+    opacity: .95;
+    font-size: var(--sm-fonts);
+}
+
+.clickElem {
+    background-color: transparent;
+    color: var(--accent-color);
+    cursor: pointer;
+}
+
+.clickElem:active {
+    color: var(--red-color);
+}
+
+.clickElem-active {
+    color: var(--light-gray-color);
 }
 
 .customLink {
@@ -78,12 +107,12 @@ textarea {
     position: relative;
     color: var(--accent-color);
     font-weight: lighter;
-    font-size: var(--md-fonts);
+    font-size: var(--sm-fonts);
 
     /* font-size: calc(var(--sm-fonts) * 1.2); */
 }
 
-.customLink + .customLink {
+.customLink + .customLink, .clickElem + .clickElem {
     margin-left: 0.8em;
 }
 
@@ -97,22 +126,15 @@ textarea {
     border-bottom: 1px solid currentColor;
     left: 0;
     bottom: 0;
-    height: 2px;
+    height: 4px;
     width: 100%;
     transform: scaleX(0.8);
-    transform-origin: center;
+    transform-origin: left;
     transition: transform 300ms ease-in;
 }
 
 .customLink:hover::after {
     transform: scaleX(1);
-}
-
-.clickText {
-    color: var(--accent-color);
-    font-size: var(--md-fonts);
-    margin: 0 .25rem;
-    cursor: pointer;
 }
 
 p {
@@ -137,6 +159,7 @@ ul {
 .tagline__title {
     text-align: center;
 }
+
 
 .gradient-text {
     background: linear-gradient(300deg, var(--green-color), var(--light-green-color));
@@ -164,7 +187,8 @@ ul {
 
 .page-wrapper {
     width: 70%;
-    height: 100%;
+    height: auto;
+    min-height: 100%;
     margin: auto;
     position: relative;
 }

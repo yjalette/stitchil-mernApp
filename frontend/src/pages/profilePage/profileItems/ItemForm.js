@@ -19,8 +19,8 @@ const ItemForm = ({ form_title, onSubmit, onCancel, form_props }) => {
             displayWithoutBtn={true}
             modal_footer={(
                 <div className="itemForm__controllers">
-                    {activeIndex !== 0 && <i onClick={handleBackward} className="fa fa-long-arrow-left clickText" />}
-                    {activeIndex !== comp.ItemFormParts(form_props).length - 1 && <i onClick={handleForward} className="fa fa-long-arrow-right clickText" />}
+                    {activeIndex !== 0 && <i onClick={handleBackward} className="fa fa-long-arrow-left clickElem" />}
+                    {activeIndex !== comp.ItemFormParts(form_props).length - 1 && <i onClick={handleForward} className="fa fa-long-arrow-right clickElem" />}
                     {/* {activeIndex !== 0 && <IconButton onClick={handleBackward} icon_class="fa fa-arrow-left" />}
                     {activeIndex !== comp.ItemFormParts(form_props).length - 1 && <IconButton onClick={handleForward} icon_class="fa fa-arrow-right" />} */}
                 </div>

@@ -1,9 +1,12 @@
-.listItem {
+.pageWrapper {
     width: 100%;
+    height: 100%;
+    background-color: var(--main-color);
+    overflow: hidden;
+}
 
-    /* display: flex;
-    align-items: center; */
-    margin: .4rem 0;
+.listItem {
+    margin: .4rem auto;
 }
 
 .listItem__field, .listItem__icon {
@@ -331,15 +334,14 @@ button + button:not(.dropdown-item), i + i {
 .iconTextButton {
     color: var(--accent-color);
     text-transform: lowercase;
-    font-size: var(--md-fonts);
-    padding: .3em;
+    font-size: var(--sm-fonts);
+    padding: var(--padding-elem);
 }
 
-/* .iconTextButton__title::before {
-    content: "";
-    width: 100%;
-    border-bottom: 2px;
-} */
+.iconTextButton__title, .iconTextButton__icon {
+    color: inherit;
+    font-size: inherit;
+}
 
 .iconTextButton:hover {
     color: var(--white-color);
@@ -479,15 +481,27 @@ button + button:not(.dropdown-item), i + i {
     z-index: 5000;
 }
 
+.sectionWrapper {
+    background-color: var(--main-color-light);
+    padding: var(--padding-section);
+}
+
+.sectionWrapper + .sectionWrapper {
+    margin-top: 2rem;
+}
+
 .sectionHeader {
-    justify-content: flex-start;
-    padding: .8rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: var(--padding-box);
 }
 
 .sectionHeader__title {
     width: auto;
-}
 
+    /* text-align: left; */
+}
 
 .pageMenu {
     width: 100%;

@@ -34,9 +34,9 @@ const Heroimage = () => {
                     <ListItem field="experience: " content={slide.experience} />
                     <ListItem field="skills: " content={slide.skills} />
                     <IconTextButton
-                        title="more"
+                        title="see more"
                         btn_class="hpSlides__btn align-self-end"
-                        icon="fa fa-angle-double-right customIcon"
+                        icon="fa fa-angle-double-right ml-1"
                         onClick={() => push("/explore/gigs")} />
                 </div>
 

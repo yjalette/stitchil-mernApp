@@ -1,12 +1,13 @@
 import React from 'react'
+import PageWrapper from '../../layout/PageWrapper'
 import ExploreData from './ExploreData'
 import './style.css'
 
 const ExplorePage = () => {
     return (
-        <div className="explore">
+        <PageWrapper page_class="explore">
             <ExploreData />
-        </div>
+        </PageWrapper>
     )
 }
 

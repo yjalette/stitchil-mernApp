@@ -3,6 +3,11 @@ const { gql } = require("apollo-server-express");
 
 module.exports = gql`
 
+type ExploreResult {
+    items: [ExploreItem]
+    total: Int
+}
+
 interface ExploreItem {
     _id: ID
     title: String
@@ -63,7 +68,7 @@ type Bid {
 
 
 type Query {        
-    explore_items(filters: Filters, price: Price): [ExploreItem] 
+    explore_items(filters: Filters, price: Price, page: Int): ExploreResult 
 }
 
 

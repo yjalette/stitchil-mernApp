@@ -6,19 +6,22 @@ import PageMenu from '../../layout/PageMenu';
 import AccountIndex from '../../components/settingsAccount/AccountIndex';
 import DemoVersionAlert from '../../layout/alerts/DemoVersionAlert';
 import SecurityPassword from '../../components/security/SecurityPassword';
+import PageWrapper from '../../layout/PageWrapper';
+import SectionHeader from '../../layout/SectionHeader';
+import SectionWrapper from '../../layout/SectionWrapper';
 
 const SettingsPage = () => {
-    const { section, token } = useParams();
+    const { section } = useParams();
     return (
-        <section className="settings flex-center flex-column">
-            <h3 className="settings__title gradient-text">Settings</h3>
+        <PageWrapper page_class="settings">
             <PageMenu items={["account", "security", "notifications"]} />
-            <div className="settings__section ">
+            <SectionHeader title={section}></SectionHeader>
+            <SectionWrapper>
                 {section === "account" && <AccountIndex />}
                 {section === "security" && <SecurityPassword />}
                 {section === "notifications" && <DemoVersionAlert />}
-            </div>
-        </section>
+            </SectionWrapper>
+        </PageWrapper>
 
     )
 }

@@ -1,14 +1,8 @@
-.chats__wrapper {
+.chats {
     width: 100%;
     height: 800px;
-    margin: 15px 0;
     overflow: hidden;
     border: 1px solid var(--outline-color);
-    background-color: var(--main-color);
-}
-
-.chats {
-    height: 700px;
 }
 
 .chatHeader {

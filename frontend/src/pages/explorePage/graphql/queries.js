@@ -1,8 +1,9 @@
 import gql from 'graphql-tag';
 
 export const EXPLORE_ITEMS_QUERY = gql`
-    query explore_items($filters: Filters, $price: Price){
-        explore_items(filters: $filters, price: $price){
+    query explore_items($filters: Filters, $price: Price, $page: Int){
+        explore_items(filters: $filters, price: $price, page: $page){
+            items {
                 _id
                 title
                 imageUrl
@@ -24,6 +25,8 @@ export const EXPLORE_ITEMS_QUERY = gql`
             delivery
             saved
            }
+        }
+        total
         }
     }
 `

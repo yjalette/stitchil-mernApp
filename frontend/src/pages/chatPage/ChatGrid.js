@@ -26,11 +26,11 @@ const ChatGrid = ({ chats, addMessage }) => {
     console.log(activeChat)
 
     return (
-        <div className="chats__wrapper">
+        <div className="chats">
             <ChatHeader
                 onSearch={handleSearchChat}
                 chatUser={chats && chats[activeChat] && chats[activeChat].members.find(member => member.username !== user.username)} />
-            <Row className="chats">
+            <Row>
                 <Col lg={4} className="p-0">
                     {chats && <ChatHistory chats={chats} seeChat={handleActiveChat} activeChatIndex={activeChat} />}
                 </Col>

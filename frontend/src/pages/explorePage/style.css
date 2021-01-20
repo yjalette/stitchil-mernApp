@@ -1,9 +1,3 @@
-.explore {
-    width: 100%;
-    height: 100%;
-    background-color: var(--main-color);
-}
-
 .explore__header {
     height: 600px;
     overflow: hidden;
@@ -11,18 +5,10 @@
     padding: 50px;
 }
 
-.explore__body {
+/* .explore__body {
     margin-top: 2rem;
     background-color: var(--main-color);
-}
-
-.exploreFilter {
-    background-color: var(--main-color-light);
-    padding: var(--padding-section);
-    margin-bottom: 2rem;
-}
-
-.explore .customDropdown__body {}
+} */
 
 .exploreFilter__price, .exploreFilter__fiters {
     display: flex;
@@ -32,12 +18,17 @@
     margin: 0 1em;
 }
 
-.exploreFilter__fiters .menuButton {
+.pageWrapper-explore .menuButton {
     background-color: transparent;
 }
 
-.exploreFilter__fiters .customDropdown__body {
-    background-color: var(--white-color);
+.pageWrapper-explore .customDropdown__body {
+    background-color: var(--light-gray-color);
+}
+
+.pageWrapper-explore .menuButton-sort {
+    float: right;
+    padding: var(--padding-elem);
 }
 
 .exploreFilter__price .field-wrapper {
@@ -61,13 +52,14 @@
     height: auto;
 }
 
-.explore .itemList {
+.pageWrapper-explore .itemList {
     max-width: 100%;
     width: 100%;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
     grid-auto-rows: 400px;
-    background-color: var(--main-color);
+
+    /* background-color: var(--main-color); */
 }
 
 .explore__heroimage {
@@ -77,7 +69,7 @@
     padding: var(--padding-element);
 }
 
-.explore .card-img-overlay {
+.pageWrapper-explore .card-img-overlay {
     background-color: #1705355c;
 }
 
@@ -115,29 +107,22 @@
 .exploreParam__items {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: var(--padding-section);
 }
 
-.exploreParam__selected .iconTextButton__title, .exploreParam__selected .iconTextButton__icon {
-    color: var(--light-gray-color) !important;
+.exploreFilter__wrapper .iconTextButton > * {
     pointer-events: none;
 }
 
-.exploreParam__selected-red {
+.exploreParam__selected {
+    color: var(--light-gray-color) !important;
+}
+
+.pageWrapper-explore .selected-red {
     color: var(--red-color);
-    font-size: var(--sm-fonts);
-    font-weight: lighter;
     border: 1px solid currentColor;
-    height: 30px;
-    min-width: 160px;
-}
-
-.exploreParam__selected-red .iconTextButton__title::after {
-    display: none;
-}
-
-.exploreParam__selected-red .iconTextButton__title {
-    color: inherit;
-    font-size: inherit;
 }
 
 @media only screen and (max-width: 1200px) {

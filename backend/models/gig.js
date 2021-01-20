@@ -49,7 +49,7 @@ const gigSchema = new Schema({
     },
     updatedAt: {
         type: Date,
-        required: true
+        required: false
     },
     createdAt: {
         type: Date,
