@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import AuthContext from '../../context/Auth-context'
 import usePostData from '../../custom_hooks/usePostData';
-import IconTextButton from '../../layout/buttons/IconTextButton';
+import CustomButton from '../../layout/button/CustomButton';
 import CustomOverlay from '../../layout/CustomOverlay';
 
 const PortfolioItemLike = ({ likes, docId }) => {
@@ -26,11 +26,12 @@ const PortfolioItemLike = ({ likes, docId }) => {
 
     return (
         <CustomOverlay content={values} trigger={['hover', 'focus']} placement="bottom">
-            <IconTextButton
+            <CustomButton
                 onClick={toggleLike}
-                title={values.length || 0}
-                btn_class=""
-                icon={`fa ${values.includes(user.username) ? "fa-thumbs-o-up" : "fa-thumbs-up"}`} />
+                btn_class="btn-icon-text"
+                icon={`fa ${values.includes(user.username) ? "fa-thumbs-o-up" : "fa-thumbs-up"}`} >
+                {values.length || 0}
+            </CustomButton>
         </CustomOverlay>
     )
 }

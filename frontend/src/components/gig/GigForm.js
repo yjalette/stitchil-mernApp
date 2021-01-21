@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import useSlides from '../../custom_hooks/useSlides';
-import IconButton from '../../layout/buttons/IconButton';
-
+import CustomButton from '../../layout/button/CustomButton';
+import GroupButton from '../../layout/button/GroupButton';
 import FormInput from '../inputs/FormInput'
 import FormMultipleInput from '../inputs/FormMultipleInput'
 import FormTextarea from '../inputs/FormTextarea';
@@ -41,10 +41,10 @@ const GigForm = ({ inputs, media, onChange, onMultiChange }) => {
     return (
         <>
             {items[activeIndex] || null}
-            <div className="groupButton">
-                <IconButton onClick={handleBackward} icon_class="fa fa-arrow-left" />
-                <IconButton onClick={handleForward} icon_class="fa fa-arrow-right" />
-            </div>
+            <GroupButton>
+                <CustomButton onClick={handleBackward} icon="fa fa-arrow-left" btn_class="btn-icon" />
+                <CustomButton onClick={handleForward} icon="fa fa-arrow-right" btn_class="btn-icon" />
+            </GroupButton>
         </>
     )
 

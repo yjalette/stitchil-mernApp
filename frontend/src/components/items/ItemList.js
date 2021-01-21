@@ -1,11 +1,16 @@
 import React from 'react'
+import EmptyResultAlert from '../../layout/alerts/EmptyResultAlert'
+import OverlayCard from '../../layout/card/OverlayCard'
+import "./style.css"
 
-const ItemList = ({ items, showItem }) => {
+const ItemList = ({ items, getProps, emptyResultType }) => {
+
+    if (!items || items.length < 1) return <EmptyResultAlert type={emptyResultType || "results"} includeText={emptyResultType && true} />
+
     return (
         <div className="itemList">
-            {items && items.length > 0 && items.map((item, i) => <span key={i} className="">{showItem(item, i)}</span>)}
+            {items.map((item, index) => <OverlayCard key={index} card_props={{ ...getProps(item, index), class: "itemSum" }} />)}
         </div>
     )
 }
-
 export default ItemList

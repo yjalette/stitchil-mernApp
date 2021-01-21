@@ -23,7 +23,7 @@ const ItemSlides = ({ items, item, activeIndex, handleBackward, handleForward })
                     </div>}
                 </>
             }
-            btn_class="fa fa-angle-double-right customIcon">
+            btn_class="fa fa-angle-double-right btn-icon">
             <Row className="slides__item ">
                 <Col lg={8} className="slides__col">
                     <Image src={item.imageUrl} className="slides__img" />
@@ -54,7 +54,7 @@ ItemSlides.defaultProps = {
 //         </div>}
 //     </>
 // }
-// btn_class="fa fa-angle-double-right customIcon">
+// btn_class="fa fa-angle-double-right btn-icon">
 // <Row className="slides__item ">
 //     <Col lg={8} className="slides__col">
 //         <Image src={items[activeIndex].imageUrl} className="slides__img" />

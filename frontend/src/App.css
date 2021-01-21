@@ -160,7 +160,6 @@ ul {
     text-align: center;
 }
 
-
 .gradient-text {
     background: linear-gradient(300deg, var(--green-color), var(--light-green-color));
     background-clip: text;
@@ -184,14 +183,6 @@ ul {
 }
 
 /* layout */
-
-.page-wrapper {
-    width: 70%;
-    height: auto;
-    min-height: 100%;
-    margin: auto;
-    position: relative;
-}
 
 .header {
     position: relative;
@@ -454,10 +445,6 @@ hr {
         margin: 0 !important;
     }
 
-    .btn-wrapper {
-        width: 100% !important;
-    }
-
     .reverse {
         flex-direction: column-reverse;
     }
@@ -482,10 +469,6 @@ hr {
     p, span {
         /* text-align: left !important; */
         padding: 0.1em;
-    }
-
-    .page-wrapper {
-        width: 100%;
     }
 
     .slides__col {

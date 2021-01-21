@@ -1,8 +1,7 @@
 import React from 'react';
 import { Alert } from 'react-bootstrap'
-
 import { useToggle } from '../../custom_hooks/useToggle';
-import ClickButton from '../buttons/ClickButton';
+import CustomButton from '../button/CustomButton';
 
 const AlertDismissible = ({ alert_class, heading, text, onClick, btn_title, children }) => {
     const [open, toggle] = useToggle(true);
@@ -19,7 +18,9 @@ const AlertDismissible = ({ alert_class, heading, text, onClick, btn_title, chil
                 <p className={`${alert_class}__text`}>{text}</p>
                 {children}
                 {btn_title && <div className="d-flex justify-content-end">
-                    <ClickButton onClick={handleClick} variant="" btn_title={btn_title} />
+                    <CustomButton
+                        btn_class="btn-click"
+                        onClick={handleClick} >{btn_title} </CustomButton>
                 </div>}
             </Alert>
             {/* {!open && <Button onClick={() => setShow(true)}>Show Alert</Button>} */}

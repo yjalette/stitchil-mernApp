@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
 
-import useForm from '../../custom_hooks/useForm';
-import FormMultipleInput from '../inputs/FormMultipleInput';
-import FormInput from '../inputs/FormInput';
-import { handleResponse } from '../../helpers/dataHelper';
+import useForm from '../../../custom_hooks/useForm';
+import FormMultipleInput from '../../../components/inputs/FormMultipleInput';
+import FormInput from '../../../components/inputs/FormInput';
+import { handleResponse } from '../../../helpers/dataHelper';
 import AccountForm from './AccountForm';
-import useMutationHook from '../../custom_hooks/useMutationHook';
-import { UPDATE_GENERAL_MUTATION } from '../../pages/settingsPage/graphql/mutations';
+import useMutationHook from '../../../custom_hooks/useMutationHook';
+import { UPDATE_GENERAL_MUTATION } from '../graphql/mutations';
 
 const AccountGeneral = ({ currValues }) => {
     const { post } = useMutationHook(UPDATE_GENERAL_MUTATION, onPostCompleted);

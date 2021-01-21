@@ -1,8 +1,6 @@
 import React from 'react';
 import ItemList from '../../components/items/ItemList';
-import ItemSum from '../../components/items/ItemSum';
 import PaginationIndex from '../../components/pagination/PaginationIndex';
-import IconTextButton from '../../layout/buttons/IconTextButton';
 import ListItem from '../../layout/ListItem';
 import FilterWrapper from './exploreFilter/FilterWrapper';
 import SectionHeader from '../../layout/SectionHeader';
@@ -10,6 +8,7 @@ import FilterSelected from './exploreFilter/FilterSelected';
 import ExploreSort from './ExploreSort';
 import EmptyResultAlert from '../../layout/alerts/EmptyResultAlert';
 import SectionWrapper from '../../layout/SectionWrapper';
+import CustomButton from '../../layout/button/CustomButton';
 
 const ExploreGrid = ({ items, total, activePage, loadMoreData, filters, onFilter, price, onPriceChange, deleteSearchParam, clearAll }) => (
     <>
@@ -26,22 +25,31 @@ const ExploreGrid = ({ items, total, activePage, loadMoreData, filters, onFilter
         <SectionWrapper>
             {total && <div className="exploreParam">
                 <ExploreSort />
-                <IconTextButton onClick={clearAll} title="clear form" btn_class="selected-red" icon="fa fa-close" />
+                <CustomButton onClick={clearAll} btn_class="btn-icon-text btn-red" icon="fa fa-close" >clear form</CustomButton>
             </div>}
-            {items && items.length > 0 ? <ItemList
+            <ItemList
                 items={items}
-                showItem={(item) => <ItemSum
-                    item_title={item.title}
-                    item_img={item.imageUrl}
-                    item_highlights={(
-                        <>
-                            <ListItem field="style" content={item.style} />
-                            <ListItem field="price" content={`starts at ${item.price}$`} />
-                        </>
-                    )}
-                />}
-            /> : <EmptyResultAlert type="results" includeText={true} />}
+                emptyResultType="results"
+                getProps={(item) => {
+                    return {
+                        title: item.title,
+                        imageUrl: item.imageUrl,
+                        body: (
+                            <>
+                                <ListItem field="style" content={item.style} />
+                                <ListItem field="price" content={`starts at ${item.price}$`} />
+                            </>
+                        ),
+                        footer: (
+                            <>
+                                <CustomButton btn_class="btn-icon" icon="fa fa-angle-double-right" />
+                            </>
+                        )
+                    }
+                }
 
+                }
+            />
             {total && <div className="exploreGrid__footer d-flex">
                 <SectionHeader title={`${total} results`} />
                 <PaginationIndex count={total} onClick={loadMoreData} activePage={activePage} />

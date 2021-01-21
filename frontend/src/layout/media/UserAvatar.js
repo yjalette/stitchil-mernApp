@@ -1,8 +1,6 @@
 import React from 'react'
 import { useHistory } from 'react-router-dom';
-
-import StarButton from '../buttons/StarButton';
-import Flags from './Flags';
+import CustomButton from '../button/CustomButton';
 import Thumbnail from './Thumbnail';
 
 const UserAvatar = ({ profileImage, username, rating }) => {
@@ -16,7 +14,7 @@ const UserAvatar = ({ profileImage, username, rating }) => {
             </div>
             {rating &&
                 <div className="rank">
-                    <StarButton count="5" />
+                    <CustomButton btn_class="btn-icon-text btn-star" icon="fa fa-star ">5</CustomButton>
                 </div>
             }
         </>

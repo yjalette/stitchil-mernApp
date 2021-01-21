@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 
 import "./style.css";
 import PageMenu from '../../layout/PageMenu';
-import AccountIndex from '../../components/settingsAccount/AccountIndex';
+import AccountIndex from './settingsAccount/AccountIndex';
 import DemoVersionAlert from '../../layout/alerts/DemoVersionAlert';
 import SecurityPassword from '../../components/security/SecurityPassword';
 import PageWrapper from '../../layout/PageWrapper';

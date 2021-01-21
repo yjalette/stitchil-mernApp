@@ -1,13 +1,13 @@
 import React, { useEffect, useContext } from 'react';
 
-import useForm from '../../custom_hooks/useForm';
-import useMutationHook from '../../custom_hooks/useMutationHook';
-import FormInput from '../inputs/FormInput';
+import useForm from '../../../custom_hooks/useForm';
+import useMutationHook from '../../../custom_hooks/useMutationHook';
+import FormInput from '../../../components/inputs/FormInput';
 import AccountForm from './AccountForm';
-import AuthContext from '../../context/Auth-context';
-import { updateLocalStorage } from '../../helpers/localStorageHelper';
-import { handleResponse } from '../../helpers/dataHelper';
-import { UPDATE_USERNAME_MUTATION } from '../../pages/settingsPage/graphql/mutations';
+import AuthContext from '../../../context/Auth-context';
+import { updateLocalStorage } from '../../../helpers/localStorageHelper';
+import { handleResponse } from '../../../helpers/dataHelper';
+import { UPDATE_USERNAME_MUTATION } from '../graphql/mutations';
 
 const AccountUsername = ({ currValue }) => {
     const { user, setUser } = useContext(AuthContext)

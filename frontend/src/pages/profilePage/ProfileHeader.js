@@ -1,12 +1,7 @@
 import React, { useContext } from 'react'
 import { Container, Card } from 'react-bootstrap'
 import { useHistory } from 'react-router-dom';
-
-import GroupButton from '../../layout/buttons/GroupButton';
-import ClickButton from '../../layout/buttons/ClickButton';
 import { useToggle } from '../../custom_hooks/useToggle';
-
-// import UserMessage from './UserMessage';
 import ProfileImage from './ProfileImage';
 import ProfileContext from '../../context/Profile-context';
 
@@ -28,16 +23,6 @@ const ProfileHeader = ({ profile }) => {
                     <ProfileImage src={profile && profile.profileImage} image_type="profileImage" />
                     <h2 className="profileHeader__title">{profile.fullname} </h2>
                 </Container>
-                <GroupButton group_class="profileHeader__col justify-content-end">
-                    {!logged_in_user &&
-                        <>
-                            <ClickButton title="follow" />
-                            {/* <UserMessage /> */}
-                            {/* <ClickButton title="message" onClick={handleMessage} /> */}
-                            {/* {showChat && <CreateChat />} */}
-                        </>
-                    }
-                </GroupButton>
             </Container>
         </Card>
 

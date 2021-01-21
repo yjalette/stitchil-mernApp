@@ -1,14 +1,11 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-
-import IconTextButton from '../../layout/buttons/IconTextButton';
-import StarButton from '../../layout/buttons/StarButton';
 import Flags from '../../layout/media/Flags';
 import CustomCarousel from '../../layout/CustomCarousel';
-
 import { heroSlides } from './consts'
 import ListItem from '../../layout/ListItem';
 import { Container } from 'react-bootstrap';
+import CustomButton from '../../layout/button/CustomButton';
 
 const style = { backgroundImage: `url("https://res.cloudinary.com/dgxa9gpta/image/upload/v1602105434/homepage/iphone_vw9pja.png")` };
 
@@ -20,7 +17,11 @@ const Heroimage = () => {
             <>
                 <div className="hpSlides__header">
                     <h5 className="username mb-0">{slide.username}</h5>
-                    <StarButton count="5" />
+                    <CustomButton btn_class="btn-icon-text btn-star"
+                        icon="fa fa-star"
+                        onClick={() => push("/explore/gigs")}
+                    >5
+                   </CustomButton>
                 </div>
                 <img
                     className="hpSlides__img"
@@ -33,11 +34,11 @@ const Heroimage = () => {
                     </Container>
                     <ListItem field="experience: " content={slide.experience} />
                     <ListItem field="skills: " content={slide.skills} />
-                    <IconTextButton
-                        title="see more"
-                        btn_class="hpSlides__btn align-self-end"
-                        icon="fa fa-angle-double-right ml-1"
-                        onClick={() => push("/explore/gigs")} />
+                    <CustomButton btn_class="btn-icon-text hpSlides__btn align-self-end"
+                        icon="fa fa-angle-double-right "
+                        onClick={() => push("/explore/gigs")}
+                    >see more
+                   </CustomButton>
                 </div>
 
             </>

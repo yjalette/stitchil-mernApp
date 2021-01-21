@@ -5,10 +5,8 @@ import usePostData from '../../custom_hooks/usePostData';
 import useUpload from '../../custom_hooks/useUpload';
 import ProfileContext from '../../context/Profile-context';
 import { useToggle } from '../../custom_hooks/useToggle';
-
-import IconButton from '../../layout/buttons/IconButton';
-import IconTextButton from '../../layout/buttons/IconTextButton';
-import GroupButton from '../../layout/buttons/GroupButton';
+import GroupButton from '../../layout/button/GroupButton';
+import CustomButton from '../../layout/button/CustomButton';
 
 const defaultImg = "https://res.cloudinary.com/dgxa9gpta/image/upload/v1602105102/background/buttons_nd9vx1.jpg"
 
@@ -40,12 +38,12 @@ const ProfileImage = ({ src, image_type }) => {
             <Image className={image_type} src={file ? URL.createObjectURL(file) : src || defaultImg} alt="file" />
             {!showButtons ? <div {...getRootProps()} className="userImage__box flex-center">
                 <input {...getInputProps({ className: 'dropzone' })} />
-                <IconTextButton icon="fa fa-camera" />
+                <CustomButton icon="fa fa-camera" btn_class="btn-icon" />
             </div>
                 :
                 <GroupButton group_class="userImage__box justify-content-end">
-                    <IconButton icon_class="fa fa-check" onClick={handleSave} />
-                    <IconButton icon_class="fa fa-close redIcon" onClick={handleCancel} />
+                    <CustomButton icon="fa fa-check" btn_class="btn-icon" onClick={handleSave} />
+                    <CustomButton icon="fa fa-close" btn_class="btn-icon btn-icon-red" onClick={handleCancel} />
                 </GroupButton>
             }
 

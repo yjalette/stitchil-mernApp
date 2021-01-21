@@ -1,0 +1,118 @@
+.overlayCard {
+    border-radius: 0 var(--border-radius);
+    margin: 1rem;
+    overflow: hidden;
+    min-height: 300px;
+    max-height: 100%;
+}
+
+.overlayCard .card-img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 0;
+    filter: brightness(0.5);
+    transition: transform 1s ease-in-out;
+}
+
+.overlayCard .card-header {
+    background-color: transparent;
+}
+
+.overlayCard .card-img-overlay, .overlayCard .card-header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    border: none;
+}
+
+.overlayCard .card-img-overlay {
+    background-color: rgba(0, 0, 0, 0.03);
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+.overlayCard .card-body {
+    width: 100%;
+}
+
+.overlayCard .card-title {
+    text-transform: capitalize;
+    font-size: var(--lg-fonts);
+    color: var(--white-color);
+    letter-spacing: var(--letter-spacing);
+    font-weight: bolder;
+}
+
+.overlayCard .card-footer {
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+.roundCard {
+    width: 400px;
+    height: 400px;
+    box-shadow: none;
+    border: none;
+    text-align: center;
+    margin: auto 0;
+    padding: var(--padding-box);
+    background-image: url("https://res.cloudinary.com/dgxa9gpta/image/upload/v1602104503/background/circle-bg_firyyt.svg");
+    background-color: transparent !important;
+    background-size: contain;
+    background-repeat: no-repeat;
+    transition: transform 2s;
+}
+
+.roundCard:hover {
+    transform: scale(1.5);
+    z-index: 5;
+}
+
+.roundCard__front, .roundCard:hover .roundCard__back {
+    display: block;
+}
+
+.roundCard__back, .roundCard:hover .roundCard__front {
+    display: none;
+}
+
+.roundCard__title {
+    text-align: center;
+    color: var(--light-green-color);
+}
+
+.roundCard__back .roundCard__title {
+    color: var(--green-color);
+}
+
+.roundCard__text {
+    text-align: center;
+    word-wrap: break-word;
+    padding: .8em;
+}
+
+.roundCard__img {
+    width: 150px;
+    height: 150px;
+    object-fit: scale-down;
+}
+
+.roundCard .roundCard__img {
+    transition: all ease-in-out 0.2s;
+}
+
+@media only screen and (max-width: 1200px) {}
+
+@media only screen and (max-width: 1024px) {
+    .roundCard {
+        width: 400px;
+        height: 400px;
+    }
+}
+
+@media (max-width: 768px) {}
+
+@media (max-width: 480px) {}

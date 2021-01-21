@@ -1,19 +1,15 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { Container } from 'react-bootstrap';
-
-
-
-
 import { useToggle } from '../../../custom_hooks/useToggle';
 import DesignerUpdate from './DesignerUpdate';
 import { initState_designer } from '../../../constants/initStates';
 import SectionHeader from '../../../layout/SectionHeader';
 import ProfileContext from '../../../context/Profile-context';
-import IconButton from '../../../layout/buttons/IconButton';
 import ListItem from '../../../layout/ListItem';
 import useForm from '../../../custom_hooks/useForm';
 import useMutationHook from '../../../custom_hooks/useMutationHook';
 import { UPDATE_DESIGNER_MUTATION } from '../graphql/mutations';
+import CustomButton from '../../../layout/button/CustomButton';
 
 const DesignerSum = ({ values }) => {
     const { post } = useMutationHook(UPDATE_DESIGNER_MUTATION)
@@ -44,9 +40,8 @@ const DesignerSum = ({ values }) => {
     return (
         <Container className="designerSum profileSection">
             <SectionHeader title="Designer Info">
-                {logged_in_user && <IconButton onClick={toggleEditMode} icon_class="fa fa-edit" />}
+                {logged_in_user && <CustomButton onClick={toggleEditMode} icon="fa fa-edit" btn_class="btn-icon" />}
             </SectionHeader>
-
             <Container className="profileSection__content">
                 {Object.keys(initState_designer).map(field => <ListItem key={field}
                     field={`${field}: `}

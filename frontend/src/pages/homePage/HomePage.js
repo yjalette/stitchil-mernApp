@@ -6,7 +6,7 @@ import { guarantees, howItWorks, questions, whyStitch, tagLines } from './consts
 import Guarantees from './Guarantees';
 import CustomAccordion from '../../layout/CustomAccordion';
 import Tagline from '../../layout/Tagline';
-import RoundCard from '../../layout/cards/RoundCard';
+import RoundCard from '../../layout/card/RoundCard';
 
 
 const HomePage = ({ display }) => (

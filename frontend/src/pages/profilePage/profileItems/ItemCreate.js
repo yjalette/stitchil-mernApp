@@ -1,16 +1,15 @@
 import React, { useContext, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
-
 import useUpload from '../../../custom_hooks/useUpload';
 import usePostData from '../../../custom_hooks/usePostData';
-import IconButton from '../../../layout/buttons/IconButton'
 import ItemForm from './ItemForm';
 import { initState, transformInputs } from "./util"
 import ItemUpload from './ItemUpload';
 import InlineAlert from '../../../layout/alerts/InlineAlert';
 import ProfileItemContext from '../../../context/ProfileItem-context';
 import useForm from '../../../custom_hooks/useForm';
+import CustomButton from '../../../layout/button/CustomButton';
 
 const ItemCreate = ({ overLimit }) => {
     const { section } = useParams();
@@ -47,7 +46,7 @@ const ItemCreate = ({ overLimit }) => {
 
     if (!editMode) return (
         <>
-            <IconButton icon_class="fa fa-plus" onClick={handleEditMode} />
+            <CustomButton icon="fa fa-plus" btn_class="btn-icon" onClick={handleEditMode} />
             {open && <InlineAlert variant="danger" content="max 6 items in demo version" alert_class="text-left w-auto" />}
         </>
     )

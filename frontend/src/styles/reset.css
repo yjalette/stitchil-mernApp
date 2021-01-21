@@ -35,7 +35,7 @@ select {
     appearance: none;
 }
 
-input, textarea, select, .customIcon {
+input, textarea, select, .btn-icon {
     color: var(--white-color) !important;
 }
 

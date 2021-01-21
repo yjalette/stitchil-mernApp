@@ -3,8 +3,8 @@ import { useParams } from 'react-router-dom';
 
 import AuthContext from '../../context/Auth-context';
 import usePostData from '../../custom_hooks/usePostData';
-import IconButton from '../../layout/buttons/IconButton';
 import useGetData from '../../custom_hooks/useGetData';
+import CustomButton from '../../layout/button/CustomButton';
 
 const LikeCreate = ({ docId }) => {
     const { section } = useParams();
@@ -29,7 +29,7 @@ const LikeCreate = ({ docId }) => {
         fetchData();
     }
 
-    return <IconButton onClick={toggleLike} icon_class={`fa ${likes.includes(user.username) ? "fa-thumbs-o-up" : "fa-thumbs-up"}`} />
+    return <CustomButton onClick={toggleLike} btn_class="btn-icon" icon={`fa ${likes.includes(user.username) ? "fa-thumbs-o-up" : "fa-thumbs-up"}`} />
 
 }
 

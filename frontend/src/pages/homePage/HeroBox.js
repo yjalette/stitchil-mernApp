@@ -1,7 +1,6 @@
 import React from 'react';
 import { Col, Row, Image, Container } from 'react-bootstrap';
-
-import ClickButton from '../../layout/buttons/ClickButton';
+import CustomButton from '../../layout/button/CustomButton';
 import Heroimage from './Heroimage';
 
 const HeroBox = ({ onClick }) => {
@@ -15,8 +14,12 @@ const HeroBox = ({ onClick }) => {
                                         </h1>
                                                 <span className="landing__subtitle subtitle"> Create clothing you'll love to wear. </span>
                                                 <div className="herobox__btn-group">
-                                                        <ClickButton title="learn more" onClick={() => onClick("buyers")} />
-                                                        <ClickButton title="designers" onClick={() => onClick("talents")} />
+                                                        <CustomButton
+                                                                btn_class="btn-click"
+                                                                onClick={() => onClick("buyers")} >learn more</CustomButton>
+                                                        <CustomButton
+                                                                btn_class="btn-click"
+                                                                onClick={() => onClick("designers")} >designers</CustomButton>
                                                 </div>
                                         </section>
 

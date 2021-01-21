@@ -1,9 +1,7 @@
 import React from 'react';
 import { Col, Form, Media, Row } from 'react-bootstrap';
-
-import IconButton from '../../layout/buttons/IconButton';
+import CustomButton from '../../layout/button/CustomButton';
 import FormTextarea from '../inputs/FormTextarea';
-
 
 const MessageForm = ({ message, onSubmit, onChange, children, msg_class }) => console.log(message) || (
     <Media className={`messageForm-wrapper ${msg_class}`}>
@@ -14,7 +12,7 @@ const MessageForm = ({ message, onSubmit, onChange, children, msg_class }) => co
                     <FormTextarea label="message" value={message} placeholder="write here ..." onChange={onChange} />
                 </Col>
                 <Col xs={2}>
-                    <IconButton onClick={onSubmit} icon_class="fa fa-paper-plane ml-3" />
+                    <CustomButton onClick={onSubmit} btn_class="btn-icon ml-3" icon="fa fa-paper-plane" />
                 </Col>
             </Row>
         </Form>

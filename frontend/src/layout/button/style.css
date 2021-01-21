@@ -1,0 +1,186 @@
+.customButton {
+    text-transform: lowercase;
+}
+
+.customButton + .customButton:not(.dropdown-item), i + i {
+    margin-left: .8em;
+}
+
+.customButton.btn-click {
+    color: var(--accent-color);
+    font-size: var(--md-fonts);
+    letter-spacing: .5x;
+    background-color: transparent;
+    border: 1px solid currentColor;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 120px;
+    padding: var(--padding-elem);
+    animation: none;
+    text-shadow: var(--text-shadow);
+}
+
+.customButton.btn-click:hover {
+    animation: clickButtonAnim 2s ease-in-out;
+}
+
+@keyframes clickButtonAnim {
+    15% {
+        border-top-color: transparent;
+    }
+
+    30% {
+        border-right-color: transparent;
+    }
+
+    65% {
+        border-bottom-color: transparent;
+    }
+
+    85% {
+        border-left-color: transparent;
+    }
+}
+
+.groupButton {
+    margin: 1.5rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+/* .groupButton .customButton + .customButton {
+    margin-left: .8rem;
+} */
+
+.btn-icon {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: var(--sm-fonts);
+    color: var(--white-color);
+    border: 1.85px dashed currentColor;
+    border-radius: 50%;
+    padding: .5em;
+    background-color: var(--green-color);
+    box-shadow: var(--box-shadow);
+    text-shadow: var(--text-shadow);
+}
+
+.btn-icon:hover {
+    animation: btn-iconAnim 1s infinite alternate ease-in-out;
+    color: var(--white-color);
+}
+
+.btn-icon-red {
+    background-color: var(--red-color);
+    box-shadow: var(--box-shadow-red);
+    text-shadow: var(--text-shadow-red);
+}
+
+.btn-icon-text {
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    color: var(--accent-color);
+}
+
+.btn-icon-text:not(.btn-star) {
+    flex-direction: row-reverse;
+}
+
+.btn-icon-text.btn-red {
+    color: var(--red-color);
+}
+
+.btn-icon-text:not(.btn-star)::before {
+    margin-left: 0.5rem;
+}
+
+.btn-form {
+    width: 80px;
+    margin: .3em;
+    padding: .2em .4em;
+    background-color: var(--green-color);
+    color: var(--white-color);
+    font-size: var(--sm-fonts);
+    line-height: 1.3em;
+    border: 1.8px dashed currentColor;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    text-shadow: var(--text-shadow);
+}
+
+.btn-form::after {
+    content: "\f00c";
+    font-family: FontAwesome;
+    font-size: var(--sm-fonts);
+    opacity: .5;
+    color: currentColor;
+    margin-left: .5em;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+}
+
+.btn-form:hover, .btn-form:focus, .btn-form:active {
+    color: var(--white-color);
+    border: none;
+    outline: none;
+}
+
+.btn-form-cancel {
+    background-color: var(--red-color);
+    box-shadow: var(--box-shadow-red);
+    text-shadow: var(--text-shadow-red);
+}
+
+.btn-form-cancel::after {
+    /* content: "\f057"; */
+    content: "\f00d";
+    width: 100%;
+    font-family: 'FontAwesome';
+}
+
+.btn-close {
+    background-color: transparent;
+    color: var(--light-gray-color);
+}
+
+.btn-close::after {
+    content: "\f00d";
+    font-family: 'FontAwesome';
+}
+
+.btn-star {
+    color: var(--light-gray-color);
+}
+
+.btn-star::before {
+    color: yellow;
+    margin-right: .2em;
+}
+
+@media only screen and (max-width: 1200px) {}
+
+@media only screen and (max-width: 1024px) {
+    .roundCard {
+        width: 400px;
+        height: 400px;
+    }
+}
+
+@media (max-width: 768px) {
+    .btn-icon {
+        width: 25px;
+        height: 25px;
+        padding: .2em;
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 480px) {}

@@ -51,6 +51,7 @@ const ExploreData = () => {
     }
 
     const deleteSearchParam = (key, value) => {
+        console.log(key, value)
         const newState = filters[key].filter(elem => elem !== value)
         setFilters({
             ...filters,

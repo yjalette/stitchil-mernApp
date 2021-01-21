@@ -14,11 +14,11 @@ const SignInLinks = ({ username }) => {
     menu_class="iconMenu"
     onClick={handleClick}
     items={[
-      { icon: "fa fa-user customIcon", value: `/profile/${username}/gigs` },
-      { icon: "fa fa-comment customIcon", value: `/messages` },
-      { icon: "fa fa-gear customIcon", value: `/settings/account` },
-      { icon: "fa fa-bell customIcon", value: `/${username}/gigs` },
-      { icon: "fa fa-sign-out customIcon", value: `/logout` }
+      { icon: "fa fa-user btn-icon", value: `/profile/${username}/gigs` },
+      { icon: "fa fa-comment btn-icon", value: `/messages` },
+      { icon: "fa fa-gear btn-icon", value: `/settings/account` },
+      { icon: "fa fa-bell btn-icon", value: `/${username}/gigs` },
+      { icon: "fa fa-sign-out btn-icon", value: `/logout` }
     ]} />
 }
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import useGetData from '../../custom_hooks/useGetData';
-import useQueryHook from '../../custom_hooks/useQueryHook';
-import { ACCOUNT_QUERY } from '../../pages/settingsPage/graphql/queries';
+
+import useQueryHook from '../../../custom_hooks/useQueryHook';
+import { ACCOUNT_QUERY } from '../graphql/queries';
 import AccountEmail from './AccountEmail';
 import AccountGeneral from './AccountGeneral';
 import AccountUsername from './AccountUsername';

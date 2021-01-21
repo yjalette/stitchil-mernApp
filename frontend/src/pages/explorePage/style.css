@@ -112,17 +112,15 @@
     padding: var(--padding-section);
 }
 
-.exploreFilter__wrapper .iconTextButton > * {
+/* .exploreFilter__wrapper .btn-icon-text > * {
     pointer-events: none;
-}
+} */
 
 .exploreParam__selected {
     color: var(--light-gray-color) !important;
-}
-
-.pageWrapper-explore .selected-red {
-    color: var(--red-color);
     border: 1px solid currentColor;
+    border-radius: var(--border-radius);
+    padding: var(--padding-elem);
 }
 
 @media only screen and (max-width: 1200px) {

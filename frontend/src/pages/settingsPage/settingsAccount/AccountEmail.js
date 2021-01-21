@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 
-import useForm from '../../custom_hooks/useForm';
-import FormInput from '../inputs/FormInput';
+import useForm from '../../../custom_hooks/useForm';
+import FormInput from '../../../components/inputs/FormInput';
 import AccountForm from './AccountForm';
-import { handleResponse } from '../../helpers/dataHelper';
-import useMutationHook from '../../custom_hooks/useMutationHook';
-import { UPDATE_EMAIL_MUTATION } from '../../pages/settingsPage/graphql/mutations';
+import { handleResponse } from '../../../helpers/dataHelper';
+import useMutationHook from '../../../custom_hooks/useMutationHook';
+import { UPDATE_EMAIL_MUTATION } from '../graphql/mutations';
 
 const AccountEmail = ({ currValue }) => {
     const { post, error } = useMutationHook(UPDATE_EMAIL_MUTATION, onPostCompleted);

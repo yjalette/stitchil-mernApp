@@ -6,10 +6,9 @@ import useUpload from '../../../custom_hooks/useUpload'
 import usePostData from '../../../custom_hooks/usePostData';
 import ItemForm from './ItemForm';
 import ProfileItemContext from '../../../context/ProfileItem-context';
-import IconButton from '../../../layout/buttons/IconButton';
-
 import { transformInputs, initState } from "./util"
 import ItemUpload from './ItemUpload';
+import CustomButton from '../../../layout/button/CustomButton';
 
 const ItemUpdate = ({ item, index }) => {
     const { section } = useParams();
@@ -26,7 +25,7 @@ const ItemUpdate = ({ item, index }) => {
     function onSubmit() {
         post({
             variables: {
-                itemInput: transformInputs(inputs),
+                itemInput: transformInputs({ ...inputs, likes: undefined }),
                 file,
                 itemId: item._id
             }
@@ -36,8 +35,7 @@ const ItemUpdate = ({ item, index }) => {
     }
 
 
-    if (!editMode) return <IconButton icon_class="fa fa-edit" onClick={() => setEditMode(true)} />
-
+    if (!editMode) return <CustomButton icon="fa fa-edit" btn_class="btn-icon" onClick={() => setEditMode(true)} />
     return <ItemForm
         form_title="Update Item"
         onSubmit={handleSubmit}
