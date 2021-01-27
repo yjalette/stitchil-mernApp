@@ -55,7 +55,7 @@ export const DESIGNER_RESUME_QUERY = gql`
         designerResume(portfolioId: $portfolioId){
             education
             skills
-            style
+            styles
             experience
             about
     }
@@ -124,27 +124,7 @@ export const CHECK_IF_EXISTS_QUERY = gql`
 `
 
 
-export const CHATS_QUERY = gql`
-        query chats{
-            chats{
-                    _id
-                    members {
-                        username
-                        profileImage
-                    }
-                    messages {
-                        _id
-                        message
-                        sender {
-                            username
-                            profileImage
-                        }
-                        createdAt
-                    }
-            }
-        }
-    
-`
+
 
 export const MESSAGES_QUERY = gql`
         query messages{
@@ -167,106 +147,5 @@ export const MESSAGES_QUERY = gql`
 `
 
 
-export const PROFILE_GIGS_QUERY = gql`
-query profile_gigs($username: String){
-    profile_gigs(username: $username) {
-        _id
-        title
-        description
-        imageUrl
-        price
-        delivery
-        category
-        style
-        fabric
-        keywords
-        createdAt
-        
-    }
-}
-`
 
-export const FILTER_GIGS_QUERY = gql`
-    query filter_gigs($keyWords: String, $categories: [String], $garmentType: [String], $minPrice: Int, $maxPrice: Int, $sortBy: String,  $limit: Int){
-        filter_gigs(keyWords: $keyWords, categories: $categories,garmentType: $garmentType, minPrice: $minPrice, maxPrice: $maxPrice, sortBy: $sortBy, limit: $limit) {
-            _id
-            title
-            description
-            imageUrl
-            price
-            delivery
-            categories
-           garmentType
-            fabrics
-            createdAt
-            creator {
-                username
-                profileImage
-               country
-               rating
-            }
-        }
-    }
-`
-
-
-export const FILTER_TALENTS_QUERY = gql`
-    query filter_talents($specialties: [String], $categories: [String], $experience: [String], $sortBy: String, $limit: Int){
-        filter_talents(specialties: $specialties, categories: $categories, experience: $experience, sortBy: $sortBy, limit: $limit) {
-                designerInfo{
-                    education
-                    skills
-                    specialties
-                    experience
-                    about
-                }
-                gallery {
-                    _id
-                    public_id
-                    imageUrl
-                    title
-                    description
-                }
-        
-                creator {
-                    username
-                    profileImage
-                    country
-                }
-        }
-    }
-`
-
-
-export const PROFILE_REVIEWS_QUERY = gql`
-query profile_reviews($username: String){
-    profile_reviews(username: $username) {
-        _id
-        docId
-        sender{
-            profileImage
-            username
-        }
-        message
-        subject
-        createdAt
-    }
-}
-`
-
-
-export const COMMENTS_QUERY = gql`
-query comments($docId: ID){
-    comments(docId: $docId) {
-        _id
-        docId
-        sender{
-            profileImage
-            username
-        }
-        message
-        createdAt
-    }
-}
-`
 

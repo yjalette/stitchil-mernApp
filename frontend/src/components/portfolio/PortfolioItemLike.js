@@ -1,13 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react'
 import AuthContext from '../../context/Auth-context'
-import usePostData from '../../custom_hooks/usePostData';
 import CustomButton from '../../layout/button/CustomButton';
 import CustomOverlay from '../../layout/CustomOverlay';
 
 const PortfolioItemLike = ({ likes, docId }) => {
     const [values, setValues] = useState([]);
     const { user } = useContext(AuthContext);
-    const { post, error } = usePostData("likePortfolioItem", onCompleted)
+    // const { post, error } = usePostData("likePortfolioItem", onCompleted)
 
     useEffect(() => {
         if (likes) setValues(likes)
@@ -16,7 +15,7 @@ const PortfolioItemLike = ({ likes, docId }) => {
     function toggleLike() {
         if (values.includes(user.username)) setValues(values.filter(like => like !== user.username))
         else setValues([...values, user.username]);
-        post({ variables: { docId, username: user.username } })
+        // post({ variables: { docId, username: user.username } })
     }
     console.log(values)
     function onCompleted() {

@@ -9,10 +9,13 @@ const HeroBox = ({ onClick }) => {
                         <Row className="herobox">
                                 <Col lg={8} md={7} sm={12} className="flex-center flex-column herobox__col ">
                                         <section className="landing__content ">
-                                                <h1 className="landing__title gradient-text">
-                                                        From Design To Creation
+                                                <div className="landing__text">
+                                                        <h1 className="landing__title gradient-text">
+                                                                From Design To Creation
                                         </h1>
-                                                <span className="landing__subtitle subtitle"> Create clothing you'll love to wear. </span>
+                                                        <span className="landing__subtitle subtitle"> Create clothing you'll love to wear. </span>
+                                                </div>
+
                                                 <div className="herobox__btn-group">
                                                         <CustomButton
                                                                 btn_class="btn-click"

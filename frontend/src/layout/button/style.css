@@ -97,7 +97,16 @@
 }
 
 .btn-icon-text:not(.btn-star)::before {
-    margin-left: 0.5rem;
+    margin-left: 0.8rem;
+}
+
+.btn-icon-text.btn-icon {
+    background-color: var(--green-color);
+    justify-content: flex-start;
+}
+
+.btn-icon-text.btn-icon::before {
+    margin-left: 1.5rem;
 }
 
 .btn-form {

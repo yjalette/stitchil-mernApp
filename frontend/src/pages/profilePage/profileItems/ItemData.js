@@ -1,25 +1,13 @@
-import React, { useState, useEffect, useContext, useReducer } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-
-import { itemReducer } from './itemReducer';
 import ItemGrid from './ItemGrid';
-import ItemCreate from './ItemCreate';
-import EmptyResultAlert from '../../../layout/alerts/EmptyResultAlert';
-import SectionHeader from '../../../layout/SectionHeader';
 import useQueryHook from '../../../custom_hooks/useQueryHook';
-import ProfileContext from '../../../context/Profile-context';
-import ProfileItemContext from '../../../context/ProfileItem-context';
+import { query_get } from './api';
 
-const ItemData = ({ query }) => {
-    const { logged_in_user } = useContext(ProfileContext);
+const ItemData = () => {
     const { username, section } = useParams();
-    const [comp, dispatch] = useReducer(itemReducer, section.toUpperCase());
-    const { data, updateQuery } = useQueryHook(query, { username });
+    const { data, updateQuery } = useQueryHook(query_get[section], { username });
     const [values, setValues] = useState([]);
-
-    useEffect(() => {
-        if (section) dispatch({ type: section.toUpperCase() });
-    }, [section]);
 
     useEffect(() => {
         if (data) setValues(data[`profile_${section}`]);
@@ -41,18 +29,12 @@ const ItemData = ({ query }) => {
         [`profile_${section}`]: prev[`profile_${section}`].filter(item => item._id !== itemId)
     }))
 
+    const props = { values, updateItemCache: handleUpdate, addItemCache: handleNewItem, deleteItemCache: handleDeleteItem }
 
-    return (
-        <ProfileItemContext.Provider value={{ updateItemCache: handleUpdate, addItemCache: handleNewItem, deleteItemCache: handleDeleteItem, comp }}>
-            <section className={section}>
-                <SectionHeader title={section}>
-                    {logged_in_user && <ItemCreate overLimit={values && values.length > 2 ? true : false} />}
-                </SectionHeader>
-                <ItemGrid values={values} />
-                {values && values.length === 0 && <EmptyResultAlert type={section} />}
-            </section>
-        </ProfileItemContext.Provider>
-    )
+    return <ItemGrid {...props} />
 }
 
 export default ItemData
+
+
+

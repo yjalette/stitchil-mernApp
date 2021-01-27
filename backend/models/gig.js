@@ -15,7 +15,7 @@ const gigSchema = new Schema({
         type: Array,
         required: false
     },
-    style: {
+    styles: {
         type: Array,
         required: false
     },

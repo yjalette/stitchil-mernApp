@@ -26,7 +26,7 @@ type Profile {
 }
 
 type DesignerResume {
-    style: [String]
+    styles: [String]
     skills: [String]
     experience: [String]
     education: [String]

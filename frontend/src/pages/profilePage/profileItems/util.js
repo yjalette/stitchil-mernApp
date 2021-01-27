@@ -1,7 +1,7 @@
 
 export const initState = {
     "portfolio": { title: "", description: "" },
-    "gigs": { title: "", description: "", category: [], style: [], price: 0, fabric: [], delivery: 0, keywords: [] }
+    "gigs": { title: "", description: "", category: [], styles: [], price: 0, fabric: [], delivery: 0, keywords: [] }
 }
 
 export const transformInputs = inputs => {

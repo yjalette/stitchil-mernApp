@@ -14,7 +14,12 @@ export const itemReducer = (state, action) => {
     switch (action.type) {
         case "PORTFOLIO": {
             return {
-                "highlights": item => <PortfolioHighlights item={item} />,
+                // "highlights": item => <PortfolioHighlights item={item} />,
+                "highlights": item => [
+                    { field: "title", content: item.title },
+                    { icon: "fa fa-thumb-up", content: 5 }
+                ]
+                ,
                 "ItemDetailsComp": (item) => <PortfolioItemDetails item={item} />,
                 "ItemFormParts": ({ inputs, onChange, media }) => console.log(inputs) || [
                     <>
@@ -32,7 +37,12 @@ export const itemReducer = (state, action) => {
         }
         case "GIGS": {
             return {
-                "highlights": item => <GigHighlights item={item} />,
+                // "highlights": item => <GigHighlights item={item} />,
+                "highlights": item => [
+                    { field: "fabric", content: item.fabric },
+                    { field: "price starts at: ", content: `$${item.price}` }
+                ]
+                ,
                 "ItemDetailsComp": (item, index) => <GigDetails item={item} index={index} />,
                 "ItemFormParts": ({ inputs, onChange, onMultiChange, media }) => [
                     <>

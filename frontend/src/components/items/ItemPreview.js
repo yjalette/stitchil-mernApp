@@ -1,8 +1,8 @@
 import React from 'react';
-import { Row, Col, Image, Button } from 'react-bootstrap'
+import { Row, Col, Image } from 'react-bootstrap'
 import { Link, useParams } from 'react-router-dom';
 
-import UserAvatar from '../../layout/media/UserAvatar';
+import UserAvatar from '../user/UserAvatar';
 import CustomModal from '../../layout/CustomModal';
 
 const ItemPreview = ({ item, children }) => {

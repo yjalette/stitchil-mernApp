@@ -6,22 +6,22 @@ export const UPDATE_DESIGNER_MUTATION = gql`
             
         }
 `
-export const CREATE_PORTFOLIO_ITEM_MUTATION = gql`
-        mutation CreatePortfolioItem($itemInput: ItemInput, $file: Upload ) {
-            createPortfolioItem(itemInput: $itemInput, file: $file)
+export const CREATE_PRODUCT_MUTATION = gql`
+        mutation CreateProduct($itemInput: ItemInput, $file: Upload ) {
+            createProduct(itemInput: $itemInput, file: $file)
         }
       `;
 
-export const UPDATE_PORTFOLIO_ITEM_MUTATION = gql`
-      mutation UpdatePortfolioItem($itemInput: ItemInput, $file: Upload, $itemId: String ) {
-        updatePortfolioItem(itemInput: $itemInput, file: $file, itemId: $itemId )
+export const UPDATE_PRODUCT_MUTATION = gql`
+      mutation UpdateProduct($itemInput: ItemInput, $file: Upload, $itemId: String ) {
+        updateProduct(itemInput: $itemInput, file: $file, itemId: $itemId )
       }
     `;
 
 
-export const DELETE_PORTFOLIO_ITEM_MUTATION = gql`
-          mutation DeletePortfolioItem($itemId: ID){
-            deletePortfolioItem(itemId: $itemId)
+export const DELETE_PRODUCT_MUTATION = gql`
+          mutation DeleteProduct($itemId: ID){
+            deleteProduct(itemId: $itemId)
           }
       `;
 
@@ -62,9 +62,9 @@ export const DELETE_GIG_MUTATION = gql`
           }
       `;
 
-export const LIKE_PORTFOLIO_ITEM_MUTATION = gql`
-    mutation LikePortfolioItem($docId: ID, $username: String){
-        likePortfolioItem(docId: $docId, username: $username)
+export const LIKE_PRODUCT_MUTATION = gql`
+    mutation LikeProduct($docId: ID, $username: String){
+        likeProduct(docId: $docId, username: $username)
     }
 `
 

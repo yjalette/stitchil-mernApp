@@ -20,7 +20,7 @@ input ItemInput {
     _id: ID
     title: String
     description: String
-    style: [String]
+    styles: [String]
     category: [String]
     price: Int
     fabric: [String]

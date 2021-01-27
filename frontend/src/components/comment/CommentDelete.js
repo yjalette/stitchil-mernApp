@@ -1,14 +1,16 @@
 import React from 'react'
-import useDeleteData from '../../custom_hooks/useDeleteData'
+
+import useMutationHook from '../../custom_hooks/useMutationHook';
+import { DELETE_COMMENT_MUTATION } from './graphql/mutations';
 import CustomButton from '../../layout/button/CustomButton';
 import GroupButton from '../../layout/button/GroupButton';
 import CustomModal from '../../layout/CustomModal'
 
 const CommentDelete = ({ itemId, onDelete }) => {
-    const { deleteItem, data, error } = useDeleteData("deletecomment", onCompleted);
+    const { post, data, error } = useMutationHook(DELETE_COMMENT_MUTATION, onCompleted);
 
     const handleDelete = () => {
-        deleteItem(itemId)
+        post(itemId)
     }
 
     function onCompleted(data) {

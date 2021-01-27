@@ -1,88 +1,50 @@
-import React, { useEffect, useContext } from 'react';
-import { Container, Card } from 'react-bootstrap';
+import React, { useContext } from 'react';
+import { useHistory, useParams } from 'react-router-dom';
 
 import ProfileContext from '../../../context/Profile-context';
 import ItemDelete from './ItemDelete';
-import ProfileItemContext from '../../../context/ProfileItem-context';
 import ItemUpdate from './ItemUpdate';
 import CustomButton from '../../../layout/button/CustomButton';
 import ItemList from '../../../components/items/ItemList';
-import useSlides from '../../../custom_hooks/useSlides';
-import CustomModal from '../../../layout/CustomModal';
-import ItemDetails from './ItemDetails';
-import { useToggle } from '../../../custom_hooks/useToggle';
+import { highlights } from './helpers';
+import ItemHighlights from '../../../components/items/ItemHighlights';
+import SectionHeader from '../../../layout/SectionHeader';
+import ItemCreate from './ItemCreate';
+import GroupButton from '../../../layout/button/GroupButton';
 
-const ItemGrid = ({ values }) => {
-    const [open, toggle] = useToggle(false)
-    const { handleForward, handleBackward, activeIndex, setActiveIndex } = useSlides(0, values);
+const ItemGrid = ({ values, updateItemCache, addItemCache, deleteItemCache }) => {
+    const { section } = useParams();
+    const { push } = useHistory()
     const { logged_in_user } = useContext(ProfileContext);
-    const { comp } = useContext(ProfileItemContext);
 
-    // useEffect(() => {
-    //     if (index) handleSlides(index);
-    // }, [index]);
-
-    const handleSlides = index => {
-        setActiveIndex(index);
-        toggle();
-    }
+    const showDetails = id => console.log(id) || push(`/view-${section}-item/${id}`)
 
     return (
-        <Container className="item__grid">
+        <>
+            <SectionHeader title={section}>
+                {logged_in_user && <ItemCreate addItemCache={addItemCache} overLimit={values && values.length > 5} />}
+            </SectionHeader>
             {values && values.length > 0 && <ItemList items={values} getProps={(item, index) => {
                 return {
                     title: item.title,
                     imageUrl: item.imageUrl,
-                    body: comp.highlights(item),
-                    footer: (
-                        <>
-                            {
-                                logged_in_user ?
-                                    <>
-                                        < ItemUpdate item={item} index={index} />
-                                        <ItemDelete itemId={item._id} />
-                                    </>
-                                    :
-                                    <CustomButton btn_class="btn-icon" icon="fa fa-heart" />}
-                            <CustomButton btn_class="btn-icon" icon="fa fa-angle-double-right" onClick={() => handleSlides(index)} />
-                            {open && <CustomModal
-                                modal_title={values[activeIndex].title}
-                                modal_class="itemSlides slides"
-                                displayWithoutBtn={true}>
-                                <ItemDetails item={values[activeIndex]} onBackward={handleBackward} onForward={handleForward} />
-                            </CustomModal>}
-                        </>
+                    body: <ItemHighlights highlights={highlights(item, section)} />,
+                    footer: (<>
+                        {logged_in_user ?
+                            <GroupButton>
+                                <ItemUpdate item={item} index={index} updateItemCache={updateItemCache} />
+                                <ItemDelete itemId={item._id} deleteItemCache={deleteItemCache} />
+                            </GroupButton>
+                            : <CustomButton btn_class="btn-icon" icon="fa fa-heart" />}
+
+                        <CustomButton btn_class="btn-icon" icon="fa fa-angle-double-right" onClick={() => showDetails(item._id)} />
+                    </>
                     )
                 }
             }} />}
-
-
-
-        </Container >
+        </>
     )
 
 }
 
 export default ItemGrid;
-
-
-
-
-// key={index}
-
-// item={item}
-// onClick={() => setActiveIndex(index)}
-// card_footer={
-//     <>
-//         {logged_in_user ?
-//             <>
-//                 <ItemUpdate item={item} index={index} />
-//                 <ItemDelete itemId={item._id} />
-//             </>
-//             :
-//             <CustomButton btn_class="btn-icon" icon="fa fa-heart" />}
-//     </>
-// }
-
-
-

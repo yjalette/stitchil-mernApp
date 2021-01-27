@@ -1,4 +1,5 @@
 import React from 'react';
+
 import ItemList from '../../components/items/ItemList';
 import PaginationIndex from '../../components/pagination/PaginationIndex';
 import ListItem from '../../layout/ListItem';
@@ -6,7 +7,6 @@ import FilterWrapper from './exploreFilter/FilterWrapper';
 import SectionHeader from '../../layout/SectionHeader';
 import FilterSelected from './exploreFilter/FilterSelected';
 import ExploreSort from './ExploreSort';
-import EmptyResultAlert from '../../layout/alerts/EmptyResultAlert';
 import SectionWrapper from '../../layout/SectionWrapper';
 import CustomButton from '../../layout/button/CustomButton';
 
@@ -36,7 +36,7 @@ const ExploreGrid = ({ items, total, activePage, loadMoreData, filters, onFilter
                         imageUrl: item.imageUrl,
                         body: (
                             <>
-                                <ListItem field="style" content={item.style} />
+                                <ListItem field="styles" content={item.styles} />
                                 <ListItem field="price" content={`starts at ${item.price}$`} />
                             </>
                         ),

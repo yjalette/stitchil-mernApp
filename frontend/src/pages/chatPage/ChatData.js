@@ -1,13 +1,12 @@
 import React, { useState, useContext, useEffect } from 'react';
 import AuthContext from '../../context/Auth-context';
-import useGetData from '../../custom_hooks/useGetData';
+import useQueryHook from '../../custom_hooks/useQueryHook';
 import ChatGrid from './ChatGrid';
-
-
+import { CHATS_QUERY } from './graphql/queries';
 
 const ChatData = () => {
     const { user } = useContext(AuthContext);
-    const { data, getData, updateQuery } = useGetData("chats")
+    const { data, getData, updateQuery } = useQueryHook(CHATS_QUERY)
 
     const [chats, setChats] = useState([]);
 

@@ -1,11 +1,11 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import Flags from '../../layout/media/Flags';
 import CustomCarousel from '../../layout/CustomCarousel';
 import { heroSlides } from './consts'
 import ListItem from '../../layout/ListItem';
 import { Container } from 'react-bootstrap';
 import CustomButton from '../../layout/button/CustomButton';
+import PictureFlag from '../../components/pictures/PictureFlag';
 
 const style = { backgroundImage: `url("https://res.cloudinary.com/dgxa9gpta/image/upload/v1602105434/homepage/iphone_vw9pja.png")` };
 
@@ -16,7 +16,7 @@ const Heroimage = () => {
         return (
             <>
                 <div className="hpSlides__header">
-                    <h5 className="username mb-0">{slide.username}</h5>
+                    <h5 className="hpSlides__username mb-0">{slide.username}</h5>
                     <CustomButton btn_class="btn-icon-text btn-star"
                         icon="fa fa-star"
                         onClick={() => push("/explore/gigs")}
@@ -30,7 +30,7 @@ const Heroimage = () => {
                 />
                 <div className="hpSlides__content">
                     <Container className="w-100">
-                        <h3 className="hpSlides__fullname">{slide.fullName} <Flags countryCode={slide.country} /> </h3>
+                        <h3 className="hpSlides__fullname">{slide.fullName} <PictureFlag countryCode={slide.country} /></h3>
                     </Container>
                     <ListItem field="experience: " content={slide.experience} />
                     <ListItem field="skills: " content={slide.skills} />

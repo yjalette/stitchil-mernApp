@@ -11,15 +11,21 @@ const CustomModal = ({
     btn_class,
     children,
     displayWithoutBtn,
+    onOpen,
     onClose }) => {
     const [open, setOpen] = useState(displayWithoutBtn ? true : false);
+
+    const handleOpen = () => {
+        onOpen && onOpen();
+        setOpen(true);
+    };
 
     const handleClose = () => {
         onClose && onClose();
         setOpen(false);
     };
 
-    if (!open) return <CustomButton onClick={() => setOpen(true)} btn_class={btn_class}>{btn_title}</CustomButton>
+    if (!open) return <CustomButton onClick={handleOpen} btn_class={btn_class}>{btn_title}</CustomButton>
 
     return (
         <Modal show={open} onHide={handleClose}

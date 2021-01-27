@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const portfolioSchema = new Schema({
-    style: {
+    styles: {
         type: Array,
         required: false
     },

@@ -3,19 +3,18 @@ import { Modal } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 
 import "./style.css"
-import useDeleteData from '../../../custom_hooks/useDeleteData';
 import CustomModal from '../../../layout/CustomModal';
-import ProfileItemContext from '../../../context/ProfileItem-context';
 import CustomButton from '../../../layout/button/CustomButton';
+import useMutationHook from '../../../custom_hooks/useMutationHook';
+import { DELETE_GIG_MUTATION, DELETE_PRODUCT_MUTATION } from '../graphql/mutations';
 
-const ItemDelete = ({ itemId }) => {
+const ItemDelete = ({ itemId, postCache }) => {
     const { section } = useParams();
-    const { deleteItemCache } = useContext(ProfileItemContext);
-    const { deleteItem, data, error } = useDeleteData(section);
+    const { post, data, error } = useMutationHook(section === "gigs" ? DELETE_GIG_MUTATION : DELETE_PRODUCT_MUTATION);
 
     const handleDelete = () => {
-        deleteItem({ variables: { itemId } });
-        deleteItemCache(itemId);
+        post({ variables: { itemId } });
+        postCache(itemId);
     };
 
     return (
@@ -23,11 +22,11 @@ const ItemDelete = ({ itemId }) => {
             btn_class="fa fa-trash btn-icon btn-icon-red"
             modal_title="Confirm Deletion"
             modal_size="md"
-            modal_class="deleteItemModal" >
+            modal_class="postModal" >
             <Modal.Body className="p-3 d-flex flex-column">
-                <h6 className="deleteItemModal__title">Are you sure to delete this item? </h6>
-                <a href="#" className="deleteItemModal__button-wrapper" onClick={handleDelete}>
-                    <CustomButton btn_class="btn-click deleteItemModal__button float-right" >delete</CustomButton>
+                <h6 className="postModal__title">Are you sure to delete this item? </h6>
+                <a href="#" className="postModal__button-wrapper" onClick={handleDelete}>
+                    <CustomButton btn_class="btn-click postModal__button float-right" >delete</CustomButton>
                 </a>
             </Modal.Body>
         </CustomModal>

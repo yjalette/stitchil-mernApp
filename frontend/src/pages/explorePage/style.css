@@ -52,16 +52,6 @@
     height: auto;
 }
 
-.pageWrapper-explore .itemList {
-    max-width: 100%;
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-    grid-auto-rows: 400px;
-
-    /* background-color: var(--main-color); */
-}
-
 .explore__heroimage {
     width: 100%;
     height: 100%;

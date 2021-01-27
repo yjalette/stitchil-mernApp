@@ -1,17 +1,18 @@
 import React, { useEffect, useRef } from 'react'
 import { Container } from 'react-bootstrap';
 
-import useDeleteData from '../../custom_hooks/useDeleteData';
 import CustomDropdown from '../../layout/CustomDropdown';
-import UserAvatar from '../../layout/media/UserAvatar'
+import UserAvatar from '../user/UserAvatar'
 import MessageItem from '../message/MessageItem'
+import useMutationHook from '../../custom_hooks/useMutationHook';
+import { DELETE_COMMENT_MUTATION } from './graphql/mutations';
 
 const CommentGrid = ({ items, children, onDelete }) => {
     const divRef = useRef(null);
-    const { deleteItem, data, error } = useDeleteData("deletecomment");
+    const { post, data, error } = useMutationHook(DELETE_COMMENT_MUTATION);
 
     const handleDelete = (itemId) => {
-        deleteItem({ variables: { itemId } });
+        post({ variables: { itemId } });
         onDelete(itemId);
     }
 

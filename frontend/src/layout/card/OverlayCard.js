@@ -7,14 +7,20 @@ const OverlayCard = ({ card_props, onClick }) => console.log(card_props) || (
         {card_props.imageUrl && <Card.Img src={card_props.imageUrl} className="overlayCard__img" alt="card image" />}
         <Card.ImgOverlay className="overlayCard__container">
             <Card.Header className="overlayCard__header">
-                <Card.Title className="overlayCard__title">{card_props.title}</Card.Title>
+                <button className="overlayCard__btn" onClick={onClick} name={card_props.title}>
+                    <Card.Title className="overlayCard__title">{card_props.title}</Card.Title>
+                </button>
                 {card_props.header}
             </Card.Header>
-            <Card.Body>{card_props.body}</Card.Body>
             {card_props.footer && <Card.Footer>{card_props.footer}</Card.Footer>}
         </Card.ImgOverlay>
+        <Card.Body>{card_props.body}</Card.Body>
     </Card>
 )
 
 
-export default OverlayCard
+
+
+export default OverlayCard;
+
+

@@ -19,7 +19,7 @@ const ProfileHeader = ({ profile }) => {
         <Card className="profileHeader">
             <ProfileImage src={profile && profile.coverImage} image_type="coverImage" />
             <Container className="profileHeader__box">
-                <Container className="profileHeader__col justify-content-center">
+                <Container className="profileHeader__col">
                     <ProfileImage src={profile && profile.profileImage} image_type="profileImage" />
                     <h2 className="profileHeader__title">{profile.fullname} </h2>
                 </Container>

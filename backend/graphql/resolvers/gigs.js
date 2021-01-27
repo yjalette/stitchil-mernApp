@@ -6,6 +6,11 @@ const { populateByUser } = require("../../consts/user");
 
 module.exports = {
     Query: {
+        view_gig: async (_, { id }, req) => {
+            const gig = await Gig.findById(id);
+            console.log(gig)
+            return gig
+        },
         profile_gigs: async (_, { username }, req) => {
             console.log("gigs---->", username);
             const user = await User.findOne({ username }, { _id: 1 });

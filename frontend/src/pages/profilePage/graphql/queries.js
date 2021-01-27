@@ -13,7 +13,7 @@ export const PROFILE_INTRO_QUERY = gql`
                 portfolio {
                     education
                     skills
-                    style
+                    styles
                     experience
                     about
             }  
@@ -28,6 +28,7 @@ query profile_portfolio($username: String){
     profile_portfolio(username: $username){
         _id
         imageUrl
+        coverImage
         title
         description
         likes
@@ -47,7 +48,7 @@ query profile_gigs($username: String){
         price
         delivery
         category
-        style
+        styles
         fabric
         keywords
         createdAt

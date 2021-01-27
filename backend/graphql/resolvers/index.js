@@ -1,5 +1,5 @@
 
-const portfolioResolver = require('./portfolio');
+const productResolver = require('./product');
 const authResolver = require('./auth');
 const chatResolver = require('./chat');
 const contactResolver = require('./contact');
@@ -9,12 +9,13 @@ const messageResolver = require('./message');
 const fileResolver = require('./file');
 const commentResolver = require('./comment');
 const exploreResolver = require('./explore');
+const designerResolver = require('./designer')
 
 const resolvers = {
     Query: {
         ...authResolver.Query,
         ...gigResolver.Query,
-        ...portfolioResolver.Query,
+        ...productResolver.Query,
         ...userResolver.Query,
         ...chatResolver.Query,
         ...messageResolver.Query,
@@ -25,7 +26,8 @@ const resolvers = {
     Mutation: {
         ...authResolver.Mutation,
         ...gigResolver.Mutation,
-        ...portfolioResolver.Mutation,
+        ...productResolver.Mutation,
+        ...designerResolver.Mutation,
         ...userResolver.Mutation,
         ...contactResolver.Mutation,
         ...chatResolver.Mutation,

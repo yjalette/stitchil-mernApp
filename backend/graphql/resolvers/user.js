@@ -15,7 +15,7 @@ module.exports = {
         profile_intro: async (_, { username }, req) => {
             console.log(req)
             return await User.findOne({ username })
-                .populate({ path: 'portfolio', select: '-gallery' })
+                .populate({ path: 'portfolio' })
         },
         userAccount: async (_, args, { userId }) => userId ? await User.findById(userId) : new Error('user is not authorized')
     },

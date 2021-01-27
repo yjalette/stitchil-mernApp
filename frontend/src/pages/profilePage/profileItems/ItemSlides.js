@@ -1,15 +1,10 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useContext } from 'react';
 import { Col, Image, Row } from 'react-bootstrap';
-
 import ProfileItemContext from '../../../context/ProfileItem-context';
-import useSlides from '../../custom_hooks/useSlides';
 import CustomModal from '../../layout/CustomModal';
-import ImageZoom from '../../layout/media/ImageZoom';
-
 
 const ItemSlides = ({ items, item, activeIndex, handleBackward, handleForward }) => {
     const { comp } = useContext(ProfileItemContext);
-    // const [currentIndex, setCurrentIndex] = useState(0);
 
     return (
         <CustomModal
@@ -26,7 +21,8 @@ const ItemSlides = ({ items, item, activeIndex, handleBackward, handleForward })
             btn_class="fa fa-angle-double-right btn-icon">
             <Row className="slides__item ">
                 <Col lg={8} className="slides__col">
-                    <Image src={item.imageUrl} className="slides__img" />
+                    {/* <Image src={item.imageUrl} className="slides__img" /> */}
+                    <PictureZoom elem_class="slides__img" imgageUrl={item.imageUrl} />
                     {/* <ImageZoom img_class="slides__img" img_src={item.imageUrl} /> */}
                 </Col>
                 <Col lg={4} className="slides__col">

@@ -9,7 +9,7 @@ module.exports = {
                 const items = await Gig.find({
                     $and: [
                         { category: filters.category && filters.category.length > 0 ? { $in: filters.category } : { $exists: true } },
-                        { style: filters.style && filters.style.length > 0 ? { $in: filters.style } : { $exists: true } },
+                        { styles: filters.styles && filters.styles.length > 0 ? { $in: filters.styles } : { $exists: true } },
                         { price: { $lt: price.max || 1000, $gt: price.min || 1 } }
                     ]
                 })

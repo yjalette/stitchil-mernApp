@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
 
 import "./style.css";
-import useGetData from '../../custom_hooks/useGetData';
 import CommentGrid from './CommentGrid';
 import CommentCreate from './CommentCreate';
+import useQueryHook from '../../custom_hooks/useQueryHook';
+import { COMMENTS_QUERY } from './graphql/queries';
 
 const CommentData = ({ docId }) => {
-    const { data, getData } = useGetData("comments");
+    const { data, getData } = useQueryHook(COMMENTS_QUERY);
     const [values, setValues] = useState([]);
 
     useEffect(() => {

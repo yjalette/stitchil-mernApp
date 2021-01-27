@@ -1,3 +1,4 @@
+const File = require("../models/file");
 const cloudinary = require('cloudinary');
 require('dotenv').config()
 
@@ -57,7 +58,23 @@ async function saveFile(item, file, userId) {
     return true;
 }
 
+async function newUpload(file, userId) {
+    try {
+        const newFile = await uploadToCloud({ file, public_id: `${userId}/${Math.floor(Math.random() * 100) + 1}` })
+        await new File({
+            imageUrl: newFile.url,
+            createdAt: new Date()
+        }).save();
+        console.log(newFile)
+        return newFile.url
+    } catch (error) {
+        throw new Error(error)
+    }
+
+}
+
 exports.uploadToCloud = uploadToCloud;
+exports.newUpload = newUpload;
 exports.saveFile = saveFile;
 exports.deleteFile = deleteFile;
 exports.cloud_config = cloud_config;

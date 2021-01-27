@@ -47,9 +47,9 @@ const userSchema = new Schema({
         type: String,
         required: false
     },
-    portfolio: {
+    designer: {
         type: Schema.Types.ObjectId,
-        ref: 'Portfolio'
+        ref: 'Designer'
     },
     createdAt: {
         type: Date,

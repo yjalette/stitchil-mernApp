@@ -14,6 +14,8 @@ import ChatPage from './pages/chatPage/ChatPage';
 import Footer from './components/footer/Footer';
 import SettingsPage from './pages/settingsPage/SettingsPage';
 import AuthPage from './pages/authPage/AuthPage';
+import GigPage from './pages/gigPage/GigPage';
+import ProductPage from './pages/productPage/ProductPage';
 
 const userObj = JSON.parse(localStorage.getItem('user'));
 
@@ -35,19 +37,19 @@ class App extends Component {
             <Route path="/auth/:authType" component={AuthPage} />
             <Route path="/auth/:authType/:token" component={AuthPage} />
             {/* <Route path="/confirm/:confirmType" component={ConfirmCreds} /> */}
-            <div className="page-wrapper">
-              <Switch>
-                <Route path="/explore" component={ExplorePage} />
-                <Route path="/settings/:section" component={SettingsPage} />
-                {/* <Route path="/update/:section/:token" component={Settings} /> */}
-                <Route path="/measurements" component={MeasurementsPage} />
-                <Route path="/filter/:section/:category" component={ExplorePage} />
-                <Route path="/profile/:username/:section" component={ProfilePage} />
-                <Route exact path="/messages" component={ChatPage} />
-                <Route path="/support" component={Contact} />
-                <Route path="/logout" component={Logout} />
-              </Switch>
-            </div>
+            <Switch>
+              <Route path="/explore" component={ExplorePage} />
+              <Route path="/settings/:section" component={SettingsPage} />
+              {/* <Route path="/update/:section/:token" component={Settings} /> */}
+              <Route path="/measurements" component={MeasurementsPage} />
+              <Route path="/filter/:section/:category" component={ExplorePage} />
+              <Route path="/profile/:username/:section" component={ProfilePage} />
+              <Route path="/view-gigs-item/:id" component={GigPage} />
+              <Route path="/view-portfolio-item/:id" component={ProductPage} />
+              <Route exact path="/messages" component={ChatPage} />
+              <Route path="/support" component={Contact} />
+              <Route path="/logout" component={Logout} />
+            </Switch>
             <Footer />
           </AuthContext.Provider>
         </Router>

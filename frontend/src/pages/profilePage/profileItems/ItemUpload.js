@@ -1,15 +1,12 @@
 import React from 'react';
 import { Image } from "react-bootstrap";
-import ImageZoom from '../../../layout/media/ImageZoom';
-
-// import InlineAlert from "../alerts/InlineAlert";
+import PictureZoom from '../../../components/pictures/PictureZoom';
 
 const ItemUpload = ({ file, prevFile, clearUpload, getRootProps, getInputProps }) => {
-
     if (file) {
         return (
             <div className="itemFile__wrapper flex-center flex-column">
-                <ImageZoom img_class="itemUpload__img" img_src={URL.createObjectURL(file)} />
+                <PictureZoom elem_class="itemUpload__img" imageUrl={URL.createObjectURL(file)} />
                 <i className="fa fa-close itemFile__cancel" onClick={clearUpload} />
             </div>
         )

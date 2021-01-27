@@ -1,106 +1,6 @@
 import gql from 'graphql-tag';
 
 
-export const UPDATE_GENERAL_MUTATION = gql`
-mutation UpdateGeneral($country: [String], $languages: [String], $fullname: String){
-    updateGeneral(country: $country, languages: $languages, fullname: $fullname){
-        ... on Result {
-            success
-           
-        }
-
-        ... on Failure {
-            message 
-            code 
-            type 
-        }
-    }
-    }    
-`
-
-export const UPDATE_EMAIL_MUTATION = gql`
-        mutation updateEmail($email: String){
-            updateEmail(email: $email){
-                ... on Result {
-                    success
-                   
-                }
-    
-                ... on Failure {
-                    message 
-                    code 
-                    type 
-                }
-            }
-        }
-`
-
-export const UPDATE_USERNAME_MUTATION = gql`
-        mutation updateUsername($username: String){
-            updateUsername(username: $username){
-                ... on Result {
-                    success
-                   
-                }
-    
-                ... on Failure {
-                    message 
-                    code 
-                    type 
-                }
-            }
-        }
-`
-
-export const UPDATE_PASSWORD_MUTATION = gql`
-mutation updatePassword($passwordInput: PasswordInput, $token: String){
-    updatePassword(passwordInput: $passwordInput, token: $token) {      
-        ... on Result {
-            success
-            message 
-        }
-
-        ... on Failure {
-            message 
-            code 
-            type 
-        }
-         
-}     
-    }    
-`
-
-export const FORGOT_PASSWORD_MUTATION = gql`
-        mutation forgotPassword($email: String){
-            forgotPassword(email: $email)
-        }
-`
-
-export const SIGNUP_MUTATION = gql`
-    mutation CreateUser($userInput: UserInput){
-        createUser(userInput: $userInput) 
-        {
-            ... on Confirmation {
-                emailSent
-            }
-            ... on AuthData {
-                token                
-                role
-                username
-                googleAuth
-                  
-            }
-
-            ... on Error {
-                message 
-                code 
-                type 
-            }
-             
-    }
-        }     
-`;
-
 
 export const UPDATE_DESIGNER_MUTATION = gql`
         mutation UpdateDesigner($designerInput: DesignerInput){
@@ -139,11 +39,6 @@ export const DELETE_PROFILE_IMAGE_MUTATION = gql`
     }
 `;
 
-export const CREATE_CHAT_MUTATION = gql`
-        mutation CreateChat($message: String, $participant: String){
-            createChat(message: $message, participant: $participant)
-        }
-`
 
 export const CREATE_MESSAGE_MUTATION = gql`
         mutation CreateMessage($message: String,  $docId: String){
@@ -151,11 +46,6 @@ export const CREATE_MESSAGE_MUTATION = gql`
         }
 `
 
-export const CREATE_COMMENT_MUTATION = gql`
-        mutation CreateComment($message: String,  $docId: ID){
-            createComment(message: $message, docId: $docId)
-        }
-`
 
 export const CREATE_REVIEW_MUTATION = gql`
         mutation CreateReview($reviewInput: ReviewInput, $recipient: String ){
@@ -211,7 +101,3 @@ mutation DeleteMessage($itemId: ID){
     deleteMessage(itemId: $itemId)
 }`
 
-export const DELETE_COMMENT_MUTATION = gql`
-mutation DeleteComment($itemId: ID){
-    deleteComment(itemId: $itemId)
-}`

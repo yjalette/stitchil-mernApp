@@ -12,7 +12,7 @@ interface ExploreItem {
     _id: ID
     title: String
     category: [String]
-    style: [String]
+    styles: [String]
     price: Int
     fabric: [String]
     imageUrl: String
@@ -24,7 +24,7 @@ type BuyerItem implements ExploreItem{
     _id: ID
     title: String
     category: [String]
-    style: [String]
+    styles: [String]
     price: Int
     fabric: [String]
     imageUrl: String
@@ -37,7 +37,7 @@ type DesignerItem implements ExploreItem {
     _id: ID
     title: String
     category: [String]
-    style: [String]
+    styles: [String]
     price: Int
     fabric: [String]
     imageUrl: String
@@ -49,7 +49,7 @@ type DesignerItem implements ExploreItem {
 
 input Filters {
     category: [String]
-    style: [String]
+    styles: [String]
     worldwide: Boolean
     min: Int
     max: Int

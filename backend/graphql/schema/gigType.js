@@ -9,10 +9,12 @@ type Gig {
     title: String
     description: String
     category: [String]
-    style: [String]
+    styles: [String]
     price: Int
     fabric: [String]
     imageUrl: String
+    coverImage: String
+    gallery: [String]
     delivery: Int
     keywords: [String]
     createdAt: String
@@ -21,7 +23,8 @@ type Gig {
 
 
 
-type Query {        
+type Query { 
+    view_gig(id: ID): Gig       
     profile_gigs(username: String): [Gig]
     filter_gigs(keyWords: String, categories: [String],garmentType: [String], minPrice: Int, maxPrice: Int, sortBy: String, limit: Int): [Gig]       
 }

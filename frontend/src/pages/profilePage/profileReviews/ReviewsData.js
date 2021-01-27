@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 
 import ReviewCreate from './ReviewCreate';
 import ReviewItem from '../../../components/message/MessageItem';
-import UserAvatar from '../../../layout/media/UserAvatar';
+import UserAvatar from '../../../components/user/UserAvatar';
 import ReviewRating from './ReviewRating';
 import EmptyResultAlert from '../../../layout/alerts/EmptyResultAlert';
 import SectionHeader from '../../../layout/SectionHeader';

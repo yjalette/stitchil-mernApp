@@ -5,12 +5,10 @@ import ProfileIntro from './ProfileIntro';
 import ProfileHeader from './ProfileHeader';
 import PageMenu from '../../layout/PageMenu';
 import ReviewData from './profileReviews/ReviewsData';
-import PortfolioIndex from './profilePortfolio/PortfolioIndex';
-import GigIndex from './profileGig/GigIndex';
 import SectionWrapper from '../../layout/SectionWrapper';
+import ItemData from './profileItems/ItemData';
 
 const ProfileGrid = ({ resData, activeSection }) => {
-    console.log(resData)
     return (
         <>
             <ProfileHeader profile={resData} />
@@ -22,8 +20,8 @@ const ProfileGrid = ({ resData, activeSection }) => {
                     <PageMenu items={["gigs", resData.role === "designer" ? "portfolio" : null, "reviews"]} />
                     <SectionWrapper>
                         {activeSection === "reviews" && <ReviewData />}
-                        {activeSection === "portfolio" && <PortfolioIndex section={activeSection} />}
-                        {activeSection === "gigs" && <GigIndex section={activeSection} />}
+                        {activeSection === "portfolio" && <ItemData />}
+                        {activeSection === "gigs" && <ItemData />}
                     </SectionWrapper>
                 </Col>
             </Row>

@@ -3,14 +3,15 @@ import { Container } from 'react-bootstrap';
 
 import AuthContext from '../../context/Auth-context';
 import useForm from '../../custom_hooks/useForm';
-import usePostData from '../../custom_hooks/usePostData';
-import UserAvatar from '../../layout/media/UserAvatar';
+import useMutationHook from '../../custom_hooks/useMutationHook';
 import MessageForm from '../message/MessageForm';
+import UserAvatar from '../user/UserAvatar';
+import { CREATE_COMMENT_MUTATION } from './graphql/mutations';
 
 const CommentCreate = ({ addComment, docId }) => {
     const { user } = useContext(AuthContext);
     const { inputs, setInputs, handleChange, handleSubmit } = useForm({ message: "", subject: "" }, onSubmit);
-    const { post } = usePostData("createComment", onPostCompleted);
+    const { post } = useMutationHook(CREATE_COMMENT_MUTATION, onPostCompleted);
 
     function onPostCompleted() {
         addComment({ message: inputs.message, sender: { profileImage: user.profileImage, username: user.username } });
