@@ -1,6 +1,7 @@
 import React from 'react'
 import EmptyResultAlert from '../../layout/alerts/EmptyResultAlert'
 import OverlayCard from '../../layout/card/OverlayCard'
+import ItemSum from './ItemSum'
 import "./style.css"
 
 const ItemList = ({ items, getProps, emptyResultType }) => {
@@ -9,7 +10,7 @@ const ItemList = ({ items, getProps, emptyResultType }) => {
 
     return (
         <div className="itemList">
-            {items.map((item, index) => <OverlayCard key={index} card_props={{ ...getProps(item, index), class: "itemSum" }} />)}
+            {items.map((item, index) => <ItemSum key={index} {...getProps(item, index)} />)}
         </div>
     )
 }

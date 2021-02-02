@@ -14,6 +14,7 @@ type Login {
     fullname: String
     token: String
     googleAuth: Boolean 
+    
 
 }
 

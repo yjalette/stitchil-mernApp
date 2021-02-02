@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
-export const PROFILE_INTRO_QUERY = gql`
-        query profile_intro($username: String){
-            profile_intro(username: $username) {
+export const PROFILE_USER_QUERY = gql`
+        query userProfile($username: String){
+            userProfile(username: $username) {
                 username
                 fullname
                 languages
@@ -10,13 +10,47 @@ export const PROFILE_INTRO_QUERY = gql`
                 profileImage
                 country
                 role
-                portfolio {
+                lastSeen
+                designer {
                     education
                     skills
                     styles
                     experience
                     about
-            }  
+                }
+                portfolio {
+                    _id
+                    coverImage
+                    title
+                    description
+                    likes
+                }  
+
+                gigs {
+                    _id
+                    title
+                    description
+                    coverImage
+                    price
+                    delivery
+                    category
+                    styles
+                    fabrics
+                    keywords
+                    createdAt
+                }
+
+                reviews {
+                    _id
+                    sender{
+                        profileImage
+                        username
+                    }
+                    message
+                    createdAt
+                }
+
+
         }  
     }
 `
@@ -44,12 +78,13 @@ query profile_gigs($username: String){
         _id
         title
         description
-        imageUrl
+        coverImage
+        gallery
         price
         delivery
         category
         styles
-        fabric
+        fabrics
         keywords
         createdAt
         

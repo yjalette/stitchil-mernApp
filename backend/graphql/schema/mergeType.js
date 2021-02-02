@@ -23,11 +23,59 @@ input ItemInput {
     styles: [String]
     category: [String]
     price: Int
-    fabric: [String]
-    imageUrl: String
+    fabrics: [String]
     delivery: Int
+    coverImage: String
+    gallery: [String]
     keywords: [String]
 }
+
+type Gig {
+    _id: ID
+    title: String
+    description: String
+    category: [String]
+    styles: [String]
+    price: Int
+    fabrics: [String]
+    coverImage: String
+    gallery: [String]
+    delivery: Int
+    keywords: [String]
+    createdAt: String
+    updatedAt: String
+}
+
+
+type Product {
+    _id: ID
+    imageUrl: String
+    coverImage: String
+    gallery: [String]
+    title: String
+    description: String
+    likes: [String]
+    createdAt: String
+}
+
+type Comment{
+    _id: ID
+    docId: String
+    subject: String
+    message: String
+    sender: AuthData
+    rating: Int
+    createdAt: String
+}
+
+type Message {
+    _id: String
+    message: String
+    sender: AuthData
+    recipient: String
+    createdAt: String
+}
+
 
 type Failure {
     code: Int

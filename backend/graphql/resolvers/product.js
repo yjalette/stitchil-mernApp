@@ -2,7 +2,7 @@ const Product = require("../../models/product");
 const User = require("../../models/user");
 const File = require("../../models/file");
 const { populateByUser } = require("../../consts/user");
-const { saveFile, deleteFile, newUpload } = require("../../helpers/uploadToCloud");
+const { saveFile, deleteFile, singleUpload } = require("../../helpers/uploadToCloud");
 
 module.exports = {
     Query: {
@@ -17,21 +17,19 @@ module.exports = {
         }
     },
     Mutation: {
-        createProduct: async (_, { itemInput, file }, req) => {
+        createProduct: async (_, { itemInput, file }, { userId }) => {
             console.log(":input---->", itemInput)
-            if (!req.userId) throw new Error("unauthenticated");
-            const newImg = await newUpload(file, req.userId);
-            if (newImg) {
-                console.log(newImg)
+            if (!userId) throw new Error("unauthenticated");
+            // const newImg = await singleUpload(file, req.userId);
+            if (itemInput) {
                 const newProduct = await new Product({
                     ...itemInput,
-                    imageUrl: newImg,
-                    coverImage: newImg,
-                    gallery: [newImg],
-                    creator: req.userId,
+                    coverImage: null,
+                    creator: userId,
                     createdAt: new Date(),
                 }).save();
-                console.log(newProduct)
+
+                await User.findOneAndUpdate(userId, { $push: { portfolio: newProduct._id } })
             }
 
             return true
@@ -42,10 +40,11 @@ module.exports = {
             if (itemInput) await File.updateOne({ _id: itemId }, { $set: { ...itemInput } })
         },
 
-        deleteProduct: async (_, { itemId }, req) => {
-            if (!req.isUser) throw new Error("unauthenticated user to delete this file");
-            await deleteFile(`${req.userId}/${itemId}`);
-            await File.findByIdAndDelete(itemId);
+        deleteProduct: async (_, { itemId }, { userId }) => {
+            if (!userId) throw new Error("unauthenticated user to delete this file");
+            await deleteFile(`${userId}/${itemId}`);
+            await Product.findByIdAndDelete(itemId);
+            await User.findByIdAndUpdate(userId, { $pull: { portfolio: itemId } })
             return true
         },
         likeProduct: async (_, { docId, username }, req) => {

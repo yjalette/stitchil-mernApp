@@ -38,16 +38,16 @@ const DesignerSum = ({ values }) => {
     if (editMode) return <DesignerUpdate inputs={inputs} onChange={handleChange} onMultiChange={handleMultiChange} onSubmit={handleSubmit} onCancel={handleClear} />
 
     return (
-        <Container className="designerSum profileSection">
+        <>
             <SectionHeader title="Designer Info">
                 {logged_in_user && <CustomButton onClick={toggleEditMode} icon="fa fa-edit" btn_class="btn-icon" />}
             </SectionHeader>
-            <Container className="profileSection__content">
+            <div className="profileSection__content">
                 {Object.keys(initState_designer).map(field => <ListItem key={field}
                     field={`${field}: `}
                     content={inputs[field]} />)}
-            </Container>
-        </Container>
+            </div>
+        </>
     )
 }
 

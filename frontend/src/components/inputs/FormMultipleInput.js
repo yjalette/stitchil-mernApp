@@ -3,10 +3,10 @@ import { Typeahead } from "react-bootstrap-typeahead";
 import { getNames } from 'country-list';
 import { Form } from 'react-bootstrap';
 
-import { skills, experience, category, styles, fabric } from '../../constants/options';
+import { skills, experience, category, styles, fabrics } from '../../constants/options';
 import languages from '../../constants/languages'
 
-const options = { skills, styles, experience, country: getNames(), category, styles, fabric, keywords: [], languages };
+const options = { skills, styles, experience, country: getNames(), category, styles, fabrics, keywords: [], languages };
 
 const FormMultipleInput = ({ label, selected, onChange, multiple, error, allowNew }) => {
     return (

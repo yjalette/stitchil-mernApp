@@ -9,7 +9,6 @@ import LandingPage from './pages/homePage/Landing';
 import ExplorePage from './pages/explorePage/ExplorePage';
 import MeasurementsPage from './pages/measurements/Measurements';
 import Logout from './components/navbar/Logout';
-import Contact from './components/contact/Contact';
 import ChatPage from './pages/chatPage/ChatPage';
 import Footer from './components/footer/Footer';
 import SettingsPage from './pages/settingsPage/SettingsPage';
@@ -47,7 +46,7 @@ class App extends Component {
               <Route path="/view-gigs-item/:id" component={GigPage} />
               <Route path="/view-portfolio-item/:id" component={ProductPage} />
               <Route exact path="/messages" component={ChatPage} />
-              <Route path="/support" component={Contact} />
+              {/* <Route path="/support" component={Contact} /> */}
               <Route path="/logout" component={Logout} />
             </Switch>
             <Footer />

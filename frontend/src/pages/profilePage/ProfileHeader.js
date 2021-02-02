@@ -16,15 +16,13 @@ const ProfileHeader = ({ profile }) => {
     }
 
     return (
-        <Card className="profileHeader">
+        <div className="profileHeader">
             <ProfileImage src={profile && profile.coverImage} image_type="coverImage" />
-            <Container className="profileHeader__box">
-                <Container className="profileHeader__col">
-                    <ProfileImage src={profile && profile.profileImage} image_type="profileImage" />
-                    <h2 className="profileHeader__title">{profile.fullname} </h2>
-                </Container>
-            </Container>
-        </Card>
+            <div className="profileHeader__col">
+                <ProfileImage src={profile && profile.profileImage} image_type="profileImage" />
+                <h2 className="profileHeader__title">{profile.fullname} </h2>
+            </div>
+        </div>
 
     )
 }

@@ -9,7 +9,7 @@ const GigDetails = ({ item }) => (
         <ListItem field="description: " content={item.description} maxWords="25" />
         <ListItem field="category: " content={item.category} />
         <ListItem field="styles: " content={`${item.styles}`} />
-        <ListItem field="fabric: " content={item.fabric} />
+        <ListItem field="fabrics: " content={item.fabrics} />
         <ListItem field="price starts at: " content={`$${item.price}`} />
         <ListItem field="delivery: " content={`${item.delivery} days`} />
         <ListItem field="keywords: " content={item.keywords} />

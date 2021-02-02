@@ -23,6 +23,17 @@ module.exports = {
         }
     },
     Mutation: {
+        createReview: async (_, { message, recipient }, { userId }) => {
+            console.log(recipient)
+            if (!userId) throw new Error("unauthenticated");
+            const newReview = await new Message({
+                message,
+                sender: userId,
+                createdAt: new Date()
+            }).save();
+            await User.findOneAndUpdate({ username: recipient }, { $push: { reviews: newReview._id } })
+            return true;
+        },
         contactUs: async (_, { email, message, subject }, req) => {
             console.log(email, subject, message)
             try {
@@ -51,45 +62,3 @@ module.exports = {
 
 
 
-// switch (docType) {
-//     case "portfolio": {
-//         const portfolio = await Portfolio.findOne({ 'gallery._id': docId });
-//         const index = portfolio.gallery.findIndex(slide => slide._id.equals(docId));
-//         await portfolio.gallery[index].comments.push({
-//             ...commentInput,
-//             sender: req.userId,
-//             createdAt: new Date()
-
-//         });
-//         await portfolio.save();
-//         return true
-//     }
-//     case "reviews": {
-//         const recipient = await User.findOne({ username: docId })
-//         try {
-//             await recipient.reviews.push({
-//                 ...commentInput,
-//                 sender: req.userId,
-//                 createdAt: new Date(),
-//             });
-//             console.log(recipient.reviews)
-//             recipient.save();
-//             return true;
-
-//         } catch (error) {
-//             throw new Error(error)
-//         }
-//     }
-//     case "gigs": {
-//         const gig = await Gig.findById(docId);
-//         await gig.comments.push({
-//             ...commentInput,
-//             sender: req.userId,
-//             createdAt: new Date(),
-
-//         });
-//         await gig.save();
-//         return true
-//     }
-
-// }

@@ -1,9 +1,10 @@
 import { CREATE_GIG_MUTATION, CREATE_PRODUCT_MUTATION, UPDATE_GIG_MUTATION, UPDATE_PRODUCT_MUTATION } from "../graphql/mutations"
-import { PROFILE_GIGS_QUERY, PROFILE_PORTFOLIO_QUERY } from "../graphql/queries"
+import { PROFILE_GIGS_QUERY, PROFILE_PORTFOLIO_QUERY, PROFILE_REVIEWS_QUERY } from "../graphql/queries"
 
 export const query_get = {
     gigs: PROFILE_GIGS_QUERY,
-    portfolio: PROFILE_PORTFOLIO_QUERY
+    portfolio: PROFILE_PORTFOLIO_QUERY,
+    reviews: PROFILE_REVIEWS_QUERY
 }
 
 export const mutation_create = {

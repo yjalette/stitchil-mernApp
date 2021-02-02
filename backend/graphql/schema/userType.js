@@ -4,17 +4,7 @@ const { gql } = require("apollo-server-express");
 module.exports = gql`
 
 
-type User {   
-    role: String
-    username: String
-    fullname: String
-    profileImage: String
-    coverImage: String
-    country: [String]
-    googleAuth: Boolean
-}
-
-type Profile {
+type UserProfile {   
     username: String
     fullname: String
     country: [String]
@@ -22,7 +12,22 @@ type Profile {
     profileImage: String
     coverImage: String
     role: String
-    portfolio: DesignerResume
+    lastSeen: String
+}
+
+type Profile {
+      username: String
+    fullname: String
+    country: [String]
+    languages: [String]
+    profileImage: String
+    coverImage: String
+    role: String
+    lastSeen: String
+    designer: DesignerResume
+    gigs: [Gig]
+    portfolio: [Product]
+    reviews: [Message]
 }
 
 type DesignerResume {
@@ -79,7 +84,7 @@ type Location {
 
 type Query {   
     userAccount: Account
-    profile_intro(username: String): Profile
+    userProfile(username: String): Profile
    
 }
 

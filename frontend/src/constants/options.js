@@ -3,7 +3,7 @@ export const specialties = ["eveningwear", "casual", "streetwear", "professional
 export const experience = ["newbie", "beginner", "novice", "intermediate", "advanced", "expert"];
 export const garmentType = ["dresses", "suits", "shirts", "pants", "tops", "sweaters", "jackets", "skirts"];
 
-export const fabric = ["wool", "cotton", "denim", "silk", "linen", "leather", "polyester", "viscose", "crepe", "jersey", "chiffon"]
+export const fabrics = ["wool", "cotton", "denim", "silk", "linen", "leather", "polyester", "viscose", "crepe", "jersey", "chiffon"]
 export const category = ["dresses", "suits", "shirts", "pants", "tops", "sweaters", "jackets", "skirts"];
 export const styles = ["eveningwear", "casual", "streetwear", "professional", "childrenswear", "costume", "bridal", "uniform"];
 

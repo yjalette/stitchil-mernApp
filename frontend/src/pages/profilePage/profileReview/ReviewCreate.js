@@ -34,8 +34,6 @@ const ReviewCreate = ({ addComment }) => {
         post({ variables: { reviewInput: inputs, recipient: username } })
     }
 
-    console.log(inputs)
-
     return (
         <MessageForm onSubmit={handleSubmit} onChange={handleChange} message={inputs.message} msg_class="reviewCreate">
             <Container className="reviewItem__header">

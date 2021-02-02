@@ -1,6 +1,6 @@
 export const highlights = (item, section) => {
     if (section === "gigs") return [
-        { field: "fabric", content: item.fabric },
+        { field: "fabric choices: ", content: item.fabrics },
         { field: "price starts at: ", content: `$${item.price}` }
     ]
     if (section === "portfolio") return [
@@ -12,13 +12,13 @@ export const highlights = (item, section) => {
 
 export const initState = {
     portfolio: { title: "", description: "" },
-    gigs: { title: "", description: "", category: [], styles: [], price: 0, fabric: [], delivery: 0, keywords: [] }
+    gigs: { title: "", description: "", category: [], styles: [], price: 0, fabrics: [], delivery: 0, keywords: [] }
 }
 
 export const transformInputs = inputs => {
     if (inputs.price) inputs.price = parseInt(inputs.price);
     if (inputs.delivery) inputs.delivery = parseInt(inputs.delivery);
-    if (inputs.keywords) inputs.keywords = inputs.keywords.map(elem => elem.keywords || elem)
-    return { ...inputs, __typename: undefined, createdAt: undefined, updateAt: undefined }
+    if (inputs.keywords && inputs.keywords.length !== 0) inputs.keywords = inputs.keywords.map(elem => elem.keywords || elem)
+    return { ...inputs, __typename: undefined, coverImage: undefined, createdAt: undefined, updateAt: undefined, likes: undefined }
 }
 

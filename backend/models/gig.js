@@ -27,11 +27,11 @@ const gigSchema = new Schema({
         type: Number,
         required: false
     },
-    fabric: {
+    fabrics: {
         type: Array,
         required: false
     },
-    imageUrl: {
+    coverImage: {
         type: String,
         required: false
     },

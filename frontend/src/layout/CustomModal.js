@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Modal, Button } from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 import CustomButton from './button/CustomButton';
 
 const CustomModal = ({
@@ -25,7 +25,7 @@ const CustomModal = ({
         setOpen(false);
     };
 
-    if (!open) return <CustomButton onClick={handleOpen} btn_class={btn_class}>{btn_title}</CustomButton>
+    if (!open && !displayWithoutBtn) return <CustomButton onClick={handleOpen} btn_class={btn_class}>{btn_title}</CustomButton>
 
     return (
         <Modal show={open} onHide={handleClose}

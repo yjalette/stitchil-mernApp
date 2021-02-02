@@ -27,6 +27,8 @@
 }
 
 .boxWrapper {
+    background-color: var(--main-color);
+    filter: brightness(0.95);
     padding: var(--padding-box);
 }
 
@@ -35,13 +37,13 @@
 }
 
 .listItem__field, .listItem__icon {
-    color: var(--green-color);
+    color: var(--secondary-color);
     margin-right: .4em;
-    opacity: .8;
+    opacity: .9;
 }
 
 .listItem__content {
-    color: rgb(253 242 242 / 56%);
+    color: var(--light-gray-color);
 }
 
 .menuButton {
@@ -255,6 +257,10 @@
     background-color: transparent;
 }
 
+.customForm {
+    width: 100%;
+}
+
 @media only screen and (max-width: 1200px) {}
 
 @media only screen and (max-width: 1024px) {
@@ -262,13 +268,13 @@
         width: 400px;
         height: 400px;
     }
-}
 
-@media (max-width: 768px) {
     .pageWrapper {
         width: 100%;
     }
+}
 
+@media (max-width: 768px) {
     .sectionWrapper {
         padding: 0;
     }

@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
 export const PROFILE_INTRO_QUERY = gql`
-        query profile_intro($username: String){
-            profile_intro(username: $username) {
+        query userProfile($username: String){
+            userProfile(username: $username) {
                 username
                 fullname
                 languages
@@ -10,7 +10,7 @@ export const PROFILE_INTRO_QUERY = gql`
                 profileImage
                 country
                 role
-                portfolio   
+               
         }  
     }
 `

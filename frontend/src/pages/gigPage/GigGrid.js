@@ -5,16 +5,17 @@ import BoxWrapper from '../../layout/BoxWrapper';
 import SectionWrapper from '../../layout/SectionWrapper';
 
 const GigGrid = ({ gig }) => {
+    console.log(gig)
     return (
         <>
             <SectionWrapper>
-                <ItemDetails gallery={gig.gallery || [gig.imageUrl]}>
+                <ItemDetails gallery={gig.gallery || [gig.coverImage]}>
                     <BoxWrapper>
                         <ListItem field="title: " content={gig.title || ""} />
                         <ListItem field="description: " content={gig.description} maxWords="25" />
                         <ListItem field="category: " content={gig.category || ""} />
                         <ListItem field="styles: " content={`${gig.styles || ""}`} />
-                        <ListItem field="fabric: " content={gig.fabric} />
+                        <ListItem field="fabrics: " content={gig.fabrics} />
                         <ListItem field="price starts at: " content={`$${gig.price}`} />
                         <ListItem field="delivery: " content={`${gig.delivery} days`} />
                         <ListItem field="keywords: " content={gig.keywords} />

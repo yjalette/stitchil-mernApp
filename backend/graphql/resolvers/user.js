@@ -1,6 +1,7 @@
 const User = require("../../models/user");
 const { comparePwd, createPwd, verifyJWT } = require("../../helpers/creds");
 const { uploadToCloud, deleteFile } = require("../../helpers/uploadToCloud");
+const { populateByUser } = require("../../consts/user");
 const { unauthorized_error,
     server_error,
     notUser_error,
@@ -10,12 +11,15 @@ const { unauthorized_error,
     update_success,
     login_redirect } = require("../../consts/client_msg");
 
+
 module.exports = {
     Query: {
-        profile_intro: async (_, { username }, req) => {
-            console.log(req)
+        userProfile: async (_, { username }, req) => {
             return await User.findOne({ username })
+                .populate({ path: 'designer' })
+                .populate({ path: 'gigs' })
                 .populate({ path: 'portfolio' })
+                .populate({ path: "reviews", populate: populateByUser })
         },
         userAccount: async (_, args, { userId }) => userId ? await User.findById(userId) : new Error('user is not authorized')
     },
@@ -28,15 +32,13 @@ module.exports = {
             if (await User.exists(email)) return emailTaken_error;
             return await handleUpdate(userId, email);
         },
-        // updateGeneral: async (_, args, { userId }) => !await handleUpdate(userId, args) ? server_error : { "success": true },
         updateGeneral: async (_, args, { userId }) => await handleUpdate(userId, args),
-        uploadProfileImage: async (_, { file, image_type }, req) => {
-            console.log("upload====>", file, image_type)
-            if (!req.isUser) throw new Error("unauthenticated user to upload file");
+        uploadProfileImage: async (_, { file, image_type }, { userId }) => {
+            if (!userId) throw new Error("unauthenticated user to upload file");
             try {
-                const user = await User.findById(req.userId);
-                if (user[image_type]) await deleteFile(`${req.userId}/${image_type}`);
-                const result = await uploadToCloud({ file, public_id: `${req.userId}/profile/${image_type}` });
+                const user = await User.findById(userId);
+                if (user[image_type]) await deleteFile(`${userId}/${image_type}`);
+                const result = await uploadToCloud({ file, public_id: `${userId}/${image_type}` });
                 user[image_type] = result.url;
                 await user.save();
                 return true;

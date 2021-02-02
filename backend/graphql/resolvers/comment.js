@@ -11,17 +11,6 @@ module.exports = {
 
     },
     Mutation: {
-        createReview: async (_, { reviewInput, recipient }, req) => {
-            if (!req.userId) throw new Error("unauthenticated");
-            const user = await User.findOne({ username: recipient }, { _id: 1 });
-            await new Comment({
-                ...reviewInput,
-                docId: user._id,
-                sender: req.userId,
-                createdAt: new Date()
-            }).save();
-            return true;
-        },
         createComment: async (_, { message, docId }, req) => {
             if (!req.userId) throw new Error("unauthenticated");
             await new Comment({

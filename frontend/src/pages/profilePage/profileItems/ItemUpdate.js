@@ -8,12 +8,13 @@ import { transformInputs, initState } from "./helpers"
 import ItemUpload from './ItemUpload';
 import useMutationHook from '../../../custom_hooks/useMutationHook';
 import { mutation_update } from './api';
+import CustomButton from '../../../layout/button/CustomButton';
 
 const ItemUpdate = ({ item, updateItemCache, index }) => {
     const { section } = useParams();
     const { post } = useMutationHook(mutation_update[section])
-    const { file, clearUpload, getRootProps, getInputProps } = useUpload();
-    const { inputs, setInputs, handleChange, handleMultiChange, handleSubmit, handleCancel } = useForm(initState[section], onSubmit);
+    const { inputs, setInputs, handleChange, handleMultiChange, handleSubmit, handleCancel, editMode, toggleEditMode } = useForm(initState[section], onSubmit);
+    const { files, clearUpload, getRootProps, getInputProps } = useUpload(null, inputs.gallery ? 5 - inputs.gallery : 5);
 
     useEffect(() => {
         if (item) setInputs(item);
@@ -22,24 +23,29 @@ const ItemUpdate = ({ item, updateItemCache, index }) => {
     function onSubmit() {
         post({
             variables: {
-                itemInput: transformInputs({ ...inputs, likes: undefined }),
-                file,
-                itemId: item._id
+                itemInput: transformInputs(inputs),
+                files,
             }
         });
-        updateItemCache({ ...inputs, imageUrl: file ? URL.createObjectURL(file) : inputs.imageUrl }, index);
+        updateItemCache({ ...inputs, coverImage: files ? URL.createObjectURL(files[0]) : inputs.coverImage }, index);
+        clearUpload();
+        toggleEditMode();
     }
 
+    if (!editMode) return <CustomButton btn_class="btn-icon" icon="fa fa-edit" onClick={toggleEditMode}></CustomButton>
 
     return <ItemForm
         form_title="update"
         inputs={inputs}
         initState={initState[section]}
         onSubmit={handleSubmit}
-        onCancel={handleCancel}
+        onClose={() => {
+            handleCancel();
+            clearUpload();
+        }}
         onChange={handleChange}
         onMultiChange={handleMultiChange}
-        media={<ItemUpload file={file} prevFile={item.imageUrl} clearUpload={clearUpload} getInputProps={getInputProps} getRootProps={getRootProps} />}
+        media_props={{ files, prevFiles: inputs.gallery, clearUpload, getInputProps, getRootProps }}
     />
 }
 

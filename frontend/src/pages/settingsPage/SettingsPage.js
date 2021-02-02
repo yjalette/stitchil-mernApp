@@ -15,8 +15,8 @@ const SettingsPage = () => {
     return (
         <PageWrapper page_class="settings">
             <PageMenu items={["account", "security", "notifications"]} />
-            <SectionHeader title={section}></SectionHeader>
             <SectionWrapper>
+                <SectionHeader title={section} />
                 {section === "account" && <AccountIndex />}
                 {section === "security" && <SecurityPassword />}
                 {section === "notifications" && <DemoVersionAlert />}

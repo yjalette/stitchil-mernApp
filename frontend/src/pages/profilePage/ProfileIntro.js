@@ -1,28 +1,28 @@
 import React from 'react';
-import { Container } from 'react-bootstrap';
 
 import ListItem from '../../layout/ListItem';
 import SectionHeader from '../../layout/SectionHeader';
-import SectionWrapper from '../../layout/SectionWrapper';
+import BoxWrapper from '../../layout/BoxWrapper';
 import DesignerSum from './proflleDesigner/DesignerSum';
 
 const ProfileIntro = ({ profile }) => {
-    const { role, country, username, language } = profile;
+
     return (
-        <>
-            <SectionWrapper>
-                <SectionHeader title={`About ${username}`} />
-                <Container className="profileSection__content">
-                    <ListItem imageUrl="https://res.cloudinary.com/dgxa9gpta/image/upload/v1602093309/icons/username-icon_ajmegx.svg" content={username} />
-                    <ListItem imageUrl="https://res.cloudinary.com/dgxa9gpta/image/upload/v1602093309/icons/role-icon_hrlek5.svg" content={role} />
-                    <ListItem imageUrl="https://res.cloudinary.com/dgxa9gpta/image/upload/v1602093311/icons/house-icon_oxkixc.svg" content={`lives in ${country}`} />
-                    <ListItem imageUrl="https://res.cloudinary.com/dgxa9gpta/image/upload/v1602093309/icons/language-icon_jwvll4.svg" content={`speaks ${language || "English"}`} />
+        <>   {profile &&
+            <BoxWrapper>
+                <SectionHeader title={`About ${profile.username}`} />
+                <div className="profileSection__content">
+                    <ListItem imageUrl="https://res.cloudinary.com/dgxa9gpta/image/upload/v1602093309/icons/username-icon_ajmegx.svg" content={profile.username} />
+                    <ListItem imageUrl="https://res.cloudinary.com/dgxa9gpta/image/upload/v1602093309/icons/role-icon_hrlek5.svg" content={profile.role} />
+                    <ListItem imageUrl="https://res.cloudinary.com/dgxa9gpta/image/upload/v1602093311/icons/house-icon_oxkixc.svg" content={`lives in ${profile.country || ""}`} />
+                    <ListItem imageUrl="https://res.cloudinary.com/dgxa9gpta/image/upload/v1602093309/icons/language-icon_jwvll4.svg" content={`speaks ${profile.language || "English"}`} />
                     <ListItem imageUrl="https://res.cloudinary.com/dgxa9gpta/image/upload/v1602093311/icons/info-icon_bj05ca.svg" content={`Hardcore coffee nerd. Twitter fanatic. Professional internet trailblazer. Introvert. Communicator. Problem solver.`} maxWords="30" />
-                </Container>
-            </SectionWrapper>
-            {profile && profile.portfolio && <SectionWrapper>
-                <DesignerSum values={profile.portfolio} />
-            </SectionWrapper>}
+                </div>
+            </BoxWrapper>
+            //  profile.portfolio && <BoxWrapper>
+            //         <DesignerSum values={profile.portfolio} />
+            //     </BoxWrapper>
+        }
         </>
     )
 }

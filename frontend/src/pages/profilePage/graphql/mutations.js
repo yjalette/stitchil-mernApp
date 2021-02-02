@@ -7,14 +7,14 @@ export const UPDATE_DESIGNER_MUTATION = gql`
         }
 `
 export const CREATE_PRODUCT_MUTATION = gql`
-        mutation CreateProduct($itemInput: ItemInput, $file: Upload ) {
-            createProduct(itemInput: $itemInput, file: $file)
+        mutation CreateProduct($itemInput: ItemInput,  $files: [Upload] ) {
+            createProduct(itemInput: $itemInput, files: $files)
         }
       `;
 
 export const UPDATE_PRODUCT_MUTATION = gql`
-      mutation UpdateProduct($itemInput: ItemInput, $file: Upload, $itemId: String ) {
-        updateProduct(itemInput: $itemInput, file: $file, itemId: $itemId )
+      mutation UpdateProduct($itemInput: ItemInput,  $files: [Upload]  ) {
+        updateProduct(itemInput: $itemInput, files: $files )
       }
     `;
 
@@ -38,21 +38,21 @@ export const DELETE_PROFILE_IMAGE_MUTATION = gql`
 `;
 
 export const CREATE_REVIEW_MUTATION = gql`
-        mutation CreateReview($reviewInput: ReviewInput, $recipient: String ){
-            createReview(reviewInput: $reviewInput, recipient: $recipient)
+        mutation CreateReview($message: String, $recipient: String ){
+            createReview(message: $message, recipient: $recipient)
         }
 `
 
 
 export const CREATE_GIG_MUTATION = gql`
-    mutation CreateGig($itemInput: ItemInput, $file: Upload){
-        createGig(itemInput: $itemInput, file: $file)
+    mutation CreateGig($itemInput: ItemInput, $files: [Upload] ){
+        createGig(itemInput: $itemInput, files: $files)
     }
 `
 
 export const UPDATE_GIG_MUTATION = gql`
-    mutation UpdateGig($itemInput: ItemInput, $file: Upload, $itemId: String){
-        updateGig(itemInput: $itemInput, file: $file, itemId: $itemId)
+    mutation UpdateGig($itemInput: ItemInput, $files: [Upload] ){
+        updateGig(itemInput: $itemInput, files: $files)
     }
 `
 

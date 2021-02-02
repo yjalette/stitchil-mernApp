@@ -1,5 +1,4 @@
 const User = require("../../models/user");
-const Portfolio = require("../../models/portfolio");
 const { sendEmail } = require("../../helpers/nodemailer")
 const { generateJWT, comparePwd, createPwd } = require("../../helpers/creds");
 const { server_error, notUser_error, wrongPwd_error, emailTaken_error, usernameTaken_error } = require("../../consts/client_msg");
@@ -11,6 +10,7 @@ module.exports = {
             if (!user) return notUser_error;
             if (!googleAuth && !await comparePwd(password, user.password)) return wrongPwd_error;
             if (verifiedEmail) await user.updateOne({ $set: { verifiedEmail: true } });
+            await user.updateOne({ lastSeen: new Date() });
             return { token: generateJWT(user._id, email), username: user.username, role: user.role, googleAuth };
         },
         checkIfExists: async ({ email }, req) => {
@@ -37,7 +37,6 @@ module.exports = {
     },
     Mutation: {
         createUser: async (_, { userInput }) => {
-            console.log("createuser--->", userInput)
             const { email, username, role } = userInput;
             if (await User.exists({ email })) return emailTaken_error;
             if (await User.exists({ username })) return usernameTaken_error;
@@ -49,8 +48,8 @@ module.exports = {
             });
 
             if (role === "designer") {
-                const portfolio = new Portfolio({ creator: user._id, createdAt: new Date() }).save();
-                user.portfolio = portfolio._id;
+                const designer = new Designer({ creator: user._id }).save();
+                user.designer = designer._id;
             }
 
             if (userInput.googleAuth) {

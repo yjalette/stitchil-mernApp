@@ -40,11 +40,36 @@
     /* padding: var(--padding-box); */
 }
 
-.itemForm .upload__box {
+.itemUpload__wrapper {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.itemUpload__wrapper:focus {
+    outline: none;
+}
+
+.itemUpload__list {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.itemUpload__img {
+    width: 200px;
+    height: 200px;
+}
+
+.itemUpload__box {
     background-color: var(--main-color-light);
     border-radius: 50%;
-    position: relative;
     padding: 3.5rem;
+    width: 200px;
 }
 
 .itemForm .upload__icon {
@@ -52,42 +77,13 @@
     max-height: 100px;
 }
 
-.hideButtons .customForm__groupButton {
+.itemForm-hideButton .groupButton {
     display: none;
 }
 
-.itemSlides .modal-body {
-    padding: 0;
+.hideButtons .customForm__groupButton {
+    display: none;
 }
-
-.itemSlides .slides__item {
-    overflow: hidden;
-    width: 100%;
-    margin: 0;
-}
-
-.itemSlides .slides__img {
-    max-height: 80vh;
-    object-fit: cover;
-}
-
-.itemSlides .slides__controls {
-    /* position: absolute;
-    top: 50%;
-    z-index: 1000; */
-    justify-content: space-around;
-}
-
-.itemForm__controllers {
-    display: block;
-    padding: 0 2rem;
-    width: 100%;
-}
-
-/* .itemForm .itemForm__box {
-    background-color: var(--main-color-light);
-    padding: 1rem 2rem;
-} */
 
 .itemForm__controllers .fa-long-arrow-right {
     float: right;
@@ -97,29 +93,13 @@
     float: left;
 }
 
-.itemUpload__prev {
+/* .itemUpload__prev {
     position: absolute;
     z-index: 5200;
-}
+} */
 
 @media (max-width: 992px) {}
 
-@media (max-width: 768px) {
-    .profile__main {
-        background-color: var(--main-color);
-    }
-
-    .profileSection {
-        padding: var(--padding-box) 0;
-    }
-
-    .itemForm {
-        padding: 0;
-    }
-
-    .itemSlides .slides__img {
-        max-height: 40vh;
-    }
-}
+@media (max-width: 768px) {}
 
 @media (max-width: 576px) {}

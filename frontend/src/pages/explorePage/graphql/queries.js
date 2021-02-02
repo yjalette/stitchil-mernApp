@@ -10,7 +10,7 @@ export const EXPLORE_ITEMS_QUERY = gql`
                 price
                 category
                 styles
-                fabric
+                fabrics
                 creator {
                     username
                     profileImage

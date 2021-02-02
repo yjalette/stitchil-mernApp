@@ -7,12 +7,13 @@ query view_gig($id: ID){
         _id
         title
         description
-        imageUrl
+        coverImage
+        gallery
         price
         delivery
         category
         styles
-        fabric
+        fabrics
         keywords
         createdAt
         

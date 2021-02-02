@@ -13,13 +13,13 @@ const defaultImg = "https://res.cloudinary.com/dgxa9gpta/image/upload/v160210510
 
 const ProfileImage = ({ src, image_type }) => {
     const { logged_in_user } = useContext(ProfileContext)
-    const { file, clearUpload, getRootProps, getInputProps } = useUpload();
+    const { files, clearUpload, getRootProps, getInputProps } = useUpload();
     const [showButtons, setShowButtons] = useToggle(false);
     const { post, error } = useMutationHook(UPLOAD_PROFILE_IMAGE_MUTATION)
 
     useEffect(() => {
-        if (file) setShowButtons(true);
-    }, [file])
+        if (files) setShowButtons(true);
+    }, [files])
 
 
     const handleCancel = () => {
@@ -28,7 +28,7 @@ const ProfileImage = ({ src, image_type }) => {
     }
 
     const handleSave = () => {
-        post({ variables: { file, image_type } });
+        post({ variables: { file: files[0], image_type } });
         !error ? setShowButtons(false) : console.log(error)
     }
 
@@ -36,14 +36,14 @@ const ProfileImage = ({ src, image_type }) => {
 
     return (
         <div className={`${image_type}__wrapper userImage-wrapper`}>
-            <Image className={image_type} src={file ? URL.createObjectURL(file) : src || defaultImg} alt="file" />
+            <Image className={image_type} src={files ? URL.createObjectURL(files[0]) : src || defaultImg} alt="files" />
             {!showButtons ? <div {...getRootProps()} className="userImage__box flex-center">
                 <input {...getInputProps({ className: 'dropzone' })} />
                 <CustomButton icon="fa fa-camera" btn_class="btn-icon" />
             </div>
                 :
                 <GroupButton group_class="userImage__box justify-content-end">
-                    <CustomButton icon="fa fa-check" btn_class="btn-icon" onClick={handleSave} />
+                    <CustomButton icon="fa fa-check mr-2" btn_class="btn-icon" onClick={handleSave} />
                     <CustomButton icon="fa fa-close" btn_class="btn-icon btn-icon-red" onClick={handleCancel} />
                 </GroupButton>
             }

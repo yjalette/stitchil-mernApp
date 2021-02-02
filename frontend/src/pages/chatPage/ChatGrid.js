@@ -37,7 +37,7 @@ const ChatGrid = ({ chats, addMessage }) => {
                 <Col lg={8}>
                     {chats && chats.length > 0 ? <div className="chatActive">
                         <ChatActive chat={chats[activeChat]} addMessage={addMessage} />
-                        <MessageCreate docId={chats[activeChat] && chats[activeChat]._id} addMessage={addMessage} />
+                        {/* <MessageCreate docId={chats[activeChat] && chats[activeChat]._id} addMessage={addMessage} /> */}
                     </div> : <EmptyResultAlert type="messages" />}
                 </Col>
             </Row>

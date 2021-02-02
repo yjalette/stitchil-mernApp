@@ -51,7 +51,23 @@ const userSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Designer'
     },
+    gigs: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Gig'
+    }],
+    portfolio: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Product'
+    }],
+    reviews: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Message'
+    }],
     createdAt: {
+        type: Date,
+        required: false
+    },
+    lastSeen: {
         type: Date,
         required: false
     },

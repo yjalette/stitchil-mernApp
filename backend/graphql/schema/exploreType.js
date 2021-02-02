@@ -14,7 +14,7 @@ interface ExploreItem {
     category: [String]
     styles: [String]
     price: Int
-    fabric: [String]
+    fabrics: [String]
     imageUrl: String
     updatedAt: String
     creator: AuthData
@@ -26,7 +26,7 @@ type BuyerItem implements ExploreItem{
     category: [String]
     styles: [String]
     price: Int
-    fabric: [String]
+    fabrics: [String]
     imageUrl: String
     updatedAt: String
     creator: AuthData
@@ -39,7 +39,7 @@ type DesignerItem implements ExploreItem {
     category: [String]
     styles: [String]
     price: Int
-    fabric: [String]
+    fabrics: [String]
     imageUrl: String
     updatedAt: String
     creator: AuthData

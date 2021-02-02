@@ -32,7 +32,7 @@ const MessageData = ({ docId, messages_class }) => {
             <div className="message__list">
                 {values && values.length > 0 && values.map((item, index) => <MessageItem key={index} item={item} />)}
             </div>
-            <MessageCreate docId={docId} addMessage={handleNewMessage} />
+            {/* <MessageCreate docId={docId} addMessage={handleNewMessage} /> */}
         </div>
     )
 }

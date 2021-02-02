@@ -13,17 +13,6 @@ type Portfolio {
 }
 
 
-type Product {
-    _id: ID
-    imageUrl: String
-    coverImage: String
-    gallery: [String]
-    title: String
-    description: String
-    likes: [String]
-    createdAt: String
-}
-
 
 type Query {   
     profile_portfolio(username: String): [Product]
@@ -31,8 +20,8 @@ type Query {
 }
 
 type Mutation {    
-    createProduct(file: Upload, itemInput: ItemInput): Boolean
-    updateProduct(file: Upload, itemId: String, itemInput: ItemInput): Boolean
+    createProduct(itemInput: ItemInput, files: [Upload]): Boolean
+    updateProduct(itemInput: ItemInput, files: [Upload]): Boolean
     deleteProduct(itemId: ID): Boolean 
     likeProduct(docId: ID, username: String): Boolean  
 }

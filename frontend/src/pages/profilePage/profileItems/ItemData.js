@@ -13,7 +13,7 @@ const ItemData = () => {
         if (data) setValues(data[`profile_${section}`]);
     }, [data]);
 
-    const handleNewItem = newItem => updateQuery(prev => ({
+    const handleNewItem = newItem => updateQuery(prev => console.log(prev, newItem) || ({
         [`profile_${section}`]: [newItem, ...prev[`profile_${section}`]]
     }))
 
@@ -28,6 +28,8 @@ const ItemData = () => {
     const handleDeleteItem = async itemId => await updateQuery(prev => ({
         [`profile_${section}`]: prev[`profile_${section}`].filter(item => item._id !== itemId)
     }))
+
+    console.log(section)
 
     const props = { values, updateItemCache: handleUpdate, addItemCache: handleNewItem, deleteItemCache: handleDeleteItem }
 

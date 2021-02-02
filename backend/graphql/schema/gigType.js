@@ -4,23 +4,6 @@ const { gql } = require("apollo-server-express");
 module.exports = gql`
 
 
-type Gig {
-    _id: ID
-    title: String
-    description: String
-    category: [String]
-    styles: [String]
-    price: Int
-    fabric: [String]
-    imageUrl: String
-    coverImage: String
-    gallery: [String]
-    delivery: Int
-    keywords: [String]
-    createdAt: String
-    updatedAt: String
-}
-
 
 
 type Query { 
@@ -30,8 +13,8 @@ type Query {
 }
 
 type Mutation {
-    createGig(itemInput: ItemInput, file: Upload): Boolean 
-    updateGig(itemInput: ItemInput, file: Upload, itemId: String): Boolean 
+    createGig(itemInput: ItemInput, files: [Upload]): Boolean 
+    updateGig(itemInput: ItemInput, files: [Upload]): Boolean 
     deleteGig(itemId: ID): Boolean 
 }
 

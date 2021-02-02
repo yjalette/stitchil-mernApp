@@ -1,6 +1,7 @@
 const User = require("../../models/user");
 const Gig = require("../../models/gig");
-const { saveFile, deleteFile } = require("../../helpers/uploadToCloud");
+const File = require("../../models/file");
+const { saveFile, deleteFile, multiUpload } = require("../../helpers/uploadToCloud");
 const { populateByUser } = require("../../consts/user");
 
 
@@ -39,23 +40,31 @@ module.exports = {
         }
     },
     Mutation: {
-        createGig: async (_, { itemInput, file }, req) => {
-            console.log("create gig---->", itemInput)
-            if (!req.isUser) throw new Error("unauthenticated");
-            await saveFile(new Gig({ creator: req.userId, createdAt: new Date(), ...itemInput }), file, req.userId);
+        createGig: async (_, { itemInput, files }, { userId }) => {
+            if (!userId) throw new Error("unauthenticated");
+            // const gallery = await multiUpload(files, userId);
+            const newGig = await new Gig({
+                ...itemInput,
+                coverImage: null,
+                createdAt: new Date(),
+                creator: userId
+            }).save();
+            await User.findByIdAndUpdate(userId, { $push: { gigs: newGig._id } })
             return true
         },
-        updateGig: async (_, { itemInput, file, itemId }, req) => {
-            if (!req.isUser) throw new Error("unauthenticated");
-            if (file) saveFile(await Gig.findById(itemId), file, req.userId);
-            if (itemInput) await Gig.updateOne({ _id: itemId }, { $set: itemInput });
+        updateGig: async (_, { itemInput, files }, { userId }) => {
+            if (!userId) throw new Error("unauthenticated");
+            const gig = await Gig.findById(itemInput._id);
+            // if (files) gig.updateOne({ $set: { gallery: [...gig.gallery, ...await multiUpload(files, userId)] } })
+            await gig.updateOne({ $set: { ...itemInput } });
             return true;
         },
-        deleteGig: async (_, { itemId }, req) => {
-            if (!req.isUser) throw new Error("unauthenticated");
+        deleteGig: async (_, { itemId }, { userId }) => {
+            if (!userId) throw new Error("unauthenticated");
             try {
-                await deleteFile(`${req.userId}/${itemId}`);
+                await deleteFile(`${userId}/${itemId}`);
                 await Gig.findByIdAndDelete(itemId);
+                await User.findByIdAndUpdate(userId, { $pull: { gigs: itemId } })
                 return true;
             } catch (error) {
                 throw new Error(error)

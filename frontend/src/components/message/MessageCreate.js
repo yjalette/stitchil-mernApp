@@ -5,23 +5,28 @@ import AuthContext from '../../context/Auth-context';
 import useForm from '../../custom_hooks/useForm';
 import MessageForm from './MessageForm';
 import useMutationHook from '../../custom_hooks/useMutationHook';
-import { CREATE_MESSAGE_MUTATION } from '../../graphql/mutations';
 
-const MessageCreate = ({ docId, addMessage, children }) => {
+const MessageCreate = ({ query, otherVariables, docId, addMessage, children }) => {
     const { user } = useContext(AuthContext);
     const { inputs, setInputs, handleChange, handleSubmit } = useForm({ message: "" }, onSubmit);
-    const { post } = useMutationHook(CREATE_MESSAGE_MUTATION, onPostCompleted);
+    const { post } = useMutationHook(query, onPostCompleted);
 
     function onPostCompleted() {
-        addMessage({ message: inputs.message, sender: { profileImage: user.profileImage, username: user.username }, docId });
+        addMessage({
+            _id: 0,
+            message: inputs.message,
+            sender: { profileImage: user.profileImage || "", username: user.username, __typename: "" },
+            createdAt: new Date(),
+            __typename: "",
+            docId, ...otherVariables
+        });
         setInputs({ message: "" });
     }
 
     function onSubmit() {
-        post({ variables: { message: inputs.message, docId } })
+        post({ variables: { message: inputs.message, ...otherVariables } })
     }
 
-    console.log(docId)
     return (
         <MessageForm onChange={handleChange} onSubmit={handleSubmit} message={inputs.message} >
             {children}

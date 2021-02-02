@@ -11,10 +11,6 @@ const productSchema = new Schema({
         type: String,
         required: false
     },
-    imageUrl: {
-        type: String,
-        required: false
-    },
     coverImage: {
         type: String,
         required: false
