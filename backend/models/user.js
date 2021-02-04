@@ -63,6 +63,10 @@ const userSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Message'
     }],
+    rating: {
+        type: Number,
+        required: false
+    },
     createdAt: {
         type: Date,
         required: false

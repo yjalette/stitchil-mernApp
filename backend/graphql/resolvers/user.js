@@ -1,7 +1,6 @@
 const User = require("../../models/user");
 const { comparePwd, createPwd, verifyJWT } = require("../../helpers/creds");
 const { uploadToCloud, deleteFile } = require("../../helpers/uploadToCloud");
-const { populateByUser } = require("../../consts/user");
 const { unauthorized_error,
     server_error,
     notUser_error,
@@ -19,7 +18,7 @@ module.exports = {
                 .populate({ path: 'designer' })
                 .populate({ path: 'gigs' })
                 .populate({ path: 'portfolio' })
-                .populate({ path: "reviews", populate: populateByUser })
+                .populate({ path: "reviews", populate: "sender", options: { sort: { createdAt: -1 } } })
         },
         userAccount: async (_, args, { userId }) => userId ? await User.findById(userId) : new Error('user is not authorized')
     },

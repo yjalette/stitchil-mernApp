@@ -1,8 +1,6 @@
 const File = require("../../models/file");
 const User = require("../../models/user");
-
 const { uploadToCloud, cloud_config, saveFile, deleteFile } = require("../../helpers/uploadToCloud");
-
 
 module.exports = {
     Query: {

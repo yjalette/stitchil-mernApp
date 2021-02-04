@@ -1,19 +1,19 @@
 const Designer = require("../../models/designer");
-const { populateByUser } = require("../../consts/user");
+const User = require("../../models/user");
 
 module.exports = {
     Mutation: {
-        updateDesigner: async (_, { designerInput }, req) => {
+        updateDesigner: async (_, { designerInput }, { userId }) => {
+            if (!userId) throw new Error("unauthenticated");
             try {
-                const designer = await Designer.findOne({ creator: req.userId });
-                await designer.updateOne({ $set: { ...designerInput } }, { new: true });
-
-                designer.save()
-
+                if (!await Designer.exists({ creator: userId })) {
+                    const newDesigner = await new Designer({ ...designerInput, creator: userId }).save();
+                    await User.findByIdAndUpdate(userId, { designer: newDesigner._id })
+                }
+                else await Designer.findOneAndUpdate({ creator: userId }, { $set: { ...designerInput, updatedAt: new Date() } });
             } catch (error) {
                 throw new Error(error)
             }
-
             return true
         }
     }

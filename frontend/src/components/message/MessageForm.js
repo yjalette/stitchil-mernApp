@@ -5,8 +5,8 @@ import FormTextarea from '../inputs/FormTextarea';
 
 const MessageForm = ({ message, onSubmit, onChange, children, msg_class }) => console.log(message) || (
     <Media className={`messageForm-wrapper ${msg_class}`}>
+        {children}
         <Form className="messageForm d-flex flex-column">
-            {children}
             <Row className="flex-center messageForm__body">
                 <Col xs={10}>
                     <FormTextarea label="message" value={message} placeholder="write here ..." onChange={onChange} />

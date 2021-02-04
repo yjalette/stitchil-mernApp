@@ -46,6 +46,10 @@
     align-items: center;
 }
 
+.messageForm .customButton {
+    margin: auto;
+}
+
 .messageForm__body {
     padding: .5em 0;
     width: 100%;

@@ -23,15 +23,15 @@ module.exports = {
         }
     },
     Mutation: {
-        createReview: async (_, { message, recipient }, { userId }) => {
-            console.log(recipient)
+        createReview: async (_, { message, recipient, rating }, { userId }) => {
             if (!userId) throw new Error("unauthenticated");
             const newReview = await new Message({
                 message,
+                rating,
                 sender: userId,
                 createdAt: new Date()
             }).save();
-            await User.findOneAndUpdate({ username: recipient }, { $push: { reviews: newReview._id } })
+            await User.findOneAndUpdate({ username: recipient }, { $push: { reviews: newReview._id }, $inc: { rating } })
             return true;
         },
         contactUs: async (_, { email, message, subject }, req) => {

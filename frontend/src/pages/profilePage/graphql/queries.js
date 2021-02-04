@@ -9,6 +9,7 @@ export const PROFILE_USER_QUERY = gql`
                 coverImage
                 profileImage
                 country
+                rating
                 role
                 lastSeen
                 designer {
@@ -16,11 +17,11 @@ export const PROFILE_USER_QUERY = gql`
                     skills
                     styles
                     experience
-                    about
                 }
                 portfolio {
                     _id
                     coverImage
+                    gallery
                     title
                     description
                     likes
@@ -31,6 +32,7 @@ export const PROFILE_USER_QUERY = gql`
                     title
                     description
                     coverImage
+                    gallery
                     price
                     delivery
                     category
@@ -55,56 +57,3 @@ export const PROFILE_USER_QUERY = gql`
     }
 `
 
-
-
-export const PROFILE_PORTFOLIO_QUERY = gql`
-query profile_portfolio($username: String){
-    profile_portfolio(username: $username){
-        _id
-        imageUrl
-        coverImage
-        title
-        description
-        likes
-    }
-   
-}
-       
-`
-
-export const PROFILE_GIGS_QUERY = gql`
-query profile_gigs($username: String){
-    profile_gigs(username: $username) {
-        _id
-        title
-        description
-        coverImage
-        gallery
-        price
-        delivery
-        category
-        styles
-        fabrics
-        keywords
-        createdAt
-        
-    }
-}
-
-`
-
-export const PROFILE_REVIEWS_QUERY = gql`
-query profile_reviews($username: String){
-    profile_reviews(username: $username) {
-        _id
-        docId
-        sender{
-            profileImage
-            username
-        }
-        message
-        subject
-        createdAt
-    }
-}
-`

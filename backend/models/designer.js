@@ -19,10 +19,6 @@ const designerSchema = new Schema({
         type: Array,
         required: true
     },
-    about: {
-        type: String,
-        required: false
-    },
     creator: {
         type: Schema.Types.ObjectId,
         ref: 'User'

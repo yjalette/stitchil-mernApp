@@ -7,8 +7,7 @@ import ProfileGrid from './ProfileGrid';
 import useQueryHook from '../../custom_hooks/useQueryHook';
 import { PROFILE_USER_QUERY } from './graphql/queries';
 import LoadingSpinner from '../../components/LoadingSpinner';
-import ItemGrid from './profileItems/ItemGrid';
-import ReviewGrid from './profileReview/ReviewGrid';
+
 
 const ProfileData = ({ logged_in_user }) => {
     const { username, section } = useParams();
@@ -16,7 +15,7 @@ const ProfileData = ({ logged_in_user }) => {
     const [values, setValues] = useState({});
 
     useEffect(() => {
-        if (data) console.log(data) || setValues(data.userProfile);
+        if (data) setValues(data.userProfile);
     }, [data]);
 
     const handleNewItem = newItem => {
@@ -52,17 +51,11 @@ const ProfileData = ({ logged_in_user }) => {
 
     if (!data) return <LoadingSpinner />
 
+    const sectionProps = { values: values[section], updateItemCache: handleUpdate, addItemCache: handleNewItem, deleteItemCache: handleDeleteItem };
 
-    const dataProps = { updateItemCache: handleUpdate, addItemCache: handleNewItem, deleteItemCache: handleDeleteItem }
     return (
         <ProfilePageContext.Provider value={{ logged_in_user, updateQuery }}>
-            <ProfileGrid resData={values} activeSection={section}>
-                <>
-                    <ItemGrid values={values[section]} {...dataProps} />
-                    {/* <ReviewGrid values={values.reviews || []} {...dataProps} /> */}
-                </>
-            </ProfileGrid>
-
+            <ProfileGrid resData={values} activeSection={section} sectionProps={sectionProps} />
         </ProfilePageContext.Provider>
     )
 

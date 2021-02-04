@@ -7,9 +7,7 @@ module.exports = gql`
 
 
 type Query { 
-    view_gig(id: ID): Gig       
-    profile_gigs(username: String): [Gig]
-    filter_gigs(keyWords: String, categories: [String],garmentType: [String], minPrice: Int, maxPrice: Int, sortBy: String, limit: Int): [Gig]       
+    view_gig(id: ID): Gig              
 }
 
 type Mutation {

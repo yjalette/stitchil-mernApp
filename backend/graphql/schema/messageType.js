@@ -13,7 +13,7 @@ type Query {
 
 type Mutation {    
     createComment(message: String, docId: ID): Boolean
-    createReview(message: String, recipient: String): Boolean
+    createReview(message: String, recipient: String, rating: Int): Boolean
     contactUs(email: String, subject: String, message: String): Boolean 
     deleteComment(itemId: ID): Boolean  
 }

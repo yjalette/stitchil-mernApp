@@ -16,13 +16,14 @@ type UserProfile {
 }
 
 type Profile {
-      username: String
+    username: String
     fullname: String
     country: [String]
     languages: [String]
     profileImage: String
     coverImage: String
     role: String
+    rating: Int
     lastSeen: String
     designer: DesignerResume
     gigs: [Gig]

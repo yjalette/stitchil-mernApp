@@ -91,6 +91,11 @@ textarea {
     background-color: transparent;
     color: var(--accent-color);
     cursor: pointer;
+    transition: 2s;
+}
+
+.clickElem:hover {
+    color: var(--light-green-color);
 }
 
 .clickElem:active {

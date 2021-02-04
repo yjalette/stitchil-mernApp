@@ -1,12 +1,14 @@
 import React, { useContext } from 'react';
+import { Col, Form, Media, Row } from 'react-bootstrap';
 
 import "./style.css";
 import AuthContext from '../../context/Auth-context';
 import useForm from '../../custom_hooks/useForm';
-import MessageForm from './MessageForm';
+import CustomButton from '../../layout/button/CustomButton';
+import FormTextarea from '../inputs/FormTextarea';
 import useMutationHook from '../../custom_hooks/useMutationHook';
 
-const MessageCreate = ({ query, otherVariables, docId, addMessage, children }) => {
+const MessageCreate = ({ query, otherVariables, docId, addMessage, onMessageSent, children, msg_class }) => {
     const { user } = useContext(AuthContext);
     const { inputs, setInputs, handleChange, handleSubmit } = useForm({ message: "" }, onSubmit);
     const { post } = useMutationHook(query, onPostCompleted);
@@ -16,10 +18,12 @@ const MessageCreate = ({ query, otherVariables, docId, addMessage, children }) =
             _id: 0,
             message: inputs.message,
             sender: { profileImage: user.profileImage || "", username: user.username, __typename: "" },
+            docId,
             createdAt: new Date(),
             __typename: "",
-            docId, ...otherVariables
+            ...otherVariables
         });
+        onMessageSent();
         setInputs({ message: "" });
     }
 
@@ -28,9 +32,19 @@ const MessageCreate = ({ query, otherVariables, docId, addMessage, children }) =
     }
 
     return (
-        <MessageForm onChange={handleChange} onSubmit={handleSubmit} message={inputs.message} >
-            {children}
-        </MessageForm>
+        <Media className={`messageForm-wrapper ${msg_class}`}>
+            <Form className="messageForm d-flex flex-column">
+                {children}
+                <Row className="flex-center messageForm__body">
+                    <Col xs={10}>
+                        <FormTextarea label="message" value={inputs.message} placeholder="write here ..." onChange={handleChange} />
+                    </Col>
+                    <Col xs={2}>
+                        <CustomButton onClick={handleSubmit} btn_class="btn-icon w-auto" icon="fa fa-paper-plane" />
+                    </Col>
+                </Row>
+            </Form>
+        </Media>
     )
 }
 

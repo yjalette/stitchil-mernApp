@@ -20,7 +20,7 @@ const ProfileHeader = ({ profile }) => {
             <ProfileImage src={profile && profile.coverImage} image_type="coverImage" />
             <div className="profileHeader__col">
                 <ProfileImage src={profile && profile.profileImage} image_type="profileImage" />
-                <h2 className="profileHeader__title">{profile.fullname} </h2>
+                <h2 className="profileHeader__title">{profile.fullname}{profile.rating} </h2>
             </div>
         </div>
 

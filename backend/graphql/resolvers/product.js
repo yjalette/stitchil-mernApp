@@ -2,42 +2,34 @@ const Product = require("../../models/product");
 const User = require("../../models/user");
 const File = require("../../models/file");
 const { populateByUser } = require("../../consts/user");
-const { saveFile, deleteFile, singleUpload } = require("../../helpers/uploadToCloud");
+const { deleteFile, multiUpload } = require("../../helpers/uploadToCloud");
 
 module.exports = {
     Query: {
         view_product: async (_, { id }, req) => {
             return await Product.findById(id).populate(populateByUser);
-        },
-        profile_portfolio: async (_, { username }, req) => {
-            const user = await User.findOne({ username }, { portfolio: 1 });
-            const products = await Product.find({ creator: user._id }).sort({ createdAt: -1 })
-            console.log(products)
-            return products
         }
     },
     Mutation: {
-        createProduct: async (_, { itemInput, file }, { userId }) => {
-            console.log(":input---->", itemInput)
+        createProduct: async (_, { itemInput, files }, { userId }) => {
             if (!userId) throw new Error("unauthenticated");
-            // const newImg = await singleUpload(file, req.userId);
-            if (itemInput) {
-                const newProduct = await new Product({
-                    ...itemInput,
-                    coverImage: null,
-                    creator: userId,
-                    createdAt: new Date(),
-                }).save();
-
-                await User.findOneAndUpdate(userId, { $push: { portfolio: newProduct._id } })
-            }
-
+            const gallery = await multiUpload(files, userId);
+            const newProduct = await new Product({
+                ...itemInput,
+                gallery,
+                creator: userId,
+                createdAt: new Date(),
+            }).save();
+            console.log(newProduct)
+            await User.findByIdAndUpdate(userId, { $push: { portfolio: newProduct._id } })
             return true
         },
-        updateProduct: async (_, { itemInput, file, itemId }, req) => {
-            if (!req.userId) throw new Error("unauthenticated");
-            if (file) saveFile(await File.findById(itemId), file, req.userId);
-            if (itemInput) await File.updateOne({ _id: itemId }, { $set: { ...itemInput } })
+        updateProduct: async (_, { itemInput, files }, { userId }) => {
+            if (!userId) throw new Error("unauthenticated");
+            const product = await Product.findById(itemInput._id);
+            if (files) product.gallery = product.gallery.concat(await multiUpload(files, userId))
+            else await product.updateOne({ $set: itemInput });
+            await product.save();
         },
 
         deleteProduct: async (_, { itemId }, { userId }) => {

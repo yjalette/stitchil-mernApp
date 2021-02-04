@@ -129,14 +129,14 @@
 }
 
 .btn-form {
-    width: 80px;
+    min-width: 80px;
     margin: .3em;
     padding: .2em .4em;
     background-color: var(--green-color);
     color: var(--white-color);
     font-size: var(--sm-fonts);
     line-height: 1.3em;
-    border: 1.8px dashed currentColor;
+    border: 1px dashed currentColor;
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow);
     text-shadow: var(--text-shadow);
@@ -172,6 +172,10 @@
     content: "\f00d";
     width: 100%;
     font-family: 'FontAwesome';
+}
+
+.btn-form:hover::after {
+    opacity: 1;
 }
 
 .btn-close {

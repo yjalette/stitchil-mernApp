@@ -109,6 +109,19 @@
     margin-right: .5em;
 }
 
+.reviewCreate__header {
+    display: flex;
+}
+
+.reviewCreate__header .dv-star-rating {
+    width: 100%;
+}
+
+.profile__main .userAvatar, .reviewCreate__header {
+    width: 100%;
+    justify-content: space-between;
+}
+
 @media (max-width: 992px) {}
 
 @media (max-width: 768px) {

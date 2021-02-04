@@ -11,8 +11,8 @@ export const highlights = (item, section) => {
 }
 
 export const initState = {
-    portfolio: { title: "", description: "" },
-    gigs: { title: "", description: "", category: [], styles: [], price: 0, fabrics: [], delivery: 0, keywords: [] }
+    portfolio: { title: "", description: "", keywords: [] },
+    gigs: { title: "", description: "", keywords: [], category: [], styles: [], price: 0, fabrics: [], delivery: 0 }
 }
 
 export const transformInputs = inputs => {

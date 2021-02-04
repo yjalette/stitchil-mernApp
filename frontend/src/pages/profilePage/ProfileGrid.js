@@ -7,15 +7,16 @@ import BoxWrapper from '../../layout/BoxWrapper';
 import ProfileImage from './ProfileImage';
 import GroupButton from '../../layout/button/GroupButton';
 import CustomButton from '../../layout/button/CustomButton';
+import ItemGrid from './profileItems/ItemGrid';
 
-const ProfileGrid = ({ resData, children }) => {
+const ProfileGrid = ({ resData, sectionProps }) => {
     return (
         <>
             <ProfileImage src={resData && resData.coverImage} image_type="coverImage" />
             <Container className="profileHeader">
                 <Container className="profileHeader__content">
                     <ProfileImage src={resData && resData.profileImage} image_type="profileImage" />
-                    {/* <h2 className="profileHeader__title">{resData.user.fullname} </h2> */}
+                    <h2 className="profileHeader__title">{resData.fullname} </h2>
                 </Container>
                 <GroupButton>
                     <CustomButton btn_class="btn-click">message</CustomButton>
@@ -29,7 +30,7 @@ const ProfileGrid = ({ resData, children }) => {
                 <Col xl={8} lg={7} sm={12} className="profile__col profile-rightComlun p-0">
                     <PageMenu items={["gigs", resData && resData.role === "designer" ? "portfolio" : null, "reviews"]} />
                     <BoxWrapper>
-                        {children}
+                        <ItemGrid {...sectionProps} />
                     </BoxWrapper>
                 </Col>
             </Row>

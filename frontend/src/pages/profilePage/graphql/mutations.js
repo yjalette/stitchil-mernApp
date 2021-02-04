@@ -38,8 +38,8 @@ export const DELETE_PROFILE_IMAGE_MUTATION = gql`
 `;
 
 export const CREATE_REVIEW_MUTATION = gql`
-        mutation CreateReview($message: String, $recipient: String ){
-            createReview(message: $message, recipient: $recipient)
+        mutation CreateReview($message: String, $recipient: String, $rating: Int ){
+            createReview(message: $message, recipient: $recipient, rating: $rating)
         }
 `
 

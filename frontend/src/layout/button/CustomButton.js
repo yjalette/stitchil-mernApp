@@ -5,7 +5,7 @@ const CustomButton = ({ onClick, btn_class, btn_type, btn_value, btn_name, icon,
     <button
         name={btn_name}
         value={btn_value}
-        type={btn_type || "click"}
+        type={btn_type}
         onClick={onClick}
         className={`customButton ${btn_class} ${icon}`}>
         {children}

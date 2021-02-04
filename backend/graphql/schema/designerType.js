@@ -7,16 +7,14 @@ type DesignerResume {
     skills: [String]
     experience: [String]
     education: [String]
-    about: String
 }
 
 input DesignerInput {
     styles: [String]
     skills: [String]
     experience: [String]
-    education: [String]
-    about: String     
-     }
+    education: [String]    
+}
 
 type Mutation {    
     updateDesigner(designerInput: DesignerInput): Boolean

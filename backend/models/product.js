@@ -25,6 +25,10 @@ const productSchema = new Schema({
             required: false
         }
     ],
+    keyWords: {
+        type: Array,
+        required: false
+    },
     createdAt: {
         type: Date,
         required: false
