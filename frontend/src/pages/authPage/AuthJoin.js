@@ -1,11 +1,9 @@
 import React, { useContext } from 'react';
-import { Form } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 
 import useForm from '../../custom_hooks/useForm';
 import { onSuccess } from './helpers'
 import AuthContext from '../../context/Auth-context';
-import AlertDismissible from '../../layout/alerts/AlertDismissible';
 import { validate } from '../../validation/validate_form';
 import { initState_join } from '../../constants/initStates';
 import GoogleButton from './AuthGoogleBtn';
@@ -17,12 +15,11 @@ import CustomForm from '../../layout/CustomForm';
 const AuthJoin = () => {
     const { push } = useHistory()
     const { setUser } = useContext(AuthContext);
-    const { inputs, setInputs, handleChange, handleSubmit, errors, setErrors, setMsg, msg } = useForm(initState_join, onSubmit);
+    const { inputs, setInputs, handleChange, handleMultiChange, handleSubmit, errors, setErrors, setMsg, msg } = useForm(initState_join, onSubmit);
     const { data, post } = useMutationHook(SIGNUP_MUTATION, onCompleted);
 
     const responseGoogle = (response) => {
         if (response.profileObj.email) {
-            console.log(response.profileObj)
             const { email, name } = response.profileObj;
             setInputs({
                 ...inputs,
@@ -68,10 +65,10 @@ const AuthJoin = () => {
 
     // if (data && data.createUser.emailSent) return <AlertDismissible text="We have sent an email with a confirmation link. In order to complete the sign-up process, please click the confirmation link" alert_class="auth-alert" />
 
-    const form_props = { inputs, setInputs, onChange: handleChange, errors, setErrors, validate: validate_form }
+    const form_props = { inputs, setInputs, onSubmit: handleSubmit, onChange: handleChange, onMultiChange: handleMultiChange, errors, setErrors, validate: validate_form }
 
     return (
-        <CustomForm onSubmit={handleSubmit} form_error={errors.form_error} form_msg={msg}>
+        <CustomForm form_error={errors.form_error} form_msg={msg}>
             <AuthJoinForm {...form_props}>
                 <GoogleButton responseGoogle={responseGoogle} />
             </AuthJoinForm>

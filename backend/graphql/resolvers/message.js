@@ -1,6 +1,5 @@
 const User = require("../../models/user");
 const Message = require("../../models/message");
-const Portfolio = require("../../models/portfolio");
 const { transformUsersIds } = require("./merge");
 const { sendEmail } = require("../../helpers/nodemailer")
 
@@ -11,7 +10,7 @@ module.exports = {
             try {
                 switch (docName) {
                     case "portfolio": {
-                        const portfolio = await Portfolio.findOne({ 'gallery._id': docId });
+                        // const portfolio = await Portfolio.findOne({ 'gallery._id': docId });
                         const { likes } = portfolio.gallery.id(docId);
                         return transformUsersIds(likes);
                     }

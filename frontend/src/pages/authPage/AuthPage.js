@@ -13,10 +13,7 @@ import SecurityPassword from '../../components/security/SecurityPassword';
 
 const AuthPage = ({ history }) => {
     const { authType, token } = useParams();
-    console.log(authType)
-
     const { left_link, right_link, title } = form_content[authType];
-
 
     const handleRedirect = (url) => {
         history.push(`/auth/${url}`)
@@ -33,8 +30,8 @@ const AuthPage = ({ history }) => {
             modal_size="md"
             modal_footer={left_link && (
                 <>
-                    <Nav.Link className="customLink" onClick={() => handleRedirect(left_link.href)} >{left_link && left_link.title} </Nav.Link>
-                    <Nav.Link className="customLink" onClick={() => handleRedirect(right_link.href)}>{right_link && right_link.title}</Nav.Link>
+                    <Nav.Link className="clickElem" onClick={() => handleRedirect(left_link.href)} >{left_link && left_link.title} </Nav.Link>
+                    <Nav.Link className="clickElem" onClick={() => handleRedirect(right_link.href)}>{right_link && right_link.title}</Nav.Link>
                 </>
             )}
             displayWithoutBtn={true}

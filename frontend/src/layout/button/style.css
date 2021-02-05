@@ -128,6 +128,10 @@
     margin-left: 1.5rem;
 }
 
+.btn-text {
+    color: var(--accent-color);
+}
+
 .btn-form {
     min-width: 80px;
     margin: .3em;

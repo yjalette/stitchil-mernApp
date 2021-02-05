@@ -1,9 +1,6 @@
 const User = require("../../models/user");
 const Gig = require("../../models/gig");
-const File = require("../../models/file");
-const { saveFile, deleteFile, multiUpload } = require("../../helpers/uploadToCloud");
-const { populateByUser } = require("../../consts/user");
-
+const { deleteFiles, multiUpload } = require("../../helpers/uploadToCloud");
 
 module.exports = {
     Query: {
@@ -16,21 +13,16 @@ module.exports = {
     Mutation: {
         createGig: async (_, { itemInput, files }, { userId }) => {
             if (!userId) throw new Error("unauthenticated");
-            const gallery = await multiUpload(files, userId);
-            console.log(gallery)
-            const newGig = await new Gig({
-                ...itemInput,
-                gallery,
-                coverImage: gallery[0],
-                createdAt: new Date(),
-                creator: userId
-            }).save();
+            const newGig = await new Gig({ ...itemInput, createdAt: new Date(), creator: userId }).save();
+            const gallery = await multiUpload(files, newGig._id);
+            await newGig.updateOne({ gallery, coverImage: gallery[0] })
             await User.findByIdAndUpdate(userId, { $push: { gigs: newGig._id } })
             return true
         },
         updateGig: async (_, { itemInput, files }, { userId }) => {
             if (!userId) throw new Error("unauthenticated");
             const gig = await Gig.findById(itemInput._id);
+            if (itemInput.gallery.length < gig.gallery.length) await deleteFiles(gig.gallery.filter(elem => !itemInput.gallery.includes(elem)))
             if (files) gig.gallery = gig.gallery.concat(await multiUpload(files, userId))
             else await gig.updateOne({ $set: itemInput });
             await gig.save();
@@ -39,8 +31,9 @@ module.exports = {
         deleteGig: async (_, { itemId }, { userId }) => {
             if (!userId) throw new Error("unauthenticated");
             try {
-                await deleteFile(`${userId}/${itemId}`);
-                await Gig.findByIdAndDelete(itemId);
+                const gig = await Gig.findById(itemId);
+                await deleteFiles(gig.gallery);
+                await gig.deleteOne();
                 await User.findByIdAndUpdate(userId, { $pull: { gigs: itemId } })
                 return true;
             } catch (error) {

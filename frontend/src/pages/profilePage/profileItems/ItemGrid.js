@@ -22,7 +22,7 @@ const ItemGrid = ({ values, updateItemCache, addItemCache, deleteItemCache }) =>
         <>
             <SectionHeader title={`${section} (${values ? values.length : 0})`}> </SectionHeader>
             {logged_in_user && <ItemCreate addItemCache={addItemCache} overLimit={values && values.length > 5} />}
-            {values && values.length > 0 && <ItemList items={values} getProps={(item, index) => {
+            {values && <ItemList items={values} getProps={(item, index) => {
                 return {
                     itemId: item._id,
                     header: { title: item.title },

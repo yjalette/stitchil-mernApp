@@ -74,12 +74,6 @@ textarea {
     font-size: var(--sm-fonts);
 }
 
-.fa-close {
-    text-align: right;
-    color: var(--red-color);
-    padding: var(--padding-elem);
-}
-
 .text-mute {
     text-transform: lowercase;
     color: var(--secondary-color);

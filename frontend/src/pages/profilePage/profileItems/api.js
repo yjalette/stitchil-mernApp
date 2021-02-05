@@ -9,3 +9,5 @@ export const mutation_update = {
     gigs: UPDATE_GIG_MUTATION,
     portfolio: UPDATE_PRODUCT_MUTATION
 }
+
+

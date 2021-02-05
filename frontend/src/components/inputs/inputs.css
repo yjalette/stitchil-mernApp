@@ -17,7 +17,7 @@ label, .formLabel {
 }
 
 .field-wrapper {
-    margin: .5em auto;
+    /* margin: .5em auto; */
     width: 100%;
 
     /* font-size: 5px; */

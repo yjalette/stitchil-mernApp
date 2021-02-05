@@ -2,7 +2,7 @@ const Product = require("../../models/product");
 const User = require("../../models/user");
 const File = require("../../models/file");
 const { populateByUser } = require("../../consts/user");
-const { deleteFile, multiUpload } = require("../../helpers/uploadToCloud");
+const { deleteFiles, multiUpload } = require("../../helpers/uploadToCloud");
 
 module.exports = {
     Query: {
@@ -27,6 +27,7 @@ module.exports = {
         updateProduct: async (_, { itemInput, files }, { userId }) => {
             if (!userId) throw new Error("unauthenticated");
             const product = await Product.findById(itemInput._id);
+            if (itemInput.gallery.length < product.gallery.length) deleteFiles(product.gallery.filter(elem => !itemInput.gallery.includes(elem)), product._id)
             if (files) product.gallery = product.gallery.concat(await multiUpload(files, userId))
             else await product.updateOne({ $set: itemInput });
             await product.save();
@@ -34,9 +35,12 @@ module.exports = {
 
         deleteProduct: async (_, { itemId }, { userId }) => {
             if (!userId) throw new Error("unauthenticated user to delete this file");
-            await deleteFile(`${userId}/${itemId}`);
-            await Product.findByIdAndDelete(itemId);
-            await User.findByIdAndUpdate(userId, { $pull: { portfolio: itemId } })
+            const product = await Product.findById(itemId);
+            if (deleteFiles(product.gallery)) {
+                console.log("tut---------->")
+                await Product.findByIdAndDelete(itemId);
+                await User.findByIdAndUpdate(userId, { $pull: { portfolio: itemId } })
+            }
             return true
         },
         likeProduct: async (_, { docId, username }, req) => {

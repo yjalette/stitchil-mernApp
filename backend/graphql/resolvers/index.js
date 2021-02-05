@@ -6,7 +6,6 @@ const contactResolver = require('./contact');
 const userResolver = require('./user');
 const gigResolver = require('./gigs');
 const messageResolver = require('./message');
-const fileResolver = require('./file');
 const commentResolver = require('./comment');
 const exploreResolver = require('./explore');
 const designerResolver = require('./designer')
@@ -20,7 +19,6 @@ const resolvers = {
         ...chatResolver.Query,
         ...messageResolver.Query,
         ...commentResolver.Query,
-        ...fileResolver.Query,
         ...exploreResolver.Query
     },
     Mutation: {
@@ -33,7 +31,6 @@ const resolvers = {
         ...chatResolver.Mutation,
         ...messageResolver.Mutation,
         ...commentResolver.Mutation,
-        ...fileResolver.Mutation,
         // ...exploreResolver.Mutation
     },
     AuthResult: authResolver.AuthResult,

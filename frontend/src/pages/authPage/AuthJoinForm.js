@@ -7,7 +7,7 @@ import FormMultipleInput from '../../components/inputs/FormMultipleInput';
 import FormInput from '../../components/inputs/FormInput';
 import CustomButton from '../../layout/button/CustomButton';
 
-const AuthJoinForm = ({ inputs, setInputs, onChange, errors, validate, children }) => {
+const AuthJoinForm = ({ inputs, setInputs, onChange, onMultiChange, errors, validate, onSubmit, children }) => {
     const [open, toggle] = useToggle(false);
 
     const props = useCallback(
@@ -31,7 +31,7 @@ const AuthJoinForm = ({ inputs, setInputs, onChange, errors, validate, children 
                 <FormInput {...props("email")} />
                 <Password {...props("password")} />
                 <Password {...props("confirm_password")} />
-                <CustomButton icon="fa fa-long-arrow-right" onClick={toggle} btn_class="btn-icon btn-text join__continueButton">continue</CustomButton>
+                <CustomButton icon="fa fa-long-arrow-right" onClick={toggle} btn_class="btn-icon-text join__continueButton">continue</CustomButton>
                 {children}
             </>
         )
@@ -42,13 +42,10 @@ const AuthJoinForm = ({ inputs, setInputs, onChange, errors, validate, children 
             <>
                 <FormInput {...props("fullname")} />
                 <FormInput {...props("username")} />
-                <FormMultipleInput label="country" required="true" selected={inputs.country} onChange={country => setInputs({
-                    ...inputs,
-                    country
-                })} />
+                <FormMultipleInput label="country" selected={inputs.country} required="true" onChange={onMultiChange} />
                 <SelectInput {...props("role")} options={["designer", "buyer"]} />
-
-                {!inputs.googleAuth && <CustomButton onClick={toggle} btn_class="btn-icon btn-text join__backButton" icon="fa fa-long-arrow-left">go back</CustomButton>}
+                {!inputs.googleAuth && <CustomButton onClick={toggle} btn_class="btn-icon-text join__backButton" icon="fa fa-long-arrow-left">go back</CustomButton>}
+                <CustomButton type="submit" btn_class="btn-form float-right" onClick={onSubmit}>submit</CustomButton>
 
             </>
         )

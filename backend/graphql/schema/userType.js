@@ -94,6 +94,7 @@ type Mutation {
     updateEmail(email: String): Response
     updateUsername(username: String): Response
     updatePassword(passwordInput: PasswordInput, token: String): Response 
+    uploadProfileImage(file: Upload, image_type: String): Boolean
 }
 
 `;

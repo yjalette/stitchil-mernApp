@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
+import { Image } from 'react-bootstrap';
 
 import useForm from '../../../custom_hooks/useForm'
 import useUpload from '../../../custom_hooks/useUpload'
@@ -22,16 +23,30 @@ const ItemUpdate = ({ item, updateItemCache, index }) => {
     function onSubmit() {
         post({
             variables: {
-                itemInput: transformInputs(inputs),
+                itemInput: transformInputs[section](inputs),
                 files
             }
         });
-        updateItemCache({ ...inputs, coverImage: files ? URL.createObjectURL(files[0]) : inputs.coverImage }, index);
+        updateItemCache(inputs, index);
         clearUpload();
         toggleEditMode();
     }
 
-    if (!editMode) return <CustomButton btn_class="btn-icon" icon="fa fa-edit" onClick={toggleEditMode}></CustomButton>
+
+    if (!editMode) return <CustomButton btn_title="edit item" btn_class="btn-icon" icon="fa fa-edit" onClick={toggleEditMode}></CustomButton>
+
+    const prevFiles = inputs.gallery.map((item, index) => <div key={index} className="item-upload-wrapper">
+        <Image className="itemUpload__img itemUpdate-prevImg" src={item} alt="file" />
+        {item === inputs.coverImage ? <i className="itemUpdate-cover__footer itemUpload-footer fa fa-shield">cover</i>
+            : <> <CustomButton
+                btn_title="set as a cover"
+                btn_class="btn-click itemUpdate__overlay-btn"
+                btn_name="coverImage"
+                btn_value={item}
+                onClick={handleChange}>cover</CustomButton>
+                <i title="delete image" className="fa fa-close itemUpload-footer" onClick={() => setInputs({ ...inputs, gallery: inputs.gallery.filter((item, i) => i !== index) })} />
+            </>}
+    </div>)
 
     return <ItemForm
         form_title="update"
@@ -44,7 +59,11 @@ const ItemUpdate = ({ item, updateItemCache, index }) => {
         }}
         onChange={handleChange}
         onMultiChange={handleMultiChange}
-        media_props={{ files, prevFiles: inputs.gallery, clearUpload, getInputProps, getRootProps }}
+        media_props={{
+            files,
+            prevFiles,
+            clearUpload, getInputProps, getRootProps
+        }}
     />
 }
 

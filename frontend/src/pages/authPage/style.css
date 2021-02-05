@@ -7,10 +7,17 @@
     width: 100%;
 }
 
+.auth__form .groupButton .customButton {
+    margin: 0 0.5rem;
+}
+
+.auth__google {
+    padding: 1rem 0;
+}
+
 .auth__google-btn {
-    box-shadow: none !important;
+    /* box-shadow: none !important; */
     overflow: hidden;
-    margin: 0;
     flex-direction: row-reverse;
     border-radius: var(--border-radius);
 }
@@ -20,7 +27,7 @@
 }
 
 .join__continueButton, .join__backButton {
-    margin: 1.5rem 0;
+    margin: 1rem 0;
 }
 
 .join__backButton {

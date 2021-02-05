@@ -13,7 +13,6 @@ import { LOGIN_QUERY } from './graphql/queries';
 import useLazyQueryHook from '../../custom_hooks/useLazyQueryHook';
 
 const AuthLogin = ({ verifiedEmail }) => {
-    console.log(verifiedEmail)
     const { setUser } = useContext(AuthContext);
     const { push } = useHistory()
     const { getData, data } = useLazyQueryHook(LOGIN_QUERY, onCompleted);

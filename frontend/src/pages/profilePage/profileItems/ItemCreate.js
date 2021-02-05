@@ -11,18 +11,20 @@ import CustomButton from '../../../layout/button/CustomButton';
 
 const ItemCreate = ({ overLimit, addItemCache }) => {
     const { section } = useParams();
-    const { post } = useMutationHook(mutation_create[section]);
-    const { inputs, setInputs, handleChange, handleMultiChange, handleSubmit, handleCancel, editMode, toggleEditMode } = useForm(initState[section], onSubmit);
-    const { files, clearUpload, getRootProps, getInputProps } = useUpload(null, 5);
+    const { post, data, error } = useMutationHook(mutation_create[section], handleResponse());
+    const { inputs, setInputs, handleChange, handleMultiChange, handleSubmit, editMode, toggleEditMode } = useForm(initState[section], onSubmit);
+    const { files, clearUpload, getRootProps, getInputProps, uploadError } = useUpload(2000000, 5);
 
     function onSubmit() {
-        post({
-            variables: {
-                itemInput: transformInputs(inputs),
-                files
-            }
-        });
-        setInputs({});
+        if (!uploadError) {
+            post({
+                variables: {
+                    itemInput: transformInputs[section](inputs),
+                    files
+                }
+            });
+        }
+
         addItemCache({
             ...inputs,
             coverImage: files ? URL.createObjectURL(files[0]) : "https://res.cloudinary.com/dgxa9gpta/image/upload/v1602105102/background/buttons_nd9vx1.jpg",
@@ -30,11 +32,19 @@ const ItemCreate = ({ overLimit, addItemCache }) => {
             createdAt: "just now",
             __typename: "", _id: 0, likes: []
         });
-        clearUpload();
-        toggleEditMode();
     }
 
-    if (!editMode) return <CustomButton btn_class="btn-icon float-right" icon="fa fa-plus" onClick={toggleEditMode} />
+    function handleResponse() {
+        if (data && !error) {
+            setInputs({});
+            clearUpload();
+            toggleEditMode();
+        }
+
+        // addItemCache here instead
+    }
+
+    if (!editMode) return <CustomButton btn_class="btn-icon-text btn-icon float-right" icon="fa fa-plus" onClick={toggleEditMode}>new</CustomButton>
 
     return <ItemForm
         form_title="Create"
@@ -42,12 +52,13 @@ const ItemCreate = ({ overLimit, addItemCache }) => {
         initState={initState[section]}
         onSubmit={handleSubmit}
         onClose={() => {
-            handleCancel();
             clearUpload();
+            setInputs(initState[section])
+            toggleEditMode();
         }}
         onChange={handleChange}
         onMultiChange={handleMultiChange}
-        media_props={{ files, clearUpload, getInputProps, getRootProps }}
+        media_props={{ files, uploadError, clearUpload, getInputProps, getRootProps }}
     />
 }
 

@@ -6,7 +6,7 @@
     text-transform: capitalize;
 }
 
-.item-preview__wrapper button {
+/* .item-preview__wrapper button {
     float: right;
 }
 
@@ -27,13 +27,64 @@
     color: var(--accent-color);
     font-size: 4rem;
     cursor: pointer;
+} */
+
+.itemUpload__list {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+
+    /* align-items: center; */
+    padding: var(--padding-box);
+}
+
+.item-upload-wrapper {
+    position: relative;
+    width: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: .3rem;
+}
+
+.itemUpdate__overlay-btn {
+    position: absolute;
+    top: 30px;
+    visibility: hidden;
+    width: 80px;
+}
+
+.item-upload-wrapper:hover .itemUpdate__overlay-btn {
+    visibility: visible;
+    display: block;
+}
+
+.itemUpdate-cover__footer {
+    display: flex;
+    flex-direction: row-reverse;
+    color: var(--light-green-color);
+}
+
+.itemUpdate-cover__footer::before {
+    margin-left: .3rem;
+}
+
+.itemUpload-footer {
+    padding: var(--padding-elem);
+}
+
+.itemUpload-footer.fa-close {
+    cursor: pointer;
+    color: var(--red-color);
+}
+
+.itemUpdate-prevImg {
+    opacity: .3;
 }
 
 .itemUpload__img {
-    width: 100%;
-    height: 100%;
-    max-width: 250px;
-    max-height: 250px;
+    width: 100px;
+    height: 100px;
     object-fit: cover;
     border-radius: var(--border-radius);
 }
@@ -48,58 +99,38 @@
     /* padding: var(--padding-box); */
 }
 
-.itemUpload__wrapper {
-    width: 100%;
-    height: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
+.itemUpload__box {
+    justify-content: center;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
 }
 
-.itemUpload__wrapper:focus {
+.itemUpload__box:focus {
     outline: none;
 }
 
-.itemUpload__list {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-}
-
-.itemUpload__img {
-    width: 200px;
-    height: 200px;
-}
-
-.itemUpload__box {
-    background-color: var(--main-color-light);
-    border-radius: 50%;
-    padding: 3.5rem;
-    width: 200px;
-}
-
 .itemForm .upload__icon {
-    max-width: 100px;
-    max-height: 100px;
+    cursor: pointer;
+    max-width: 50px;
+    max-height: 50px;
 }
 
 .itemForm-hideButton .groupButton {
     display: none;
 }
 
-.hideButtons .customForm__groupButton {
+/* .hideButtons .customForm__groupButton {
     display: none;
-}
-
+} */
+/* 
 .itemForm__controllers .fa-long-arrow-right {
     float: right;
 }
 
 .itemForm__controllers .fa-long-arrow-left {
     float: left;
-}
+} */
 
 /* .itemUpload__prev {
     position: absolute;

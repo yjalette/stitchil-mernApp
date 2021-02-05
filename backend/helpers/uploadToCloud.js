@@ -9,9 +9,13 @@ const cloud_config = cloudinary.config({
 });
 
 
-async function deleteFile(public_id) {
-    await cloudinary.v2.uploader.destroy(public_id, (error) => error ? new Error("deleting file error", error) : true)
+async function deleteSingleFile(imageUrl) {
+    const file = await File.findOne({ imageUrl });
+    await cloudinary.v2.uploader.destroy(file.public_id, async (error) => error ? new Error("deleting file error", error) : await file.deleteOne())
+}
 
+async function deleteFiles(files) {
+    return files.forEach(file => deleteSingleFile(file))
 }
 
 async function uploadToCloud({ file, public_id }) {
@@ -32,9 +36,8 @@ async function uploadToCloud({ file, public_id }) {
 
 }
 
-async function saveFile(item, file, userId) {
-    console.log(item)
-    const result = await uploadToCloud({ file, public_id: `${userId}/${item._id}` });
+async function saveFile(item, file, docId) {
+    const result = await uploadToCloud({ file, public_id: `${docId}/${item._id}` });
     try {
         item.imageUrl = result.url;
         item.save();
@@ -45,16 +48,14 @@ async function saveFile(item, file, userId) {
     return true;
 }
 
-async function singleUpload(file, userId) {
+async function singleUpload(file, docId) {
     try {
-        const upload = await uploadToCloud({ file, public_id: `${userId}/${Math.floor(Math.random() * 100) + 1}` })
-        const newFile = await new File({
+        const upload = await uploadToCloud({ file, public_id: `${docId}/${Math.floor(Math.random() * 100) + 1}` })
+        await new File({
             public_id: upload.public_id,
             imageUrl: upload.url,
             createdAt: new Date()
         }).save();
-        console.log("upload------>", upload.url)
-        console.log("new url------>", newFile.url)
         return upload.url
     } catch (error) {
         throw new Error(error)
@@ -70,5 +71,6 @@ exports.multiUpload = multiUpload;
 exports.uploadToCloud = uploadToCloud;
 exports.singleUpload = singleUpload;
 exports.saveFile = saveFile;
-exports.deleteFile = deleteFile;
+exports.deleteSingleFile = deleteSingleFile;
+exports.deleteFiles = deleteFiles;
 exports.cloud_config = cloud_config;
