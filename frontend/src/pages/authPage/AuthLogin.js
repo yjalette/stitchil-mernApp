@@ -33,9 +33,9 @@ const AuthLogin = ({ verifiedEmail }) => {
 
     return (
         <>
-            <CustomForm form_class="modal__form auth__form" onSubmit={handleSubmit} onCancel={handleCancel} form_error={errors.form_error}>
-                <FormInput type="email" label="email" onChange={handleChange} value={inputs.email} required="true" />
-                <FormInput type="password" label="password" onChange={handleChange} value={inputs.password} required="true" />
+            <CustomForm form_class="authLogin" onSubmit={handleSubmit} onCancel={handleCancel} form_error={errors.form_error}>
+                <FormInput type="email" label="email" onChange={handleChange} value={inputs.email} required={true} />
+                <FormInput type="password" label="password" onChange={handleChange} value={inputs.password} required={true} />
                 <Container className="text-light flex-center justify-content-start">
                     <Form.Label>remeber me</Form.Label>
                     <Form.Check label=" " type="radio" />

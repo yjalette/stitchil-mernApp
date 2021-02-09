@@ -11,19 +11,10 @@ label, .formLabel {
     font-size: var(--sm-fonts);
     color: var(--secondary-color);
     letter-spacing: .1em;
-
-    /* line-height: 2em; */
     text-transform: lowercase;
 }
 
-.field-wrapper {
-    /* margin: .5em auto; */
-    width: 100%;
-
-    /* font-size: 5px; */
-}
-
-.customSelect__wrapper {
+.field-wrapper, .customSelect__wrapper {
     position: relative;
     width: 100%;
 }

@@ -4,7 +4,6 @@ const { populateByUser } = require("../../consts/user");
 module.exports = {
     Query: {
         explore_items: async (_, { filters, price, page }, req) => {
-            console.log(Object.values(filters).length)
             if (Object.values(filters).length > 0 || Object.values(price).length > 0) {
                 const items = await Gig.find({
                     $and: [
@@ -17,26 +16,14 @@ module.exports = {
                     .populate(populateByUser)
                     .sort({ createdAt: -1 })
                 // .limit(10)
-                return { total: items.length, items: items.slice(page, page * 1 + 1) }
+                return items.slice(page, page * 1 + 1)
             }
-
-
-            else return { items: await Gig.find().sort({ createdAt: -1 }).limit(10) };
-
-        },
-
-    },
-    // Mutation: {
-
-    // },
-    ExploreItem: {
-        __resolveType(obj) {
-            if (obj.bids) return 'BuyerItem';
-            if (obj.delivery) return 'DesignerItem';
-            return null;
+            const items = await Gig.find().sort({ createdAt: -1 }).limit(10);
+            console.log(items)
+            return items
         }
-    }
 
+    }
 }
 
 

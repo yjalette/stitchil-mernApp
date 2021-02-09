@@ -103,6 +103,18 @@
     cursor: pointer;
 }
 
+/* .itemDetails .swiper-container {
+    min-height: 100%;
+} */
+
+.itemDetails-gallery .swiperSlide {
+    height: 500px;
+}
+
+.itemDetails-gallery .swiperThumb {
+    height: 200px;
+}
+
 @media (max-width: 1679px) {
     .itemSum {
         width: 300px;

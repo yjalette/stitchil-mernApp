@@ -6,18 +6,12 @@ import { CHATS_QUERY } from './graphql/queries';
 
 const ChatData = () => {
     const { user } = useContext(AuthContext);
-    const { data, getData, updateQuery } = useQueryHook(CHATS_QUERY)
-
+    const { data, updateQuery } = useQueryHook(CHATS_QUERY)
     const [chats, setChats] = useState([]);
-
-    useEffect(() => {
-        if (user.username) getData();
-    }, [user])
 
     useEffect(() => {
         if (data) setChats(data.chats);
     }, [data])
-
 
     const handleNewMessage = newMsg => updateQuery(prev => {
         const chatIndex = prev.chats.findIndex(el => el._id === newMsg.docId)

@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from 'react';
 
 import "./style.css"
-
 import useGetData from '../../custom_hooks/useGetData';
 import MessageItem from './MessageItem';
-import MessageCreate from './MessageCreate';
-
 
 const MessageData = ({ docId, messages_class }) => {
     const { getData, resData } = useGetData("getmessages");

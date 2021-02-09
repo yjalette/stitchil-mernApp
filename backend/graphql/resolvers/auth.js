@@ -9,7 +9,7 @@ module.exports = {
             const user = await User.findOne({ email });
             if (!user) return notUser_error;
             if (!googleAuth && !await comparePwd(password, user.password)) return wrongPwd_error;
-            if (verifiedEmail) await user.updateOne({ $set: { verifiedEmail: true } });
+            if (verifiedEmail) await user.updateOne({ $set: { verifiedEmail } });
             await user.updateOne({ lastSeen: new Date() });
             return { token: generateJWT(user._id, email), username: user.username, role: user.role, googleAuth };
         },
@@ -36,36 +36,39 @@ module.exports = {
     Mutation: {
         createUser: async (_, { userInput }) => {
             const { email, username, role } = userInput;
-
             if (await User.exists({ email })) return emailTaken_error;
             if (await User.exists({ username })) return usernameTaken_error;
 
-            const user = new User({
-                ...userInput,
-                password: !userInput.googleAuth ? await createPwd(userInput.password) : null,
-                verifiedEmail: userInput.googleAuth ? true : false,
-                createdAt: new Date()
-            }).save();
+            try {
+                const user = new User({
+                    ...userInput,
+                    password: !userInput.googleAuth ? await createPwd(userInput.password) : null,
+                    verifiedEmail: userInput.googleAuth ? true : false,
+                    createdAt: new Date()
+                }).save();
 
-            if (userInput.googleAuth) return { token: generateJWT(user._id, email), username, role, googleAuth: true };
-
-            else {
-                try {
-                    await sendEmail({
-                        subject: "Welcome To Stitchil!",
-                        template: 'registration',
-                        context: {
-                            link: 'http://localhost:3000/auth/verify_email'
-                        }
-                    });
-                } catch (error) {
-                    return { "code": 401, message: "Please Try Different Email Address" };
+                if (userInput.googleAuth) return { token: generateJWT(user._id, email), username, role, googleAuth: true };
+                else {
+                    try {
+                        await sendEmail({
+                            subject: "Welcome To Stitchil!",
+                            template: 'registration',
+                            context: {
+                                link: 'http://localhost:3000/auth/verify_email'
+                            }
+                        });
+                    } catch (error) {
+                        return { "code": 401, message: "Please Try Different Email Address" };
+                    }
+                    return { emailSent: true };
                 }
 
-                return { emailSent: true };
+            } catch (error) {
+                throw new ("errr->", error)
             }
         },
         forgotPassword: async (_, { email }) => {
+            console.log(email)
             const user = await User.findOne({ email }).lean();
             if (!user) return notUser_error;
             try {
@@ -73,14 +76,14 @@ module.exports = {
                     subject: "reset password",
                     template: "resetPwd",
                     context: {
-                        link: `http://localhost:3000/auth/reset/${generateJWT(user._id, email)}`
+                        link: `http://localhost:3000/auth/forgot_password/${generateJWT(user._id, email)}`
                     }
                 })
-                return { success: true, message: "Please check your email for a link to create a new password" };
             } catch (error) {
                 console.log(error)
                 return server_error
             }
+            return { success: true, message: "check your email for a link to create a new password" };
         }
     },
     AuthResult: {

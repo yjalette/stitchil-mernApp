@@ -6,8 +6,11 @@ import { FORGOT_PASSWORD_MUTATION } from './graphql/mutations';
 import FormInput from '../../components/inputs/FormInput';
 import useForm from '../../custom_hooks/useForm';
 import { handleResponse } from '../../helpers/dataHelper';
+import { useParams } from 'react-router-dom';
+import SecurityPassword from '../../components/security/SecurityPassword';
 
 const AuthForgotPassword = () => {
+    const { token } = useParams();
     const { inputs, setInputs, handleChange, handleSubmit, errors, setErrors, setMsg, msg } = useForm({ email: "" }, onSubmit);
     const { post } = useMutationHook(FORGOT_PASSWORD_MUTATION, onCompleted);
 
@@ -28,8 +31,11 @@ const AuthForgotPassword = () => {
         post({ variables: inputs });
     }
 
+
+    if (token) return <SecurityPassword token={token} />
+
     return (
-        <CustomForm form_class="modal__form" submitTitle="submit" onSubmit={handleSubmit} form_msg={msg} form_error={errors.form_error}>
+        <CustomForm form_class="authForgotPwd" submitTitle="submit" onSubmit={handleSubmit} form_msg={msg} form_error={errors.form_error}>
             <FormInput label="email" type="email" value={inputs.email} onChange={handleChange} />
         </CustomForm>
     )

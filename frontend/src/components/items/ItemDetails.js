@@ -2,15 +2,15 @@ import React from 'react'
 import { Row, Col } from 'react-bootstrap'
 
 import "./style.css"
-import ItemGallery from './ItemGallery'
+import ThumbGallery from '../../layout/ThumbGallery'
 
-const ItemDetails = ({ gallery, children, imageUrl, coverImage }) => {
+const ItemDetails = ({ gallery, children }) => {
     return (
-        <Row className="itemDetails">
-            <Col lg={6} className="itemDetails__col itemDetails-gallery">
-                <ItemGallery items={gallery || [imageUrl || coverImage]} />
+        <Row className="itemDetails w-100">
+            <Col lg={8} className="itemDetails__col itemDetails-gallery">
+                <ThumbGallery items={gallery} />
             </Col>
-            <Col lg={6} className="itemDetails__col itemDetails-content">
+            <Col lg={4} className="itemDetails__col itemDetails-content">
                 {children}
             </Col>
         </Row>

@@ -1,6 +1,4 @@
 export function onSuccess({ username, token, googleAuth, role }, setUser, redirect) {
-    // localStorage.setItem('username', JSON.stringify(username));
-    // localStorage.setItem('token', JSON.stringify(token));
     localStorage.setItem('user', JSON.stringify({ username, googleAuth, role }));
     localStorage.setItem('token', JSON.stringify(token));
     setUser({ token, googleAuth, username, role });
@@ -41,7 +39,7 @@ export const form_content = {
             href: "join"
         }
     },
-    reset: {
+    "forgot_password/:token": {
         title: "Reset password",
         left_link: null,
         right_link: null

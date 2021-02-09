@@ -11,7 +11,7 @@ const FormInput = ({ label, value, type, placeholder, elem_class, tooltip, onCha
             value={value || ""}
             name={label || ""}
             pattern={pattern}
-            required={required ? true : false}
+            required={required}
             placeholder={placeholder}
             onChange={onChange}
             onBlur={() => validate && validate({ [label]: value })}

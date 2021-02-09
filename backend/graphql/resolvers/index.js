@@ -35,7 +35,6 @@ const resolvers = {
     },
     AuthResult: authResolver.AuthResult,
     LoginResult: userResolver.LoginResult,
-    ExploreItem: exploreResolver.ExploreItem,
     Response: {
         __resolveType(obj) {
             if (obj.success) return 'Result';

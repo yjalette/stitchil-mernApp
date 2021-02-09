@@ -32,15 +32,14 @@ const ExploreGrid = ({ items, total, activePage, loadMoreData, filters, onFilter
                 emptyResultType="results"
                 getProps={(item) => {
                     return {
-                        title: item.title,
-                        imageUrl: item.imageUrl,
-                        body: (
-                            <>
-                                <ListItem field="styles" content={item.styles} />
-                                <ListItem field="price" content={`starts at ${item.price}$`} />
-                            </>
-                        ),
-                        footer: (
+                        itemId: item._id,
+                        header: { title: item.title },
+                        coverImage: item.coverImage,
+                        highlights: [
+                            { field: "fabric choices: ", content: item.fabrics },
+                            { field: "price starts at: ", content: `$${item.price}` }]
+                        ,
+                        sideMenu: (
                             <>
                                 <CustomButton btn_class="btn-icon" icon="fa fa-angle-double-right" />
                             </>

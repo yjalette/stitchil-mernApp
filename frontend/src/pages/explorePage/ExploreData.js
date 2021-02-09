@@ -4,32 +4,22 @@ import ExploreGrid from './ExploreGrid';
 import { EXPLORE_ITEMS_QUERY } from './graphql/queries'
 
 const ExploreData = () => {
+    const [values, setValues] = useState([]);
     const [page, setPage] = useState(0);
     const [filters, setFilters] = useState({});
     const [price, setPrice] = useState({});
-    const [values, setValues] = useState([]);
     const { data, refetch, fetchMore, updateQuery } = useQueryHook(EXPLORE_ITEMS_QUERY, { filters, price, page: Number(page) });
 
     useEffect(() => {
-        if (data && data.explore_items) setValues(data.explore_items.items)
+        if (data && data.explore_items) setValues(data.explore_items)
     }, [data]);
 
     useEffect(() => {
         if (filters && refetch) refetch();
-        console.log("filters")
     }, [filters, refetch]);
-
-    // useEffect(() => {
-    //     if (page && updateQuery) {
-    //         updateQuery((prev, newRes) => {
-    //             console.log(newRes)
-    //         })
-    //     }
-    // }, [page, updateQuery])
 
     useEffect(() => {
         if (price && refetch) refetch();
-        console.log("price")
     }, [price, refetch]);
 
     const handlePrice = ({ target }) => {
@@ -66,7 +56,6 @@ const ExploreData = () => {
 
     return <ExploreGrid
         items={values}
-        total={data && data.explore_items && data.explore_items.total && data.explore_items.total}
         activePage={page}
         loadMoreData={loadMoreData}
         filters={filters}

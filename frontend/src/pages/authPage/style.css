@@ -1,40 +1,32 @@
-.auth .custom-btn {
-    align-self: flex-end;
-    margin: 1rem 0;
-}
-
 .auth__google-wrapper {
     width: 100%;
-}
-
-.auth__form .groupButton .customButton {
-    margin: 0 0.5rem;
-}
-
-.auth__google {
-    padding: 1rem 0;
+    order: 2;
+    margin: .8rem;
 }
 
 .auth__google-btn {
-    /* box-shadow: none !important; */
     overflow: hidden;
     flex-direction: row-reverse;
     border-radius: var(--border-radius);
 }
 
-.join__continueButton, .join__submitButton {
-    float: right;
+.authJoin {
+    display: flex;
+    flex-direction: column;
 }
 
-.join__continueButton, .join__backButton {
-    margin: 1rem 0;
+.authJoin .btn-form {
+    order: 2;
+    width: 90px;
+    align-self: flex-end;
+    margin: 0 1rem 1rem 0;
 }
 
-.join__backButton {
-    align-self: flex-start;
-    flex-direction: row-reverse;
+.authJoin .groupButton {
+    display: block;
+    margin: .5rem;
 }
 
-.auth__iconBtn {
-    float: right;
+.authJoin .btn-forward {
+    margin: auto;
 }

@@ -7,7 +7,6 @@ import ListItem from '../../layout/ListItem'
 import SectionWrapper from '../../layout/SectionWrapper'
 
 const ProductGrid = ({ product }) => {
-    console.log(product)
     return (
         <>
             <SectionWrapper>

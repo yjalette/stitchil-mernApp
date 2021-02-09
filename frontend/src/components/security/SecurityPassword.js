@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 
 import AuthContext from '../../context/Auth-context'
 import useForm from '../../custom_hooks/useForm';

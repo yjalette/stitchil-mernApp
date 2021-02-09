@@ -3,48 +3,17 @@ const { gql } = require("apollo-server-express");
 
 module.exports = gql`
 
-type ExploreResult {
-    items: [ExploreItem]
-    total: Int
-}
-
-interface ExploreItem {
+type ExploreItem {
     _id: ID
     title: String
     category: [String]
     styles: [String]
     price: Int
     fabrics: [String]
-    imageUrl: String
-    updatedAt: String
-    creator: AuthData
-}
-
-type BuyerItem implements ExploreItem{
-    _id: ID
-    title: String
-    category: [String]
-    styles: [String]
-    price: Int
-    fabrics: [String]
-    imageUrl: String
-    updatedAt: String
-    creator: AuthData
-    bids: [String]
-}
-
-type DesignerItem implements ExploreItem {
-    _id: ID
-    title: String
-    category: [String]
-    styles: [String]
-    price: Int
-    fabrics: [String]
-    imageUrl: String
-    updatedAt: String
-    creator: AuthData
     delivery: Int
-    saved: [String]
+    coverImage: String
+    updatedAt: String
+    creator: AuthData
 }
 
 input Filters {
@@ -68,7 +37,7 @@ type Bid {
 
 
 type Query {        
-    explore_items(filters: Filters, price: Price, page: Int): ExploreResult 
+    explore_items(filters: Filters, price: Price, page: Int): [ExploreItem] 
 }
 
 

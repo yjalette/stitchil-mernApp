@@ -228,12 +228,6 @@
     margin: 0;
 }
 
-.pageMenu .active {
-    background-color: var(--green-color) !important;
-
-    /* order: -1; */
-}
-
 .pageMenu .active:after {
     position: absolute;
     left: 50%;
@@ -259,6 +253,17 @@
 
 .customForm {
     width: 100%;
+}
+
+.swiper-container {
+    width: 100%;
+    min-height: 300px;
+}
+
+.swiper-slide {
+    min-height: 200px;
+    background-size: cover;
+    background-position: center;
 }
 
 @media only screen and (max-width: 1200px) {}

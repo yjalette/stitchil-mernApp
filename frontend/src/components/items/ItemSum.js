@@ -7,11 +7,12 @@ import ListItem from '../../layout/ListItem';
 const ItemSum = ({ itemId, header, highlights, coverImage, sideMenu }) => {
     const { section } = useParams();
     const { push } = useHistory();
+    console.log(highlights)
     return (
         <Card className="itemSum">
             <Card.Header>
                 <Card.Title className="itemSum__title" >
-                    <CustomButton btn_class="btn-icon-text" icon="fa fa-angle-double-right" onClick={() => push(`/view-${section}-item/${itemId}`)}>
+                    <CustomButton btn_class="btn-icon-text" icon="fa fa-angle-double-right" onClick={() => push(`/view-${section || "gigs"}-item/${itemId}`)}>
                         {header.title}
                     </CustomButton>
                 </Card.Title>

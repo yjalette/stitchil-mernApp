@@ -94,19 +94,6 @@ input, textarea, select, .btn-icon {
     border-bottom: 1px solid var(--red-color) !important;
 }
 
-/* .swiper-container-multirow-column > .swiper-wrapper {
-    flex-wrap: wrap;
-} */
-
-.swiper-button-prev.swiper-button-disabled, .swiper-button-next.swiper-button-disabled {
-    opacity: 0 !important;
-}
-
-/* .slides-wrapper .modal-dialog {
-    max-width: 80% !important;
-    max-height: 80% !important;
-} */
-
 .modal-dialog {
     margin: 0 auto !important;
 }
@@ -149,4 +136,12 @@ select option, .nav-tabs, .nav-link:hover, .nav-link.active, .navbar-toggler {
 
 .dropdown-menu {
     background-color: var(--main-color);
+}
+
+.swiper-button-prev, .swiper-button-next {
+    color: var(--accent-color) !important;
+}
+
+.pageMenu .active {
+    background-color: var(--green-color) !important;
 }

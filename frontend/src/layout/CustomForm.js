@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form } from 'react-bootstrap'
+import { Form, Button } from 'react-bootstrap'
 import "./style.css"
 import InlineAlert from './alerts/InlineAlert';
 import GroupButton from './button/GroupButton';
@@ -12,7 +12,7 @@ const CustomForm = ({ form_class, form_msg, form_error, submitTitle, onSubmit, o
         {children}
         {onSubmit && <GroupButton group_class="customForm__groupButton">
             {onCancel && <CustomButton onClick={onCancel} btn_class="btn-form btn-form-cancel">cancel</CustomButton>}
-            <CustomButton type="submit" onClick={onSubmit} btn_class="btn-form">{submitTitle || "submit"}</CustomButton>
+            <Button type="submit" onSubmit={onSubmit} className="btn-form">{submitTitle || "submit"}</Button>
         </GroupButton>}
     </Form>
 )

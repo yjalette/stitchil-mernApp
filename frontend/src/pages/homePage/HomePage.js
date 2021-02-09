@@ -2,7 +2,6 @@ import React from 'react';
 import { Row } from 'react-bootstrap';
 
 import { guarantees, howItWorks, questions, whyStitch, tagLines } from './consts';
-
 import Guarantees from './Guarantees';
 import CustomAccordion from '../../layout/CustomAccordion';
 import Tagline from '../../layout/Tagline';
