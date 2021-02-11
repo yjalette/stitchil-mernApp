@@ -3,7 +3,7 @@ import React, { useEffect, useContext } from 'react';
 import useForm from '../../../custom_hooks/useForm';
 import useMutationHook from '../../../custom_hooks/useMutationHook';
 import FormInput from '../../../components/inputs/FormInput';
-import AccountForm from './AccountForm';
+import CustomForm from '../../../layout/CustomForm'
 import AuthContext from '../../../context/Auth-context';
 import { updateLocalStorage } from '../../../helpers/localStorageHelper';
 import { handleResponse } from '../../../helpers/dataHelper';
@@ -38,15 +38,9 @@ const AccountUsername = ({ currValue }) => {
         post({ variables: inputs });
     }
 
-    return <AccountForm
-        userInputs={<FormInput
-            label="username"
-            onChange={handleChange}
-            value={inputs.username} />}
-        form_msg={msg}
-        form_error={errors.form_error}
-        onSubmit={handleSubmit}
-    />
+    return <CustomForm form_msg={msg} form_error={errors.form_error} onSubmit={handleSubmit}>
+        <FormInput label="username" onChange={handleChange} value={inputs.username} />
+    </CustomForm>
 }
 
 export default AccountUsername

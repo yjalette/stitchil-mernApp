@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Modal } from 'react-bootstrap';
 import CustomButton from './button/CustomButton';
 
@@ -11,24 +11,21 @@ const CustomModal = ({
     btn_class,
     children,
     displayWithoutBtn,
-    onOpen,
-    onClose }) => {
+    timeOut }) => {
+
     const [open, setOpen] = useState(displayWithoutBtn ? true : false);
 
-    const handleOpen = () => {
-        onOpen && onOpen();
-        setOpen(true);
-    };
+    useEffect(() => {
+        if (timeOut) setTimeout(() => setOpen(false), timeOut)
+    }, [timeOut])
 
-    const handleClose = () => {
-        onClose && onClose();
-        setOpen(false);
-    };
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
 
     if (!open && !displayWithoutBtn) return <CustomButton onClick={handleOpen} btn_class={btn_class}>{btn_title}</CustomButton>
-
     return (
-        <Modal show={open} onHide={handleClose}
+        <Modal
+            show={open} onHide={handleClose}
             size={modal_size || "xl"}
             aria-labelledby="contained-modal-title-vcenter"
             dialogClassName={`customModal ${modal_class}__wrapper`}

@@ -16,7 +16,7 @@ type Message {
 type Chat {
     _id: ID
     members: [Member]
-    messages: [Message]
+    messages: [String]
 }
 
 type Member {
@@ -24,30 +24,13 @@ type Member {
     profileImage: String
 }
 
-input ChatInput {
-    message: String
-    sender: String
-    members: [String]
-    messages: [MessageInput]
-    profileImage: String
-    createdAt: String
-}
-
-input MessageInput {
-    chatId: String
-    message: String
-    sender: String
-    createdAt: String
-}
-
-
 type Query {        
     chats: [Chat]
 }
 
-type Mutation {    
-    createChat(message: String, participant: String): Boolean
-    createMessage(message: String, docId: String): Boolean 
+type Mutation {  
+    updateChat(message: String,  docId: String): Boolean   
+    createMessage(message: String, recipient: String): Boolean 
     deleteMessage(itemId: ID): Boolean 
     deleteChat(chatId: ID, msgId: ID): Boolean 
 }

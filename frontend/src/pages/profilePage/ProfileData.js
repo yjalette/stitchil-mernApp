@@ -9,8 +9,7 @@ import { PROFILE_USER_QUERY } from './graphql/queries';
 import LoadingSpinner from '../../components/LoadingSpinner';
 
 
-const ProfileData = ({ logged_in_user }) => {
-    const { username, section } = useParams();
+const ProfileData = ({ logged_in_user, section, username }) => {
     const { data, updateQuery } = useQueryHook(PROFILE_USER_QUERY, { username });
     const [values, setValues] = useState({});
 
@@ -18,7 +17,7 @@ const ProfileData = ({ logged_in_user }) => {
         if (data) setValues(data.userProfile);
     }, [data]);
 
-    const handleNewItem = newItem => {
+    const handleNewItem = (newItem) => {
         updateQuery(prev => ({
             userProfile: {
                 ...prev.userProfile,
@@ -55,7 +54,7 @@ const ProfileData = ({ logged_in_user }) => {
 
     return (
         <ProfilePageContext.Provider value={{ logged_in_user, updateQuery }}>
-            <ProfileGrid resData={values} activeSection={section} sectionProps={sectionProps} />
+            <ProfileGrid resData={values} section={section} sectionProps={sectionProps} />
         </ProfilePageContext.Provider>
     )
 

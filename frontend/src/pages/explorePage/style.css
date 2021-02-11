@@ -102,9 +102,10 @@
     padding: var(--padding-section);
 }
 
-/* .exploreFilter__wrapper .btn-icon-text > * {
-    pointer-events: none;
-} */
+.sectionWrapper-filter {
+    border-bottom: 1px solid var(--accent-color);
+    border-top: 1px solid var(--accent-color);
+}
 
 .exploreParam__selected {
     color: var(--light-gray-color) !important;

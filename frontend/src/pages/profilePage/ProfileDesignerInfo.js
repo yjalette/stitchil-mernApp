@@ -26,7 +26,7 @@ const ProfileDesignerInfo = ({ values }) => {
         toggleEditMode();
     }
 
-    if (editMode) return (
+    if (editMode && logged_in_user) return (
         <CustomForm form_class="designer__form" onSubmit={handleSubmit} onCancel={handleClear} submitTitle="save" >
             {Object.keys(initState_designer).map((label, index) => <FormMultipleInput
                 key={index}

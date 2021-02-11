@@ -19,7 +19,7 @@
     width: 100%;
     display: flex;
     align-items: center;
-    padding: var(--padding-box);
+    padding: var(--padding-section);
 }
 
 .sectionHeader__title {
@@ -211,36 +211,6 @@
 .iconMenu .dropdown-menu {
     position: absolute !important;
     z-index: 5000;
-}
-
-.pageMenu {
-    width: 100%;
-    background-color: var(--green-color);
-    text-align: center;
-    margin: auto;
-    justify-content: space-evenly;
-}
-
-.pageMenu__item {
-    padding: .75rem;
-    position: relative;
-    color: var(--light-gray-color) !important;
-    margin: 0;
-}
-
-.pageMenu .active:after {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 0;
-    height: 100px;
-    content: '';
-    border-left: 12px solid transparent;
-    border-right: 12px solid transparent;
-    border-bottom-width: 12px;
-    border-bottom-style: solid;
-    border-bottom-color: var(--main-color-light);
-    bottom: 0;
 }
 
 .plainIcon {

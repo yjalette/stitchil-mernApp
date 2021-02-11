@@ -102,7 +102,7 @@ input, textarea, select, .btn-icon {
     padding: var(--padding-elem) !important;
 }
 
-select option, .nav-tabs, .nav-link:hover, .nav-link.active, .navbar-toggler {
+select option, .nav-link:hover, .nav-link.active, .navbar-toggler {
     border: none !important;
 }
 
@@ -140,8 +140,4 @@ select option, .nav-tabs, .nav-link:hover, .nav-link.active, .navbar-toggler {
 
 .swiper-button-prev, .swiper-button-next {
     color: var(--accent-color) !important;
-}
-
-.pageMenu .active {
-    background-color: var(--green-color) !important;
 }

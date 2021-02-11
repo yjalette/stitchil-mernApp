@@ -12,7 +12,7 @@ import CustomButton from '../../layout/button/CustomButton';
 
 const ExploreGrid = ({ items, total, activePage, loadMoreData, filters, onFilter, price, onPriceChange, deleteSearchParam, clearAll }) => (
     <>
-        <SectionWrapper>
+        <SectionWrapper section_class="filter">
             <FilterWrapper
                 filters={filters}
                 onFilter={onFilter}
@@ -33,6 +33,7 @@ const ExploreGrid = ({ items, total, activePage, loadMoreData, filters, onFilter
                 getProps={(item) => {
                     return {
                         itemId: item._id,
+                        creator: item.creator,
                         header: { title: item.title },
                         coverImage: item.coverImage,
                         highlights: [

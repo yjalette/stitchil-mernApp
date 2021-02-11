@@ -8,7 +8,6 @@ import { form_content } from './helpers'
 import CustomModal from '../../layout/CustomModal';
 
 const AuthPage = ({ history, auth_type, children }) => {
-    console.log(auth_type)
     const { left_link, right_link, title } = form_content[auth_type];
     const handleRedirect = (url) => history.push(`/auth/${url}`)
     const handleCloseModal = () => history.push(`/`)

@@ -4,7 +4,7 @@ import useForm from '../../../custom_hooks/useForm';
 import FormMultipleInput from '../../../components/inputs/FormMultipleInput';
 import FormInput from '../../../components/inputs/FormInput';
 import { handleResponse } from '../../../helpers/dataHelper';
-import AccountForm from './AccountForm';
+import CustomForm from '../../../layout/CustomForm'
 import useMutationHook from '../../../custom_hooks/useMutationHook';
 import { UPDATE_GENERAL_MUTATION } from '../graphql/mutations';
 
@@ -35,17 +35,14 @@ const AccountGeneral = ({ currValues }) => {
     }
 
 
-    return <AccountForm
-        userInputs={(<>
+    return <CustomForm form_msg={msg} form_error={errors.form_error} onSubmit={handleSubmit}>
+        <>
             <FormInput label="fullname" onChange={handleChange} value={inputs["fullname"]} />
-            <FormMultipleInput label="languages" selected={inputs["languages"]} multiple={true} onChange={value => handleMultiChange("languages", value)} />
-            <FormMultipleInput label="country" selected={inputs["country"]} onChange={value => handleMultiChange("country", value)} />
+            <FormMultipleInput label="languages" selected={inputs["languages"]} multiple={true} onChange={handleMultiChange} />
+            <FormMultipleInput label="country" selected={inputs["country"]} onChange={handleMultiChange} />
 
-        </>)}
-        form_msg={msg}
-        form_error={errors.form_error}
-        onSubmit={handleSubmit}
-    />
+        </>
+    </CustomForm>
 
 }
 

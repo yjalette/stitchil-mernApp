@@ -5,6 +5,7 @@ import { ACCOUNT_QUERY } from '../graphql/queries';
 import AccountEmail from './AccountEmail';
 import AccountGeneral from './AccountGeneral';
 import AccountUsername from './AccountUsername';
+import BoxWrapper from './../../../layout/BoxWrapper';
 
 const AccountData = () => {
     const [values, setValues] = useState({})
@@ -16,9 +17,15 @@ const AccountData = () => {
 
     return (
         <>
-            <AccountGeneral currValues={{ fullname: values.fullname, languages: values.languages, country: values.country }} />
-            <AccountUsername currValue={values.username} />
-            <AccountEmail currValue={values.email} />
+            <BoxWrapper>
+                <AccountGeneral currValues={{ fullname: values.fullname, languages: values.languages, country: values.country }} />
+            </BoxWrapper>
+            <BoxWrapper>
+                <AccountUsername currValue={values.username} />
+            </BoxWrapper>
+            <BoxWrapper>
+                <AccountEmail currValue={values.email} />
+            </BoxWrapper>
         </>
     )
 }

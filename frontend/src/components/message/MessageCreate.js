@@ -8,22 +8,20 @@ import CustomButton from '../../layout/button/CustomButton';
 import FormTextarea from '../inputs/FormTextarea';
 import useMutationHook from '../../custom_hooks/useMutationHook';
 
-const MessageCreate = ({ query, otherVariables, docId, addMessage, onMessageSent, children, msg_class }) => {
+const MessageCreate = ({ query, otherVariables, onMessageSent, children, msg_class }) => {
     const { user } = useContext(AuthContext);
     const { inputs, setInputs, handleChange, handleSubmit } = useForm({ message: "" }, onSubmit);
     const { post } = useMutationHook(query, onPostCompleted);
 
     function onPostCompleted() {
-        addMessage({
+        if (onMessageSent) onMessageSent({
             _id: 0,
             message: inputs.message,
             sender: { profileImage: user.profileImage || "", username: user.username, __typename: "" },
-            docId,
             createdAt: new Date(),
-            __typename: "",
-            ...otherVariables
+            ...otherVariables,
+            __typename: ""
         });
-        onMessageSent();
         setInputs({ message: "" });
     }
 

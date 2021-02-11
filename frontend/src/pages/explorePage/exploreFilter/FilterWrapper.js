@@ -5,7 +5,7 @@ import defaultFilters from './defaultFilters';
 import SwitchCheckBox from '../../../components/inputs/SwitchCheckBox';
 
 const FilterWrapper = ({ filters, onFilter, price, onPriceChange, children }) => (
-    <div className="exploreFilter__wrapper">
+    <>
         <div className="exploreFilter flex-center justify-content-between w-100">
             <section className="exploreFilter__fiters">
                 {Object.keys(defaultFilters).map((elem, i) => <FilterOptions
@@ -21,7 +21,7 @@ const FilterWrapper = ({ filters, onFilter, price, onPriceChange, children }) =>
             </section>
         </div>
         {children}
-    </div>
+    </>
 )
 
 export default FilterWrapper;

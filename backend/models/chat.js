@@ -13,18 +13,9 @@ const ChatSchema = new Schema({
     ],
     messages: [
         {
-            sender: {
-                type: Schema.Types.ObjectId,
-                ref: 'User'
-            },
-            message: {
-                type: String,
-                required: false
-            },
-            createdAt: {
-                type: Date,
-                required: true
-            }
+            type: Schema.Types.ObjectId,
+            ref: 'Message',
+            required: true
         }
     ],
     updatedAt: {

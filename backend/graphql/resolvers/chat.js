@@ -1,7 +1,6 @@
 const User = require("../../models/user");
 const Chat = require("../../models/chat");
 
-
 module.exports = {
     Query: {
         chats: async (_, { }, req) => {
@@ -20,51 +19,16 @@ module.exports = {
         },
     },
     Mutation: {
-        createChat: async (_, { message, participant }, req) => {
-            if (!req.isUser) throw new Error("unauthenticated");
-
-            const user2 = await User.findOne({ username: participant }, { _id: 1 }).lean();
-            const existingChat = await Chat.findOne({ members: { $all: [req.userId, user2._id] } });
-
-            if (existingChat) {
-                existingChat.messages.push({
-                    message,
-                    sender: req.userId,
-                    createdAt: new Date()
-                })
-                existingChat.updatedAt = new Date();
-                existingChat.save()
-            }
-
-            if (!existingChat) await new Chat({
-                members: [req.userId, user2._id],
-                messages: [{
-                    message,
-                    sender: req.userId,
-                    createdAt: new Date()
-                }],
-                updatedAt: new Date(),
+        updateChat: async (_, { message, docId }, { userId }) => {
+            if (!userId) throw new Error("unauthenticated");
+            console.log(message, docId)
+            const newMessage = await Message({
+                message,
+                sender: userId,
                 createdAt: new Date()
             }).save();
 
-            return true
-        },
-        createMessage: async (_, { message, docId }, req) => {
-            if (!req.userId) throw new Error("unauthenticated");
-            console.log(message, docId, req.userId)
-            const chat = await Chat.findById(docId);
-            chat.messages = [{ message, sender: req.userId, createdAt: new Date() }, ...chat.messages];
-            chat.updatedAt = new Date();
-            await chat.save();
-            return true;
-        },
-        deleteMessage: async (_, { itemId }, req) => {
-            try {
-                await Message.findByIdAndRemove(itemId);
-                return true
-            } catch (error) {
-                throw new Error(error)
-            }
+            return await Chat.findByIdAndUpdate(docId, { $push: { messages: newMessage._id } });
         },
         deleteChat: async ({ chatId, msgId }, req) => {
             if (!req.userId) throw new Error("unauthenticated");

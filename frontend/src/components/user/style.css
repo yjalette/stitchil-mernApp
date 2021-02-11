@@ -1,5 +1,6 @@
 .userAvatar {
     display: flex;
+    cursor: pointer;
 }
 
 .userAvatar__username {

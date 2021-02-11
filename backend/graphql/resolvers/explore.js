@@ -18,7 +18,7 @@ module.exports = {
                 // .limit(10)
                 return items.slice(page, page * 1 + 1)
             }
-            const items = await Gig.find().sort({ createdAt: -1 }).limit(10);
+            const items = await Gig.find().populate(populateByUser).sort({ createdAt: -1 }).limit(10);
             console.log(items)
             return items
         }

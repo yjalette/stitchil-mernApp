@@ -1,6 +1,6 @@
 const User = require("../../models/user");
 const { comparePwd, createPwd, verifyJWT } = require("../../helpers/creds");
-const { uploadToCloud, deleteFile } = require("../../helpers/uploadToCloud");
+const { uploadToCloud, deleteSingleFile } = require("../../helpers/uploadToCloud");
 const { unauthorized_error,
     server_error,
     notUser_error,
@@ -36,7 +36,7 @@ module.exports = {
             if (!userId) throw new Error("unauthenticated user to upload file");
             try {
                 const user = await User.findById(userId);
-                if (user[image_type]) await deleteFile(`${userId}/${image_type}`);
+                if (user[image_type]) await deleteSingleFile(`${userId}/${image_type}`);
                 const result = await uploadToCloud({ file, public_id: `${userId}/${image_type}` });
                 user[image_type] = result.url;
                 await user.save();

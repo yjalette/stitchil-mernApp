@@ -35,14 +35,14 @@ const ProfileImage = ({ src, image_type }) => {
     if (!logged_in_user) return <Image src={src || defaultImg} className={image_type} />
 
     return (
-        <div className={`${image_type}__wrapper userImage-wrapper`}>
+        <div className={`${image_type}-wrapper profileUpload__wrapper`}>
             <Image className={image_type} src={files ? URL.createObjectURL(files[0]) : src || defaultImg} alt="files" />
-            {!showButtons ? <div {...getRootProps()} className="userImage__box flex-center">
+            {!showButtons ? <div {...getRootProps()} className="profileUpload__box flex-center">
                 <input {...getInputProps({ className: 'dropzone' })} />
-                <CustomButton icon="fa fa-camera" btn_class="btn-icon" />
+                <CustomButton icon="fa fa-camera" btn_class="btn-icon profileUpload__btn" />
             </div>
                 :
-                <GroupButton group_class="userImage__box justify-content-end">
+                <GroupButton group_class="profileUpload__box justify-content-end">
                     <CustomButton icon="fa fa-check mr-2" btn_class="btn-icon" onClick={handleSave} />
                     <CustomButton icon="fa fa-close" btn_class="btn-icon btn-icon-red" onClick={handleCancel} />
                 </GroupButton>

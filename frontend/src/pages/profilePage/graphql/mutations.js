@@ -68,3 +68,9 @@ export const LIKE_PRODUCT_MUTATION = gql`
     }
 `
 
+export const CREATE_MESSAGE_MUTATION = gql`
+        mutation CreateMessage($message: String, $recipient: String){
+            createMessage(message: $message, recipient: $recipient)
+        }
+`
+

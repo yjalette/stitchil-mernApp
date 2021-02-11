@@ -23,6 +23,11 @@ const ProfileReviews = ({ values, addItemCache }) => {
         }
     }, [user]);
 
+    const handleReview = async review => {
+        await addItemCache(review);
+        toggle();
+    }
+
     return (
         <>
             <SectionHeader title={`reviews (${values.length || 0})`} />
@@ -35,8 +40,7 @@ const ProfileReviews = ({ values, addItemCache }) => {
             </div>
             {open && <ReviewCreate
                 query={CREATE_REVIEW_MUTATION}
-                addMessage={addItemCache}
-                onMessageSent={toggle}
+                onMessageSent={handleReview}
                 otherVariables={{ recipient: username, rating }}>
                 <section className="reviewCreate__header">
                     <UserAvatar profileImage={user.profileImage} username={user.username} />

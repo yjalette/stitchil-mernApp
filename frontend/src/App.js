@@ -17,6 +17,9 @@ import ProductPage from './pages/productPage/ProductPage';
 import AuthLogin from './pages/authPage/AuthLogin';
 import AuthJoin from './pages/authPage/AuthJoin';
 import AuthForgotPassword from './pages/authPage/AuthForgotPassword';
+import AccountData from './pages/settingsPage/settingsAccount/AccountData';
+import SecurityIndex from './pages/settingsPage/settingsSecurity/SecurityIndex';
+import NotificationIndex from './pages/settingsPage/settingsNotification/NotificationIndex';
 
 const userObj = JSON.parse(localStorage.getItem('user'));
 
@@ -27,6 +30,13 @@ const authComponents = [
   { auth_type: "forgot_password", component: <AuthForgotPassword /> },
   { auth_type: "forgot_password/:token", component: <AuthForgotPassword /> }
 ]
+
+const settingsComponents = [
+  { section: "account", component: <AccountData /> },
+  { section: "security", component: <SecurityIndex /> },
+  { section: "notifications", component: <NotificationIndex /> },
+]
+
 
 class App extends Component {
   state = { user: userObj || null };
@@ -46,8 +56,9 @@ class App extends Component {
             {authComponents.map(elem => <Route key={elem.auth_type} path={`/auth/${elem.auth_type}`}>
               <AuthPage auth_type={elem.auth_type}>{elem.component}</AuthPage></Route>)}
             <Switch>
+              {settingsComponents.map(elem => <Route key={elem.section} path={`/settings/${elem.section}`}>
+                <SettingsPage section={elem.section}>{elem.component}</SettingsPage></Route>)}
               <Route path="/explore" component={ExplorePage} />
-              <Route path="/settings/:section" component={SettingsPage} />
               <Route path="/filter/:section/:category" component={ExplorePage} />
               <Route path="/profile/:username/:section" component={ProfilePage} />
               <Route path="/view-gigs-item/:id" component={GigPage} />

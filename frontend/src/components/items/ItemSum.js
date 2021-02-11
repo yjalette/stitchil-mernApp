@@ -3,11 +3,11 @@ import { Card, Container } from 'react-bootstrap'
 import { useHistory, useParams } from 'react-router-dom';
 import CustomButton from '../../layout/button/CustomButton';
 import ListItem from '../../layout/ListItem';
+import UserAvatar from '../user/UserAvatar';
 
-const ItemSum = ({ itemId, header, highlights, coverImage, sideMenu }) => {
+const ItemSum = ({ itemId, header, highlights, coverImage, sideMenu, creator }) => {
     const { section } = useParams();
     const { push } = useHistory();
-    console.log(highlights)
     return (
         <Card className="itemSum">
             <Card.Header>
@@ -21,10 +21,12 @@ const ItemSum = ({ itemId, header, highlights, coverImage, sideMenu }) => {
             <Card.Body className="itemSum__body" >
                 <Card.Img className="itemSum__img" src={coverImage} />
                 <Container className="itemSum__overlay">
+                    <div className="itemSum__creator">
+                        {creator && <UserAvatar username={creator.username} />}
+                    </div>
                     <div className="itemSum__menu">
                         {sideMenu}
                     </div>
-                    {/* <CustomButton btn_class="btn-click">details</CustomButton> */}
                 </Container>
             </Card.Body>
             <Card.Footer className="itemSum__footer" >{highlights.map((item, index) => <ListItem key={index} {...item} />)}</Card.Footer>

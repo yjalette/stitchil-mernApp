@@ -1,11 +1,7 @@
-
-
-
-
-/* .settings__title {
-    font-size: 3rem;
-    padding: var(--padding-elem);
-} */
+.pageWrapper-settings .boxWrapper {
+    width: 100%;
+    margin-bottom: 1rem;
+}
 
 .settings__password {
     background-color: var(--main-color);
