@@ -13,13 +13,15 @@ const ProfileHeader = ({ coverImage, profileImage, fullname }) => {
         <section className="profileHeader">
             <ProfileImage src={coverImage} image_type="coverImage" />
             <Container className="profileHeader__overlay">
-                <ProfileImage src={profileImage} image_type="profileImage" />
-                <h2 className="profileHeader__title">{fullname} </h2>
+                <Container className="profileHeader__leftCol">
+                    <ProfileImage src={profileImage} image_type="profileImage" />
+                    <h2 className="profileHeader__title">{fullname} </h2>
+                </Container>
+                <GroupButton group_class={!logged_in_user ? "profileHeader__buttons" : "profileHeader__buttons profileHeader__buttons-hide"}>
+                    <DemoVersionAlert btn_props={{ btn_class: "ml-2 btn-click", btn_title: "follow" }} />
+                    <ProfileMessage />
+                </GroupButton>
             </Container>
-            <GroupButton group_class="profileHeader__buttons">
-                {!logged_in_user && <ProfileMessage />}
-                <DemoVersionAlert btn_props={{ btn_class: "ml-2 btn-click", btn_title: "follow" }} />
-            </GroupButton>
         </section>
 
     )

@@ -106,10 +106,6 @@ select option, .nav-link:hover, .nav-link.active, .navbar-toggler {
     border: none !important;
 }
 
-/* .modal-header .close {
-    display: none;
-} */
-
 .red-btn {
     color: var(--red-color) !important;
     float: right;

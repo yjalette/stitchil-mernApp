@@ -1,8 +1,7 @@
 <div class="container">
-    {{> header title="Welcome to Stitchil!" subtitle="Please click the button below to confirm your email address and
-    activate your account."}}
-    {{> clickButton link=link btnTitle="confirm"}}
-    {{!-- {{> muteText text="Thanks for choosing Stitchil.com, we’re thrilled to count you as the newest member of our
-    global
-    community!"}} --}}
+    {{> header title="Welcome to Stitchil" name=name}}
+    <span class="content">Please click{{> buttonLink link=link btnTitle="here"}}to confirm your email
+        address
+        and
+        activate your account.</span>
 </div>

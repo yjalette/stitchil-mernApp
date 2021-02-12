@@ -11,6 +11,7 @@ const CustomModal = ({
     btn_class,
     children,
     displayWithoutBtn,
+    onClose,
     timeOut }) => {
 
     const [open, setOpen] = useState(displayWithoutBtn ? true : false);
@@ -20,7 +21,10 @@ const CustomModal = ({
     }, [timeOut])
 
     const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
+    const handleClose = () => {
+        onClose && onClose();
+        setOpen(false);
+    }
 
     if (!open && !displayWithoutBtn) return <CustomButton onClick={handleOpen} btn_class={btn_class}>{btn_title}</CustomButton>
     return (
@@ -34,7 +38,7 @@ const CustomModal = ({
         >
             {modal_title && <Modal.Header className="customModal__header" closeButton={false} >
                 <Modal.Title>{modal_title}</Modal.Title>
-                <CustomButton onClick={handleClose} btn_class="btn-close" />
+                <CustomButton onClick={handleClose} btn_class="btn-close customModal__btn-close" />
             </Modal.Header>}
             <Modal.Body scrollable="true"> {children}</Modal.Body>
             {modal_footer && <Modal.Footer className="customModal__footer">{modal_footer}</Modal.Footer>}

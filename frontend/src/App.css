@@ -194,6 +194,14 @@ ul {
     height: 250px;
 }
 
+.center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
 /* .header h1 {
     width: 80%;
     margin: auto;
@@ -348,8 +356,13 @@ hr {
         padding: 0.1em;
     }
 
-    .slides__col {
-        padding: 0;
+    .modal {
+        overflow-x: hidden;
+    }
+
+    .modal-content {
+        min-height: 100vh;
+        max-height: 100%;
     }
 
     /* .modal-dialog-centered {
@@ -364,9 +377,5 @@ hr {
 
     /* .fa-bars {
         font-size: var(--md-fonts);
-    } */
-
-    /* .modal-content {
-        height: 100vh;
     } */
 }

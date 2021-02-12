@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-
 const messageSchema = new Schema({
     docId: {
         type: String,
@@ -21,6 +20,10 @@ const messageSchema = new Schema({
     },
     rating: {
         type: Number,
+        required: false
+    },
+    seen: {
+        type: Boolean,
         required: false
     },
     createdAt: {

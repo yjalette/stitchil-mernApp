@@ -15,7 +15,6 @@ import SelectInput from '../../components/inputs/SelectInput';
 import FormMultipleInput from '../../components/inputs/FormMultipleInput';
 import FormInput from '../../components/inputs/FormInput';
 import FormSteps from '../../components/inputs/FormSteps';
-import { Button } from 'react-bootstrap';
 
 const AuthJoin = () => {
     const { push } = useHistory()
@@ -75,22 +74,23 @@ const AuthJoin = () => {
         }
     }
 
-    const form_parts = [<>
-        <FormInput {...props("email")} />
-        <Password {...props("password")} />
-        <Password {...props("confirm_password")} />
-        <GoogleButton responseGoogle={responseGoogle} />
-    </>,
-    <>
-        <FormInput {...props("fullname")} />
-        <FormInput {...props("username")} />
-        <FormMultipleInput label="country" required={true} error={errors.country} selected={inputs.country} onChange={handleMultiChange} />
-        <SelectInput {...props("role")} options={["designer", "buyer"]} required={true} />
-        <Button type="submit" className="btn-form customButton float-right" onSubmit={handleSubmit}>submit</Button>
-    </>]
+    const form_parts = [
+        <>
+            <FormInput {...props("email")} />
+            <Password {...props("password")} />
+            <Password {...props("confirm_password")} />
+            <GoogleButton responseGoogle={responseGoogle} />
+        </>
+        ,
+        <>
+            <FormInput {...props("fullname")} />
+            <FormInput {...props("username")} />
+            <FormMultipleInput label="country" required={true} error={errors.country} selected={inputs.country} onChange={handleMultiChange} />
+            <SelectInput {...props("role")} options={["designer", "buyer"]} required={true} />
+        </>]
 
     return (
-        <CustomForm form_class="authJoin" form_error={errors.form_error} form_msg={msg}>
+        <CustomForm form_class="authJoin" form_error={errors.form_error} form_msg={msg} onSubmit={handleSubmit}>
             {!inputs.googleAuth ? <FormSteps steps={form_parts} /> : form_parts[1]}
         </CustomForm>
     )

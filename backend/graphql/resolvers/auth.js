@@ -54,6 +54,7 @@ module.exports = {
                             subject: "Welcome To Stitchil!",
                             template: 'registration',
                             context: {
+                                name: userInput.fullname,
                                 link: 'http://localhost:3000/auth/verify_email'
                             }
                         });

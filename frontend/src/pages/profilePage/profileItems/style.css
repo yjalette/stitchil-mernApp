@@ -6,35 +6,10 @@
     text-transform: capitalize;
 }
 
-/* .item-preview__wrapper button {
-    float: right;
-}
-
-.item-preview__wrapper button a {
-    color: var(--accent-green);
-}
-
-.item .rank {
-    background: rgb(40 30 58 / 82%);
-    clip-path: polygon(100% 0, 100% 100%, 57% 87%, 0% 100%, 0 0);
-    padding: .3rem .5rem;
-    position: absolute;
-    top: 0;
-    right: 1%;
-}
-
-.slides__controls i {
-    color: var(--accent-color);
-    font-size: 4rem;
-    cursor: pointer;
-} */
-
 .itemUpload__list {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
-
-    /* align-items: center; */
     padding: var(--padding-box);
 }
 
@@ -99,6 +74,14 @@
     /* padding: var(--padding-box); */
 }
 
+.itemForm .itemToggle ~ .customForm__groupButton {
+    display: none;
+}
+
+.itemForm .formSteps__buttons {
+    margin: 1rem;
+}
+
 .itemUpload__box {
     justify-content: center;
     border-radius: 50%;
@@ -115,27 +98,6 @@
     max-width: 50px;
     max-height: 50px;
 }
-
-.itemForm-hideButton .groupButton {
-    display: none;
-}
-
-/* .hideButtons .customForm__groupButton {
-    display: none;
-} */
-/* 
-.itemForm__controllers .fa-long-arrow-right {
-    float: right;
-}
-
-.itemForm__controllers .fa-long-arrow-left {
-    float: left;
-} */
-
-/* .itemUpload__prev {
-    position: absolute;
-    z-index: 5200;
-} */
 
 @media (max-width: 992px) {}
 

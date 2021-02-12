@@ -10,10 +10,10 @@ const CustomForm = ({ form_class, form_msg, form_error, submitTitle, onSubmit, o
         {form_error && <InlineAlert content={form_error} variant="danger" alert_class="alert-danger" />}
         {form_msg && <InlineAlert content={form_msg} variant="success" alert_class="alert-success" />}
         {children}
-        {onSubmit && <GroupButton group_class="customForm__groupButton">
+        <GroupButton group_class="customForm__groupButton">
             {onCancel && <CustomButton onClick={onCancel} btn_class="btn-form btn-form-cancel">cancel</CustomButton>}
             <Button type="submit" onSubmit={onSubmit} className="btn-form">{submitTitle || "submit"}</Button>
-        </GroupButton>}
+        </GroupButton>
     </Form>
 )
 export default CustomForm

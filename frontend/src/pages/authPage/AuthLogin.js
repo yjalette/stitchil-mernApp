@@ -33,13 +33,13 @@ const AuthLogin = ({ verifiedEmail }) => {
 
     return (
         <>
-            <CustomForm form_class="authLogin" onSubmit={handleSubmit} onCancel={handleCancel} form_error={errors.form_error}>
+            <CustomForm form_class="authLogin" onSubmit={handleSubmit} form_error={errors.form_error}>
                 <FormInput type="email" label="email" onChange={handleChange} value={inputs.email} required={true} />
                 <FormInput type="password" label="password" onChange={handleChange} value={inputs.password} required={true} />
-                <Container className="text-light flex-center justify-content-start">
+                {/* <Container className="text-light flex-center justify-content-start">
                     <Form.Label>remeber me</Form.Label>
                     <Form.Check label=" " type="radio" />
-                </Container>
+                </Container> */}
             </CustomForm>
             {!verifiedEmail && <GoogleButton responseGoogle={responseGoogle} />}
         </>

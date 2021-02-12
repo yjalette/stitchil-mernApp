@@ -245,7 +245,8 @@
 
     .herobox__btn-group {
         justify-content: center;
-        padding-top: 1.5rem;
+        padding-bottom: 1.5rem;
+        padding-top: 0;
     }
 
     .landing__text {

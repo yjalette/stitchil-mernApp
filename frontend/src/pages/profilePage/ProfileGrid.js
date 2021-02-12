@@ -12,7 +12,7 @@ const ProfileGrid = ({ resData, sectionProps, section }) => {
     return (
         <>
             <ProfileHeader coverImage={resData && resData.coverImage} profileImage={resData && resData.profileImage} fullname={resData && resData.fullname} />
-            <Row className="profile__main p-3 w-100">
+            <Row className="profile__main w-100">
                 <Col xl={4} lg={5} md={6} sm={12} className="profile__col profile-leftComlun">
                     <ProfileIntro profile={resData} />
                 </Col>

@@ -1,53 +1,36 @@
-.chats {
-    width: 100%;
-    height: 800px;
-    overflow: hidden;
-    border: 1px solid var(--outline-color);
+.chat__grid {
+    height: 100%;
+
+    /* border: 1px solid var(--outline-color); */
 }
 
-.chatHeader {
+.chat__col-history {
+    border-right: 1px solid var(--outline-color);
+}
+
+/* .chat__col-history, .chat__col-active {
+    padding-left: 0;
+    padding-right: 0;
+} */
+
+.chatHistory__header, .chat__grid .userAvatar {
     height: 100px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: var(--padding-elem);
     border-bottom: 1px solid var(--outline-color);
-}
-
-.chatHeader .search-box {
-    width: 100%;
-}
-
-.chatHeader .search-box input {
-    width: 80%;
-    border-bottom: 1px solid var(--light-gray-color);
-}
-
-.chatHistory {
-    height: 100%;
-}
-
-.chatHistory__wrapper {
-    border-right: 1px solid var(--outline-color);
-    height: 700px;
-    overflow-y: auto;
-}
-
-.chatActive {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
 }
 
 .chatActive__messages {
     height: 600px;
     overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
 }
 
-.chatActive .messageForm-wrapper {
-    height: 100px;
-}
+/* .chatActive .messageForm-wrapper {
+    width: 100%;
+} */
 
 .chatActive__msg__wrapper {
     width: 100%;
@@ -60,9 +43,9 @@
     border: none;
 }
 
-.chatActive .messageItem__msg {
+/* .chatActive .messageItem__msg {
     padding: 0;
-}
+} */
 
 .chatActive-user {
     float: right;
@@ -73,29 +56,13 @@
     background-color: var(--outline-color);
 }
 
-.chatHistory__item {
-    margin: 0;
-    border: 1px solid var(--outline-color);
-}
-
-.chatHistory__item__col {
-    margin: 0;
-    height: 100%;
-}
-
-.chatHistory__item__img {
-    width: 100%;
-    height: 100px;
-    object-fit: cover;
-}
-
-.msg-form__box {
+/* .msg-form__box {
     width: 100%;
 }
 
 .msg-form__box label {
     display: none;
-}
+} */
 
 /* .messenger .modal-dialog {
     max-width: 100% !important;
@@ -105,7 +72,7 @@
     background-color: var(--main-color);
 } */
 
-.messenger__users {
+/* .messenger__users {
     align-items: flex-start;
     background: none repeat scroll 0 0;
     float: left;
@@ -114,62 +81,68 @@
     padding: 0 !important;
     height: 100%;
     overflow: hidden;
-}
+} */
 
-.messenger__userlist-item {
+/* .messenger__userlist-item {
     height: 100px;
-
-    /* border-top: 1px solid var(--main-color-light); */
     border-bottom: 1px solid var(--outline-color);
     clear: both;
     overflow: hidden;
-}
+} */
 
 /* .messenger__userlist-item + .messenger__userlist-item {
     border-bottom: 1px solid var(--main-color-light);
 } */
 
-.chatHistory__item-active {
-    background-color: var(--outline-color);
-    order: -1;
+/* history */
+
+.chatHistory__header .search-box {
+    width: 100%;
+}
+
+.chatHistory__header .search-box input {
+    width: calc(100% - 40px);
+}
+
+.chatHistory__header .search-box i {
+    margin: 0;
 }
 
 .chatHistory__item {
     width: 100%;
     height: 100px;
-    object-fit: cover;
+    overflow: hidden;
+    display: flex;
 }
 
-.chat__wrapper {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: 100%;
-    overflow-y: auto;
-    padding: var(--padding-box);
+.chatHistory__item + .chatHistory__item {
     border-bottom: 1px solid var(--outline-color);
 }
 
-.chat__item {
-    width: 45%;
-    background-color: #0c4e54;
-    border-radius: var(--border-radius);
-    margin: .5rem 0;
-    padding: var(--padding-elem);
+.chatHistory__item-active {
+    background-color: var(--main-color-light);
+    order: -1;
+}
+
+.chatHistory__img {
+    width: 200px;
+    height: 100%;
+    overflow: hidden;
+    object-fit: cover;
+}
+
+.chatHistory__item .username {
+    color: var(--accent-color);
+}
+
+.chatHistory__date {
+    float: right;
+    color: var(--secondary-color);
 }
 
 .chat__item-sender {
     align-self: flex-end;
     background-color: var(--main-color-light);
-}
-
-.chatHistory__item__text {
-    padding: .2em;
-    margin: 0;
-}
-
-.chatHistory__item__date {
-    float: right;
 }
 
 /* .userlist-item__msg {
@@ -203,12 +176,12 @@
     overflow-y: auto;
 }
 
-.messenger__chat .chat {
+/* .messenger__chat .chat {
     height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-}
+} */
 
 .sent-msg .container {
     text-align: right;

@@ -20,7 +20,6 @@ module.exports = {
                 creator: userId,
                 createdAt: new Date(),
             }).save();
-            console.log(newProduct)
             await User.findByIdAndUpdate(userId, { $push: { portfolio: newProduct._id } })
             return true
         },

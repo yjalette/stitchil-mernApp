@@ -69,32 +69,6 @@
     justify-content: flex-start;
 }
 
-/* .item .rank {
-    background: rgb(40 30 58 / 82%);
-    clip-path: polygon(100% 0, 100% 100%, 57% 87%, 0% 100%, 0 0);
-    padding: .3rem .5rem;
-    position: absolute;
-    top: 0;
-    right: 1%;
-}
-
-.deleteItemModal .modal-dialog {
-    max-width: 400px;
-}
-
-.deleteItemModal__title {
-    font-size: var(--md-fonts);
-    color: var(--light-gray-color);
-}
-
-.deleteItemModal__header {
-    font-size: var(--md-fonts);
-}
-
-.deleteItemModal__groupButtons {
-    align-self: flex-end;
-} */
-
 .itemToggle {
     display: flex;
     align-items: center;
@@ -104,10 +78,6 @@
 .itemToggle__btn {
     cursor: pointer;
 }
-
-/* .itemDetails .swiper-container {
-    min-height: 100%;
-} */
 
 .itemDetails-gallery .swiperSlide {
     height: 500px;

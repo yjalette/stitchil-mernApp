@@ -25,10 +25,9 @@ module.exports = {
     Mutation: {
         createMessage: async (_, { message, recipient }, { userId }) => {
             if (!userId) throw new Error("unauthenticated");
-            await Message.deleteMany()
-            await Chat.deleteMany()
             const user2 = await User.findOne({ username: recipient });
-            const chat = await Chat.findOne({ members: { $in: [user2, userId] } });
+            const chat = await Chat.findOne({ members: { $all: [user2, userId] } });
+            console.log(Chat)
             const newMessage = await new Message({ message, sender: userId, createdAt: new Date() }).save();
             if (chat) await chat.updateOne({ $push: { messages: newMessage._id } });
             else await new Chat({

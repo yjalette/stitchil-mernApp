@@ -1,17 +1,13 @@
-const User = require("../../models/user");
+const Message = require("../../models/message");
 const Chat = require("../../models/chat");
 
 module.exports = {
     Query: {
         chats: async (_, { }, req) => {
             try {
-                return await Chat.find({ members: { $in: req.userId } }, { 'messages': { $slice: 15 } })
+                return await Chat.find({ members: { $in: req.userId } }, { 'messages': { $slice: 2 } })
                     .populate({ path: 'members', select: 'username profileImage' })
-                    .populate({ path: 'messages.sender' })
-                    .sort('-updatedAt')
-
-                // , { "messages": { $slice: 5 } }
-
+                    .populate({ path: 'messages', populate: 'sender' })
             } catch (error) {
                 throw new Error(error)
             }
@@ -21,14 +17,13 @@ module.exports = {
     Mutation: {
         updateChat: async (_, { message, docId }, { userId }) => {
             if (!userId) throw new Error("unauthenticated");
-            console.log(message, docId)
             const newMessage = await Message({
                 message,
                 sender: userId,
                 createdAt: new Date()
             }).save();
-
-            return await Chat.findByIdAndUpdate(docId, { $push: { messages: newMessage._id } });
+            await Chat.findByIdAndUpdate(docId, { $push: { messages: newMessage._id } });
+            return true
         },
         deleteChat: async ({ chatId, msgId }, req) => {
             if (!req.userId) throw new Error("unauthenticated");

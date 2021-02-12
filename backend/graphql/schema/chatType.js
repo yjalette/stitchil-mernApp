@@ -16,7 +16,7 @@ type Message {
 type Chat {
     _id: ID
     members: [Member]
-    messages: [String]
+    messages: [Message]
 }
 
 type Member {

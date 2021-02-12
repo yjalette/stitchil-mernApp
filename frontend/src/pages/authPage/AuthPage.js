@@ -23,7 +23,7 @@ const AuthPage = ({ history, auth_type, children }) => {
                     <Nav.Link className="clickElem" onClick={() => handleRedirect(right_link.href)}>{right_link && right_link.title}</Nav.Link>
                 </>
             )}
-            displayWithoutBtn={true}
+            displayWithoutBtn
             onClose={handleCloseModal}
         >
             {children}

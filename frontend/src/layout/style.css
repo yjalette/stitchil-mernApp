@@ -1,7 +1,8 @@
 .pageWrapper {
     width: 70%;
     height: auto;
-    min-height: 100%;
+
+    /* min-height: 100%; */
     background-color: var(--main-color);
     overflow: hidden;
     margin: auto;
@@ -186,16 +187,13 @@
 .customModal .modal-footer, .customModal .modal-header {
     background-color: var(--main-color-light);
     justify-content: space-between;
+    align-items: center;
     border: none;
 }
 
 .customModal .modal-footer a {
     font-size: calc( var(--md-fonts) / 1.2);
 }
-
-/* .customDropdown .dropdown-menu, .iconMenu .dropdown-menu {
-    border: none;
-} */
 
 .customDropdown, .iconMenu {
     position: relative;
@@ -252,6 +250,10 @@
 @media (max-width: 768px) {
     .sectionWrapper {
         padding: 0;
+    }
+
+    .boxWrapper {
+        padding: 1rem;
     }
 
     .roundCard:hover {

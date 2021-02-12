@@ -9,7 +9,6 @@ export const patterns = {
 export function validate(obj) {
     if (!patterns[Object.keys(obj)]) return null
     if (Object.keys(obj).length === 1 && !patterns[Object.keys(obj)].reg.test(Object.values(obj))) return { [Object.keys(obj)]: patterns[Object.keys(obj)].msg }
-
     return null
 }
 

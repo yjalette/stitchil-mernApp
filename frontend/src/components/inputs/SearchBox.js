@@ -6,7 +6,7 @@ const SearchBox = ({ onClick, box_class }) => {
     return (
         <Form className={`search-box ${box_class}`} inline>
             <Form.Control type="text" placeholder="search..." className="mr-sm-2" value={str} onChange={({ target }) => setStr(target.value)} />
-            <i className="fa fa-search btn-icon" onClick={() => onClick(str)} />
+            <i className="fa fa-search clickElem" onClick={() => onClick(str)} />
         </Form>
 
     )

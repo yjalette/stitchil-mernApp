@@ -7,6 +7,7 @@ import useForm from '../../custom_hooks/useForm';
 import CustomButton from '../../layout/button/CustomButton';
 import FormTextarea from '../inputs/FormTextarea';
 import useMutationHook from '../../custom_hooks/useMutationHook';
+import CustomForm from '../../layout/CustomForm';
 
 const MessageCreate = ({ query, otherVariables, onMessageSent, children, msg_class }) => {
     const { user } = useContext(AuthContext);
@@ -30,18 +31,12 @@ const MessageCreate = ({ query, otherVariables, onMessageSent, children, msg_cla
     }
 
     return (
-        <Media className={`messageForm-wrapper ${msg_class}`}>
-            <Form className="messageForm d-flex flex-column">
-                {children}
-                <Row className="flex-center messageForm__body">
-                    <Col xs={10}>
-                        <FormTextarea label="message" value={inputs.message} placeholder="write here ..." onChange={handleChange} />
-                    </Col>
-                    <Col xs={2}>
-                        <CustomButton onClick={handleSubmit} btn_class="btn-icon w-auto" icon="fa fa-paper-plane" />
-                    </Col>
-                </Row>
-            </Form>
+        <Media className={`messageForm__wrapper ${msg_class}`}>
+            {children}
+            <CustomForm form_class="messageForm" submitTitle="send" onSubmit={handleSubmit}>
+                <FormTextarea label="message" value={inputs.message} placeholder="write here ..." onChange={handleChange} />
+                {/* <CustomButton onClick={handleSubmit} btn_class="btn-icon w-auto" icon="fa fa-paper-plane" /> */}
+            </CustomForm>
         </Media>
     )
 }

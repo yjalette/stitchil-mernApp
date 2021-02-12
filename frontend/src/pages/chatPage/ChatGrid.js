@@ -1,20 +1,17 @@
-import React, { useState, useRef, useContext, useEffect } from 'react';
-import { Col, Row } from 'react-bootstrap';
-
-import MessageCreate from '../../components/message/MessageCreate';
+import React, { useState, useContext } from 'react';
+import { Col, Row, Container } from 'react-bootstrap';
 import AuthContext from '../../context/Auth-context';
 import UserAvatar from '../../components/user/UserAvatar';
 import ChatActive from './ChatActive';
 import ChatHistory from './ChatHistory'
-import ChatSearch from './ChatSearch';
-import ChatHeader from './ChatHeader';
+import SearchBox from '../../components/inputs/SearchBox'
 import EmptyResultAlert from '../../layout/alerts/EmptyResultAlert';
 
 
 const ChatGrid = ({ chats, addMessage }) => {
     const { user } = useContext(AuthContext);
     const [activeChat, setActiveChat] = useState(0);
-
+    const user2 = chats && chats[activeChat] && chats[activeChat].members.find(member => member.username !== user.username)
     const handleActiveChat = index => setActiveChat(index);
 
     const handleSearchChat = username => {
@@ -23,26 +20,23 @@ const ChatGrid = ({ chats, addMessage }) => {
         console.log(newIndex)
     }
 
-    console.log(activeChat)
-
     return (
-        <div className="chats">
-            <ChatHeader
-                onSearch={handleSearchChat}
-                chatUser={chats && chats[activeChat] && chats[activeChat].members.find(member => member.username !== user.username)} />
-            <Row>
-                <Col lg={4} className="p-0">
-                    {chats && <ChatHistory chats={chats} seeChat={handleActiveChat} activeChatIndex={activeChat} />}
-                </Col>
-                <Col lg={8}>
-                    {chats && chats.length > 0 ? <div className="chatActive">
-                        <ChatActive chat={chats[activeChat]} addMessage={addMessage} />
-                        {/* <MessageCreate docId={chats[activeChat] && chats[activeChat]._id} addMessage={addMessage} /> */}
-                    </div> : <EmptyResultAlert type="messages" />}
-                </Col>
-            </Row>
 
-        </div>
+        <Row className="chat__grid">
+            <Col lg={4} sm={12} className="chat__col-history">
+                <Container className="chatHistory__header">
+                    {chats && <SearchBox onClick={handleSearchChat} />}
+                </Container>
+                {chats && <ChatHistory chats={chats} seeChat={handleActiveChat} activeChatIndex={activeChat} />}
+            </Col>
+            <Col lg={8} sm={12} className="chat__col-active">
+                {user2 && <UserAvatar username={user2.username} profileImage={user2.profileImage} />}
+                {chats && chats.length > 0 ? <ChatActive chat={chats[activeChat]} addMessage={addMessage} />
+                    : <EmptyResultAlert type="messages" />}
+            </Col>
+        </Row>
+
+
     )
 }
 

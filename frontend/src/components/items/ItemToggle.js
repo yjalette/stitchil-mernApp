@@ -12,7 +12,6 @@ const ItemToggle = ({ children, initValue, title }) => {
                 <i className={`fa fa-${open ? "minus" : "plus"} itemToggle__btn`} onClick={toggle} />
             </div>
             {open && children}
-
         </>
     )
 }

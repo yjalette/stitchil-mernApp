@@ -37,28 +37,19 @@
 .messageForm__wrapper {
     width: 100%;
     padding: var(--padding-elem);
+    display: flex;
     flex-direction: column;
 }
 
 .messageForm {
     width: 100%;
     display: flex;
-    align-items: center;
 }
 
-.messageForm .customButton {
-    margin: auto;
-}
-
-.messageForm__body {
-    padding: .5em 0;
-    width: 100%;
-}
-
-.messageForm__body label {
+.messageForm .form-label:first-child {
     display: none;
 }
 
-.messageForm__body > div {
-    padding: 0;
-}
+/* .messageForm .customButton {
+    margin: auto;
+} */
