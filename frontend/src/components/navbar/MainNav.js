@@ -22,11 +22,11 @@ const MainNav = () => {
               <Navbar.Brand href="/" to="/">
                 <Image src="https://res.cloudinary.com/dgxa9gpta/image/upload/v1602104662/logo/logo_jr1las.svg" alt="logo" className="logo" />
               </Navbar.Brand>
-              <Nav.Link href="/" className="main-menu__link">home</Nav.Link>
-              <Nav.Link href="/explore" className="main-menu__link">explore</Nav.Link>
+              <Nav.Link href="/" className="main-menu__link link-home">home</Nav.Link>
+              <Nav.Link href="/explore" className="main-menu__link link-explore">explore</Nav.Link>
               {/* <CustomDropdown btn_title="explore" className="fa fa-caret-down" items={["gigs", "talents"]} handleClick={handleExploreMenu} /> */}
             </Nav>
-            <Nav className="main-nav__icons">{context && context.user ? <SignInLinks username={context.user.username} user={context.user} /> : <SignOutLinks />}</Nav>
+            {context && context.user ? <SignInLinks username={context.user.username} user={context.user} /> : <SignOutLinks />}
           </Navbar>
         )
       }}

@@ -52,7 +52,7 @@ const ItemForm = ({ form_title, onChange, onMultiChange, onSubmit, onClose, inpu
                     ,
                     <>
                         {form_inputs.slice(2, form_inputs.length)}
-                    </>,
+                    </>
                 ]} />
 
             </CustomForm>

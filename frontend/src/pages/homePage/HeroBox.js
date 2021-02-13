@@ -10,7 +10,7 @@ const HeroBox = ({ onClick }) => {
                                 <Col lg={8} md={7} sm={12} className="flex-center flex-column herobox__col ">
                                         <section className="landing__content ">
                                                 <div className="landing__text">
-                                                        <h1 className="landing__title gradient-text">
+                                                        <h1 className="landing__title">
                                                                 From Design To Creation
                                         </h1>
                                                         <span className="landing__subtitle subtitle"> Create clothing you'll love to wear. </span>
@@ -18,7 +18,7 @@ const HeroBox = ({ onClick }) => {
 
                                                 <div className="herobox__btn-group">
                                                         <CustomButton
-                                                                btn_class="btn-click"
+                                                                btn_class="btn-click mr-3"
                                                                 onClick={() => onClick("buyers")} >learn more</CustomButton>
                                                         <CustomButton
                                                                 btn_class="btn-click"

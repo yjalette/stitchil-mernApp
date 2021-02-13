@@ -116,7 +116,7 @@
 }
 
 .btn-icon-text:not(.btn-star)::before {
-    margin-left: 0.8rem;
+    margin-left: 0.5em;
 }
 
 .btn-icon-text.btn-icon {

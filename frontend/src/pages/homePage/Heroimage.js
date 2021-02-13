@@ -3,7 +3,6 @@ import { useHistory } from 'react-router-dom';
 import CustomCarousel from '../../layout/CustomCarousel';
 import { heroSlides } from './consts'
 import ListItem from '../../layout/ListItem';
-import { Container } from 'react-bootstrap';
 import CustomButton from '../../layout/button/CustomButton';
 import PictureFlag from '../../components/pictures/PictureFlag';
 
@@ -16,7 +15,7 @@ const Heroimage = () => {
         return (
             <>
                 <div className="hpSlides__header">
-                    <h5 className="hpSlides__username mb-0">{slide.username}</h5>
+                    <h5 className="hpSlides__username mb-0">@{slide.username}</h5>
                     <CustomButton btn_class="btn-icon-text btn-star"
                         icon="fa fa-star"
                         onClick={() => push("/explore/gigs")}
@@ -29,12 +28,12 @@ const Heroimage = () => {
                     alt="slide"
                 />
                 <div className="hpSlides__content">
-                    <Container className="w-100">
-                        <h3 className="hpSlides__fullname">{slide.fullName} <PictureFlag countryCode={slide.country} /></h3>
-                    </Container>
-                    <ListItem field="experience: " content={slide.experience} />
-                    <ListItem field="skills: " content={slide.skills} />
-                    <CustomButton btn_class="btn-icon-text hpSlides__btn align-self-end"
+                    <h3 className="hpSlides__fullname ml-3">{slide.fullName} <PictureFlag countryCode={slide.country} /></h3>
+                    <div >
+                        <ListItem field="experience: " content={slide.experience} />
+                        <ListItem field="skills: " content={slide.skills} />
+                    </div>
+                    <CustomButton btn_class="btn-icon-text hpSlides__btn align-self-end mr-2"
                         icon="fa fa-angle-double-right "
                         onClick={() => push("/explore/gigs")}
                     >see more

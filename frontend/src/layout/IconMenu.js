@@ -2,7 +2,6 @@ import React from 'react';
 import { Dropdown } from 'react-bootstrap'
 
 const IconMenu = ({ items, menu_btn, menu_align, item_class, onToggle }) => {
-    console.log(items)
     return (
         <Dropdown className="iconMenu bg-transparent" onToggle={(el) => console.log(el)} drop={menu_align || "left"}>
             <Dropdown.Toggle as="button" className={`${menu_btn} iconMenu__btn `} />
@@ -20,6 +19,3 @@ const IconMenu = ({ items, menu_btn, menu_align, item_class, onToggle }) => {
 
 export default IconMenu
 
-{/* <i className={`${item.icon}`} />tuttt */ }
-
-// bg-transparent
