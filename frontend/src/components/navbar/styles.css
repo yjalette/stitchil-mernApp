@@ -71,14 +71,11 @@
     background-color: transparent;
 }
 
-.iconMenu .dropdown-item:hover {
-    background-color: var(--green-color);
-}
-
 .sectionNav {
     width: 100%;
-    border-bottom: 1px solid var(--green-color);
-    border-top: 1px solid var(--green-color);
+    border-bottom: 1px solid var(--light-green-color);
+
+    /* border-top: 1px solid var(--light-green-color); */
     text-align: center;
     margin: auto;
     justify-content: space-evenly;
@@ -92,7 +89,7 @@
 }
 
 .sectionNav__item:hover {
-    color: var(--white-color) !important;
+    color: var(--light-green-color) !important;
 }
 
 .sectionNav .active, .sectionNav__item:hover {
@@ -100,6 +97,7 @@
 }
 
 .sectionNav .active {
+    color: var(--light-green-color) !important;
     pointer-events: none;
 }
 
@@ -114,7 +112,7 @@
     border-right: 12px solid transparent;
     border-bottom-width: 12px;
     border-bottom-style: solid;
-    border-bottom-color: var(--accent-color);
+    border-bottom-color: var(--light-green-color);
     bottom: 0;
 }
 

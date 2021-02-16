@@ -103,8 +103,8 @@
 }
 
 .sectionWrapper-filter {
-    border-bottom: 1px solid var(--accent-color);
-    border-top: 1px solid var(--accent-color);
+    /* border-bottom: 1px solid var(--accent-color);
+    border-top: 1px solid var(--accent-color); */
 }
 
 .exploreParam__selected {

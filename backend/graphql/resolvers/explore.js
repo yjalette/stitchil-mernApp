@@ -1,5 +1,6 @@
 const Gig = require("../../models/gig");
 const { populateByUser } = require("../../consts/user");
+const { find } = require("../../models/gig");
 
 module.exports = {
     Query: {

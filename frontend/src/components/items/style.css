@@ -70,8 +70,6 @@
 }
 
 .itemToggle {
-    display: flex;
-    align-items: center;
     color: var(--accent-color);
 }
 

@@ -7,11 +7,11 @@ const ItemToggle = ({ children, initValue, title }) => {
 
     return (
         <>
-            <div className="itemToggle">
-                {title && <span className="itemToggle__title mr-2">{title}</span>}
-                <i className={`fa fa-${open ? "minus" : "plus"} itemToggle__btn`} onClick={toggle} />
-            </div>
             {open && children}
+            <span className="itemToggle">
+                {title && <span className="itemToggle__title mr-2">{title}</span>}
+                <i className={`fa fa-${open ? "minus" : "plus"} itemToggle__btn mx-2`} onClick={toggle} />
+            </span>
         </>
     )
 }

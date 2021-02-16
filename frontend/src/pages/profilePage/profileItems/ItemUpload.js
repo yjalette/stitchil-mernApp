@@ -5,7 +5,7 @@ import PictureZoom from '../../../components/pictures/PictureZoom';
 const ItemUpload = ({ files, uploadError, prevFiles, clearUpload, getRootProps, getInputProps }) => {
 
     return (
-        <>
+        <div className="itemUpload my-auto">
             <span className="error">{uploadError}</span>
             <div className="itemUpload__list">
                 {prevFiles}
@@ -27,7 +27,7 @@ const ItemUpload = ({ files, uploadError, prevFiles, clearUpload, getRootProps, 
 
             </div>
 
-        </>
+        </div>
     )
 }
 

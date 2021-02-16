@@ -38,8 +38,6 @@ const ProfileDesignerInfo = ({ values }) => {
             />)}
         </CustomForm>
     )
-
-    console.log(inputs)
     return (
         <>
             <SectionHeader title="Designer Info">
@@ -47,7 +45,7 @@ const ProfileDesignerInfo = ({ values }) => {
             </SectionHeader>
             <div className="profileSection__content">
                 {Object.keys(initState_designer).map(field => <ListItem key={field}
-                    field={`${field}: `}
+                    field={`${field}`}
                     content={inputs[field]} />)}
             </div>
         </>

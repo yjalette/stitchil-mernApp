@@ -1,16 +1,15 @@
 import React from 'react';
 import "./style.css"
 
-const CustomButton = ({ onClick, btn_title, btn_class, btn_type, btn_value, btn_name, icon, children }) => (
+const CustomButton = ({ onClick, btn_class, icon, btn_otherProps, children }) => (
     <button
-        title={btn_title}
-        name={btn_name}
-        value={btn_value}
-        type={btn_type}
+        type="click"
         onClick={onClick}
-        className={`customButton ${btn_class} ${icon}`}>
+        className={`customButton ${btn_class} ${icon}`}
+        {...btn_otherProps}>
         {children}
     </button>
 )
 
 export default CustomButton
+

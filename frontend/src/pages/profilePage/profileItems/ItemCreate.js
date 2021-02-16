@@ -13,7 +13,7 @@ const ItemCreate = ({ overLimit, addItemCache }) => {
     const { section } = useParams();
     const { post, data, error } = useMutationHook(mutation_create[section], handleResponse());
     const { inputs, setInputs, handleChange, handleMultiChange, handleSubmit, editMode, toggleEditMode } = useForm(initState[section], onSubmit);
-    const { files, clearUpload, getRootProps, getInputProps, uploadError } = useUpload(2000000, 5);
+    const { files, clearUpload, getRootProps, getInputProps, uploadError } = useUpload(3000000, 5);
 
     function onSubmit() {
         if (!uploadError) {

@@ -30,8 +30,8 @@ const Heroimage = () => {
                 <div className="hpSlides__content">
                     <h3 className="hpSlides__fullname ml-3">{slide.fullName} <PictureFlag countryCode={slide.country} /></h3>
                     <div >
-                        <ListItem field="experience: " content={slide.experience} />
-                        <ListItem field="skills: " content={slide.skills} />
+                        <ListItem field="experience" content={slide.experience} />
+                        <ListItem field="skills" content={slide.skills} />
                     </div>
                     <CustomButton btn_class="btn-icon-text hpSlides__btn align-self-end mr-2"
                         icon="fa fa-angle-double-right "

@@ -1,18 +1,18 @@
 import React from 'react';
 import { Container } from 'react-bootstrap';
-import ShowMore from './ShowMore';
+import ItemToggle from '../components/items/ItemToggle';
 import './style.css'
 
-const ListItem = ({ field, icon, imageUrl, content, maxWords }) => console.log(maxWords) || (
+const ListItem = ({ field, icon, content, maxWords }) => (
     <Container className={`listItem listItem-${field}`}>
         {field && <span className="listItem__field">{field}</span>}
         {icon && <i className={`${icon} listItem__icon`} alt="list icon" />}
-
-        {imageUrl && <img src={imageUrl} className="listItem__icon" alt="list img" />}
-        {maxWords && content && content.length > maxWords ?
-            <ShowMore content={content} maxWords={maxWords} />
-            :
+        {!maxWords || maxWords >= content.length ?
             <span className="listItem__content">{content !== undefined && (Array.isArray(content) ? content.join(" ") : content)}</span>
+            : <span className="listItem__content">
+                {content.slice(0, maxWords)}
+                <ItemToggle>{content.slice(maxWords, content.length)}</ItemToggle>
+            </span>
         }
     </Container>
 )

@@ -10,7 +10,39 @@
     width: 100%;
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     padding: var(--padding-box);
+}
+
+.itemForm-modal .slide-buttons > * {
+    letter-spacing: .03em;
+}
+
+.itemForm-modal .groupButton.slide-buttons {
+    width: 100%;
+    justify-content: space-between;
+}
+
+.itemForm {
+    max-height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.itemForm .customForm__groupButton {
+    display: none;
+}
+
+.itemForm .itemUpload ~ .customForm__groupButton {
+    display: flex;
+}
+
+.itemUpload__img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: var(--border-radius);
 }
 
 .item-upload-wrapper {
@@ -55,31 +87,6 @@
 
 .itemUpdate-prevImg {
     opacity: .3;
-}
-
-.itemUpload__img {
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-    border-radius: var(--border-radius);
-}
-
-.itemForm {
-    /* height: 600px; */
-    max-height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-
-    /* padding: var(--padding-box); */
-}
-
-.itemForm .itemToggle ~ .customForm__groupButton {
-    display: none;
-}
-
-.itemForm .formSteps__buttons {
-    margin: 1rem;
 }
 
 .itemUpload__box {

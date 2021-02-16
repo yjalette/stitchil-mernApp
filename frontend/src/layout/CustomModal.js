@@ -7,8 +7,9 @@ const CustomModal = ({
     modal_footer,
     modal_size,
     modal_class,
-    btn_title,
     btn_class,
+    btn_otherProps,
+    btn_title,
     children,
     displayWithoutBtn,
     onClose,
@@ -26,13 +27,13 @@ const CustomModal = ({
         setOpen(false);
     }
 
-    if (!open && !displayWithoutBtn) return <CustomButton onClick={handleOpen} btn_class={btn_class}>{btn_title}</CustomButton>
+    if (!open && !displayWithoutBtn) return <CustomButton onClick={handleOpen} btn_class={btn_class} btn_otherProps={btn_otherProps}>{btn_title}</CustomButton>
     return (
         <Modal
             show={open} onHide={handleClose}
             size={modal_size || "xl"}
             aria-labelledby="contained-modal-title-vcenter"
-            dialogClassName={`customModal ${modal_class}__wrapper`}
+            dialogClassName={`customModal ${modal_class}`}
             centered
 
         >

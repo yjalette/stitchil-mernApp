@@ -2,10 +2,6 @@
     text-transform: lowercase;
 }
 
-/* .customButton + .customButton:not(.dropdown-item), i + i {
-    margin-left: .8em;
-} */
-
 .customButton.btn-click {
     color: var(--accent-color);
     font-size: var(--sm-fonts);
@@ -226,7 +222,8 @@
     .btn-close::after {
         font-size: 1.5em;
         font-weight: bold;
-        content: "\f104";
+
+        /* content: "\f104"; */
     }
 }
 

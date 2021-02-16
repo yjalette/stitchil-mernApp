@@ -251,6 +251,10 @@
         margin-left: .2em;
     }
 
+    .herobox__col {
+        padding: 0;
+    }
+
     .herobox__btn-group {
         justify-content: center;
         padding-top: 0;
@@ -262,7 +266,7 @@
     }
 
     .landing__title {
-        font-size: 3.8rem;
+        font-size: 2.8rem;
     }
 
     .landing__subtitle {
@@ -284,12 +288,12 @@
     }
 }
 
-@media (max-width: 479px) {
+@media (max-width: 576px) {
     .landing__title {
         font-size: 1.8rem;
     }
 
-    .herobox__btn-group {
+    /* .herobox__btn-group {
         justify-content: space-around;
-    }
+    } */
 }

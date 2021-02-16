@@ -1,8 +1,6 @@
 .pageWrapper {
     width: 70%;
     height: auto;
-
-    /* min-height: 100%; */
     background-color: var(--main-color);
     overflow: hidden;
     margin: auto;
@@ -20,7 +18,7 @@
     width: 100%;
     display: flex;
     align-items: center;
-    padding: var(--padding-section);
+    padding: var(--padding-elem);
 }
 
 .sectionHeader__title {
@@ -34,17 +32,27 @@
 }
 
 .listItem {
-    margin: .4rem auto;
+    display: flex;
+    align-items: center;
+    line-height: 1.7em;
 }
 
 .listItem__field, .listItem__icon {
-    color: var(--secondary-color);
+    color: var(--light-green-color);
     margin-right: .4em;
     opacity: .9;
 }
 
 .listItem__content {
     color: var(--light-gray-color);
+}
+
+.listItem-about {
+    display: inline-block;
+}
+
+.listItem__field::after {
+    content: ":";
 }
 
 .menuButton {
@@ -133,8 +141,8 @@
 }
 
 .emptyAlert__icon {
-    color: var(--green-color);
-    font-size: 80px;
+    color: var(--light-green-color);
+    font-size: 50px;
 }
 
 .error {
@@ -195,20 +203,11 @@
     font-size: calc( var(--md-fonts) / 1.2);
 }
 
-.customDropdown, .iconMenu {
+.customDropdown {
     position: relative;
     width: auto;
     background-color: transparent;
     border: none;
-}
-
-.iconMenu .dropdown-item {
-    margin-top: 1rem;
-}
-
-.iconMenu .dropdown-menu {
-    position: absolute !important;
-    z-index: 5000;
 }
 
 .plainIcon {
@@ -249,11 +248,16 @@
 
 @media (max-width: 768px) {
     .sectionWrapper {
-        padding: 0;
+        padding: .5rem;
     }
 
     .boxWrapper {
         padding: 1rem;
+    }
+
+    .roundCard {
+        width: 300px;
+        height: 300px;
     }
 
     .roundCard:hover {

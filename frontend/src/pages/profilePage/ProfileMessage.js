@@ -14,8 +14,11 @@ const ProfileMessage = () => {
 
     return (
         <CustomModal
-            btn_class="btn-click"
-            btn_title="message"
+            btn_class="btn-icon fa fa-envelope"
+            btn_otherProps={{
+                title: "message"
+            }}
+            // btn_title="message"
             modal_size="md"
             modal_title="send message"
             modal_footer={(

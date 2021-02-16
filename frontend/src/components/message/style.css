@@ -50,6 +50,16 @@
     display: none;
 }
 
-/* .messageForm .customButton {
-    margin: auto;
-} */
+@media (max-width: 992px) {}
+
+@media (max-width: 768px) {
+    .messageForm {
+        flex-direction: column;
+    }
+
+    .customForm__groupButton {
+        margin: 0 0 .5rem 0;
+    }
+}
+
+@media (max-width: 576px) {}
