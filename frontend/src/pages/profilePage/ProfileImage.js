@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
-import { Image } from 'react-bootstrap'
+import { Image } from 'react-bootstrap';
 
+import { useMutation } from '@apollo/react-hooks';
 import useUpload from '../../custom_hooks/useUpload';
 import { useToggle } from '../../custom_hooks/useToggle';
 import GroupButton from '../../layout/button/GroupButton';
 import CustomButton from '../../layout/button/CustomButton';
-import useMutationHook from '../../custom_hooks/useMutationHook';
 import { UPLOAD_PROFILE_IMAGE_MUTATION } from './graphql/mutations';
 
 const defaultImg = "https://res.cloudinary.com/dgxa9gpta/image/upload/v1602105102/background/buttons_nd9vx1.jpg"
@@ -13,7 +13,7 @@ const defaultImg = "https://res.cloudinary.com/dgxa9gpta/image/upload/v160210510
 const ProfileImage = ({ src, image_type }) => {
     const { files, clearUpload, getRootProps, getInputProps } = useUpload();
     const [showButtons, setShowButtons] = useToggle(false);
-    const { post, error } = useMutationHook(UPLOAD_PROFILE_IMAGE_MUTATION)
+    const [post, { error }] = useMutation(UPLOAD_PROFILE_IMAGE_MUTATION)
 
     useEffect(() => {
         if (files) setShowButtons(true);

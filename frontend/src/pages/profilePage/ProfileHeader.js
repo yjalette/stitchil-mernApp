@@ -1,19 +1,20 @@
 import React, { useContext } from 'react'
-import { Container, Image } from 'react-bootstrap'
+import { Container, Image, OverlayTrigger, Popover } from 'react-bootstrap'
 import ProfileImage from './ProfileImage';
 import ProfileContext from '../../context/Profile-context';
 import GroupButton from '../../layout/button/GroupButton';
 import ProfileMessage from './ProfileMessage';
-import DemoVersionAlert from '../../layout/alerts/DemoVersionAlert';
 import AuthContext from '../../context/Auth-context';
 import PictureFlag from '../../components/pictures/PictureFlag';
+import CustomButton from '../../layout/button/CustomButton';
+import CustomPopover from '../../layout/CustomPopover';
+import messages from "../../constants/messages";
 
 const defaultImg = "https://res.cloudinary.com/dgxa9gpta/image/upload/v1602105102/background/buttons_nd9vx1.jpg"
 
 const ProfileHeader = ({ coverImage, profileImage, fullname, country }) => {
     const { logged_in_user } = useContext(ProfileContext);
     const { user } = useContext(AuthContext)
-    console.log(country)
     if (logged_in_user) {
         return (
             <>
@@ -28,7 +29,9 @@ const ProfileHeader = ({ coverImage, profileImage, fullname, country }) => {
                 </Container>
                 {user && <GroupButton group_class="profileHeader__buttons">
                     <ProfileMessage />
-                    <DemoVersionAlert btn_props={{ btn_class: "ml-3 btn-icon fa fa-user-plus", btn_otherProps: { title: "follow" } }} />
+                    <CustomPopover content={messages.demo} trigger="click" popover_class="customPopover-warning">
+                        <CustomButton btn_class="ml-3 btn-icon fa fa-user-plus" btn_otherProps={{ title: "follow" }} />
+                    </CustomPopover>
                 </GroupButton>}
 
             </>

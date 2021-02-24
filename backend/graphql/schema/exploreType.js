@@ -16,18 +16,20 @@ type ExploreItem {
     creator: AuthData
 }
 
+type ExploreResult {
+    items: [ExploreItem]
+    total: Int
+}
+
 input Filters {
     category: [String]
     styles: [String]
     worldwide: Boolean
-    min: Int
-    max: Int
+    min: String
+    max: String
 }
 
-input Price {
-    min: Int
-    max: Int
-}
+
 
 type Bid {
     creator: AuthData
@@ -37,7 +39,7 @@ type Bid {
 
 
 type Query {        
-    explore_items(filters: Filters, price: Price, page: Int): [ExploreItem] 
+    explore_items(filters: Filters, page: Int): ExploreResult 
 }
 
 

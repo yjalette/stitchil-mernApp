@@ -1,23 +1,23 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
+import { useMutation } from '@apollo/react-hooks';
 
 import CustomForm from '../../layout/CustomForm';
-import useMutationHook from '../../custom_hooks/useMutationHook';
 import { FORGOT_PASSWORD_MUTATION } from './graphql/mutations';
 import FormInput from '../../components/inputs/FormInput';
 import useForm from '../../custom_hooks/useForm';
 import { handleResponse } from '../../helpers/dataHelper';
-import { useParams } from 'react-router-dom';
 import SecurityPassword from '../../components/security/SecurityPassword';
 
 const AuthForgotPassword = () => {
     const { token } = useParams();
     const { inputs, setInputs, handleChange, handleSubmit, errors, setErrors, setMsg, msg } = useForm({ email: "" }, onSubmit);
-    const { post } = useMutationHook(FORGOT_PASSWORD_MUTATION, onCompleted);
-
-    function onCompleted(data) {
-        handleResponse(data.forgotPassword, handleSuccess, handleFailure);
-        setInputs({ email: "" });
-    }
+    const [post, { error, data }] = useMutation(FORGOT_PASSWORD_MUTATION, {
+        onCompleted: data => {
+            handleResponse(data.forgotPassword, handleSuccess, handleFailure);
+            setInputs({ email: "" });
+        }
+    });
 
     function handleSuccess(msg) {
         setMsg(msg)

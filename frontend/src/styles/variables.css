@@ -15,8 +15,8 @@
     --accent-color: #13e2ba;
     --light-green-color: #C0D4D0;
     --lg-fonts: 1.5em;
-    --md-fonts: 18px;
-    --sm-fonts: 15px;
+    --md-fonts: 1.25em;
+    --sm-fonts: 1em;
     --font-heading: 'Rubik', sans-serif;
     --font-body: 'Karla', sans-serif;
     --letter-spacing: .4px;
@@ -24,7 +24,7 @@
     --gradient-text: linear-gradient(300deg, var(--green-color), var(--light-green-color));
     --border: 1.5px dashed var(--light-gray-color);
     --border-radius: 10px;
-    --padding-elem: .4em;
+    --padding-elem: .5em;
     --padding-box: 1.5rem;
     --padding-section: 1rem 3rem;
     --box-shadow: 0 0 0 4px var(--green-color), 2px 1px 6px 4px rgba(10, 10, 0, 0.5);

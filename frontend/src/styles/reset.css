@@ -123,12 +123,12 @@ select option, .nav-link:hover, .nav-link.active, .navbar-toggler {
     color: #f9f87180 !important;
 }
 
-.alert-warning {
+/* .alert-warning {
     color: var(--red-color) !important;
     background-color: transparent !important;
     border-color: currentColor;
     font-size: var(--md-fonts) !important;
-}
+} */
 
 .dropdown-menu {
     background-color: var(--main-color);

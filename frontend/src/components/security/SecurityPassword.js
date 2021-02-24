@@ -1,23 +1,20 @@
 import React, { useContext } from 'react'
-import { useHistory, useParams } from 'react-router-dom';
-
+import { useHistory } from 'react-router-dom';
+import { useMutation } from '@apollo/react-hooks';
 import AuthContext from '../../context/Auth-context'
 import useForm from '../../custom_hooks/useForm';
 import CustomForm from '../../layout/CustomForm';
 import Password from '../inputs/Password';
 import { handleResponse } from '../../helpers/dataHelper';
-import useMutationHook from '../../custom_hooks/useMutationHook';
 import { UPDATE_PASSWORD_MUTATION } from '../../pages/settingsPage/graphql/mutations';
 
 const SecurityPassword = ({ token }) => {
     const { user } = useContext(AuthContext);
     const { push } = useHistory()
-    const { post, error } = useMutationHook(UPDATE_PASSWORD_MUTATION, onPostCompleted)
+    const [post] = useMutation(UPDATE_PASSWORD_MUTATION, {
+        onCompleted: data => handleResponse(data.updatePassword, handleSuccess, handleFailure)
+    })
     const { inputs, handleChange, handleSubmit, setMsg, msg, errors, setErrors } = useForm({}, onSubmit);
-
-    function onPostCompleted(data) {
-        handleResponse(data.updatePassword, handleSuccess, handleFailure)
-    }
 
     function handleSuccess(success_msg) {
         setErrors({});

@@ -1,8 +1,8 @@
 import React, { useContext, useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
+import { useMutation } from '@apollo/react-hooks';
 
 import useForm from '../../custom_hooks/useForm';
-import useMutationHook from '../../custom_hooks/useMutationHook';
 import { SIGNUP_MUTATION } from './graphql/mutations';
 import { onSuccess } from './helpers'
 import AuthContext from '../../context/Auth-context';
@@ -14,17 +14,13 @@ import Password from '../../components/inputs/Password';
 import SelectInput from '../../components/inputs/SelectInput';
 import FormMultipleInput from '../../components/inputs/FormMultipleInput';
 import FormInput from '../../components/inputs/FormInput';
-import FormSteps from '../../components/inputs/FormSteps';
 import useSlides from '../../custom_hooks/useSlides';
-
-
-
 
 const AuthJoin = () => {
     const { push } = useHistory()
     const { setUser } = useContext(AuthContext);
     const { inputs, setInputs, handleChange, handleMultiChange, handleSubmit, errors, setErrors, setMsg, msg } = useForm(initState_join, onSubmit);
-    const { error, post } = useMutationHook(SIGNUP_MUTATION, onCompleted);
+    const [post] = useMutation(SIGNUP_MUTATION, { onCompleted });
 
     const props = useCallback(
         label => {

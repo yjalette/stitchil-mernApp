@@ -1,15 +1,13 @@
 import React, { useEffect, useRef } from 'react'
 import { Container } from 'react-bootstrap';
-
-import CustomDropdown from '../../layout/CustomDropdown';
+import { useMutation } from '@apollo/react-hooks';
 import UserAvatar from '../user/UserAvatar'
 import MessageItem from '../message/MessageItem'
-import useMutationHook from '../../custom_hooks/useMutationHook';
 import { DELETE_COMMENT_MUTATION } from './graphql/mutations';
 
 const CommentGrid = ({ items, children, onDelete }) => {
     const divRef = useRef(null);
-    const { post, data, error } = useMutationHook(DELETE_COMMENT_MUTATION);
+    const [post, { data, error }] = useMutation(DELETE_COMMENT_MUTATION);
 
     const handleDelete = (itemId) => {
         post({ variables: { itemId } });
@@ -28,7 +26,7 @@ const CommentGrid = ({ items, children, onDelete }) => {
                     <MessageItem key={index} item={item} comp_class="commentItem">
                         <Container className="commentItem__header">
                             <UserAvatar profileImage={item.sender.profileImage} username={item.sender.username} />
-                            <CustomDropdown items={[{ title: "delete", onClick: () => handleDelete(item._id) }]} icon="fa fa-ellipsis-v" />
+                            {/* <CustomDropdown items={[{ title: "delete", onClick: () => handleDelete(item._id) }]} icon="fa fa-ellipsis-v" /> */}
                         </Container>
                     </MessageItem>
                 ))}

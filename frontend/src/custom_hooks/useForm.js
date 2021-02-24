@@ -25,9 +25,7 @@ const useForm = (initState, submit) => {
 
     const handleSubmit = e => {
         e.preventDefault();
-        console.log(e, "use form")
         submit();
-        setEditMode(false);
     }
 
     const handleCancel = () => {
@@ -40,7 +38,6 @@ const useForm = (initState, submit) => {
     }
 
     const handleClear = () => {
-        console.log("meows", initState)
         setInputs(() => initState)
     }
 

@@ -1,11 +1,8 @@
 import React from 'react';
 import { Typeahead } from "react-bootstrap-typeahead";
-import { getNames } from 'country-list';
 import { Form } from 'react-bootstrap';
-import { skills, experience, category, styles, fabrics } from '../../constants/options';
-import languages from '../../constants/languages'
+import options from '../../constants/options';
 
-const options = { skills, styles, experience, country: getNames(), category, fabrics, keywords: [], languages };
 
 const FormMultipleInput = ({ label, selected, onChange, multiple, error, allowNew, required }) => (
     <Form.Group className="field-wrapper multipleInput" >
@@ -13,13 +10,16 @@ const FormMultipleInput = ({ label, selected, onChange, multiple, error, allowNe
         < Typeahead
             id={label}
             labelKey={label}
-            onChange={(value) => onChange(label, !allowNew ? value : value.map(elem => elem[label] || elem))}
+            onChange={(value) => console.log(value) || onChange(label, !allowNew ? value : value.map(elem => elem[label] || elem))}
             options={options[label] || []}
             selected={selected && selected.length > 0 ? selected : []}
+            // defaultInputValue={selected && selected.length > 0 ? selected.join(" ") : ""}
             allowNew={allowNew}
             newSelectionPrefix={allowNew && "+ "}
             multiple={multiple}
-            inputProps={{ required }}
+        // inputProps={{
+        //     required
+        // }}
         />
         {error && <span className="error">{error}</span>}
     </Form.Group>

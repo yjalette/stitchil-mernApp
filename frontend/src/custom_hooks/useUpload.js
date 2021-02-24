@@ -20,7 +20,6 @@ const useUpload = (maxSize, maxFiles) => {
         }
     });
 
-    console.log(rejectedFiles)
     return {
         files,
         setFiles,

@@ -9,10 +9,10 @@ const CustomDropdown = ({ btn_title, items, handleClick, className }) => {
                 {items.map((item, index) => <Dropdown.Item
                     as="button"
                     key={index}
-                    name={btn_title}
+                    eventKey={btn_title}
                     value={item}
                     className="customDropdown__item"
-                    onClick={handleClick}>{item}</Dropdown.Item>)}
+                    onClick={() => handleClick({ name: btn_title, value: item })}>{item}</Dropdown.Item>)}
             </Dropdown.Menu>
         </Dropdown>
     )

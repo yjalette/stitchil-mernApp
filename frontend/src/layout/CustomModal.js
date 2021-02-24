@@ -22,6 +22,7 @@ const CustomModal = ({
     }, [timeOut])
 
     const handleOpen = () => setOpen(true);
+
     const handleClose = () => {
         onClose && onClose();
         setOpen(false);
@@ -34,13 +35,14 @@ const CustomModal = ({
             size={modal_size || "xl"}
             aria-labelledby="contained-modal-title-vcenter"
             dialogClassName={`customModal ${modal_class}`}
+            backdrop="static"
             centered
 
         >
-            {modal_title && <Modal.Header className="customModal__header" closeButton={false} >
+            <Modal.Header className="customModal__header" closeButton={false} >
                 <Modal.Title>{modal_title}</Modal.Title>
                 <CustomButton onClick={handleClose} btn_class="btn-close customModal__btn-close" />
-            </Modal.Header>}
+            </Modal.Header>
             <Modal.Body scrollable="true"> {children}</Modal.Body>
             {modal_footer && <Modal.Footer className="customModal__footer">{modal_footer}</Modal.Footer>}
         </Modal>

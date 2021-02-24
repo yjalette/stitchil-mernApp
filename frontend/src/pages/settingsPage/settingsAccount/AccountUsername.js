@@ -1,7 +1,7 @@
 import React, { useEffect, useContext } from 'react';
+import { useMutation } from '@apollo/react-hooks';
 
 import useForm from '../../../custom_hooks/useForm';
-import useMutationHook from '../../../custom_hooks/useMutationHook';
 import FormInput from '../../../components/inputs/FormInput';
 import CustomForm from '../../../layout/CustomForm'
 import AuthContext from '../../../context/Auth-context';
@@ -11,16 +11,14 @@ import { UPDATE_USERNAME_MUTATION } from '../graphql/mutations';
 
 const AccountUsername = ({ currValue }) => {
     const { user, setUser } = useContext(AuthContext)
-    const { post, error } = useMutationHook(UPDATE_USERNAME_MUTATION, onPostCompleted);
+    const [post] = useMutation(UPDATE_USERNAME_MUTATION, {
+        onCompleted: data => handleResponse(data.updateUsername, handleSuccess, handleFailure)
+    });
     const { inputs, setInputs, handleChange, errors, setErrors, msg, setMsg, handleSubmit } = useForm({ username: "" }, onSubmit);
 
     useEffect(() => {
         if (currValue) setInputs({ username: currValue })
     }, [currValue])
-
-    function onPostCompleted(data) {
-        handleResponse(data.updateUsername, handleSuccess, handleFailure)
-    }
 
     function handleSuccess(success_msg) {
         setErrors({});
@@ -35,7 +33,7 @@ const AccountUsername = ({ currValue }) => {
     }
 
     function onSubmit() {
-        post({ variables: inputs });
+        if (Object.keys(errors).length === 0) post({ variables: inputs });
     }
 
     return <CustomForm form_msg={msg} form_error={errors.form_error} onSubmit={handleSubmit}>

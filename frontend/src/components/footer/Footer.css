@@ -1,6 +1,5 @@
 .footer {
     position: absolute;
-    padding-bottom: -100px;
     background-color: var(--main-color-opacity);
 }
 

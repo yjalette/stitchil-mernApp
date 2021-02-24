@@ -3,7 +3,7 @@ import { Jumbotron } from 'react-bootstrap'
 import { withRouter } from 'react-router-dom';
 import CustomModal from '../CustomModal'
 
-const DemoVersionAlert = ({ btn_props }) => {
+const DemoVersionAlert = () => {
     const [show, setShow] = useState(true);
 
     useEffect(() => {
@@ -13,16 +13,16 @@ const DemoVersionAlert = ({ btn_props }) => {
         }, 5000)
     }, [])
 
-    // if(!show) return null
+    if (!show) return <></>
 
     return (
         <CustomModal
             modal_class="alertDemo"
-            modal_size="sm"
-            {...btn_props}
-            timeOut="5000"
+            modal_size="lg"
+            modal_title="warning"
+            displayWithoutBtn
         >
-            <Jumbotron className="alertDemo__box">
+            <Jumbotron className="alertDemo__box flex-center">
                 <h3 className="alertDemo__text">Sorry! This content is not accessible in the demo</h3>
             </Jumbotron>
         </CustomModal>
@@ -31,3 +31,5 @@ const DemoVersionAlert = ({ btn_props }) => {
 }
 
 export default withRouter(DemoVersionAlert);
+
+

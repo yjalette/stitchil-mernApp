@@ -1,5 +1,6 @@
 import gql from 'graphql-tag';
 
+
 export const UPDATE_DESIGNER_MUTATION = gql`
         mutation UpdateDesigner($designerInput: DesignerInput){
             updateDesigner(designerInput: $designerInput)
@@ -73,4 +74,21 @@ export const CREATE_MESSAGE_MUTATION = gql`
             createMessage(message: $message, recipient: $recipient)
         }
 `
+
+export const section_mutation = {
+    create: {
+        gigs: CREATE_GIG_MUTATION,
+        portfolio: CREATE_PRODUCT_MUTATION
+    },
+    update: {
+        gigs: UPDATE_GIG_MUTATION,
+        portfolio: UPDATE_PRODUCT_MUTATION
+    },
+    delete: {
+        gigs: DELETE_GIG_MUTATION,
+        portfolio: DELETE_PRODUCT_MUTATION
+    }
+}
+
+
 

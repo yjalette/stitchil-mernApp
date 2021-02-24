@@ -1,8 +1,9 @@
 import gql from 'graphql-tag';
 
 export const EXPLORE_ITEMS_QUERY = gql`
-    query explore_items($filters: Filters, $price: Price, $page: Int){
-        explore_items(filters: $filters, price: $price, page: $page){
+    query explore_items($filters: Filters, $page: Int){
+        explore_items(filters: $filters, page: $page){
+             items {
                 _id
                 title
                 coverImage
@@ -17,8 +18,8 @@ export const EXPLORE_ITEMS_QUERY = gql`
                    country
                    rating
                 }
-
-
+             }
+             total
         }
     }
 `

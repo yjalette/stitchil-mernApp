@@ -14,9 +14,8 @@
 }
 
 .commentCreate {
+    flex-direction: column;
     margin-top: 2rem;
-
-    /* background-color: var(--main-color); */
     padding: 2rem .2rem;
     border-radius: 10px;
 }

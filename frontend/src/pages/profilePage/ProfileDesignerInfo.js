@@ -1,18 +1,18 @@
 import React, { useContext, useEffect } from 'react';
+import { useMutation } from '@apollo/react-hooks';
 
+import { UPDATE_DESIGNER_MUTATION } from './graphql/mutations';
 import { initState_designer } from './../../constants/initStates';
 import SectionHeader from './../../layout/SectionHeader';
 import ProfileContext from './../../context/Profile-context';
 import ListItem from './../../layout/ListItem';
 import useForm from './../../custom_hooks/useForm';
-import useMutationHook from './../../custom_hooks/useMutationHook';
-import { UPDATE_DESIGNER_MUTATION } from './graphql/mutations';
 import CustomButton from './../../layout/button/CustomButton';
 import FormMultipleInput from './../../components/inputs/FormMultipleInput';
 import CustomForm from './../../layout/CustomForm';
 
 const ProfileDesignerInfo = ({ values }) => {
-    const { post } = useMutationHook(UPDATE_DESIGNER_MUTATION)
+    const [post, { error, data }] = useMutation(UPDATE_DESIGNER_MUTATION)
     const { logged_in_user } = useContext(ProfileContext);
     const { inputs, setInputs, handleMultiChange, handleClear, handleSubmit, editMode, toggleEditMode } = useForm(initState_designer, onSubmit);
 

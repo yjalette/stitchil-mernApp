@@ -29,7 +29,7 @@ const Heroimage = () => {
                 />
                 <div className="hpSlides__content">
                     <h3 className="hpSlides__fullname ml-3">{slide.fullName} <PictureFlag countryCode={slide.country} /></h3>
-                    <div >
+                    <div className="w-100" >
                         <ListItem field="experience" content={slide.experience} />
                         <ListItem field="skills" content={slide.skills} />
                     </div>

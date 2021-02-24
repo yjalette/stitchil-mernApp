@@ -1,13 +1,12 @@
 import React from 'react'
-
-import useMutationHook from '../../custom_hooks/useMutationHook';
+import { useMutation } from '@apollo/react-hooks';
 import { DELETE_COMMENT_MUTATION } from './graphql/mutations';
 import CustomButton from '../../layout/button/CustomButton';
 import GroupButton from '../../layout/button/GroupButton';
 import CustomModal from '../../layout/CustomModal'
 
 const CommentDelete = ({ itemId, onDelete }) => {
-    const { post, data, error } = useMutationHook(DELETE_COMMENT_MUTATION, onCompleted);
+    const [post, { data, error }] = useMutation(DELETE_COMMENT_MUTATION, onCompleted);
 
     const handleDelete = () => {
         post(itemId)

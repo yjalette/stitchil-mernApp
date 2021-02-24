@@ -11,11 +11,3 @@ export function validate(obj) {
     if (Object.keys(obj).length === 1 && !patterns[Object.keys(obj)].reg.test(Object.values(obj))) return { [Object.keys(obj)]: patterns[Object.keys(obj)].msg }
     return null
 }
-
-
-// export const validate_password = (obj) => {
-//     console.log(obj["confirm_password"], obj["new_password"]);
-
-//     if (obj["confirm_password"] !== obj["new_password"]) return { "confirm_password": "passwords don't match" }
-//     return false
-// }

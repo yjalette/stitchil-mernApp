@@ -94,11 +94,3 @@ label, .formLabel {
 .search-box input {
     border-bottom: 1px solid var(--light-green-color);
 }
-
-.formSteps__buttons > * {
-    letter-spacing: .03em;
-}
-
-.formSteps__buttons .btn-forward {
-    float: right;
-}

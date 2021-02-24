@@ -1,17 +1,21 @@
-import React, { useEffect, useState } from 'react';
-import useQueryHook from '../../custom_hooks/useQueryHook'
+import React, { useEffect, useState, useRef } from 'react';
+import useLazyQueryHook from '../../custom_hooks/useLazyQueryHook';
 import ExploreGrid from './ExploreGrid';
 import { EXPLORE_ITEMS_QUERY } from './graphql/queries'
 
 const ExploreData = () => {
     const [values, setValues] = useState([]);
+    const total = useRef();
     const [page, setPage] = useState(0);
     const [filters, setFilters] = useState({});
     const [price, setPrice] = useState({});
-    const { data, refetch, fetchMore, updateQuery } = useQueryHook(EXPLORE_ITEMS_QUERY, { filters, price, page: Number(page) });
+    const { data, refetch, fetchMore, updateQuery } = useLazyQueryHook(EXPLORE_ITEMS_QUERY, { filters, price, page: Number(page) });
 
     useEffect(() => {
-        if (data && data.explore_items) setValues(data.explore_items)
+        if (data && data.explore_items) {
+            setValues(data.explore_items.items);
+            if (data.explore_items.total) total.current = data.explore_items.total
+        }
     }, [data]);
 
     useEffect(() => {
@@ -54,8 +58,10 @@ const ExploreData = () => {
         setPrice({})
     }
 
+
     return <ExploreGrid
         items={values}
+        total={total.current}
         activePage={page}
         loadMoreData={loadMoreData}
         filters={filters}

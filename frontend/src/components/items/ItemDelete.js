@@ -1,18 +1,16 @@
 import React, { useContext, useState } from 'react';
 import { Modal } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
+import { useMutation } from '@apollo/react-hooks';
 
 import "./style.css"
-import CustomModal from '../../../layout/CustomModal';
-import CustomButton from '../../../layout/button/CustomButton';
-import useMutationHook from '../../../custom_hooks/useMutationHook';
-import { DELETE_GIG_MUTATION, DELETE_PRODUCT_MUTATION } from '../graphql/mutations';
-import { useToggle } from '../../../custom_hooks/useToggle';
+import CustomModal from '../../layout/CustomModal';
+import CustomButton from '../../layout/button/CustomButton';
+import { useToggle } from '../../custom_hooks/useToggle';
 
-const ItemDelete = ({ itemId, deleteItemCache }) => {
+const ItemDelete = ({ itemId, deleteItemCache, mutation }) => {
     const [open, toggle] = useToggle(false)
-    const { section } = useParams();
-    const { post, data, error } = useMutationHook(section === "gigs" ? DELETE_GIG_MUTATION : DELETE_PRODUCT_MUTATION);
+    const [post] = useMutation(mutation);
 
     const handleDelete = () => {
         post({ variables: { itemId } });

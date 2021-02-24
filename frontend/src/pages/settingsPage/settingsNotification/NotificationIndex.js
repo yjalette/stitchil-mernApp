@@ -1,12 +1,9 @@
 import React from 'react'
-import DemoVersionAlert from '../../../layout/alerts/DemoVersionAlert'
+import CustomAlert from '../../../layout/CustomAlert'
+import messages from '../../../constants/messages'
 
-const NotificationIndex = () => {
-    return (
-        <>
-            <DemoVersionAlert />
-        </>
-    )
-}
+const NotificationIndex = () => <CustomAlert alert_variant="warning">
+    {messages.demo}
+</CustomAlert>
 
 export default NotificationIndex

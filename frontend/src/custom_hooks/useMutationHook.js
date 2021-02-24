@@ -9,6 +9,8 @@ const useMutationHook = (MUTATION, handleResponse) => {
 
     if (loading) return <LoadingSpinner />
 
+    console.log(error)
+
     return {
         data,
         error,

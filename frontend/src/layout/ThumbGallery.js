@@ -5,7 +5,7 @@ import "swiper/swiper-bundle.css"
 
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y, Thumbs]);
 
-const ThumbGallery = ({ items }) => {
+const ThumbGallery = ({ items, img_class }) => {
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
     return (
         <>
@@ -20,7 +20,7 @@ const ThumbGallery = ({ items }) => {
                 onSwiper={(swiper) => console.log(swiper)}
                 onSlideChange={() => console.log('slide change')}
             >
-                {items.map((item, i) => <SwiperSlide key={i} className="swiperSlide" style={{ backgroundImage: `url(${item})` }}> </SwiperSlide>)}
+                {items.map((item, i) => <SwiperSlide key={i} className={`${img_class} swiperSlide`} style={{ backgroundImage: `url(${item})` }}> </SwiperSlide>)}
 
             </Swiper>
             <Swiper
@@ -31,7 +31,7 @@ const ThumbGallery = ({ items }) => {
                 slideToClickedSlide={true}
 
             >
-                {items.map((item, i) => <SwiperSlide key={i} className="swiperThumb" style={{ backgroundImage: `url(${item})` }}> </SwiperSlide>)}
+                {items.map((item, i) => <SwiperSlide key={i} className={`${img_class}-thumb swiperThumb`} style={{ backgroundImage: `url(${item})` }}> </SwiperSlide>)}
             </Swiper>
 
         </>

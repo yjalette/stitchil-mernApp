@@ -1,26 +1,30 @@
 import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { Image } from 'react-bootstrap';
+import { useMutation } from '@apollo/react-hooks';
 
-import useForm from '../../../custom_hooks/useForm'
-import useUpload from '../../../custom_hooks/useUpload'
+import useForm from '../../custom_hooks/useForm'
+import useUpload from '../../custom_hooks/useUpload'
 import ItemForm from './ItemForm';
-import { transformInputs, initState } from "./helpers"
-import useMutationHook from '../../../custom_hooks/useMutationHook';
-import { mutation_update } from './api';
-import CustomButton from '../../../layout/button/CustomButton';
+import CustomButton from '../../layout/button/CustomButton';
+import { initState, transformInputs, validate } from "./helpers"
 
-const ItemUpdate = ({ item, updateItemCache, index }) => {
+const ItemUpdate = ({ item, updateItemCache, index, mutation }) => {
     const { section } = useParams();
-    const { post } = useMutationHook(mutation_update[section])
-    const { inputs, setInputs, handleChange, handleMultiChange, handleSubmit, handleCancel, editMode, toggleEditMode } = useForm(initState[section], onSubmit);
-    const { files, clearUpload, getRootProps, getInputProps } = useUpload(null, inputs.gallery ? 5 - inputs.gallery : 5);
+    const [post] = useMutation(mutation);
+    const { inputs, setInputs, handleChange, handleMultiChange, handleSubmit, editMode, toggleEditMode, errors, setErrors } = useForm(initState[section], onSubmit);
+    const { files, clearUpload, getRootProps, getInputProps } = useUpload(null, inputs.gallery ? 5 - inputs.gallery.length : 5);
 
     useEffect(() => {
         if (item) setInputs(item);
     }, [item])
 
     function onSubmit() {
+        const emptyInputs = validate(inputs);
+        if (emptyInputs.length > 0) return setErrors({
+            ...errors,
+            form_error: `${emptyInputs.join(", ")} can't be empty`
+        })
         post({
             variables: {
                 itemInput: transformInputs[section](inputs),
@@ -28,10 +32,9 @@ const ItemUpdate = ({ item, updateItemCache, index }) => {
             }
         });
         updateItemCache(inputs, index);
-        clearUpload();
         toggleEditMode();
+        clearUpload();
     }
-
 
     if (!editMode) return <CustomButton btn_title="edit item" btn_class="btn-icon" icon="fa fa-edit" onClick={toggleEditMode}></CustomButton>
 
@@ -44,27 +47,25 @@ const ItemUpdate = ({ item, updateItemCache, index }) => {
                 btn_name="coverImage"
                 btn_value={item}
                 onClick={handleChange}>cover</CustomButton>
-                <i title="delete image" className="fa fa-close itemUpload-footer" onClick={() => setInputs({ ...inputs, gallery: inputs.gallery.filter((item, i) => i !== index) })} />
+                <i title="delete image" className="fa fa-close itemUpload-footer" onClick={() => setInputs({
+                    ...inputs,
+                    gallery: inputs.gallery.filter((item, i) => i !== index)
+                })} />
             </>}
     </div>)
 
     return <ItemForm
-        form_title="update"
+        form_title="Update"
+        errors={errors}
         inputs={inputs}
         initState={initState[section]}
         onSubmit={handleSubmit}
-        onClose={() => {
-            handleCancel();
-            clearUpload();
-        }}
+        onClose={() => clearUpload()}
         onChange={handleChange}
         onMultiChange={handleMultiChange}
-        media_props={{
-            files,
-            prevFiles,
-            clearUpload, getInputProps, getRootProps
-        }}
+        media_props={{ files, prevFiles, clearUpload, getInputProps, getRootProps }}
     />
 }
+
 
 export default ItemUpdate

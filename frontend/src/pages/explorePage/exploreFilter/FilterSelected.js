@@ -6,10 +6,12 @@ const FilterSelected = ({ filters, onClick }) => console.log(filters) || (
         {Object.keys(filters).map(filter => {
             if (Array.isArray(filters[filter])) return filters[filter].map(elem => <CustomButton
                 key={elem}
-                btn_value={elem}
                 btn_class="btn-icon-text exploreParam__selected"
                 onClick={({ target }) => onClick(filter, target.value)}
                 icon="fa fa-close"
+                btn_otherProps={{
+                    value: elem
+                }}
             >{elem}</CustomButton>)
 
         })}

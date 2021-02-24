@@ -8,7 +8,7 @@
     letter-spacing: .5x;
     background-color: transparent;
     border: 1px solid currentColor;
-    border-radius: 10px;
+    border-radius: var(--border-radius);
     width: 100%;
     max-width: 100px;
     padding: var(--padding-elem);
@@ -186,6 +186,10 @@
 
 .btn-form:hover::after {
     opacity: 1;
+}
+
+.btn-form-cancel:hover {
+    box-shadow: var(--box-shadow-red);
 }
 
 .btn-close {

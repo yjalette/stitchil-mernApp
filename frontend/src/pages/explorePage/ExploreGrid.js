@@ -9,24 +9,20 @@ import FilterSelected from './exploreFilter/FilterSelected';
 import ExploreSort from './ExploreSort';
 import SectionWrapper from '../../layout/SectionWrapper';
 import CustomButton from '../../layout/button/CustomButton';
+import SearchFilter from '../../components/search/SearchFilter';
+import SearchParam from '../../components/search/SearchParam';
 
-const ExploreGrid = ({ items, total, activePage, loadMoreData, filters, onFilter, price, onPriceChange, deleteSearchParam, clearAll }) => (
+const ExploreGrid = ({ items, total, loadMoreData }) => (
     <>
         <SectionWrapper section_class="filter">
-            <FilterWrapper
-                filters={filters}
-                onFilter={onFilter}
-                price={price}
-                onPriceChange={onPriceChange}
-                deleteSelected={deleteSearchParam}>
-            </FilterWrapper>
+            <SearchFilter />
         </SectionWrapper>
-        {filters && Object.values(filters).length > 0 && <FilterSelected filters={filters} onClick={deleteSearchParam} />}
+        <SearchParam />
         <SectionWrapper>
-            {total && <div className="exploreParam">
+            {/* {total && <div className="exploreParam">
                 <ExploreSort />
                 <CustomButton onClick={clearAll} btn_class="btn-icon-text btn-red" icon="fa fa-close" >clear form</CustomButton>
-            </div>}
+            </div>} */}
             <ItemList
                 items={items}
                 emptyResultType="results"
@@ -37,12 +33,12 @@ const ExploreGrid = ({ items, total, activePage, loadMoreData, filters, onFilter
                         header: { title: item.title },
                         coverImage: item.coverImage,
                         highlights: [
-                            { field: "fabric choices: ", content: item.fabrics },
-                            { field: "price starts at: ", content: `$${item.price}` }]
+                            { field: "delivery", content: `${item.delivery} days` },
+                            { field: "price starts at", content: `$${item.price}` }]
                         ,
                         sideMenu: (
                             <>
-                                <CustomButton btn_class="btn-icon" icon="fa fa-angle-double-right" />
+                                <CustomButton btn_class="btn-icon" icon="fa fa-heart" />
                             </>
                         )
                     }
@@ -50,10 +46,10 @@ const ExploreGrid = ({ items, total, activePage, loadMoreData, filters, onFilter
 
                 }
             />
-            {total && <div className="exploreGrid__footer d-flex">
+            {/* {total && <div className="exploreGrid__footer d-flex">
                 <SectionHeader title={`${total} results`} />
                 <PaginationIndex count={total} onClick={loadMoreData} activePage={activePage} />
-            </div>}
+            </div>} */}
         </SectionWrapper>
     </>
 )

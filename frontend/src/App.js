@@ -59,7 +59,7 @@ class App extends Component {
               {settingsComponents.map(elem => <Route key={elem.section} path={`/settings/${elem.section}`}>
                 <SettingsPage section={elem.section}>{elem.component}</SettingsPage></Route>)}
               <Route path="/explore" component={ExplorePage} />
-              <Route path="/filter/:section/:category" component={ExplorePage} />
+              <Route path="/filter/:find" component={ExplorePage} />
               <Route path="/profile/:username/:section" component={ProfilePage} />
               <Route path="/view-gigs-item/:id" component={GigPage} />
               <Route path="/view-portfolio-item/:id" component={ProductPage} />

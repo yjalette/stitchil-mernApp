@@ -1,24 +1,22 @@
 import React, { useEffect } from 'react';
+import { useMutation } from '@apollo/react-hooks';
 
 import useForm from '../../../custom_hooks/useForm';
 import FormMultipleInput from '../../../components/inputs/FormMultipleInput';
 import FormInput from '../../../components/inputs/FormInput';
 import { handleResponse } from '../../../helpers/dataHelper';
 import CustomForm from '../../../layout/CustomForm'
-import useMutationHook from '../../../custom_hooks/useMutationHook';
 import { UPDATE_GENERAL_MUTATION } from '../graphql/mutations';
 
 const AccountGeneral = ({ currValues }) => {
-    const { post } = useMutationHook(UPDATE_GENERAL_MUTATION, onPostCompleted);
+    const [post, { error, data }] = useMutation(UPDATE_GENERAL_MUTATION, {
+        onCompleted: data => handleResponse(data.updateGeneral, handleSuccess, handleFailure)
+    });
     const { inputs, setInputs, handleChange, handleMultiChange, errors, setErrors, setMsg, msg, handleSubmit } = useForm({ fullname: "", country: [], languages: [] }, onSubmit);
 
     useEffect(() => {
         if (currValues) setInputs(currValues);
     }, [currValues])
-
-    function onPostCompleted(data) {
-        handleResponse(data.updateGeneral, handleSuccess, handleFailure)
-    }
 
     function handleSuccess(success_msg) {
         setErrors({});

@@ -1,12 +1,15 @@
 import React from 'react';
 import { Image } from "react-bootstrap";
-import PictureZoom from '../../../components/pictures/PictureZoom';
+import PictureZoom from '../../components/pictures/PictureZoom';
 
 const ItemUpload = ({ files, uploadError, prevFiles, clearUpload, getRootProps, getInputProps }) => {
 
     return (
-        <div className="itemUpload my-auto">
-            <span className="error">{uploadError}</span>
+        <div className="itemUpload field-wrapper my-auto">
+            <span className="formLabel">upload*
+                <span className="text-muted ml-2">(max 5 uploads)</span>
+            </span>
+            <div className="error">{uploadError}</div>
             <div className="itemUpload__list">
                 {prevFiles}
                 {files && files.map((file, index) =>
@@ -21,9 +24,6 @@ const ItemUpload = ({ files, uploadError, prevFiles, clearUpload, getRootProps, 
                         src="https://res.cloudinary.com/dgxa9gpta/image/upload/v1602093311/Icons/upload-icon_eqsr6c.svg"
                         className="upload__icon" alt="icon upload" />
                 </div>
-
-                {/* {isDragReject && <InlineAlert variant="warning" content="File type not accepted, sorry!" />}
-            {isFileTooLarge && <InlineAlert variant="warning" content="File is too large" />} */}
 
             </div>
 

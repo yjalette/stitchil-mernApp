@@ -1,3 +1,5 @@
+import { isObjEmpty } from '../../helpers/formHelper';
+
 export const initState = {
     portfolio: { title: "", description: "", keywords: [] },
     gigs: { title: "", description: "", keywords: [], category: [], styles: [], price: 0, fabrics: [], delivery: 0 }
@@ -16,15 +18,41 @@ export const transformInputs = {
     }
 }
 
-export const highlights = (item, section) => {
-    if (section === "gigs") return [
-        { field: "fabric choices: ", content: item.fabrics },
-        { field: "price starts at: ", content: `$${item.price}` }
-    ]
-    if (section === "portfolio") return [
-        { field: "title", content: item.title },
-        { icon: "fa fa-thumbs-up", content: 5 }
-    ]
-
+export const validate = (inputs) => {
+    return Object.keys(inputs).filter(k => {
+        if (k === "description" || k === "keywords") return null
+        return isObjEmpty({ [k]: inputs[k] })
+    });
 }
+
+
+export const multiInput_props = (label, inputs, onChange) => ({
+    label,
+    selected: inputs[label],
+    onChange,
+    allowNew: label === "keywords",
+    multiple: label !== "category",
+    required: label !== "keywords"
+})
+
+export const singleInput_props = (label, inputs, onChange) => ({
+    label,
+    value: inputs[label],
+    type: Number.isInteger(inputs[label]) && "number",
+    onChange,
+    required: true
+})
+
+export const descriptionInput_props = (label, inputs, onChange) => ({
+    label,
+    value: inputs[label],
+    onChange,
+    maxLength: 100,
+    rows: 3
+})
+
+
+
+
+
 

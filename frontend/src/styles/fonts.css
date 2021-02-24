@@ -35,7 +35,7 @@ h3 {
 }
 
 h4 {
-    width: 100%;
+    /* width: 100%; */
     position: relative;
     padding: var(--padding-box);
     overflow: hidden;
