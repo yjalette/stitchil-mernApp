@@ -1,11 +1,10 @@
-import React, { useContext, useEffect, useRef } from 'react';
+import React, { useContext } from 'react';
 import { Container, Image } from 'react-bootstrap';
 import AuthContext from '../../context/Auth-context';
 import dateHelper from '../../helpers/dateHelper';
 
 const ChatHistory = ({ chats, activeChatIndex, seeChat }) => {
     const { user } = useContext(AuthContext);
-
     return (
         <>
             {chats && chats.length > 0 && chats.map((chat, index) => {

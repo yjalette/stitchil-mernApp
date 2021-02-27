@@ -5,7 +5,7 @@ import GroupButton from './button/GroupButton';
 import CustomButton from './button/CustomButton';
 import CustomAlert from './CustomAlert';
 
-const CustomForm = ({ form_class, form_msg, form_error, submitTitle, onSubmit, onCancel, children }) => console.log(form_error) || (
+const CustomForm = ({ form_class, form_msg, form_error, submitTitle, onSubmit, onCancel, children }) => (
     <Form className={`customForm ${form_class}`} onSubmit={onSubmit}>
         {form_error && <CustomAlert alert_variant="danger">{form_error} </CustomAlert>}
         {form_msg && <CustomAlert>{form_msg} </CustomAlert>}

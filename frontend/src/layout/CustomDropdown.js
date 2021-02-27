@@ -1,7 +1,7 @@
 import React from 'react'
 import { Dropdown } from 'react-bootstrap'
 
-const CustomDropdown = ({ items, btn_class, btn_title, menu_align, menu_class, onClick }) => {
+const CustomDropdown = ({ items, btn_name, btn_class, btn_title, menu_align, menu_class, onClick }) => {
 
     return (
         <Dropdown className={`${menu_class} customDropdown`} drop={menu_align || "down"}>
@@ -11,9 +11,9 @@ const CustomDropdown = ({ items, btn_class, btn_title, menu_align, menu_class, o
                     key={i}
                     as="button"
                     variant=""
-                    name={btn_title}
+                    name={btn_name || btn_title}
                     value={item}
-                    className={` customDropdown__item`}
+                    className={`customDropdown__item`}
                     onClick={onClick}>{item}</Dropdown.Item>)}
             </Dropdown.Menu>
         </Dropdown >

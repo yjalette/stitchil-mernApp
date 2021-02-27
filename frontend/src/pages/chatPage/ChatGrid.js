@@ -6,6 +6,8 @@ import ChatActive from './ChatActive';
 import ChatHistory from './ChatHistory'
 import SearchBox from '../../components/inputs/SearchBox'
 import EmptyResultAlert from '../../layout/alerts/EmptyResultAlert';
+import SectionWrapper from '../../layout/SectionWrapper';
+import BoxWrapper from '../../layout/BoxWrapper';
 
 
 const ChatGrid = ({ chats, addMessage }) => {
@@ -21,20 +23,24 @@ const ChatGrid = ({ chats, addMessage }) => {
     }
 
     return (
-
-        <Row className="chat__grid">
-            <Col lg={4} sm={12} className="chat__col-history">
-                <Container className="chatHistory__header">
-                    {chats && <SearchBox onClick={handleSearchChat} />}
-                </Container>
-                {chats && <ChatHistory chats={chats} seeChat={handleActiveChat} activeChatIndex={activeChat} />}
-            </Col>
-            <Col lg={8} sm={12} className="chat__col-active">
-                {user2 && <UserAvatar username={user2.username} profileImage={user2.profileImage} />}
+        <>
+            <SectionWrapper section_class="chats__history">
+                <BoxWrapper box_class="chats__header chats-search">
+                    <SearchBox onClick={handleSearchChat} />
+                </BoxWrapper>
+                <BoxWrapper box_class="chats__userList">
+                    {chats && <ChatHistory chats={chats} seeChat={handleActiveChat} activeChatIndex={activeChat} />}
+                </BoxWrapper>
+            </SectionWrapper>
+            <SectionWrapper section_class="chats__active">
+                <BoxWrapper box_class="chats__header">
+                    {user2 && <UserAvatar username={user2.username} profileImage={user2.profileImage} />}
+                </BoxWrapper>
                 {chats && chats.length > 0 ? <ChatActive chat={chats[activeChat]} addMessage={addMessage} />
                     : <EmptyResultAlert type="messages" />}
-            </Col>
-        </Row>
+            </SectionWrapper>
+
+        </>
 
 
     )

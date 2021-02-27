@@ -68,14 +68,15 @@ type Comment{
     createdAt: String
 }
 
+
 type Message {
     _id: String
+    docId: String
     message: String
     sender: AuthData
     recipient: String
     createdAt: String
 }
-
 
 type Failure {
     code: Int

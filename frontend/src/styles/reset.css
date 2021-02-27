@@ -45,18 +45,10 @@ input, textarea, select, .btn-icon {
 }
 
 .dropdown-menu {
-    padding: 0 !important;
-}
+    min-width: 100% !important;
 
-/* .dropdown-item {
-    width: 100% !important;
-    color: var(--accent-color) !important;
-} */
-
-/* .dropdown-item:hover {
-    background-color: var(--main-color-light) !important;
+    /* padding: 0 !important; */
 }
- */
 
 .auth__google-btn > div {
     margin-right: 0 !important;
@@ -75,10 +67,6 @@ input, textarea, select, .btn-icon {
     background-color: var(--white-color) !important;
     border: 1px solid var(--green-color) !important;
 }
-
-/* .show > .btn-primary.dropdown-toggle:focus {
-    box-shadow: none;
-} */
 
 .modal {
     background-image: url("https://www.transparenttextures.com/patterns/climpek.png");

@@ -15,7 +15,7 @@ const defaultImg = "https://res.cloudinary.com/dgxa9gpta/image/upload/v160210510
 const ProfileHeader = ({ coverImage, profileImage, fullname, country }) => {
     const { logged_in_user } = useContext(ProfileContext);
     const { user } = useContext(AuthContext)
-    if (logged_in_user) {
+    if (!logged_in_user) {
         return (
             <>
                 <Image src={coverImage || defaultImg} className="coverImage" />
@@ -46,7 +46,7 @@ const ProfileHeader = ({ coverImage, profileImage, fullname, country }) => {
                     <ProfileImage src={profileImage} image_type="profileImage" />
                 </Container>
                 <Container className="profileHeader__rightCol">
-                    <h2 className="profileHeader__title">{fullname}</h2>
+                    <h2 className="profileHeader__title">{fullname} {country && <PictureFlag country={country[0]} />}</h2>
                 </Container>
             </Container>
         </>

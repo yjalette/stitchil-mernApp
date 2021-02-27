@@ -5,13 +5,12 @@ module.exports = {
     Query: {
         chats: async (_, { }, req) => {
             try {
-                return await Chat.find({ members: { $in: req.userId } }, { 'messages': { $slice: 2 } })
+                return await Chat.find({ members: { $in: req.userId } }, { 'messages': { $slice: 1 } })
                     .populate({ path: 'members', select: 'username profileImage' })
-                    .populate({ path: 'messages', populate: 'sender' })
+                    .populate({ path: 'messages', populate: 'sender', options: { $sort: { "createdAt": -1 } } })
             } catch (error) {
                 throw new Error(error)
             }
-
         },
     },
     Mutation: {

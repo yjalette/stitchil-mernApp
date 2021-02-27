@@ -5,7 +5,7 @@ import { useLocation, useHistory } from 'react-router-dom';
 import SignOutLinks from './SignOutLinks';
 import SignInLinks from './SignInLinks';
 import AuthContext from '../../context/Auth-context';
-import "./styles.css";
+import "./style.css";
 
 const MainNav = () => {
   const { pathname } = useLocation();

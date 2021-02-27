@@ -2,7 +2,7 @@
     text-transform: lowercase;
 }
 
-.customButton.btn-click {
+.btn-click {
     color: var(--accent-color);
     font-size: var(--sm-fonts);
     letter-spacing: .5x;
@@ -16,7 +16,7 @@
     text-shadow: var(--text-shadow);
 }
 
-.customButton.btn-click:hover {
+.btn-click:hover {
     animation: clickButtonAnim 2s ease-in-out;
 }
 

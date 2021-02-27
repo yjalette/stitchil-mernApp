@@ -22,10 +22,8 @@ const CommentCreate = ({ addComment, docId }) => {
         post({ variables: { message: inputs.message, docId } })
     }
 
-    console.log(inputs)
-
     return (
-        <MessageForm onSubmit={handleSubmit} onChange={handleChange} message={inputs.message} msg_class="commentCreate">
+        <MessageForm onSubmit={handleSubmit} onChange={handleChange} inputs={inputs.message} msg_class="commentCreate">
             <Container className="commentItem__header">
                 <UserAvatar profileImage={user.profileImage} username={user.username} />
             </Container>

@@ -21,3 +21,19 @@ export const CHATS_QUERY = gql`
         }
     
 `
+
+export const CHAT_MESSAGES_QUERY = gql`
+        query chat_messages($chatId: ID){
+            chat_messages(chatId: $chatId){
+                    _id
+                    chatId
+                    sender {
+                        username
+                        profileImage
+                    }
+                    message 
+                    createdAt
+            }
+        }
+    
+`

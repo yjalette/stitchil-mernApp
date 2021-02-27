@@ -25,11 +25,10 @@ input Filters {
     category: [String]
     styles: [String]
     worldwide: Boolean
+    keywords: String
     min: String
     max: String
 }
-
-
 
 type Bid {
     creator: AuthData

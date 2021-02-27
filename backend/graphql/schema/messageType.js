@@ -5,7 +5,8 @@ module.exports = gql`
 
 
 
-type Query {  
+type Query { 
+    messages(docId: ID): [Message]  
     comments(docId: ID):[Comment] 
     profile_reviews(username: String):[Comment]      
     likes(docId: ID, docName: String): [String]   

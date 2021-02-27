@@ -10,6 +10,8 @@ input {
 label, .formLabel {
     font-size: var(--sm-fonts);
     color: var(--secondary-color);
+
+    /* font-family: var(--secondary-font); */
     letter-spacing: .1em;
     text-transform: lowercase;
 }

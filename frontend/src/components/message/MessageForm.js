@@ -1,21 +1,17 @@
 import React from 'react';
-import { Col, Form, Media, Row } from 'react-bootstrap';
-import CustomButton from '../../layout/button/CustomButton';
+import { Media } from 'react-bootstrap';
+import CustomForm from '../../layout/CustomForm';
+import FormInput from '../inputs/FormInput';
 import FormTextarea from '../inputs/FormTextarea';
 
-const MessageForm = ({ message, onSubmit, onChange, children, msg_class }) => console.log(message) || (
-    <Media className={`messageForm-wrapper ${msg_class}`}>
+const MessageForm = ({ inputs, onSubmit, onChange, children, msg_class }) => (
+    <Media className={`messageForm__wrapper ${msg_class}`}>
         {children}
-        <Form className="messageForm d-flex flex-column">
-            <Row className="flex-center messageForm__body">
-                <Col xs={10}>
-                    <FormTextarea label="message" value={message} placeholder="write here ..." onChange={onChange} />
-                </Col>
-                <Col xs={2}>
-                    <CustomButton onClick={onSubmit} btn_class="btn-icon ml-3" icon="fa fa-paper-plane" />
-                </Col>
-            </Row>
-        </Form>
+        <CustomForm form_class="messageForm" submitTitle="send" onSubmit={onSubmit}>
+            {inputs.subject && <FormInput label="subject" value={inputs.subject} onChange={onChange} />}
+            <FormTextarea label="message" value={inputs.message} placeholder="write here ..." onChange={onChange} maxLength="300" />
+            {/* <CustomButton onClick={handleSubmit} btn_class="btn-icon w-auto" icon="fa fa-paper-plane" /> */}
+        </CustomForm>
     </Media>
 )
 

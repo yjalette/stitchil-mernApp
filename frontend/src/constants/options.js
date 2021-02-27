@@ -8,7 +8,7 @@ export default {
     fabrics: ["wool", "cotton", "denim", "silk", "linen", "leather", "polyester", "viscose", "crepe", "jersey", "chiffon"],
     styles: ["eveningwear", "casual", "streetwear", "professional", "childrenswear", "costume", "bridal", "uniform", "petwear"],
     category: ["dresses", "suits", "shirts", "pants", "tops", "sweaters", "jackets", "skirts"],
-    price_range: [100, 200, 300, 400, 500, 1000],
+    price: { min: Array.from(Array(10).keys(), x => x * 50), max: Array.from(Array(10).keys(), x => x * 50 + 50) },
     country: getNames(),
     languages
 }

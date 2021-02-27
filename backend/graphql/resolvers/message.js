@@ -6,7 +6,10 @@ const { sendEmail } = require("../../helpers/nodemailer");
 
 module.exports = {
     Query: {
-
+        messages: async (_, { docId }, { userId }) => {
+            const { messages } = await Chat.findById(docId, { "messages": { $slice: 2 } }).populate({ path: "messages", populate: "sender" })
+            return messages;
+        },
         likes: async (_, { docId, docName }, req) => {
             try {
                 switch (docName) {
@@ -27,7 +30,6 @@ module.exports = {
             if (!userId) throw new Error("unauthenticated");
             const user2 = await User.findOne({ username: recipient });
             const chat = await Chat.findOne({ members: { $all: [user2, userId] } });
-            console.log(Chat)
             const newMessage = await new Message({ message, sender: userId, createdAt: new Date() }).save();
             if (chat) await chat.updateOne({ $push: { messages: newMessage._id } });
             else await new Chat({

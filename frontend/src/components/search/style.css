@@ -1,0 +1,64 @@
+.sectionWrapper-searchFilter, .sectionWrapper-searchParams {
+    flex-direction: row;
+}
+
+.sectionWrapper-searchFilter {
+    justify-content: space-between;
+}
+
+.sectionWrapper-searchParams {
+    justify-content: flex-start;
+}
+
+.searchFilter__price, .searchFilter__options {
+    display: flex;
+}
+
+.searchFilter__options .customDropdown + .customDropdown {
+    margin-left: .5em;
+}
+
+.sectionWrapper-searchFilter .customDropdown__btn {
+    background-color: transparent;
+}
+
+.sectionWrapper-searchFilter .customDropdown__body {
+    background-color: var(--light-gray-color);
+}
+
+.searchParams__item {
+    color: var(--light-gray-color) !important;
+    border: 1px solid currentColor;
+    border-radius: var(--border-radius);
+    padding: var(--padding-elem);
+}
+
+.searchParams__item + .searchParams__item {
+    margin-left: .3em;
+}
+
+/* .searchFilter .menuButton-sort {
+    float: right;
+    padding: var(--padding-elem);
+} */
+
+/* .searchFilter__price .field-wrapper {
+    display: flex;
+    align-items: center;
+    width: 150px;
+    margin: 0 1em;
+}
+
+.searchFilter__price .field-wrapper label {
+    color: var(--accent-color);
+    margin-right: .5em;
+} */
+
+/* .searchFilter__price .field-wrapper label::after {
+    font-family: FontAwesome;
+    content: "$";
+}
+
+.searchFilter__price .field-wrapper .user-input {
+    height: auto;
+} */

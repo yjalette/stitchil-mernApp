@@ -1,21 +1,22 @@
 import React, { useEffect, useState } from 'react';
 
 import "./style.css"
-import useGetData from '../../custom_hooks/useGetData';
-import MessageItem from './MessageItem';
+import { useLazyQuery } from '@apollo/react-hooks';
+import { MESSAGES_QUERY } from './graphql/queries';
+import MessageGrid from './MessageGrid';
+import MessageCreate from './MessageCreate';
 
-const MessageData = ({ docId, messages_class }) => {
-    const { getData, resData } = useGetData("getmessages");
+const MessageData = ({ docId, children }) => {
+    const [getData, { data, error }] = useLazyQuery(MESSAGES_QUERY);
     const [values, setValues] = useState([])
 
     useEffect(() => {
         if (docId) getData({ variables: { docId } })
     }, [docId]);
 
-
     useEffect(() => {
-        if (resData) setValues(resData.getMessages)
-    }, [resData]);
+        if (data) setValues(data.messages)
+    }, [data]);
 
     const handleNewMessage = newMessage => {
         setValues([
@@ -25,13 +26,12 @@ const MessageData = ({ docId, messages_class }) => {
     }
 
     return (
-        <div className={`${messages_class} messages`}>
-            <div className="message__list">
-                {values && values.length > 0 && values.map((item, index) => <MessageItem key={index} item={item} />)}
-            </div>
-            {/* <MessageCreate docId={docId} addMessage={handleNewMessage} /> */}
-        </div>
+        <MessageGrid messages={values} >
+            {children}
+            {/* <MessageCreate docId={docId} addMessage={addMessage} /> */}
+        </MessageGrid>
     )
+
 }
 
 export default MessageData;

@@ -1,75 +1,100 @@
 import React from 'react';
-import { useState, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
+import queryString from 'query-string';
 
-import options from '../../constants/options';
 import CustomButton from '../../layout/button/CustomButton';
 import CustomDropdown from '../../layout/CustomDropdown';
-import FormInput from '../inputs/FormInput';
-import SelectInput from '../inputs/SelectInput';
 import SwitchCheckBox from '../inputs/SwitchCheckBox';
+import { initState_search } from "../../constants/initStates";
+import options from "../../constants/options"
+import "./style.css"
+import SectionWrapper from '../../layout/SectionWrapper';
 
 const SearchFilter = () => {
     const { push } = useHistory();
     const { search } = useLocation();
-    const searchParam = new URLSearchParams(search)
+    const searchParam = new URLSearchParams(search);
+    const [defaultFilters, setDefaultFilters] = useState(initState_search);
+    const [selectedParam, setSelectedParam] = useState({});
 
-    const [defaultFilters, setDefaultFilters] = useState({
-        styles: options.styles,
-        category: options.category,
-        min: 0,
-        max: 1000,
-        worldwide: true
-    });
+    useEffect(() => {
+        if (search) setSelectedParam(queryString.parse(search))
+    }, [search])
 
     const handleSelect = ({ target }) => {
         const { name, value } = target;
-        setDefaultFilters({
-            ...defaultFilters,
-            [name]: defaultFilters[name].filter(elem => elem !== value)
-        })
+        setDefaultFilters({ ...defaultFilters, [name]: defaultFilters[name].filter(elem => elem !== value) })
         searchParam.append(name, value);
         push({ search: searchParam.toString() })
-        // console.log(searchParam.toString())
-        // searchData(name, value)
     }
 
     const handlePrice = ({ target }) => {
         const { name, value } = target;
-        setDefaultFilters({
-            ...defaultFilters,
-            [name]: value
-        })
-
+        setDefaultFilters({ ...defaultFilters, [name]: value })
         searchParam.set(name, value)
         push({ search: searchParam.toString() })
-        // searchData(name, value)
     }
 
-    function searchData(label, val) {
-        push({ search: search ? `${search}&${label}=${val}` : `${label}=${val}` })
+    const deleteOptionParam = async ({ target }) => {
+        const { name, value } = target;
+        const newState = { ...selectedParam, [name]: selectedParam[name].filter(p => p !== value) }
+        setSelectedParam(newState)
+        setDefaultFilters({ ...defaultFilters, [name]: [...defaultFilters[name], value] })
+        push({ search: queryString.stringify(newState) })
     }
 
-    console.log(search)
+    const deleteParam = ({ target }) => {
+        const { name } = target;
+        setSelectedParam({ ...setSelectedParam, [name]: null })
+        setDefaultFilters({ ...defaultFilters, [name]: initState_search[name] })
+        searchParam.delete(name);
+        push({ search: searchParam.toString() })
+    }
 
     return (
         <>
-            <div className="exploreFilter flex-center justify-content-between w-100">
-                <section className="exploreFilter__fiters">
-                    <CustomDropdown items={defaultFilters.styles} btn_title="styles" btn_class="menuButton fa fa-caret-down" onClick={handleSelect} />
-                    <CustomDropdown items={defaultFilters.category} btn_title="category" btn_class="menuButton fa fa-caret-down" onClick={handleSelect} />
+            <SectionWrapper section_class="searchFilter">
+                <section className="searchFilter__options">
+                    <CustomDropdown items={defaultFilters.styles} btn_title="styles" btn_class="fa fa-caret-down" onClick={handleSelect} />
+                    <CustomDropdown items={defaultFilters.category} btn_title="category" btn_class="fa fa-caret-down" onClick={handleSelect} />
                 </section>
-                <section className="exploreFilter__price">
-                    {/* <SelectInput options={options.price_range} label="min" defaultValue={defaultFilters.min} className="menuButton fa fa-caret-down" onChange={handlePrice} /> */}
-                    <CustomDropdown items={options.price_range} btn_title="min" btn_class="menuButton fa fa-caret-down" onClick={handlePrice} />
-                    <CustomDropdown items={options.price_range} btn_title="max" btn_class="menuButton fa fa-caret-down" onClick={handlePrice} />
+                <section className="searchFilter__price">
+                    <span className="clickElem mr-2">price</span>
+                    <CustomDropdown items={options.price.min} btn_name="min" btn_title={<>${defaultFilters.min}</>} btn_class="fa fa-arrow-down" onClick={handlePrice} />
+                    <span className="clickElem mx-2">-</span>
+                    <CustomDropdown items={options.price.max} btn_name="max" btn_title={<>${defaultFilters.max}</>} btn_class="fa fa-arrow-up" onClick={handlePrice} />
                 </section>
                 <section>
                     <SwitchCheckBox label="worldwide" value={defaultFilters.worldwide} />
                 </section>
-            </div>
+            </SectionWrapper>
+            {Object.values(selectedParam).length > 0 && <SectionWrapper section_class="searchParams">
+                {Object.keys(selectedParam).map((paramKey) => {
+                    if (!selectedParam[paramKey]) return null
+                    if (Array.isArray(selectedParam[paramKey])) return selectedParam[paramKey].map(el => paramBox(paramKey, el, deleteOptionParam))
+                    return paramBox(paramKey, selectedParam[paramKey], deleteParam)
+                })}
+            </SectionWrapper>}
         </>
     )
-
 }
+
+function paramBox(paramKey, paramVal, onChange) {
+    return (
+        <CustomButton
+            key={Math.random() * 100}
+            btn_class="btn-icon-text searchParams__item"
+            onClick={onChange}
+            icon="fa fa-close"
+            btn_otherProps={{
+                value: paramVal,
+                name: paramKey
+            }}
+        >{paramVal}</CustomButton>
+
+    )
+}
+
+
 export default SearchFilter;

@@ -4,8 +4,17 @@ const { populateByUser } = require("../../consts/user");
 module.exports = {
     Query: {
         explore_items: async (_, { filters, page }, req) => {
-            console.log(filters)
-            if (filters && Object.values(filters).length > 0) {
+            if (filters && filters.keywords) {
+                let total;
+                const items = await Gig.find(
+                    { $text: { $search: filters.keywords } },
+                    { projection: { score: { $meta: "textScore" } } },
+                ).sort({ score: { $meta: "textScore" } })
+                console.log(items)
+                return { items, total }
+            }
+
+            else if (filters && Object.values(filters).length > 0) {
                 const items = await Gig.find({
                     $and: [
                         { category: filters.category && filters.category.length > 0 ? { $in: filters.category } : { $exists: true } },
@@ -16,11 +25,11 @@ module.exports = {
                     // .count((err, count) => console.log("count--->", count))
                     .populate(populateByUser)
                     .sort({ createdAt: -1 })
-                // .limit(10)
+                    .limit(10)
                 return { items, total: items.length }
             }
-            const items = await Gig.find().populate(populateByUser).sort({ createdAt: -1 }).limit(10);
-            return { items }
+
+            return { items: await Gig.find().populate(populateByUser).sort({ createdAt: -1 }).limit(10) }
         }
 
     }

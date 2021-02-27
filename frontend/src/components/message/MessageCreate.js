@@ -1,11 +1,9 @@
 import React, { useContext } from 'react';
-import { Media } from 'react-bootstrap';
+import { useMutation } from '@apollo/react-hooks';
 import "./style.css";
 import AuthContext from '../../context/Auth-context';
 import useForm from '../../custom_hooks/useForm';
-import FormTextarea from '../inputs/FormTextarea';
-import CustomForm from '../../layout/CustomForm';
-import { useMutation } from '@apollo/react-hooks';
+import MessageForm from './MessageForm';
 
 const MessageCreate = ({ query, otherVariables, onMessageSent, children, msg_class }) => {
     const { user } = useContext(AuthContext);
@@ -28,15 +26,7 @@ const MessageCreate = ({ query, otherVariables, onMessageSent, children, msg_cla
         post({ variables: { message: inputs.message, ...otherVariables } })
     }
 
-    return (
-        <Media className={`messageForm__wrapper ${msg_class}`}>
-            {children}
-            <CustomForm form_class="messageForm" submitTitle="send" onSubmit={handleSubmit}>
-                <FormTextarea label="message" value={inputs.message} placeholder="write here ..." onChange={handleChange} />
-                {/* <CustomButton onClick={handleSubmit} btn_class="btn-icon w-auto" icon="fa fa-paper-plane" /> */}
-            </CustomForm>
-        </Media>
-    )
+    return <MessageForm inputs={inputs} onChange={handleChange} onSubmit={handleSubmit} msg_class={msg_class}>{children}</MessageForm>
 }
 
 export default MessageCreate;

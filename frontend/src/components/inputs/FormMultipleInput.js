@@ -3,7 +3,6 @@ import { Typeahead } from "react-bootstrap-typeahead";
 import { Form } from 'react-bootstrap';
 import options from '../../constants/options';
 
-
 const FormMultipleInput = ({ label, selected, onChange, multiple, error, allowNew, required }) => (
     <Form.Group className="field-wrapper multipleInput" >
         {label && <Form.Label className="formLabel">{label}{required && "*"}</Form.Label>}

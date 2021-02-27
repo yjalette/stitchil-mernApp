@@ -1,3 +1,8 @@
+.pageWrapper-explore .search-box input {
+    width: calc(100% - 30px);
+    border-bottom: 1px solid var(--light-green-color);
+}
+
 .exploreHeader {
     height: 600px;
     overflow: hidden;
@@ -16,73 +21,6 @@
     font-size: 3rem;
 }
 
-.exploreFilter__price, .exploreFilter__fiters {
-    display: flex;
-}
-
-.exploreFilter__fiters > * {
-    margin: 0 1em;
-}
-
-.pageWrapper-explore .menuButton {
-    background-color: transparent;
-}
-
-.pageWrapper-explore .customDropdown__body {
-    background-color: var(--light-gray-color);
-}
-
-.pageWrapper-explore .menuButton-sort {
-    float: right;
-    padding: var(--padding-elem);
-}
-
-.exploreFilter__price .field-wrapper {
-    display: flex;
-    align-items: center;
-    width: 150px;
-    margin: 0 1em;
-}
-
-.exploreFilter__price .field-wrapper label {
-    color: var(--accent-color);
-    margin-right: .5em;
-}
-
-.exploreFilter__price .field-wrapper label::after {
-    font-family: FontAwesome;
-    content: "$";
-}
-
-.exploreFilter__price .field-wrapper .user-input {
-    height: auto;
-}
-
-.explore__heroimage {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    padding: var(--padding-element);
-}
-
-.pageWrapper-explore .card-img-overlay {
-    background-color: #1705355c;
-}
-
-.exploreHeader .search-box input {
-    width: 75% !important;
-    border-bottom: 1px solid var(--light-green-color);
-}
-
-/* .explore__body .search-box input {
-    width: 95% !important;
-    border-bottom: 1px solid var(--light-green-color);
-}
-
-.explore__search .search-box input::placeholder {
-    font-size: var(--md-fonts);
-} */
-
 .exploreParam {
     display: flex;
     justify-content: space-between;
@@ -100,13 +38,6 @@
 .sectionWrapper-filter {
     /* border-bottom: 1px solid var(--accent-color);
     border-top: 1px solid var(--accent-color); */
-}
-
-.exploreParam__selected {
-    color: var(--light-gray-color) !important;
-    border: 1px solid currentColor;
-    border-radius: var(--border-radius);
-    padding: var(--padding-elem);
 }
 
 @media only screen and (max-width: 1200px) {

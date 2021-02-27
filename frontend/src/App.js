@@ -51,15 +51,14 @@ class App extends Component {
         <Router>
           <AuthContext.Provider value={{ user: this.state.user, setUser: data => this.setState({ user: data }), logout: () => this.setState({ user: null }) }}>
             <MainNav />
-            <Route exact path="/" ><LandingPage /></Route>
-            <Route path="/homepage/:page"><LandingPage /></Route>
+            <Route exact path="/" component={LandingPage} />
+            <Route path="/explore" component={ExplorePage} />
             {authComponents.map(elem => <Route key={elem.auth_type} path={`/auth/${elem.auth_type}`}>
               <AuthPage auth_type={elem.auth_type}>{elem.component}</AuthPage></Route>)}
             <Switch>
               {settingsComponents.map(elem => <Route key={elem.section} path={`/settings/${elem.section}`}>
                 <SettingsPage section={elem.section}>{elem.component}</SettingsPage></Route>)}
-              <Route path="/explore" component={ExplorePage} />
-              <Route path="/filter/:find" component={ExplorePage} />
+              <Route path="/homepage/:section" component={LandingPage} />
               <Route path="/profile/:username/:section" component={ProfilePage} />
               <Route path="/view-gigs-item/:id" component={GigPage} />
               <Route path="/view-portfolio-item/:id" component={ProductPage} />
