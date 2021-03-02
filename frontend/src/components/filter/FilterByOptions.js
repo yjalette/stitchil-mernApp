@@ -10,8 +10,9 @@ import { initState_search } from "../../constants/initStates";
 import options from "../../constants/options"
 import "./style.css"
 import SectionWrapper from '../../layout/SectionWrapper';
+import BoxWrapper from '../../layout/BoxWrapper';
 
-const SearchFilter = () => {
+const FilterByOptions = () => {
     const { push } = useHistory();
     const { search } = useLocation();
     const searchParam = new URLSearchParams(search);
@@ -54,28 +55,24 @@ const SearchFilter = () => {
 
     return (
         <>
-            <SectionWrapper section_class="searchFilter">
-                <section className="searchFilter__options">
-                    <CustomDropdown items={defaultFilters.styles} btn_title="styles" btn_class="fa fa-caret-down" onClick={handleSelect} />
-                    <CustomDropdown items={defaultFilters.category} btn_title="category" btn_class="fa fa-caret-down" onClick={handleSelect} />
-                </section>
-                <section className="searchFilter__price">
+            <BoxWrapper box_class="filterByOptions">
+                <CustomDropdown items={defaultFilters.styles} btn_title="styles" btn_class="fa fa-caret-down" onClick={handleSelect} />
+                <CustomDropdown items={defaultFilters.category} btn_title="category" btn_class="fa fa-caret-down" onClick={handleSelect} />
+                <section className="filterByOptions__price">
                     <span className="clickElem mr-2">price</span>
                     <CustomDropdown items={options.price.min} btn_name="min" btn_title={<>${defaultFilters.min}</>} btn_class="fa fa-arrow-down" onClick={handlePrice} />
                     <span className="clickElem mx-2">-</span>
                     <CustomDropdown items={options.price.max} btn_name="max" btn_title={<>${defaultFilters.max}</>} btn_class="fa fa-arrow-up" onClick={handlePrice} />
                 </section>
-                <section>
-                    <SwitchCheckBox label="worldwide" value={defaultFilters.worldwide} />
-                </section>
-            </SectionWrapper>
-            {Object.values(selectedParam).length > 0 && <SectionWrapper section_class="searchParams">
+                <SwitchCheckBox label="worldwide" value={defaultFilters.worldwide} />
+            </BoxWrapper>
+            {Object.values(selectedParam).length > 0 && <BoxWrapper box_class="filterParams">
                 {Object.keys(selectedParam).map((paramKey) => {
                     if (!selectedParam[paramKey]) return null
                     if (Array.isArray(selectedParam[paramKey])) return selectedParam[paramKey].map(el => paramBox(paramKey, el, deleteOptionParam))
                     return paramBox(paramKey, selectedParam[paramKey], deleteParam)
                 })}
-            </SectionWrapper>}
+            </BoxWrapper>}
         </>
     )
 }
@@ -84,7 +81,7 @@ function paramBox(paramKey, paramVal, onChange) {
     return (
         <CustomButton
             key={Math.random() * 100}
-            btn_class="btn-icon-text searchParams__item"
+            btn_class="btn-icon-text filterParams__item"
             onClick={onChange}
             icon="fa fa-close"
             btn_otherProps={{
@@ -97,4 +94,4 @@ function paramBox(paramKey, paramVal, onChange) {
 }
 
 
-export default SearchFilter;
+export default FilterByOptions;

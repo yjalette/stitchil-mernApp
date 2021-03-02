@@ -42,6 +42,7 @@ type Gig {
     gallery: [String]
     delivery: Int
     keywords: [String]
+    creator: AuthData
     createdAt: String
     updatedAt: String
 }

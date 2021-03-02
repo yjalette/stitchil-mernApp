@@ -20,6 +20,7 @@ import AuthForgotPassword from './pages/authPage/AuthForgotPassword';
 import AccountData from './pages/settingsPage/settingsAccount/AccountData';
 import SecurityIndex from './pages/settingsPage/settingsSecurity/SecurityIndex';
 import NotificationIndex from './pages/settingsPage/settingsNotification/NotificationIndex';
+import SearchPage from './pages/searchPage/SearchPage';
 
 const userObj = JSON.parse(localStorage.getItem('user'));
 
@@ -53,6 +54,7 @@ class App extends Component {
             <MainNav />
             <Route exact path="/" component={LandingPage} />
             <Route path="/explore" component={ExplorePage} />
+            <Route path="/search/:keywords" component={SearchPage} />
             {authComponents.map(elem => <Route key={elem.auth_type} path={`/auth/${elem.auth_type}`}>
               <AuthPage auth_type={elem.auth_type}>{elem.component}</AuthPage></Route>)}
             <Switch>

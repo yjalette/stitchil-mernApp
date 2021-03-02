@@ -7,7 +7,6 @@ const userResolver = require('./user');
 const gigResolver = require('./gigs');
 const messageResolver = require('./message');
 const commentResolver = require('./comment');
-const exploreResolver = require('./explore');
 const designerResolver = require('./designer')
 
 const resolvers = {
@@ -18,8 +17,7 @@ const resolvers = {
         ...userResolver.Query,
         ...chatResolver.Query,
         ...messageResolver.Query,
-        ...commentResolver.Query,
-        ...exploreResolver.Query
+        ...commentResolver.Query
     },
     Mutation: {
         ...authResolver.Mutation,

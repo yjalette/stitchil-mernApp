@@ -6,9 +6,10 @@ import ExploreHeader from './ExploreHeader';
 import './style.css'
 
 const ExplorePage = () => {
-
+    const { user } = useContext(AuthContext);
     return (
         <PageWrapper page_class="explore">
+            <ExploreHeader />
             <ExploreData />
         </PageWrapper>
     )

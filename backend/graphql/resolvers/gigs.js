@@ -4,10 +4,39 @@ const { deleteFiles, multiUpload } = require("../../helpers/uploadToCloud");
 
 module.exports = {
     Query: {
+        explore_gigs: async (_, { filters, page }, req) => {
+            if (filters && Object.values(filters).length > 0) {
+                const items = await Gig.find({
+                    $and: [
+                        { category: filters.category && filters.category.length > 0 ? { $in: filters.category } : { $exists: true } },
+                        { styles: filters.styles && filters.styles.length > 0 ? { $in: filters.styles } : { $exists: true } },
+                        { price: { $lt: Number(filters.max) || 1000, $gt: Number(filters.min) || 1 } }
+                    ]
+                })
+                    .populate({ path: "creator", select: "username country" })
+                    .sort({ createdAt: -1 })
+                    .limit(10)
+                return { items, total: items.length }
+            }
+
+            return { items: await Gig.find().populate({ path: "creator", select: "username country" }).sort({ createdAt: -1 }).limit(10) }
+        },
+        search_gigs: async (_, { filters, page }, req) => {
+            const items = await Gig.find(
+                {
+                    $text: { $search: filters.keywords },
+                    $and: [
+                        { category: filters.category && filters.category.length > 0 ? { $in: filters.category } : { $exists: true } },
+                        { styles: filters.styles && filters.styles.length > 0 ? { $in: filters.styles } : { $exists: true } },
+                        { price: { $lt: Number(filters.max) || 1000, $gt: Number(filters.min) || 1 } }
+                    ]
+                },
+                { projection: { score: { $meta: "textScore" } } },
+            ).sort({ score: { $meta: "textScore" } })
+            return { items, total: items.length }
+        },
         view_gig: async (_, { id }, req) => {
-            const gig = await Gig.findById(id);
-            console.log(gig)
-            return gig
+            return await Gig.findById(id);
         }
     },
     Mutation: {

@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
-export const EXPLORE_GIGS_QUERY = gql`
-    query explore_gigs($filters: Filters, $page: Int){
-        explore_gigs(filters: $filters, page: $page){
+export const SEARCH_ITEMS_QUERY = gql`
+    query search_gigs($filters: Filters, $page: Int){
+        search_gigs(filters: $filters, page: $page){
              items {
                 _id
                 title
@@ -23,6 +23,3 @@ export const EXPLORE_GIGS_QUERY = gql`
         }
     }
 `
-
-
-
