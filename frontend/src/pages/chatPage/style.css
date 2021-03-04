@@ -8,10 +8,6 @@
     border-right: 1px solid var(--outline-color);
 }
 
-.sectionWrapper-chats__active {
-    justify-content: space-between;
-}
-
 .chats__header {
     height: 100px;
     width: 100%;
@@ -58,6 +54,10 @@
 .chatHistory__date {
     float: right;
     color: var(--secondary-color);
+}
+
+.pageWrapper-chats .messages {
+    height: 50vh;
 }
 
 @media only screen and (max-width: 1024px) {}

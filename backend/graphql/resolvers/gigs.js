@@ -35,20 +35,20 @@ module.exports = {
             ).sort({ score: { $meta: "textScore" } })
             return { items, total: items.length }
         },
-        view_gig: async (_, { id }, req) => {
+        view_gigs_item: async (_, { id }, req) => {
             return await Gig.findById(id);
         }
     },
     Mutation: {
-        createGig: async (_, { itemInput, files }, { userId }) => {
+        create_gigs_item: async (_, { itemInput, files }, { userId }) => {
             if (!userId) throw new Error("unauthenticated");
             const newGig = await new Gig({ ...itemInput, createdAt: new Date(), creator: userId }).save();
             const gallery = await multiUpload(files, newGig._id);
             await newGig.updateOne({ gallery, coverImage: gallery[0] })
             await User.findByIdAndUpdate(userId, { $push: { gigs: newGig._id } })
-            return true
+            return newGig
         },
-        updateGig: async (_, { itemInput, files }, { userId }) => {
+        update_gigs_item: async (_, { itemInput, files }, { userId }) => {
             if (!userId) throw new Error("unauthenticated");
             const gig = await Gig.findById(itemInput._id);
             if (itemInput.gallery.length < gig.gallery.length) await deleteFiles(gig.gallery.filter(elem => !itemInput.gallery.includes(elem)))
@@ -57,7 +57,7 @@ module.exports = {
             await gig.save();
             return true;
         },
-        deleteGig: async (_, { itemId }, { userId }) => {
+        delete_gigs_item: async (_, { itemId }, { userId }) => {
             if (!userId) throw new Error("unauthenticated");
             try {
                 const gig = await Gig.findById(itemId);

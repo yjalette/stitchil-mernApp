@@ -3,11 +3,20 @@ const Message = require("../../models/message");
 const Chat = require("../../models/chat");
 const { transformUsersIds } = require("./merge");
 const { sendEmail } = require("../../helpers/nodemailer");
+const user = require("../../models/user");
+
 
 module.exports = {
     Query: {
-        messages: async (_, { docId }, { userId }) => {
-            const { messages } = await Chat.findById(docId, { "messages": { $slice: 2 } }).populate({ path: "messages", populate: "sender" })
+        // messages: async (_, { docId }, { userId }) => {
+        //     const { messages } = await Chat.findById(docId, { "messages": { $slice: 2 } }).populate({ path: "messages", populate: "sender" })
+        //     return messages;
+        // },
+        messages: async (_, { username }, { userId }) => {
+            const user2 = await User.findOne({ username });
+            const messages = await Message.find({ sender: userId || user2._id, recipient: user2._id || userId }).populate("sender").populate("recipient")
+            // const { messages } = await Chat.findById(docId, { "messages": { $slice: 2 } }).populate({ path: "messages", populate: "sender" })
+            console.log(messages)
             return messages;
         },
         likes: async (_, { docId, docName }, req) => {
@@ -30,14 +39,14 @@ module.exports = {
             if (!userId) throw new Error("unauthenticated");
             const user2 = await User.findOne({ username: recipient });
             const chat = await Chat.findOne({ members: { $all: [user2, userId] } });
-            const newMessage = await new Message({ message, sender: userId, createdAt: new Date() }).save();
+            const newMessage = await new Message({ message, sender: userId, recipient: user2._id, createdAt: new Date() }).save();
             if (chat) await chat.updateOne({ $push: { messages: newMessage._id } });
             else await new Chat({
                 members: [userId, user2],
                 messages: [newMessage._id],
                 createdAt: new Date()
             }).save();
-            return true;
+            return newMessage;
         },
         deleteMessage: async (_, { itemId }, req) => {
             try {

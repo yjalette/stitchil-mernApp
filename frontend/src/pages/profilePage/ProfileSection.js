@@ -24,7 +24,7 @@ const ProfileSection = ({ values, updateItemCache, addItemCache, deleteItemCache
                 <CustomPopover content="max 6 items" trigger="click" placement="left-end" popover_class="warning">
                     <CustomButton btn_class="btn-icon-text btn-icon float-right" icon="fa fa-plus">new</CustomButton>
                 </CustomPopover>
-                : <ItemCreate addItemCache={addItemCache} mutation={section_mutation.create[section]} />}
+                : <ItemCreate addItemCache={addItemCache} mutation={section_mutation[section].CREATE} />}
             <ItemList items={values} getProps={(item, index) => {
                 return {
                     itemId: item._id,
@@ -34,8 +34,8 @@ const ProfileSection = ({ values, updateItemCache, addItemCache, deleteItemCache
                     sideMenu: (<>
                         {logged_in_user ?
                             <>
-                                <ItemUpdate item={item} index={index} updateItemCache={updateItemCache} mutation={section_mutation.update[section]} />
-                                <ItemDelete itemId={item._id} deleteItemCache={deleteItemCache} mutation={section_mutation.delete[section]} />
+                                <ItemUpdate item={item} index={index} updateItemCache={updateItemCache} mutation={section_mutation[section].UPDATE} />
+                                <ItemDelete itemId={item._id} deleteItemCache={deleteItemCache} mutation={section_mutation[section].DELETE} />
                             </>
                             :
                             <CustomPopover content={messages.demo} trigger="click" placement="left-end" popover_class="warning">

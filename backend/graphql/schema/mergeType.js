@@ -48,7 +48,7 @@ type Gig {
 }
 
 
-type Product {
+type PortfolioItem {
     _id: ID
     imageUrl: String
     coverImage: String
@@ -75,7 +75,7 @@ type Message {
     docId: String
     message: String
     sender: AuthData
-    recipient: String
+    recipient: AuthData
     createdAt: String
 }
 

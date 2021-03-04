@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from 'react'
+import { useQuery } from '@apollo/react-hooks';
 import { useParams } from 'react-router-dom';
-import useQueryHook from '../../custom_hooks/useQueryHook';
+
 import GigGrid from './GigGrid';
-import { VIEW_GIG_QUERY } from './graphql/queries';
+import { VIEW_GIGS_ITEM_QUERY } from './graphql/queries';
 
 const GigData = () => {
     const { id } = useParams()
-    const { data } = useQueryHook(VIEW_GIG_QUERY, { id });
+    const { data } = useQuery(VIEW_GIGS_ITEM_QUERY, { variables: { id } });
     const [values, setValues] = useState({});
 
     useEffect(() => {
-        if (data) setValues(data.view_gig)
+        if (data) setValues(data.view_gigs_item)
     }, [data])
 
     if (!data) return <div>loaddd</div>

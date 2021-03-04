@@ -1,7 +1,7 @@
 
 import React, { useContext } from 'react';
-import { Form, Container } from 'react-bootstrap';
-import { useHistory, useLocation } from "react-router";
+import { useLazyQuery } from '@apollo/react-hooks';
+import { useHistory } from "react-router";
 
 import useForm from '../../custom_hooks/useForm';
 import CustomForm from '../../layout/CustomForm';
@@ -10,25 +10,24 @@ import { onSuccess } from './helpers'
 import AuthContext from '../../context/Auth-context';
 import GoogleButton from './AuthGoogleBtn';
 import { LOGIN_QUERY } from './graphql/queries';
-import useLazyQueryHook from '../../custom_hooks/useLazyQueryHook';
 
 const AuthLogin = ({ verifiedEmail }) => {
     const { setUser } = useContext(AuthContext);
     const { push } = useHistory()
-    const { getData, data } = useLazyQueryHook(LOGIN_QUERY, onCompleted);
-    const { inputs, errors, setErrors, handleChange, handleSubmit, handleCancel } = useForm({ email: "", password: "" }, onSubmit);
+    const [getData, { data }] = useLazyQuery(LOGIN_QUERY, {
+        onCompleted: data => {
+            if (data && data.login.code) setErrors({ form_error: data.login.message });
+            if (data.login.token) return onSuccess(data.login, setUser, push)
+        }
+    });
+    const { inputs, errors, setErrors, handleChange, handleSubmit } = useForm({ email: "", password: "" }, onSubmit);
 
     const responseGoogle = (response) => {
         if (response.profileObj.email) getData({ variables: { email: response.profileObj.email, googleAuth: true } });
     }
 
     function onSubmit() {
-        getData && getData({ variables: { ...inputs, verifiedEmail } });
-    }
-
-    function onCompleted(data) {
-        if (data && data.login.code) setErrors({ form_error: data.login.message });
-        if (data.login.token) return onSuccess(data.login, setUser, push)
+        getData({ variables: { ...inputs, verifiedEmail } });
     }
 
     return (

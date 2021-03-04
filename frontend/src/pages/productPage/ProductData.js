@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom';
-import useQueryHook from '../../custom_hooks/useQueryHook';
+import { useQuery } from '@apollo/react-hooks';
 import ProductGrid from './ProductGrid';
-import { VIEW_PRODUCT_QUERY } from './graphql/queries';
+import { VIEW_PORTFOLIO_ITEM_QUERY } from './graphql/queries';
 
 const ProductData = () => {
     const { id } = useParams()
-    const { data } = useQueryHook(VIEW_PRODUCT_QUERY, { id });
+    const { data } = useQuery(VIEW_PORTFOLIO_ITEM_QUERY, { id });
     const [values, setValues] = useState({});
 
     useEffect(() => {
-        if (data) setValues(data.view_product)
+        if (data) setValues(data.view_portfolio_item)
     }, [data])
 
     if (!data) return <div>loaddd</div>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
+import { useQuery } from '@apollo/react-hooks';
 
-import useQueryHook from '../../../custom_hooks/useQueryHook';
 import { ACCOUNT_QUERY } from '../graphql/queries';
 import AccountEmail from './AccountEmail';
 import AccountGeneral from './AccountGeneral';
@@ -9,7 +9,7 @@ import BoxWrapper from './../../../layout/BoxWrapper';
 
 const AccountData = () => {
     const [values, setValues] = useState({})
-    const { data } = useQueryHook(ACCOUNT_QUERY);
+    const { data } = useQuery(ACCOUNT_QUERY);
 
     useEffect(() => {
         if (data) setValues(data.userAccount);

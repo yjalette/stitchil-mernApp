@@ -24,7 +24,6 @@ export const PROFILE_USER_QUERY = gql`
                     gallery
                     title
                     description
-                    likes
                 }  
 
                 gigs {

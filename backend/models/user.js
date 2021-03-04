@@ -57,7 +57,7 @@ const userSchema = new Schema({
     }],
     portfolio: [{
         type: Schema.Types.ObjectId,
-        ref: 'Product'
+        ref: 'Portfolio'
     }],
     reviews: [{
         type: Schema.Types.ObjectId,

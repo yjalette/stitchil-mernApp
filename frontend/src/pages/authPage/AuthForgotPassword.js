@@ -19,12 +19,12 @@ const AuthForgotPassword = () => {
         }
     });
 
-    function handleSuccess(msg) {
-        setMsg(msg)
+    function handleSuccess(res_msg) {
+        setMsg(res_msg)
     }
 
-    function handleFailure(msg) {
-        setErrors({ form_error: msg })
+    function handleFailure(res_msg) {
+        setErrors({ form_error: res_msg })
     }
 
     function onSubmit() {

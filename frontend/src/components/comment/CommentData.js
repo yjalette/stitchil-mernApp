@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from 'react'
+import { useLazyQuery } from '@apollo/react-hooks';
 
 import "./style.css";
 import CommentGrid from './CommentGrid';
 import CommentCreate from './CommentCreate';
-import useQueryHook from '../../custom_hooks/useQueryHook';
 import { COMMENTS_QUERY } from './graphql/queries';
 
 const CommentData = ({ docId }) => {
-    const { data, getData } = useQueryHook(COMMENTS_QUERY);
+    const [getData, { data }] = useLazyQuery(COMMENTS_QUERY);
     const [values, setValues] = useState([]);
 
     useEffect(() => {
-        if (docId) getData({ variables: { docId } })
-    }, [docId]);
+        if (docId && getData) getData({ variables: { docId } })
+    }, [docId, getData]);
 
     useEffect(() => {
         if (data) setValues(data.comments)

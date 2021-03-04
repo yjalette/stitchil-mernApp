@@ -5,6 +5,7 @@ module.exports = {
     Query: {
         chats: async (_, { }, req) => {
             try {
+                // select most recent message
                 return await Chat.find({ members: { $in: req.userId } }, { 'messages': { $slice: 1 } })
                     .populate({ path: 'members', select: 'username profileImage' })
                     .populate({ path: 'messages', populate: 'sender', options: { $sort: { "createdAt": -1 } } })
@@ -22,7 +23,7 @@ module.exports = {
                 createdAt: new Date()
             }).save();
             await Chat.findByIdAndUpdate(docId, { $push: { messages: newMessage._id } });
-            return true
+            return newMessage
         },
         deleteChat: async ({ chatId, msgId }, req) => {
             if (!req.userId) throw new Error("unauthenticated");

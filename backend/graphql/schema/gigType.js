@@ -25,15 +25,15 @@ type Bid {
 
 
 type Query { 
-    view_gig(id: ID): Gig
+    view_gigs_item(id: ID): Gig
     explore_gigs(filters: Filters, page: Int): GigResult 
     search_gigs(filters: Filters, page: Int): GigResult               
 }
 
 type Mutation {
-    createGig(itemInput: ItemInput, files: [Upload]): Boolean 
-    updateGig(itemInput: ItemInput, files: [Upload]): Boolean 
-    deleteGig(itemId: ID): Boolean 
+    create_gigs_item(itemInput: ItemInput, files: [Upload]): Gig 
+    update_gigs_item(itemInput: ItemInput, files: [Upload]): Boolean 
+    delete_gigs_item(itemId: ID): Boolean 
 }
 
 

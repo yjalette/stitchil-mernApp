@@ -9,7 +9,7 @@ const SignInLinks = ({ username }) => {
 
   const items = [
     { icon: "fa fa-user-circle-o btn-icon", value: `/profile/${username}/gigs` },
-    { icon: "fa fa-comment btn-icon", value: `/messages` },
+    { icon: "fa fa-comment btn-icon", value: `/chats` },
     { icon: "fa fa-gear btn-icon", value: `/settings/account` },
     { icon: "fa fa-bell btn-icon", value: `/${username}/gigs` },
     { icon: "fa fa-sign-out btn-icon", value: `/logout` }

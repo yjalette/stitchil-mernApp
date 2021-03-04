@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
-const productSchema = new Schema({
+const portfolioSchema = new Schema({
     title: {
         type: String,
         required: false
@@ -45,4 +45,4 @@ const productSchema = new Schema({
 )
 
 
-module.exports = mongoose.model('Product', productSchema)
+module.exports = mongoose.model('Portfolio', portfolioSchema)

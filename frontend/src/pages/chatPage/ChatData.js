@@ -19,15 +19,17 @@ const ChatData = () => {
 
     if (loading) return <LoadingSpinner />
 
-    const handleNewMessage = newMsg => updateQuery(prev => {
-        // updateQuery doesn't work with useQuery??
-        const chatIndex = prev.chats.findIndex(el => el._id === newMsg.docId)
-        prev.chats[chatIndex].messages.push({ ...newMsg, _id: 0, sender: { ...newMsg.sender, profileImage: null, __typename: "" }, createdAt: new Date(), __typename: "" })
-        return prev
-    })
+    // const handleNewMessage = (data, { docId }) => updateQuery(prev => {
+    //     console.log(data)
+    //     const newMsg = data.updateChat;
+    //     // updateQuery doesn't work with useQuery??
+    //     const chatIndex = prev.chats.findIndex(el => el._id === docId)
+    //     prev.chats[chatIndex].messages.push(newMsg)
+    //     return prev
+    // })
 
 
-    return <ChatGrid chats={chats} addMessage={handleNewMessage} />
+    return <ChatGrid chats={chats} />
 
 }
 

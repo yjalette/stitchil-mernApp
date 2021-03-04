@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
-export const VIEW_PRODUCT_QUERY = gql`
-query view_product($id: ID){
-    view_product(id: $id) {
+export const VIEW_PORTFOLIO_ITEM_QUERY = gql`
+query view_portfolio_item($id: ID){
+    view_portfolio_item(id: $id) {
         _id
         title
         description

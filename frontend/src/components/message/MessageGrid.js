@@ -1,7 +1,6 @@
 import React, { useContext, useRef, useEffect } from 'react'
 import MessageItem from './MessageItem';
 import AuthContext from '../../context/Auth-context';
-import SectionWrapper from '../../layout/SectionWrapper';
 
 const MessageGrid = ({ messages, children }) => {
     const { user } = useContext(AuthContext);

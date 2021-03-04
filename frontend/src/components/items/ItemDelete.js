@@ -1,6 +1,5 @@
-import React, { useContext, useState } from 'react';
+import React from 'react';
 import { Modal } from 'react-bootstrap';
-import { useParams } from 'react-router-dom';
 import { useMutation } from '@apollo/react-hooks';
 
 import "./style.css"
@@ -10,13 +9,14 @@ import { useToggle } from '../../custom_hooks/useToggle';
 
 const ItemDelete = ({ itemId, deleteItemCache, mutation }) => {
     const [open, toggle] = useToggle(false)
-    const [post] = useMutation(mutation);
+    const [post] = useMutation(mutation, {
+        onCompleted: async data => {
+            await deleteItemCache(itemId);
+            toggle()
+        }
+    });
 
-    const handleDelete = () => {
-        post({ variables: { itemId } });
-        deleteItemCache(itemId);
-        toggle()
-    };
+    const handleDelete = () => post({ variables: { itemId } });
 
     if (!open) return <CustomButton btn_class="btn-icon btn-icon-red" icon="fa fa-trash " onClick={toggle} />
 

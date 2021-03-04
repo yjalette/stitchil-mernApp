@@ -27,7 +27,7 @@ type Profile {
     lastSeen: String
     designer: DesignerResume
     gigs: [Gig]
-    portfolio: [Product]
+    portfolio: [PortfolioItem]
     reviews: [Message]
 }
 
@@ -85,8 +85,7 @@ type Location {
 
 type Query {   
     userAccount: Account
-    userProfile(username: String): Profile
-   
+    userProfile(username: String): Profile  
 }
 
 type Mutation {    

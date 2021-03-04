@@ -22,15 +22,15 @@ const ItemForm = ({ form_title, errors, onChange, onMultiChange, onSubmit, onClo
         form_inputs.slice(0, form_inputs.length / 2),
         form_inputs.slice(form_inputs.length / 2, form_inputs.length)
     ] || [], { pagination: true })
-    console.log(errors)
+
     return (
         <CustomModal
             modal_title={form_title}
             modal_class="itemForm-modal"
             modal_size="md"
-            displayWithoutBtn
             onClose={onClose}
             modal_footer={buttons}
+            displayWithoutBtn
         >
             <CustomForm
                 onSubmit={onSubmit}

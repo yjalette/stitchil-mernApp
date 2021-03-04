@@ -1,4 +1,4 @@
-const Product = require("../../models/product");
+const Portfolio = require("../../models/portfolio");
 const User = require("../../models/user");
 const File = require("../../models/file");
 const { populateByUser } = require("../../consts/user");
@@ -6,43 +6,42 @@ const { deleteFiles, multiUpload } = require("../../helpers/uploadToCloud");
 
 module.exports = {
     Query: {
-        view_product: async (_, { id }, req) => {
-            return await Product.findById(id).populate(populateByUser);
+        view_portfolio_item: async (_, { id }, req) => {
+            return await Portfolio.findById(id).populate(populateByUser);
         }
     },
     Mutation: {
-        createProduct: async (_, { itemInput, files }, { userId }) => {
+        create_portfolio_item: async (_, { itemInput, files }, { userId }) => {
             if (!userId) throw new Error("unauthenticated");
             const gallery = await multiUpload(files, userId);
-            const newProduct = await new Product({
+            const newPortfolio = await new Portfolio({
                 ...itemInput,
                 gallery,
+                coverImage: gallery[0],
                 creator: userId,
                 createdAt: new Date(),
             }).save();
-            await User.findByIdAndUpdate(userId, { $push: { portfolio: newProduct._id } })
-            return true
+            await User.findByIdAndUpdate(userId, { $push: { portfolio: newPortfolio._id } })
+            return newPortfolio
         },
-        updateProduct: async (_, { itemInput, files }, { userId }) => {
+        update_portfolio_item: async (_, { itemInput, files }, { userId }) => {
             if (!userId) throw new Error("unauthenticated");
-            const product = await Product.findById(itemInput._id);
-            if (itemInput.gallery.length < product.gallery.length) deleteFiles(product.gallery.filter(elem => !itemInput.gallery.includes(elem)), product._id)
-            if (files) product.gallery = product.gallery.concat(await multiUpload(files, userId))
-            else await product.updateOne({ $set: itemInput });
-            await product.save();
+            const portfolio = await Portfolio.findById(itemInput._id);
+            if (itemInput.gallery.length < portfolio.gallery.length) deleteFiles(portfolio.gallery.filter(elem => !itemInput.gallery.includes(elem)), portfolio._id)
+            if (files) portfolio.gallery = portfolio.gallery.concat(await multiUpload(files, userId))
+            else await portfolio.updateOne({ $set: itemInput });
+            await portfolio.save();
         },
-
-        deleteProduct: async (_, { itemId }, { userId }) => {
+        delete_portfolio_item: async (_, { itemId }, { userId }) => {
             if (!userId) throw new Error("unauthenticated user to delete this file");
-            const product = await Product.findById(itemId);
-            if (deleteFiles(product.gallery)) {
-                console.log("tut---------->")
-                await Product.findByIdAndDelete(itemId);
+            const portfolio = await Portfolio.findById(itemId);
+            if (deleteFiles(portfolio.gallery)) {
+                await portfolio.deleteOne();
                 await User.findByIdAndUpdate(userId, { $pull: { portfolio: itemId } })
             }
             return true
         },
-        likeProduct: async (_, { docId, username }, req) => {
+        like_portfolio_item: async (_, { docId, username }, req) => {
             if (!req.userId) throw new Error("unauthenticated");
             try {
                 const item = await File.findById(docId);

@@ -11,9 +11,16 @@ import { initState, transformInputs, validate } from "./helpers"
 
 const ItemUpdate = ({ item, updateItemCache, index, mutation }) => {
     const { section } = useParams();
-    const [post] = useMutation(mutation);
     const { inputs, setInputs, handleChange, handleMultiChange, handleSubmit, editMode, toggleEditMode, errors, setErrors } = useForm(initState[section], onSubmit);
     const { files, clearUpload, getRootProps, getInputProps } = useUpload(null, inputs.gallery ? 5 - inputs.gallery.length : 5);
+    const [post] = useMutation(mutation, {
+        onCompleted: async data => {
+            await updateItemCache(inputs, index);
+            clearUpload();
+            setErrors({});
+            toggleEditMode();
+        }
+    });
 
     useEffect(() => {
         if (item) setInputs(item);
@@ -31,9 +38,6 @@ const ItemUpdate = ({ item, updateItemCache, index, mutation }) => {
                 files
             }
         });
-        updateItemCache(inputs, index);
-        toggleEditMode();
-        clearUpload();
     }
 
     if (!editMode) return <CustomButton btn_title="edit item" btn_class="btn-icon" icon="fa fa-edit" onClick={toggleEditMode}></CustomButton>
@@ -42,10 +46,12 @@ const ItemUpdate = ({ item, updateItemCache, index, mutation }) => {
         <Image className="itemUpload__img itemUpdate-prevImg" src={item} alt="file" />
         {item === inputs.coverImage ? <i className="itemUpdate-cover__footer itemUpload-footer fa fa-shield">cover</i>
             : <> <CustomButton
-                btn_title="set as a cover"
                 btn_class="btn-click itemUpdate__overlay-btn"
-                btn_name="coverImage"
-                btn_value={item}
+                btn_otherProps={{
+                    title: "set as a cover",
+                    name: "coverImage",
+                    value: item
+                }}
                 onClick={handleChange}>cover</CustomButton>
                 <i title="delete image" className="fa fa-close itemUpload-footer" onClick={() => setInputs({
                     ...inputs,
@@ -53,6 +59,8 @@ const ItemUpdate = ({ item, updateItemCache, index, mutation }) => {
                 })} />
             </>}
     </div>)
+
+    console.log(errors)
 
     return <ItemForm
         form_title="Update"

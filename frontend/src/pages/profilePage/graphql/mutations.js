@@ -7,25 +7,6 @@ export const UPDATE_DESIGNER_MUTATION = gql`
             
         }
 `
-export const CREATE_PRODUCT_MUTATION = gql`
-        mutation CreateProduct($itemInput: ItemInput,  $files: [Upload] ) {
-            createProduct(itemInput: $itemInput, files: $files)
-        }
-      `;
-
-export const UPDATE_PRODUCT_MUTATION = gql`
-      mutation UpdateProduct($itemInput: ItemInput,  $files: [Upload]  ) {
-        updateProduct(itemInput: $itemInput, files: $files )
-      }
-    `;
-
-
-export const DELETE_PRODUCT_MUTATION = gql`
-          mutation DeleteProduct($itemId: ID){
-            deleteProduct(itemId: $itemId)
-          }
-      `;
-
 export const UPLOAD_PROFILE_IMAGE_MUTATION = gql`
   mutation UploadProfileImage($file: Upload, $image_type: String ) {
     uploadProfileImage(file: $file, image_type: $image_type)
@@ -45,50 +26,92 @@ export const CREATE_REVIEW_MUTATION = gql`
 `
 
 
-export const CREATE_GIG_MUTATION = gql`
-    mutation CreateGig($itemInput: ItemInput, $files: [Upload] ){
-        createGig(itemInput: $itemInput, files: $files)
+export const CREATE_GIGS_ITEM_MUTATION = gql`
+    mutation CreateGigsItem($itemInput: ItemInput, $files: [Upload] ){
+        createGigsItem(itemInput: $itemInput, files: $files){
+            _id
+            title
+            description
+            coverImage
+            gallery
+            price
+            delivery
+            category
+            styles
+            fabrics
+            keywords
+            createdAt
+        }
     }
 `
 
-export const UPDATE_GIG_MUTATION = gql`
-    mutation UpdateGig($itemInput: ItemInput, $files: [Upload] ){
-        updateGig(itemInput: $itemInput, files: $files)
+export const UPDATE_GIGS_ITEM_MUTATION = gql`
+    mutation UpdateGigsItem($itemInput: ItemInput, $files: [Upload] ){
+        updateGigsItem(itemInput: $itemInput, files: $files)
     }
 `
 
-export const DELETE_GIG_MUTATION = gql`
-          mutation DeleteGig($itemId: ID){
-            deleteGig(itemId: $itemId)
+export const DELETE_GIGS_ITEM_MUTATION = gql`
+          mutation DeleteGigsItem($itemId: ID){
+            deleteGigsItem(itemId: $itemId)
           }
       `;
 
-export const LIKE_PRODUCT_MUTATION = gql`
-    mutation LikeProduct($docId: ID, $username: String){
-        likeProduct(docId: $docId, username: $username)
+export const LIKE_PortfolioItem_MUTATION = gql`
+    mutation LikePortfolioItem($docId: ID, $username: String){
+        likePortfolioItem(docId: $docId, username: $username)
     }
 `
-
-export const CREATE_MESSAGE_MUTATION = gql`
-        mutation CreateMessage($message: String, $recipient: String){
-            createMessage(message: $message, recipient: $recipient)
-        }
-`
-
+// export const CREATE_MESSAGE_MUTATION = gql`
+//         mutation CreateMessage($message: String, $recipient: String){
+//             createMessage(message: $message, recipient: $recipient)
+//         }
+// `
 export const section_mutation = {
-    create: {
-        gigs: CREATE_GIG_MUTATION,
-        portfolio: CREATE_PRODUCT_MUTATION
+    gigs: {
+        CREATE: gql`
+        mutation Create_gigs_item($itemInput: ItemInput, $files: [Upload] ){
+            create_gigs_item(itemInput: $itemInput, files: $files){
+                _id
+                title
+                description
+                coverImage
+                gallery
+                price
+                delivery
+                category
+                styles
+                fabrics
+                keywords
+                createdAt
+            }
+        }`,
+        UPDATE: gql`mutation Update_Gigs_Item($itemInput: ItemInput, $files: [Upload] ){
+            update_gigs_item(itemInput: $itemInput, files: $files)
+        }
+    `,
+        DELETE: gql`mutation DeleteGigsItem($itemId: ID){
+        delete_gigs_item(itemId: $itemId)
+      }`
+
     },
-    update: {
-        gigs: UPDATE_GIG_MUTATION,
-        portfolio: UPDATE_PRODUCT_MUTATION
-    },
-    delete: {
-        gigs: DELETE_GIG_MUTATION,
-        portfolio: DELETE_PRODUCT_MUTATION
+    portfolio: {
+        CREATE: gql` mutation Create_Portfolio_Item($itemInput: ItemInput,  $files: [Upload] ) {
+            create_portfolio_item(itemInput: $itemInput, files: $files){
+                _id
+                coverImage
+                gallery
+                title
+                description
+            }
+        }
+      `,
+        UPDATE: gql`
+      mutation Update_Portfolio_Item($itemInput: ItemInput,  $files: [Upload]  ) {
+        update_portfolio_item(itemInput: $itemInput, files: $files )
+      }`,
+        DELETE: gql` mutation Delete_portfolio_item($itemId: ID){ delete_portfolio_item(itemId: $itemId)}`
+
     }
 }
-
-
 

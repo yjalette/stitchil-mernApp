@@ -2,19 +2,19 @@ import React from 'react'
 import { Nav } from 'react-bootstrap';
 import { useParams } from 'react-router-dom'
 import MessageCreate from '../../components/message/MessageCreate';
+import MessageData from '../../components/message/MessageData';
 import { useToggle } from '../../custom_hooks/useToggle';
+import CustomButton from '../../layout/button/CustomButton';
 import CustomAlert from '../../layout/CustomAlert';
 import CustomModal from '../../layout/CustomModal'
-import { CREATE_MESSAGE_MUTATION } from './graphql/mutations'
+// import { CREATE_MESSAGE_MUTATION } from './graphql/mutations'
 
 const ProfileMessage = () => {
-    const { username } = useParams();
-    const [sent, toggleSent] = useToggle(false);
-
+    // const { username } = useParams();
+    const [open, toggle] = useToggle(false);
+    if (!open) return <CustomButton btn_class="btn-icon" icon="fa fa-envelope" btn_otherProps={{ title: "message" }} onClick={() => toggle()} />
     return (
         <CustomModal
-            btn_class="btn-icon fa fa-envelope"
-            btn_otherProps={{ title: "message" }}
             modal_size="md"
             modal_title="send message"
             modal_footer={(
@@ -23,14 +23,12 @@ const ProfileMessage = () => {
                     <Nav.Link>messenger</Nav.Link>
                 </>
             )}
-            timeOut={sent && "2000"}
+            displayWithoutBtn={true}
         >
-            <MessageCreate
-                query={CREATE_MESSAGE_MUTATION}
-                onMessageSent={toggleSent}
-                otherVariables={{ recipient: username }} >
+            <MessageData></MessageData>
+            {/* <MessageCreate onMessageSent={toggleSent}>
                 {sent && <CustomAlert >message was sent</CustomAlert>}
-            </MessageCreate>
+            </MessageCreate> */}
         </CustomModal>
     )
 }

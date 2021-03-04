@@ -1,9 +1,9 @@
 
 import gql from 'graphql-tag';
 
-export const VIEW_GIG_QUERY = gql`
-query view_gig($id: ID){
-    view_gig(id: $id) {
+export const VIEW_GIGS_ITEM_QUERY = gql`
+query view_gigs_item($id: ID){
+    view_gigs_item(id: $id) {
         _id
         title
         description

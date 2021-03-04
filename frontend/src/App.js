@@ -64,7 +64,8 @@ class App extends Component {
               <Route path="/profile/:username/:section" component={ProfilePage} />
               <Route path="/view-gigs-item/:id" component={GigPage} />
               <Route path="/view-portfolio-item/:id" component={ProductPage} />
-              <Route exact path="/messages" component={ChatPage} />
+              <Route exact path="/chats/" component={ChatPage} />
+              <Route path="/messages/:username" component={ChatPage} />
               <Route path="/logout" component={Logout} />
             </Switch>
             <Footer />
