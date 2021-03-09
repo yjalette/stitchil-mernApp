@@ -26,7 +26,7 @@ const FilterResultGrid = ({ items, total, loadMoreData, activePage, children }) 
                             { field: "delivery", content: `${item.delivery} days` },
                             { field: "price starts at", content: `$${item.price}` }
                         ],
-                        sideMenu: <CustomButton btn_class="btn-icon" icon="fa fa-heart" />
+                        sideMenu: <CustomButton btn_class="btn-icon" icon="far fa-heart" />
                     }
                 }} />
             {total && <div className="filterGrid__footer flex-center w-100">

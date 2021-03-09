@@ -60,8 +60,22 @@
     z-index: 1000;
 }
 
+.profileIntro .listItem {
+    margin: .5rem 0;
+}
+
+.profileIntro-country span::before {
+    content: "lives in ";
+}
+
+.profileIntro-lang span::before {
+    content: "speaks ";
+}
+
 .profile-section {
+    padding: 0;
     min-height: 300px;
+    background-color: var(--main-color);
 }
 
 .profile-section .sectionHeader {
@@ -90,6 +104,25 @@
 .profile__main .userAvatar, .reviewCreate__header {
     width: 100%;
     justify-content: space-between;
+}
+
+.profileChat .sectionWrapper-messages {
+    padding: 0;
+    align-items: flex-start;
+}
+
+.profileChat .messages__header {
+    padding: .5em;
+    align-items: flex-start;
+}
+
+.profileChat .messages {
+    min-height: 100%;
+    max-height: 300px;
+}
+
+.profileChat .customAlert {
+    display: none;
 }
 
 @media (max-width: 992px) {

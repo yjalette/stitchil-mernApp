@@ -18,7 +18,7 @@ const ItemDelete = ({ itemId, deleteItemCache, mutation }) => {
 
     const handleDelete = () => post({ variables: { itemId } });
 
-    if (!open) return <CustomButton btn_class="btn-icon btn-icon-red" icon="fa fa-trash " onClick={toggle} />
+    if (!open) return <CustomButton btn_class="btn-icon btn-icon-red" icon="fas fa-trash " onClick={toggle} />
 
     return (
         <CustomModal

@@ -12,7 +12,7 @@ const ItemSum = ({ itemId, header, highlights, coverImage, sideMenu, creator }) 
         <Card className="itemSum">
             <Card.Header>
                 <Card.Title className="itemSum__title" >
-                    <CustomButton btn_class="btn-icon-text" icon="fa fa-angle-double-right" onClick={() => push(`/view-${section || "gigs"}-item/${itemId}`)}>
+                    <CustomButton btn_class="btn-icon-text" icon="fas fa-angle-double-right" onClick={() => push(`/view-${section || "gigs"}-item/${itemId}`)}>
                         {header.title}
                     </CustomButton>
                 </Card.Title>

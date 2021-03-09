@@ -36,7 +36,13 @@ const AuthForgotPassword = () => {
 
     return (
         <CustomForm form_class="authForgotPwd" submitTitle="submit" onSubmit={handleSubmit} form_msg={msg} form_error={errors.form_error}>
-            <FormInput label="email" type="email" value={inputs.email} onChange={handleChange} />
+            <FormInput input_props={{
+                name: "email",
+                type: "email",
+                value: inputs.email,
+                placeholder: "email",
+                onChange: handleChange
+            }} />
         </CustomForm>
     )
 

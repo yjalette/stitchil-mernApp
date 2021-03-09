@@ -14,8 +14,7 @@ const defaultImg = "https://res.cloudinary.com/dgxa9gpta/image/upload/v160210510
 
 const ProfileHeader = ({ coverImage, profileImage, fullname, country }) => {
     const { logged_in_user } = useContext(ProfileContext);
-    const { user } = useContext(AuthContext)
-    if (logged_in_user) {
+    if (!logged_in_user) {
         return (
             <>
                 <Image src={coverImage || defaultImg} className="coverImage" />
@@ -30,7 +29,7 @@ const ProfileHeader = ({ coverImage, profileImage, fullname, country }) => {
                 <GroupButton group_class="profileHeader__buttons">
                     <ProfileMessage />
                     <CustomPopover content={messages.demo} trigger="click" popover_class="customPopover-warning">
-                        <CustomButton btn_class="ml-3 btn-icon fa fa-user-plus" btn_otherProps={{ title: "follow" }} />
+                        <CustomButton btn_class="ml-3 btn-icon fas fa-user-plus" btn_otherProps={{ title: "follow" }} />
                     </CustomPopover>
                 </GroupButton>
 

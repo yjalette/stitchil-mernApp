@@ -27,7 +27,7 @@ label, .formLabel {
 }
 
 .user-input, .rbt-input {
-    font-size: var(--md-fonts);
+    font-size: var(--sm-fonts);
     outline: none;
     height: 50px;
     width: 100%;
@@ -35,7 +35,12 @@ label, .formLabel {
     border-radius: var(--border-radius);
 }
 
-.range__form .user-input {
+.user-input-required::placeholder {
+    color: blue;
+    content: "*****";
+}
+
+/* .range__form .user-input {
     height: auto;
     width: 50px;
     background-color: var(--main-color);
@@ -48,7 +53,7 @@ label, .formLabel {
     font-weight: bold;
     color: var(--green-color);
     margin: 0 .2em;
-}
+} */
 
 .rbt a {
     color: var(--white-color);
@@ -74,7 +79,7 @@ label, .formLabel {
 }
 
 .rbt-input-multi {
-    height: 100%;
+    min-height: 100%;
 }
 
 .passwordWrapper__label {
@@ -91,8 +96,4 @@ label, .formLabel {
 
 .multipleInput .dropdown-menu {
     overflow-x: hidden !important;
-}
-
-.search-box input {
-    border-bottom: 1px solid var(--light-green-color);
 }

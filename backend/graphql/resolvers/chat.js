@@ -6,9 +6,9 @@ module.exports = {
         chats: async (_, { }, req) => {
             try {
                 // select most recent message
-                return await Chat.find({ members: { $in: req.userId } }, { 'messages': { $slice: 1 } })
+                return await Chat.find({ members: { $in: req.userId } })
                     .populate({ path: 'members', select: 'username profileImage' })
-                    .populate({ path: 'messages', populate: 'sender', options: { $sort: { "createdAt": -1 } } })
+                    .populate({ path: 'messages', populate: 'sender', options: { $sort: { "messages$createdAt": 1 } } })
             } catch (error) {
                 throw new Error(error)
             }

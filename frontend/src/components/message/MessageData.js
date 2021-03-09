@@ -1,17 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { useLazyQuery } from '@apollo/react-hooks';
 
 import "./style.css"
-import { useLazyQuery } from '@apollo/react-hooks';
 import { MESSAGES_QUERY } from './graphql/queries';
 import { CREATE_MESSAGE_MUTATION } from "./graphql/mutations"
 import MessageGrid from './MessageGrid';
 import MessageCreate from './MessageCreate';
-import { useParams } from 'react-router-dom';
 import BoxWrapper from '../../layout/BoxWrapper';
 import UserAvatar from '../user/UserAvatar';
+import AuthContext from '../../context/Auth-context';
 import SectionWrapper from '../../layout/SectionWrapper';
 
 const MessageData = () => {
+    const { user } = useContext(AuthContext)
     const { username } = useParams()
     const [getData, { data, updateQuery }] = useLazyQuery(MESSAGES_QUERY);
     const [values, setValues] = useState([])
@@ -28,18 +30,20 @@ const MessageData = () => {
         return {
             messages: [
                 ...prev.messages,
-                newMsg.createMessage
+                { ...newMsg.createMessage, sender: { ...newMsg.createMessage.sender, username: user.username } }
             ]
         }
     })
 
     return (
         <SectionWrapper section_class="messages">
-            <BoxWrapper box_class="messages__header">
+            <section className="messages__header">
                 {username && <UserAvatar username={username} />}
-            </BoxWrapper>
-            <MessageGrid messages={values} ></MessageGrid>
-            <MessageCreate onMessageSent={handleNewMessage} mutation={CREATE_MESSAGE_MUTATION} />
+            </section>
+            <section className="messages__body">
+                <MessageGrid messages={values} />
+                {username && <MessageCreate onMessageSent={handleNewMessage} mutation={CREATE_MESSAGE_MUTATION} />}
+            </section>
         </SectionWrapper>
     )
 

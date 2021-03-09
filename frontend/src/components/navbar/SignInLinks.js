@@ -8,11 +8,11 @@ const SignInLinks = ({ username }) => {
   const { pathname } = useLocation();
 
   const items = [
-    { icon: "fa fa-user-circle-o btn-icon", value: `/profile/${username}/gigs` },
-    { icon: "fa fa-comment btn-icon", value: `/chats` },
-    { icon: "fa fa-gear btn-icon", value: `/settings/account` },
-    { icon: "fa fa-bell btn-icon", value: `/${username}/gigs` },
-    { icon: "fa fa-sign-out btn-icon", value: `/logout` }
+    { icon: "fas fa-user", value: `/profile/${username}/gigs` },
+    { icon: "fa fa-comment", value: `/chats` },
+    { icon: "fas fa-cog", value: `/settings/account` },
+    { icon: "fa fa-bell", value: `/${username}/gigs` },
+    { icon: "fas fa-sign-out-alt", value: `/logout` }
   ]
 
   return <Nav className="navUser">{items && items.map((item, i) =>
@@ -20,7 +20,7 @@ const SignInLinks = ({ username }) => {
       key={i}
       as="button"
       eventkey={i}
-      className={`${item.icon} ${pathname === item.value && "navUser__item-active"} navUser__item`}
+      className={`${item.icon} ${pathname === item.value && "navUser__item-active"} btn-icon navUser__item`}
       onClick={() => push(item.value)} />)}
   </Nav>
 

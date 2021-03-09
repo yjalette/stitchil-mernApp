@@ -17,7 +17,7 @@ const MainNav = () => {
       {context => {
         return (
           <Navbar collapseOnSelect expand="sm" className={`main-nav flex-center ${customClass}`}>
-            <Nav className="main-nav__menu flex-center">
+            <Nav className="main-nav__menu">
               {/* <Navbar.Brand href="/" to="/">
                 <Image src="https://res.cloudinary.com/dgxa9gpta/image/upload/v1602104662/logo/logo_jr1las.svg" alt="logo" className="logo" />
               </Navbar.Brand> */}

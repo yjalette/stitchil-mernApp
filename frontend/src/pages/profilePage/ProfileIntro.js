@@ -4,20 +4,22 @@ import SectionHeader from '../../layout/SectionHeader';
 import BoxWrapper from '../../layout/BoxWrapper';
 import ProfileDesignerInfo from './ProfileDesignerInfo';
 
-const ProfileIntro = ({ profile }) => (
+const ProfileIntro = ({ profile }) => console.log(profile) || (
     <>
-        <BoxWrapper>
+        <BoxWrapper className="profileIntro">
             <SectionHeader title={`About ${profile.username}`} />
-            <div className="profileSection__content">
-                <ListItem icon="fa fa-user" content={profile.username} />
+            <div className="profileIntro__content">
+                <ListItem icon="fas fa-user" content={profile.username} />
                 {/* <ListItem icon="fa fa-eye" content={profile.lastSeen} /> */}
-                <ListItem icon="fa fa-briefcase" content={profile.role} />
-                <ListItem icon="fa fa-home" content={`lives in ${profile.country || ""}`} />
-                <ListItem icon="fa fa-globe" content={`speaks ${profile.language || "English"}`} />
-                <ListItem field="about" content={`Hardcore coffee nerd. Twitter fanatic. Professional internet trailblazer. Introvert. Communicator. Problem solver.`} maxWords={80} />
+                <ListItem icon="fas fa-briefcase" content={profile.role} />
+                <ListItem icon="fas fa-home" content={profile.country} item_class="profileIntro-country" />
+                <ListItem icon="fas fa-globe" content={profile.languages} item_class="profileIntro-lang" />
+                <ListItem field="about"
+                    content={`Hardcore coffee nerd. Twitter fanatic. Professional internet trailblazer. Introvert. Communicator. Problem solver.`}
+                    maxWords={80} />
             </div>
         </BoxWrapper>
-        {profile.role === "designer" && <BoxWrapper>
+        {profile.role === "designer" && <BoxWrapper className="profileIntro">
             <ProfileDesignerInfo values={profile.designer} />
         </BoxWrapper>}
     </>

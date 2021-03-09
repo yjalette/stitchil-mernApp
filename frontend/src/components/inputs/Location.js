@@ -1,7 +1,6 @@
 import React from 'react';
 import { Form, Col } from 'react-bootstrap';
 
-import FormMultipleInput from './FormMultipleInput';
 import MaskInput from './MaskInput';
 
 const Location = ({ inputs, setInputs }) => {
@@ -21,7 +20,7 @@ const Location = ({ inputs, setInputs }) => {
 
     return (
         <section className="address">
-            <Form.Row>
+            {/* <Form.Row>
                 <Form.Group className="field-wrapper" as={Col} xs={10}>
                     <Form.Label>address</Form.Label>
                     <Form.Control onChange={handleChange} name="address" value={inputs.location.address || ""} className="user-input" />
@@ -44,7 +43,7 @@ const Location = ({ inputs, setInputs }) => {
                     <Form.Label>zip code</Form.Label>
                     <MaskInput onChange={handleChange} mask_name="zipcode" value={inputs.location.zipCode || ""} mask_class="user-input" />
                 </Form.Group>
-            </Form.Row>
+            </Form.Row> */}
         </section>
     )
 }

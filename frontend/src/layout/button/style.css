@@ -56,11 +56,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: var(--sm-fonts);
+    font-size: 14px;
     color: var(--white-color);
-    border: 1.85px dashed currentColor;
+    border: 1px dashed currentColor;
     border-radius: 50%;
-    padding: .5em;
+    padding: 14px;
     background-color: var(--green-color);
     box-shadow: var(--box-shadow);
     text-shadow: var(--text-shadow);
@@ -68,8 +68,6 @@
 
 .btn-icon:hover {
     animation: btn-icon-anim 1s infinite alternate ease-in-out;
-
-    /* color: var(--white-color); */
 }
 
 @keyframes btn-icon-anim {
@@ -90,12 +88,6 @@
     }
 }
 
-.btn-icon-red {
-    background-color: var(--red-color);
-    box-shadow: var(--box-shadow-red);
-    text-shadow: var(--text-shadow-red);
-}
-
 .btn-icon-text {
     display: flex;
     align-items: center;
@@ -105,27 +97,43 @@
 
 .btn-icon-text:not(.btn-star) {
     flex-direction: row-reverse;
-}
 
-.btn-icon-text.btn-red {
-    color: var(--red-color);
+    /* background-color: var(--green-color); */
+    /* justify-content: flex-start; */
 }
 
 .btn-icon-text:not(.btn-star)::before {
-    margin-left: 0.5em;
+    margin-left: .5em;
 }
 
-.btn-icon-text.btn-icon {
+/* .btn-icon-text.btn-icon {
     background-color: var(--green-color);
     justify-content: flex-start;
 }
 
 .btn-icon-text.btn-icon::before {
     margin-left: 1.5rem;
+} */
+
+.btn-icon-red {
+    background-color: var(--red-color);
+    box-shadow: var(--box-shadow-red);
+    text-shadow: var(--text-shadow-red);
+}
+
+.btn-icon-text.btn-red {
+    color: var(--red-color);
 }
 
 .btn-text {
+    background-color: transparent;
+    text-decoration: underline;
     color: var(--accent-color);
+}
+
+.btn-text:disabled {
+    color: var(--light-gray-color);
+    text-decoration: none !important;
 }
 
 .btn-form {
@@ -144,9 +152,10 @@
 
 .btn-form::after {
     content: "\f00c";
-    font-family: FontAwesome;
+    font-family: "Font Awesome 5 Free";
     font-size: var(--sm-fonts);
     opacity: .5;
+    font-weight: 900;
     color: currentColor;
     margin-left: .5em;
     font-style: normal;
@@ -167,6 +176,14 @@
     background-color: var(--green-color);
 }
 
+.btn-form:hover::after {
+    opacity: .8;
+}
+
+.btn-form:hover:focus {
+    opacity: 1;
+}
+
 .btn-form-cancel {
     margin-right: .8rem;
     background-color: var(--red-color);
@@ -177,18 +194,12 @@
 .btn-form-cancel::after {
     content: "\f00d";
     width: 100%;
-    font-family: 'FontAwesome';
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
 }
 
 .btn-form-cancel:hover {
     background-color: var(--red-color);
-}
-
-.btn-form:hover::after {
-    opacity: 1;
-}
-
-.btn-form-cancel:hover {
     box-shadow: var(--box-shadow-red);
 }
 
@@ -199,7 +210,8 @@
 
 .btn-close::after {
     content: "\f00d";
-    font-family: 'FontAwesome';
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
 }
 
 .btn-star {

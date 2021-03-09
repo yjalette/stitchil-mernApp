@@ -12,9 +12,10 @@ import GoogleButton from './AuthGoogleBtn';
 import CustomForm from '../../layout/CustomForm';
 import Password from '../../components/inputs/Password';
 import SelectInput from '../../components/inputs/SelectInput';
-import FormMultipleInput from '../../components/inputs/FormMultipleInput';
+import FormTypeahead from '../../components/inputs/FormTypeahead';
 import FormInput from '../../components/inputs/FormInput';
 import useSlides from '../../custom_hooks/useSlides';
+import FormGroup from '../../components/inputs/FormGroup';
 
 const AuthJoin = () => {
     const { push } = useHistory()
@@ -25,34 +26,39 @@ const AuthJoin = () => {
     const props = useCallback(
         label => {
             return {
-                label,
+                name: label,
                 value: inputs[label],
-                onChange: handleChange,
-                type: label === "email" && "email",
+                onChange: label !== "country" ? handleChange : handleMultiChange,
                 validate: validate_form,
-                error: errors[label],
                 required: true
             }
         },
         [inputs]
     )
 
-    const form_parts = [
+    const form_inputs = [
+        { label: "email", input_component: <FormInput input_props={{ ...props("email"), type: "email" }} /> },
+        { label: "fullname", input_component: <FormInput input_props={{ ...props("fullname") }} /> },
+        { label: "username", input_component: <FormInput input_props={{ ...props("username") }} /> },
+        { label: "country", input_component: <FormTypeahead {...props("country")} /> },
+        { label: "role", input_component: <SelectInput input_props={{ ...props("role") }} options={["designer", "buyer"]} /> },
+    ].map((input) => <FormGroup
+        key={input.label}
+        label={input.label}
+        errors={errors[input.label]}
+        input_component={input.input_component}
+    />)
+
+    const { activeSlide, buttons, slides } = useSlides(0, [
         <>
-            <FormInput {...props("email")} />
+            {form_inputs[0]}
             <Password {...props("password")} />
             <Password {...props("confirm_password")} />
             <GoogleButton responseGoogle={responseGoogle} />
-        </>
-        ,
-        <>
-            <FormInput {...props("fullname")} />
-            <FormInput {...props("username")} />
-            <FormMultipleInput label="country" required={true} error={errors.country} selected={inputs.country} onChange={handleMultiChange} />
-            <SelectInput {...props("role")} options={["designer", "buyer"]} required={true} />
-        </>]
+        </>,
+        form_inputs.slice(1)
 
-    const { activeSlide, buttons } = useSlides(0, form_parts)
+    ])
 
     function responseGoogle(response) {
         if (response.profileObj.email) {
@@ -83,6 +89,8 @@ const AuthJoin = () => {
         }
     }
 
+    console.log(inputs.role)
+
     function onCompleted(data) {
         if (data && data.createUser.code) setErrors({ form_error: data.createUser.message });
         if (data.createUser.token) return onSuccess(data.createUser, setUser, push);
@@ -92,24 +100,30 @@ const AuthJoin = () => {
         }
     }
 
-
-
     return (
         <>
             <CustomForm form_class="authJoin" form_error={errors.form_error} form_msg={msg} onSubmit={handleSubmit}>
-                {!inputs.googleAuth ? activeSlide : <>
-
-                    {form_parts[1]}
-                </>}
+                {!inputs.googleAuth ? activeSlide : slides[1]}
             </CustomForm>
             {!inputs.googleAuth && buttons}
         </>
     )
 }
 
-
-
-
-
-
 export default React.memo(AuthJoin)
+
+
+// const form_parts = [
+//     <>
+//         <FormInput {...props("email")} />
+//         <Password {...props("password")} />
+//         <Password {...props("confirm_password")} />
+//         <GoogleButton responseGoogle={responseGoogle} />
+//     </>
+//     ,
+//     <>
+//         <FormInput {...props("fullname")} />
+//         <FormInput {...props("username")} />
+//         <FormTypeahead label="country" required={true} error={errors.country} selected={inputs.country} onChange={handleMultiChange} />
+//         <SelectInput {...props("role")} options={["designer", "buyer"]} required={true} />
+//     </>]

@@ -43,23 +43,42 @@ class App extends Component {
   state = { user: userObj || null };
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevState.user !== this.state.user) localStorage.setItem('user', JSON.stringify(this.state.user))
+    if (prevState.user !== this.state.user) {
+      localStorage.setItem('user', JSON.stringify(this.state.user))
+    }
   }
 
   render() {
+    const authValues = {
+      user: this.state.user,
+      setUser: data => this.setState({ user: data }),
+      logout: () => this.setState({ user: null })
+    }
+
     return (
       <div className="App">
         <Router>
-          <AuthContext.Provider value={{ user: this.state.user, setUser: data => this.setState({ user: data }), logout: () => this.setState({ user: null }) }}>
+          <AuthContext.Provider value={authValues}>
             <MainNav />
             <Route exact path="/" component={LandingPage} />
             <Route path="/explore" component={ExplorePage} />
             <Route path="/search/:keywords" component={SearchPage} />
-            {authComponents.map(elem => <Route key={elem.auth_type} path={`/auth/${elem.auth_type}`}>
-              <AuthPage auth_type={elem.auth_type}>{elem.component}</AuthPage></Route>)}
+            {authComponents.map(elem => (
+              <Route key={elem.auth_type} path={`/auth/${elem.auth_type}`} component={() => (
+                <AuthPage auth_type={elem.auth_type}>
+                  {elem.component}
+                </AuthPage>
+              )}>
+              </Route>
+            ))}
             <Switch>
-              {settingsComponents.map(elem => <Route key={elem.section} path={`/settings/${elem.section}`}>
-                <SettingsPage section={elem.section}>{elem.component}</SettingsPage></Route>)}
+              {settingsComponents.map(elem => (
+                <Route key={elem.section} path={`/settings/${elem.section}`}>
+                  <SettingsPage section={elem.section}>
+                    {elem.component}
+                  </SettingsPage>
+                </Route>
+              ))}
               <Route path="/homepage/:section" component={LandingPage} />
               <Route path="/profile/:username/:section" component={ProfilePage} />
               <Route path="/view-gigs-item/:id" component={GigPage} />

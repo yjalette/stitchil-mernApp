@@ -83,7 +83,7 @@ function paramBox(paramKey, paramVal, onChange) {
             key={Math.random() * 100}
             btn_class="btn-icon-text filterParams__item"
             onClick={onChange}
-            icon="fa fa-close"
+            icon="fas fa-times"
             btn_otherProps={{
                 value: paramVal,
                 name: paramKey

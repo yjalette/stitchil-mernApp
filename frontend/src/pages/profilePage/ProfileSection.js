@@ -22,7 +22,7 @@ const ProfileSection = ({ values, updateItemCache, addItemCache, deleteItemCache
         <>
             {logged_in_user && values && values.length > 5 ?
                 <CustomPopover content="max 6 items" trigger="click" placement="left-end" popover_class="warning">
-                    <CustomButton btn_class="btn-icon-text btn-icon float-right" icon="fa fa-plus">new</CustomButton>
+                    <CustomButton btn_class="btn-icon float-right" icon="fas fa-plus"></CustomButton>
                 </CustomPopover>
                 : <ItemCreate addItemCache={addItemCache} mutation={section_mutation[section].CREATE} />}
             <ItemList items={values} getProps={(item, index) => {

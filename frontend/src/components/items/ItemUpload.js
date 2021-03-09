@@ -1,6 +1,7 @@
 import React from 'react';
 import { Image } from "react-bootstrap";
 import PictureZoom from '../../components/pictures/PictureZoom';
+import CustomButton from '../../layout/button/CustomButton';
 
 const ItemUpload = ({ files, uploadError, prevFiles, clearUpload, getRootProps, getInputProps }) => {
 
@@ -15,7 +16,10 @@ const ItemUpload = ({ files, uploadError, prevFiles, clearUpload, getRootProps, 
                 {files && files.map((file, index) =>
                     < div key={index} className="itemUpload__wrapper item-upload-wrapper">
                         <PictureZoom elem_class="itemUpload__img" imageUrl={URL.createObjectURL(file)} />
-                        <i title="clear upload" className="fa fa-close itemUpload-footer" onClick={() => clearUpload(index)} />
+                        <CustomButton
+                            btn_class="fas fa-times btn-icon-text btn-red pt-1"
+                            onClick={() => clearUpload(index)} />
+
                     </div>)}
                 <div {...getRootProps()} className="itemUpload__box item-upload-wrapper">
                     <input {...getInputProps({ className: 'dropzone' })} multiple={true} />

@@ -10,7 +10,7 @@ const UserAvatar = ({ profileImage, username, rating, history }) => (
         <span className="userAvatar__username ml-2" onClick={() => history.push(`/profile/${username}/gigs`)}>@{username}</span>
         {rating &&
             <div className="userAvatar__rank ml-2">
-                <CustomButton btn_class="btn-icon-text btn-star " icon="fa fa-star ">{rating || 5}</CustomButton>
+                <CustomButton btn_class="btn-icon-text btn-star " icon="fas fa-star ">{rating || 5}</CustomButton>
             </div>
         }
     </div>

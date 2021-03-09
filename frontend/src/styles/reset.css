@@ -39,16 +39,24 @@ input, textarea, select, .btn-icon {
     color: var(--white-color) !important;
 }
 
+.form-control:focus-within {
+    box-shadow: none !important;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--accent-color) !important;
+}
+
+.form-control:required::placeholder {
+    background-color: pink !important;
+}
+
 .guarantees__card, .card-circle, .card-footer, .form-control, .overlayCard {
     background-color: transparent !important;
     border: none;
 }
 
-.dropdown-menu {
+/* .dropdown-menu {
     min-width: 100% !important;
-
-    /* padding: 0 !important; */
-}
+} */
 
 .auth__google-btn > div {
     margin-right: 0 !important;
@@ -78,10 +86,6 @@ input, textarea, select, .btn-icon {
     background-color: var(--main-color) !important;
 }
 
-.user-input-error {
-    border-bottom: 1px solid var(--red-color) !important;
-}
-
 .modal-dialog {
     margin: 0 auto !important;
 }
@@ -90,11 +94,15 @@ input, textarea, select, .btn-icon {
     padding: var(--padding-elem) !important;
 }
 
+.field-wrapper-error input {
+    border-bottom: 1px solid var(--red-color) !important;
+}
+
 select option, .nav-link:hover, .nav-link.active, .navbar-toggler {
     border: none !important;
 }
 
-.red-btn {
+/* .red-btn {
     color: var(--red-color) !important;
     float: right;
     align-self: flex-end;
@@ -105,7 +113,7 @@ select option, .nav-link:hover, .nav-link.active, .navbar-toggler {
     color: var(--white-color);
     background-color: var(--red-color) !important;
     box-shadow: 0 0 0 2px var(--red-color), 1px 0.5px 3px 2px rgba(10, 10, 0, 0.5) !important;
-}
+} */
 
 .dv-star-rating-empty-star {
     color: #f9f87180 !important;
@@ -118,9 +126,9 @@ select option, .nav-link:hover, .nav-link.active, .navbar-toggler {
     font-size: var(--md-fonts) !important;
 } */
 
-.dropdown-menu {
+/* .dropdown-menu {
     background-color: var(--main-color);
-}
+} */
 
 .swiper-button-prev, .swiper-button-next {
     color: var(--accent-color) !important;

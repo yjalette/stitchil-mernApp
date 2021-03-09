@@ -37,12 +37,12 @@ const ProfileImage = ({ src, image_type }) => {
             <Image className={image_type} src={files ? URL.createObjectURL(files[0]) : src || defaultImg} alt="files" />
             {!showButtons ? <div {...getRootProps()} className="profileUpload__box flex-center">
                 <input {...getInputProps({ className: 'dropzone' })} />
-                <CustomButton icon="fa fa-camera" btn_class={`btn-${image_type} btn-icon profileUpload__btn`} />
+                <CustomButton icon="fas fa-camera" btn_class={`btn-${image_type} btn-icon profileUpload__btn`} />
             </div>
                 :
                 <GroupButton group_class="profileUpload__box justify-content-end">
-                    <CustomButton icon="fa fa-check mr-2" btn_class="btn-icon" onClick={handleSave} />
-                    <CustomButton icon="fa fa-close" btn_class="btn-icon btn-icon-red" onClick={handleCancel} />
+                    <CustomButton icon="fas fa-check mr-2" btn_class="btn-icon" onClick={handleSave} />
+                    <CustomButton icon="fas fa-times" btn_class="btn-icon btn-icon-red" onClick={handleCancel} />
                 </GroupButton>
             }
 

@@ -1,22 +1,16 @@
 import React from 'react';
 import { Form } from 'react-bootstrap';
 
-const FormInput = ({ label, value, type, placeholder, elem_class, tooltip, onChange, error, validate, required, pattern }) => (
-    <Form.Group className={`field-wrapper ${elem_class}`} >
-        {label && <Form.Label title={tooltip} className="formLabel">{label}{required && "*"}</Form.Label>}
+const FormInput = ({ input_props }) => (
+    <>
+        {/* {input_props.required && <span className="text-muted">*</span>} */}
         <Form.Control
-            className={`field-wrapper__input user-input ${error && `user-input-error`}`}
-            type={type || "text"}
-            title={tooltip}
-            value={value || ""}
-            name={label || ""}
-            pattern={pattern}
-            required={required}
-            placeholder={placeholder}
-            onChange={onChange}
+            className={`${input_props.required && "user-input-required"} user-input`}
+            type={input_props.type || "text"}
+            {...input_props}
         />
-        {error && <span className="error">{error}</span>}
-    </Form.Group>
+    </>
 )
 
 export default FormInput;
+

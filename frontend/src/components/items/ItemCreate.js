@@ -36,7 +36,7 @@ const ItemCreate = ({ mutation, addItemCache }) => {
         if (!uploadError && emptyInputs.length === 0) await post({ variables: { itemInput: transformInputs[section](inputs), files } });
     }
 
-    if (!editMode) return <CustomButton btn_class="btn-icon-text btn-icon float-right" icon="fa fa-plus" onClick={() => setEditMode(true)}>new</CustomButton>
+    if (!editMode) return <CustomButton btn_class="btn-icon float-right" icon="fas fa-plus" onClick={() => setEditMode(true)}></CustomButton>
     return <ItemForm
         form_title="Create"
         inputs={inputs}

@@ -41,9 +41,9 @@ const SecurityPassword = ({ token }) => {
             form_msg={msg}
             form_error={errors.form_error}
         >
-            {user && !user.googleAuth && <Password label="password" value={inputs["password"]} onChange={handleChange} />}
-            <Password label="new_password" value={inputs["new_password"]} onChange={handleChange} />
-            <Password label="confirm_password" value={inputs["confirm_password"]} onChange={handleChange} />
+            {user && !user.googleAuth && <Password name="password" value={inputs["password"]} onChange={handleChange} />}
+            <Password name="new_password" value={inputs["new_password"]} onChange={handleChange} />
+            <Password name="confirm_password" value={inputs["confirm_password"]} onChange={handleChange} />
         </CustomForm>
     )
 }

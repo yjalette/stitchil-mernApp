@@ -2,11 +2,12 @@ import React, { useEffect } from 'react';
 import { useMutation } from '@apollo/react-hooks';
 
 import useForm from '../../../custom_hooks/useForm';
-import FormMultipleInput from '../../../components/inputs/FormMultipleInput';
+import FormTypeahead from '../../../components/inputs/FormTypeahead';
 import FormInput from '../../../components/inputs/FormInput';
 import { handleResponse } from '../../../helpers/dataHelper';
 import CustomForm from '../../../layout/CustomForm'
 import { UPDATE_GENERAL_MUTATION } from '../graphql/mutations';
+import FormGroup from '../../../components/inputs/FormGroup';
 
 const AccountGeneral = ({ currValues }) => {
     const [post, { error, data }] = useMutation(UPDATE_GENERAL_MUTATION, {
@@ -16,7 +17,7 @@ const AccountGeneral = ({ currValues }) => {
 
     useEffect(() => {
         if (currValues) setInputs(currValues);
-    }, [currValues])
+    }, [currValues, setInputs])
 
     function handleSuccess(success_msg) {
         setErrors({});
@@ -32,15 +33,17 @@ const AccountGeneral = ({ currValues }) => {
         if (Object.keys(errors).length === 0) post({ variables: inputs });
     }
 
-
-    return <CustomForm form_msg={msg} form_error={errors.form_error} onSubmit={handleSubmit}>
-        <>
-            <FormInput label="fullname" onChange={handleChange} value={inputs["fullname"]} />
-            <FormMultipleInput label="languages" selected={inputs["languages"]} multiple={true} onChange={handleMultiChange} />
-            <FormMultipleInput label="country" selected={inputs["country"]} onChange={handleMultiChange} />
-
-        </>
-    </CustomForm>
+    return (
+        <CustomForm form_msg={msg} form_error={errors.form_error} onSubmit={handleSubmit}>
+            <FormGroup label="fullname" input_component={<FormInput input_props={{
+                name: "fullname",
+                onChange: handleChange,
+                value: inputs["fullname"]
+            }} />} />
+            <FormGroup label="languages" input_component={<FormTypeahead name="languages" value={inputs["languages"]} multiple={true} onChange={handleMultiChange} />} />
+            <FormGroup label="country" input_component={<FormTypeahead name="country" value={inputs["country"]} onChange={handleMultiChange} />} />
+        </CustomForm>
+    )
 
 }
 

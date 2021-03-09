@@ -7,12 +7,12 @@ import { DELETE_COMMENT_MUTATION } from './graphql/mutations';
 
 const CommentGrid = ({ items, children, onDelete }) => {
     const divRef = useRef(null);
-    const [post, { data, error }] = useMutation(DELETE_COMMENT_MUTATION);
+    const [post] = useMutation(DELETE_COMMENT_MUTATION);
 
-    const handleDelete = (itemId) => {
-        post({ variables: { itemId } });
-        onDelete(itemId);
-    }
+    // const handleDelete = (itemId) => {
+    //     post({ variables: { itemId } });
+    //     onDelete(itemId);
+    // }
 
     useEffect(() => {
         divRef.current.scrollIntoView({ behavior: 'smooth' });

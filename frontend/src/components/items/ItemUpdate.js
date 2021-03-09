@@ -40,24 +40,25 @@ const ItemUpdate = ({ item, updateItemCache, index, mutation }) => {
         });
     }
 
-    if (!editMode) return <CustomButton btn_title="edit item" btn_class="btn-icon" icon="fa fa-edit" onClick={toggleEditMode}></CustomButton>
+    if (!editMode) return <CustomButton btn_title="edit item" btn_class="btn-icon" icon="fas fa-pencil-alt" onClick={toggleEditMode}></CustomButton>
 
-    const prevFiles = inputs.gallery.map((item, index) => <div key={index} className="item-upload-wrapper">
+    const prevFiles = inputs.gallery.map((item, index) => <div key={index} className={`${item === inputs.coverImage && "item-cover"} item-upload-wrapper`}>
         <Image className="itemUpload__img itemUpdate-prevImg" src={item} alt="file" />
-        {item === inputs.coverImage ? <i className="itemUpdate-cover__footer itemUpload-footer fa fa-shield">cover</i>
-            : <> <CustomButton
-                btn_class="btn-click itemUpdate__overlay-btn"
-                btn_otherProps={{
-                    title: "set as a cover",
-                    name: "coverImage",
-                    value: item
-                }}
-                onClick={handleChange}>cover</CustomButton>
-                <i title="delete image" className="fa fa-close itemUpload-footer" onClick={() => setInputs({
-                    ...inputs,
-                    gallery: inputs.gallery.filter((item, i) => i !== index)
-                })} />
-            </>}
+        <CustomButton
+            btn_class="btn-text itemUpdate__overlay-btn"
+            btn_otherProps={{
+                title: item !== inputs.coverImage ? "set as a cover" : "",
+                name: "coverImage",
+                value: item,
+                disabled: item === inputs.coverImage
+            }}
+            onClick={handleChange}>cover</CustomButton>
+        {item !== inputs.coverImage && <CustomButton
+            btn_class="fas fa-times btn-icon-text btn-red pt-1"
+            onClick={() => setInputs({
+                ...inputs,
+                gallery: inputs.gallery.filter((item, i) => i !== index)
+            })} />}
     </div>)
 
     console.log(errors)
@@ -77,3 +78,22 @@ const ItemUpdate = ({ item, updateItemCache, index, mutation }) => {
 
 
 export default ItemUpdate
+
+
+// const prevFiles = inputs.gallery.map((item, index) => <div key={index} className="item-upload-wrapper">
+// <Image className="itemUpload__img itemUpdate-prevImg" src={item} alt="file" />
+// {item === inputs.coverImage ? <i className="itemUpdate-cover itemUpload-footer fas fa-shield-alt">cover</i>
+//     : <> <CustomButton
+//         btn_class="btn-click itemUpdate__overlay-btn"
+//         btn_otherProps={{
+//             title: "set as a cover",
+//             name: "coverImage",
+//             value: item
+//         }}
+//         onClick={handleChange}>cover</CustomButton>
+//         <i title="delete image" className="fa fa-close itemUpload-footer" onClick={() => setInputs({
+//             ...inputs,
+//             gallery: inputs.gallery.filter((item, i) => i !== index)
+//         })} />
+//     </>}
+// </div>)

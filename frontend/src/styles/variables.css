@@ -26,7 +26,7 @@
     --border-radius: 10px;
     --padding-elem: .5em;
     --padding-box: 1.5rem;
-    --padding-section: 1rem 3rem;
+    --padding-section: 2rem;
     --box-shadow: 0 0 0 4px var(--green-color), 2px 1px 6px 4px rgba(10, 10, 0, 0.5);
     --box-shadow-red: 0 0 0 4px var(--red-color), 2px 1px 6px 4px rgba(10, 10, 0, 0.5);
     --text-shadow: -.5px -.5px var(--green-color);

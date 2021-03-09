@@ -1,17 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
-import SearchBox from '../inputs/SearchBox';
+import React from 'react';
+import { useHistory } from 'react-router-dom';
+import FormSearch from '../inputs/FormSearch';
 
 const FilterByKeywords = () => {
-    const [value, setValue] = useState("");
-    const { search } = useLocation();
     const { push } = useHistory();
 
-    useEffect(() => {
-        if (value) push(`/search/${value.toString()}`)
-    }, [value])
+    const findItems = keywords => push(`/search/${keywords.toString()}`)
 
-    return <SearchBox box_class="filterByKeywords" onClick={value => setValue(value)} />
+    return <FormSearch handleSearch={findItems} />
 }
 
 export default FilterByKeywords

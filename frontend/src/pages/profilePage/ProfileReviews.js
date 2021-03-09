@@ -37,7 +37,7 @@ const ProfileReviews = ({ values, addItemCache }) => {
                 )) : <EmptyResultAlert type="reviews" />}
             </div>
             {open && <ReviewCreate
-                query={CREATE_REVIEW_MUTATION}
+                mutation={CREATE_REVIEW_MUTATION}
                 onMessageSent={handleReview}
                 otherVariables={{ recipient: username, rating }}>
                 <section className="reviewCreate__header">

@@ -1,6 +1,7 @@
 import React, { useContext, useRef, useEffect } from 'react'
 import MessageItem from './MessageItem';
 import AuthContext from '../../context/Auth-context';
+import CustomAlert from '../../layout/CustomAlert';
 
 const MessageGrid = ({ messages, children }) => {
     const { user } = useContext(AuthContext);
@@ -11,13 +12,18 @@ const MessageGrid = ({ messages, children }) => {
     return (
         <>
             <div className="messages">
-                {messages.length > 0 && messages
+                {messages.length > 0 ? messages
                     // .sort((a, b) => a.createdAt - b.createdAt)
-                    .map((msg, i) => (
+                    .map((msg, i) => console.log(msg.sender.username === user.username) || (
                         <div className="messages__msg__wrapper" key={i}>
-                            < MessageItem item={msg} comp_class={`${msg.sender.username === user.username && "messageItem-user"} w-50`} />
+                            < MessageItem item={msg} comp_class={`${msg.sender.username === user.username && "messageItem-user"}`} />
                         </div>
-                    ))}
+                    ))
+                    :
+                    <CustomAlert alert_variant="info" alert_class="messages__alert">
+                        <span>no message history yet</span>
+                    </CustomAlert>
+                }
                 <div ref={divRef} />
             </div>
             {children}

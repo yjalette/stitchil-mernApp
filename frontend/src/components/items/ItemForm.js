@@ -5,22 +5,44 @@ import CustomForm from '../../layout/CustomForm';
 import CustomModal from '../../layout/CustomModal'
 import ItemUpload from './ItemUpload';
 import useSlides from '../../custom_hooks/useSlides';
-import FormTextarea from '../inputs/FormTextarea';
 import FormInput from '../inputs/FormInput';
-import FormMultipleInput from '../inputs/FormMultipleInput';
-import { singleInput_props, multiInput_props, descriptionInput_props } from './helpers';
+import FormTypeahead from '../inputs/FormTypeahead';
+import { input_props } from './helpers';
+import FormGroup from '../inputs/FormGroup';
+
+
 
 const ItemForm = ({ form_title, errors, onChange, onMultiChange, onSubmit, onClose, inputs, initState, media_props }) => {
-    const form_inputs = (Object.keys(initState).map((label, index) => {
-        if (Array.isArray(initState[label])) return <FormMultipleInput key={index} {...multiInput_props(label, inputs, onMultiChange)} />
-        if (label === "description") return <FormTextarea key={index} {...descriptionInput_props(label, inputs, onChange)} />
-        else return <FormInput key={index} {...singleInput_props(label, inputs, onChange)} />
-    }))
-    form_inputs.unshift(<ItemUpload key={form_inputs.length + 1} {...media_props} />)
+    const form_inputs = (Object.keys(initState).map((label) => {
+        if (Array.isArray(initState[label])) {
+            return wrapInput(label, <FormTypeahead {...{
+                ...input_props(label, inputs[label], onMultiChange),
+                allowNew: label === "keywords",
+                multiple: label !== "category"
+            }} />)
+        }
+        if (label === "description") {
+            return wrapInput(label, <FormInput input_props={{
+                ...input_props(label, inputs[label], onChange),
+                maxLength: 100,
+                rows: 3,
+                as: "textarea"
+            }} />)
+        }
+        else {
+            return wrapInput(label, <FormInput input_props={{
+                ...input_props(label, inputs[label], onChange),
+                type: Number.isInteger(inputs[label]) ? "number" : "text"
+            }} />)
+        }
+    }));
+
+    // form_inputs.unshift(<ItemUpload key={form_inputs.length + 1} {...media_props} />)
 
     const { activeSlide, buttons } = useSlides(0, [
         form_inputs.slice(0, form_inputs.length / 2),
-        form_inputs.slice(form_inputs.length / 2, form_inputs.length)
+        form_inputs.slice(form_inputs.length / 2, form_inputs.length),
+        <ItemUpload {...media_props} />
     ] || [], { pagination: true })
 
     return (
@@ -35,13 +57,17 @@ const ItemForm = ({ form_title, errors, onChange, onMultiChange, onSubmit, onClo
             <CustomForm
                 onSubmit={onSubmit}
                 form_class="itemForm"
-                form_error={errors.form_errors}
+                form_error={errors.form_error}
             >
                 {activeSlide}
             </CustomForm>
 
         </CustomModal>
     )
+}
+
+function wrapInput(label, input_component) {
+    return <FormGroup key={label} label={label} input_component={input_component} />
 }
 
 export default ItemForm

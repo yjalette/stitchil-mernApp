@@ -10,6 +10,7 @@ import { onSuccess } from './helpers'
 import AuthContext from '../../context/Auth-context';
 import GoogleButton from './AuthGoogleBtn';
 import { LOGIN_QUERY } from './graphql/queries';
+import FormGroup from '../../components/inputs/FormGroup';
 
 const AuthLogin = ({ verifiedEmail }) => {
     const { setUser } = useContext(AuthContext);
@@ -33,8 +34,20 @@ const AuthLogin = ({ verifiedEmail }) => {
     return (
         <>
             <CustomForm form_class="authLogin" onSubmit={handleSubmit} form_error={errors.form_error}>
-                <FormInput type="email" label="email" onChange={handleChange} value={inputs.email} required={true} />
-                <FormInput type="password" label="password" onChange={handleChange} value={inputs.password} required={true} />
+                {["email", "password"].map(label => (
+                    <FormGroup
+                        key={label}
+                        label={label}
+                        input_component={<FormInput
+                            input_props={{
+                                type: label === "email" ? "email" : "text",
+                                name: label,
+                                onChange: handleChange,
+                                value: inputs[label],
+                                required: true
+                            }}
+                        />} />
+                ))}
                 {/* <Container className="text-light flex-center justify-content-start">
                     <Form.Label>remeber me</Form.Label>
                     <Form.Check label=" " type="radio" />

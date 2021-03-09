@@ -3,8 +3,8 @@ import { Container } from 'react-bootstrap';
 import ItemToggle from '../components/items/ItemToggle';
 import './style.css'
 
-const ListItem = ({ field, icon, content, maxWords }) => (
-    <Container className={`listItem listItem-${field}`}>
+const ListItem = ({ field, icon, content, maxWords, item_class }) => console.log(content) || (
+    <Container className={`listItem ${item_class}`}>
         {field && <span className="listItem__field">{field}</span>}
         {icon && <i className={`${icon} listItem__icon`} alt="list icon" />}
         {content ? !maxWords ?

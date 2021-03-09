@@ -8,7 +8,7 @@ import ProfileContext from './../../context/Profile-context';
 import ListItem from './../../layout/ListItem';
 import useForm from './../../custom_hooks/useForm';
 import CustomButton from './../../layout/button/CustomButton';
-import FormMultipleInput from './../../components/inputs/FormMultipleInput';
+import FormTypeahead from './../../components/inputs/FormTypeahead';
 import CustomForm from './../../layout/CustomForm';
 
 const ProfileDesignerInfo = ({ values }) => {
@@ -18,7 +18,7 @@ const ProfileDesignerInfo = ({ values }) => {
 
     useEffect(() => {
         if (values) setInputs(values);
-    }, [values])
+    }, [values, setInputs])
 
 
     function onSubmit() {
@@ -28,11 +28,11 @@ const ProfileDesignerInfo = ({ values }) => {
 
     if (editMode && logged_in_user) return (
         <CustomForm form_class="designer__form" onSubmit={handleSubmit} onCancel={handleClear} submitTitle="save" >
-            {Object.keys(initState_designer).map((label, index) => <FormMultipleInput
+            {Object.keys(initState_designer).map((label, index) => <FormTypeahead
                 key={index}
-                label={label}
+                name={label}
                 onChange={handleMultiChange}
-                selected={inputs[label]}
+                value={inputs[label]}
                 multiple={label !== "experience"}
                 allowNew={label === "education"}
             />)}
@@ -41,7 +41,7 @@ const ProfileDesignerInfo = ({ values }) => {
     return (
         <>
             <SectionHeader title="Designer Info">
-                {logged_in_user && <CustomButton onClick={toggleEditMode} icon="fa fa-edit" btn_class="btn-icon" />}
+                {logged_in_user && <CustomButton onClick={toggleEditMode} icon="fas fa-pencil-alt" btn_class="btn-icon" />}
             </SectionHeader>
             <div className="profileSection__content">
                 {Object.keys(initState_designer).map(field => <ListItem key={field}

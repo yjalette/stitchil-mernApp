@@ -8,6 +8,7 @@ import AuthContext from '../../../context/Auth-context';
 import { updateLocalStorage } from '../../../helpers/localStorageHelper';
 import { handleResponse } from '../../../helpers/dataHelper';
 import { UPDATE_USERNAME_MUTATION } from '../graphql/mutations';
+import FormGroup from '../../../components/inputs/FormGroup';
 
 const AccountUsername = ({ currValue }) => {
     const { user, setUser } = useContext(AuthContext)
@@ -36,9 +37,15 @@ const AccountUsername = ({ currValue }) => {
         if (Object.keys(errors).length === 0) post({ variables: inputs });
     }
 
-    return <CustomForm form_msg={msg} form_error={errors.form_error} onSubmit={handleSubmit}>
-        <FormInput label="username" onChange={handleChange} value={inputs.username} />
-    </CustomForm>
+    return (
+        <CustomForm form_msg={msg} form_error={errors.form_error} onSubmit={handleSubmit}>
+            <FormGroup label="username" input_component={<FormInput input_props={{
+                name: "username",
+                onChange: handleChange,
+                value: inputs.username
+            }} />} />
+        </CustomForm>
+    )
 }
 
 export default AccountUsername

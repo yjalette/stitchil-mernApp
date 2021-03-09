@@ -17,7 +17,7 @@ const Heroimage = () => {
                 <div className="hpSlides__header">
                     <h5 className="hpSlides__username mb-0">@{slide.username}</h5>
                     <CustomButton btn_class="btn-icon-text btn-star"
-                        icon="fa fa-star"
+                        icon="fas fa-star"
                         onClick={() => push("/explore/gigs")}
                     >5
                    </CustomButton>

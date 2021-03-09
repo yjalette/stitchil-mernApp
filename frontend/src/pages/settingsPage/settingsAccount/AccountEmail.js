@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useMutation } from '@apollo/react-hooks';
 
 import useForm from '../../../custom_hooks/useForm';
+import FormGroup from '../../../components/inputs/FormGroup';
 import FormInput from '../../../components/inputs/FormInput';
 import CustomForm from '../../../layout/CustomForm'
 import { handleResponse } from '../../../helpers/dataHelper';
@@ -32,9 +33,16 @@ const AccountEmail = ({ currValue }) => {
         if (Object.keys(errors).length === 0) post({ variables: inputs });
     }
 
-    return <CustomForm form_msg={msg} form_error={errors.form_error} onSubmit={handleSubmit}>
-        <FormInput label="email" type="email" onChange={handleChange} value={inputs.email} />
-    </CustomForm>
+    return (
+        <CustomForm form_msg={msg} form_error={errors.form_error} onSubmit={handleSubmit}>
+            <FormGroup label="email" input_component={<FormInput input_props={{
+                name: "email",
+                type: "email",
+                onChange: handleChange,
+                value: inputs.email
+            }} />} />
+        </CustomForm>
+    )
 }
 
 export default AccountEmail

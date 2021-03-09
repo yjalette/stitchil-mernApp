@@ -26,30 +26,14 @@ export const validate = (inputs) => {
 }
 
 
-export const multiInput_props = (label, inputs, onChange) => ({
-    label,
-    selected: inputs[label],
+export const input_props = (label, value, onChange) => ({
+    name: label,
+    value,
     onChange,
-    allowNew: label === "keywords",
-    multiple: label !== "category",
-    required: label !== "keywords"
+    required: label !== "description" && label !== "keywords"
 })
 
-export const singleInput_props = (label, inputs, onChange) => ({
-    label,
-    value: inputs[label],
-    type: Number.isInteger(inputs[label]) && "number",
-    onChange,
-    required: true
-})
 
-export const descriptionInput_props = (label, inputs, onChange) => ({
-    label,
-    value: inputs[label],
-    onChange,
-    maxLength: 100,
-    rows: 3
-})
 
 
 
