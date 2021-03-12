@@ -10,9 +10,9 @@ const SettingsPage = ({ section, children }) => (
         <SectionWrapper>
             <SectionNav currSection={section} items={["account", "security", "notifications"]} />
         </SectionWrapper>
-        <SectionWrapper>
+        {/* <SectionWrapper>
             <SectionHeader title={section} />
-        </SectionWrapper>
+        </SectionWrapper> */}
         <SectionWrapper>
             {children}
         </SectionWrapper>

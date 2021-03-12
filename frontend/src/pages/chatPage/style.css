@@ -1,15 +1,15 @@
-.pageWrapper-chats {
+.chats-page {
     height: 90vh;
     display: flex;
     border: 1px solid var(--outline-color);
 }
 
-.sectionWrapper-chats-leftCol {
+.chats-leftCol-section {
     flex-shrink: 3;
     border-right: 1px solid var(--outline-color);
 }
 
-.chats__header, .pageWrapper-chats .messages__header {
+.chats__header, .chats-page .messages__header {
     height: 50px;
     width: 100%;
     display: flex;
@@ -66,14 +66,14 @@
     color: var(--secondary-color);
 }
 
-.pageWrapper-chats .messages {
+.chats-page .messages {
     height: 50vh;
 }
 
 @media only screen and (max-width: 1024px) {}
 
 @media (max-width: 767px) {
-    .pageWrapper-chats {
+    .chats-page {
         flex-direction: column;
     }
 }

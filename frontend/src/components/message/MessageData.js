@@ -7,7 +7,6 @@ import { MESSAGES_QUERY } from './graphql/queries';
 import { CREATE_MESSAGE_MUTATION } from "./graphql/mutations"
 import MessageGrid from './MessageGrid';
 import MessageCreate from './MessageCreate';
-import BoxWrapper from '../../layout/BoxWrapper';
 import UserAvatar from '../user/UserAvatar';
 import AuthContext from '../../context/Auth-context';
 import SectionWrapper from '../../layout/SectionWrapper';

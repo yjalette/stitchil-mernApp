@@ -42,7 +42,7 @@ input, textarea, select, .btn-icon {
 .form-control:focus-within {
     box-shadow: none !important;
     border-radius: var(--border-radius);
-    border: 1px solid var(--accent-color) !important;
+    border: 1px solid var(--light-gray-color) !important;
 }
 
 .form-control:required::placeholder {

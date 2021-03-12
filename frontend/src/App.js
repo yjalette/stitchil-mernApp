@@ -12,8 +12,6 @@ import ChatPage from './pages/chatPage/ChatPage';
 import Footer from './components/footer/Footer';
 import SettingsPage from './pages/settingsPage/SettingsPage';
 import AuthPage from './pages/authPage/AuthPage';
-import GigPage from './pages/gigPage/GigPage';
-import ProductPage from './pages/productPage/ProductPage';
 import AuthLogin from './pages/authPage/AuthLogin';
 import AuthJoin from './pages/authPage/AuthJoin';
 import AuthForgotPassword from './pages/authPage/AuthForgotPassword';
@@ -21,6 +19,8 @@ import AccountData from './pages/settingsPage/settingsAccount/AccountData';
 import SecurityIndex from './pages/settingsPage/settingsSecurity/SecurityIndex';
 import NotificationIndex from './pages/settingsPage/settingsNotification/NotificationIndex';
 import SearchPage from './pages/searchPage/SearchPage';
+import ItemPage from './pages/itemPage/ItemPage';
+import ItemCreate from './components/items/ItemCreate';
 
 const userObj = JSON.parse(localStorage.getItem('user'));
 
@@ -36,6 +36,12 @@ const settingsComponents = [
   { section: "account", component: <AccountData /> },
   { section: "security", component: <SecurityIndex /> },
   { section: "notifications", component: <NotificationIndex /> },
+]
+
+const itemComponents = [
+  { path: `/item/gigs/:itemId`, children: null },
+  { path: `/item/portfolio/:itemId`, children: null },
+  { path: "/create-item/:section", children: <ItemCreate /> },
 ]
 
 
@@ -79,10 +85,15 @@ class App extends Component {
                   </SettingsPage>
                 </Route>
               ))}
+              {itemComponents.map((elem, i) => (
+                <Route key={i} path={elem.path} component={() => (
+                  <ItemPage >{elem.children}</ItemPage>
+                )}>
+                </Route>
+              ))}
+
               <Route path="/homepage/:section" component={LandingPage} />
               <Route path="/profile/:username/:section" component={ProfilePage} />
-              <Route path="/view-gigs-item/:id" component={GigPage} />
-              <Route path="/view-portfolio-item/:id" component={ProductPage} />
               <Route exact path="/chats/" component={ChatPage} />
               <Route path="/messages/:username" component={ChatPage} />
               <Route path="/logout" component={Logout} />

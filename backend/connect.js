@@ -5,10 +5,10 @@ module.exports = () => mongoose.connect(`mongodb+srv://${process.env.MONGO_USER}
     useUnifiedTopology: true,
     useFindAndModify: false
 })
-// .then(async () => {
-//     await mongoose.connection.db.collection('gigs').dropIndex("title_text")
-//     await mongoose.connection.db.collection('gigs').createIndex({ "$**": "text" })
-//     console.log(await mongoose.connection.db.collection('gigs').indexes())
-// });
+    // .then(async () => {
+    //     // await mongoose.connection.db.collection('gigs').dropIndex("title_text")
+    //     await mongoose.connection.db.collection('items').createIndex({ "$**": "text" })
+    //     console.log(await mongoose.connection.db.collection('items').indexes())
+    // });
 
 

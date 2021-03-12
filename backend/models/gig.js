@@ -3,46 +3,26 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const gigSchema = new Schema({
-    title: {
-        type: String,
-        required: false
+    item: {
+        type: Schema.Types.ObjectId,
+        ref: 'Item'
     },
-    description: {
-        type: String,
-        required: false
-    },
-    category: {
-        type: Array,
-        required: false
-    },
-    styles: {
-        type: Array,
-        required: false
-    },
-    price: {
-        type: Number,
-        required: false
-    },
-    delivery: {
-        type: Number,
-        required: false
-    },
-    fabrics: {
-        type: Array,
-        required: false
-    },
-    coverImage: {
-        type: String,
-        required: false
-    },
-    gallery: {
-        type: Array,
-        required: false
-    },
-    keywords: {
-        type: Array,
-        required: false
-    },
+    variants: [
+        {
+            price: {
+                type: Number,
+                required: false
+            },
+            fabrics: {
+                type: Array,
+                required: false
+            },
+            colors: {
+                type: Array,
+                required: false
+            }
+        }
+    ],
     creator: {
         type: Schema.Types.ObjectId,
         ref: 'User'

@@ -16,37 +16,6 @@ type AuthData {
     googleAuth: Boolean
 }
 
-input ItemInput {
-    _id: ID
-    title: String
-    description: String
-    styles: [String]
-    category: [String]
-    price: Int
-    fabrics: [String]
-    delivery: Int
-    coverImage: String
-    gallery: [String]
-    keywords: [String]
-}
-
-type Gig {
-    _id: ID
-    title: String
-    description: String
-    category: [String]
-    styles: [String]
-    price: Int
-    fabrics: [String]
-    coverImage: String
-    gallery: [String]
-    delivery: Int
-    keywords: [String]
-    creator: AuthData
-    createdAt: String
-    updatedAt: String
-}
-
 
 type PortfolioItem {
     _id: ID

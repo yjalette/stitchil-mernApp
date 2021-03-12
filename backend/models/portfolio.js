@@ -3,32 +3,30 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const portfolioSchema = new Schema({
-    title: {
-        type: String,
+    item: {
+        type: Schema.Types.ObjectId,
+        ref: 'Item'
+    },
+    startingPrice: {
+        type: Number,
         required: false
     },
-    description: {
-        type: String,
+    auction: {
+        type: Boolean,
         required: false
     },
-    coverImage: {
-        type: String,
-        required: false
-    },
-    gallery: {
-        type: Array,
-        required: false
-    },
+    bids: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Bid'
+        }
+    ],
     likes: [
         {
             type: String,
             required: false
         }
     ],
-    keyWords: {
-        type: Array,
-        required: false
-    },
     createdAt: {
         type: Date,
         required: false

@@ -1,7 +1,3 @@
-/* .sectionWrapper-messages {
-    justify-content: space-between;
-} */
-
 .messages {
     width: 100%;
     display: flex;
@@ -15,7 +11,8 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    overflow-y: auto;
+
+    /* overflow-y: auto; */
 }
 
 .messages__msg__wrapper {

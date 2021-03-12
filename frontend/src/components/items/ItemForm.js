@@ -7,20 +7,20 @@ import ItemUpload from './ItemUpload';
 import useSlides from '../../custom_hooks/useSlides';
 import FormInput from '../inputs/FormInput';
 import FormTypeahead from '../inputs/FormTypeahead';
-import { input_props } from './helpers';
 import FormGroup from '../inputs/FormGroup';
+import { input_props } from './helpers';
+import { initState_item } from '../../constants/initStates';
 
-
-
-const ItemForm = ({ form_title, errors, onChange, onMultiChange, onSubmit, onClose, inputs, initState, media_props }) => {
-    const form_inputs = (Object.keys(initState).map((label) => {
-        if (Array.isArray(initState[label])) {
+const ItemForm = ({ form_title, errors, onChange, onMultiChange, onSubmit, onClose, inputs, media_props }) => {
+    const form_inputs = (Object.keys(initState_item).map((label) => {
+        if (Array.isArray(initState_item[label])) {
             return wrapInput(label, <FormTypeahead {...{
                 ...input_props(label, inputs[label], onMultiChange),
                 allowNew: label === "keywords",
-                multiple: label !== "category"
+                multiple: ["keywords", "occasion", "style"].includes(label)
             }} />)
         }
+
         if (label === "description") {
             return wrapInput(label, <FormInput input_props={{
                 ...input_props(label, inputs[label], onChange),
@@ -31,8 +31,7 @@ const ItemForm = ({ form_title, errors, onChange, onMultiChange, onSubmit, onClo
         }
         else {
             return wrapInput(label, <FormInput input_props={{
-                ...input_props(label, inputs[label], onChange),
-                type: Number.isInteger(inputs[label]) ? "number" : "text"
+                ...input_props(label, inputs[label], onChange)
             }} />)
         }
     }));
@@ -49,7 +48,7 @@ const ItemForm = ({ form_title, errors, onChange, onMultiChange, onSubmit, onClo
         <CustomModal
             modal_title={form_title}
             modal_class="itemForm-modal"
-            modal_size="md"
+            modal_size="lg"
             onClose={onClose}
             modal_footer={buttons}
             displayWithoutBtn

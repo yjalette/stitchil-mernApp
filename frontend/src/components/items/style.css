@@ -14,6 +14,16 @@
     padding: var(--padding-box);
 }
 
+.itemAlert {
+    pointer-events: none;
+    font-size: 5em;
+    color: var(--light-gray-color);
+}
+
+.itemAlert i {
+    opacity: .5;
+}
+
 .itemForm-modal .slide-buttons > * {
     letter-spacing: .03em;
 }
@@ -205,13 +215,17 @@
 
 .itemDetails-gallery .itemImg {
     height: 500px;
-    width: 100%;
-    object-fit: cover;
+    max-width: 100%;
+
+    /* object-fit: cover; */
 }
 
 .itemDetails-gallery .itemImg-thumb {
     height: 200px;
-    object-fit: cover;
+    width: 200px;
+
+    /* background-size: contain;
+    background-repeat: no-repeat; */
 }
 
 @media (max-width: 1679px) {}

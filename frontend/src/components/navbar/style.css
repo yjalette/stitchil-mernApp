@@ -85,9 +85,7 @@
     content: '';
     border-left: 12px solid transparent;
     border-right: 12px solid transparent;
-    border-bottom-width: 12px;
-    border-bottom-style: solid;
-    border-bottom-color: var(--light-green-color);
+    border-bottom: 12px solid var(--light-green-color);
     bottom: 0;
 }
 

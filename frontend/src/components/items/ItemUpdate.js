@@ -1,24 +1,22 @@
 import React, { useEffect } from 'react'
-import { useParams } from 'react-router-dom'
-import { Image } from 'react-bootstrap';
 import { useMutation } from '@apollo/react-hooks';
 
 import useForm from '../../custom_hooks/useForm'
 import useUpload from '../../custom_hooks/useUpload'
-import ItemForm from './ItemForm';
 import CustomButton from '../../layout/button/CustomButton';
-import { initState, transformInputs, validate } from "./helpers"
+import { transformInputs, validate } from "./helpers"
+import ItemPrevFiles from './ItemPrevFiles';
+import ItemForm from './ItemForm';
+import { initState_item } from '../../constants/initStates';
+import { UPDATE } from './graphql/mutations';
 
-const ItemUpdate = ({ item, updateItemCache, index, mutation }) => {
-    const { section } = useParams();
-    const { inputs, setInputs, handleChange, handleMultiChange, handleSubmit, editMode, toggleEditMode, errors, setErrors } = useForm(initState[section], onSubmit);
+const ItemUpdate = ({ item, updateItemCache }) => {
+    const { inputs, setInputs, handleChange, handleMultiChange, handleSubmit, editMode, setEditMode, errors, setErrors } = useForm(initState_item, onSubmit);
     const { files, clearUpload, getRootProps, getInputProps } = useUpload(null, inputs.gallery ? 5 - inputs.gallery.length : 5);
-    const [post] = useMutation(mutation, {
+    const [post] = useMutation(UPDATE, {
         onCompleted: async data => {
-            await updateItemCache(inputs, index);
-            clearUpload();
-            setErrors({});
-            toggleEditMode();
+            await updateItemCache(inputs);
+            handleClose();
         }
     });
 
@@ -34,66 +32,48 @@ const ItemUpdate = ({ item, updateItemCache, index, mutation }) => {
         })
         post({
             variables: {
-                itemInput: transformInputs[section](inputs),
+                itemInput: transformInputs(inputs),
                 files
             }
         });
     }
 
-    if (!editMode) return <CustomButton btn_title="edit item" btn_class="btn-icon" icon="fas fa-pencil-alt" onClick={toggleEditMode}></CustomButton>
+    function handleClose() {
+        clearUpload()
+        setEditMode(false)
+        setErrors({})
+    }
 
-    const prevFiles = inputs.gallery.map((item, index) => <div key={index} className={`${item === inputs.coverImage && "item-cover"} item-upload-wrapper`}>
-        <Image className="itemUpload__img itemUpdate-prevImg" src={item} alt="file" />
-        <CustomButton
-            btn_class="btn-text itemUpdate__overlay-btn"
-            btn_otherProps={{
-                title: item !== inputs.coverImage ? "set as a cover" : "",
-                name: "coverImage",
-                value: item,
-                disabled: item === inputs.coverImage
-            }}
-            onClick={handleChange}>cover</CustomButton>
-        {item !== inputs.coverImage && <CustomButton
-            btn_class="fas fa-times btn-icon-text btn-red pt-1"
-            onClick={() => setInputs({
-                ...inputs,
-                gallery: inputs.gallery.filter((item, i) => i !== index)
-            })} />}
-    </div>)
-
-    console.log(errors)
+    if (!editMode) return <CustomButton
+        btn_class="btn-icon float-right"
+        icon="fas fa-pencil-alt"
+        btn_otherProps={{
+            title: "edit"
+        }}
+        onClick={() => setEditMode(true)} />
 
     return <ItemForm
         form_title="Update"
         errors={errors}
         inputs={inputs}
-        initState={initState[section]}
+        // initState={initState[section]}
         onSubmit={handleSubmit}
-        onClose={() => clearUpload()}
+        onClose={handleClose}
         onChange={handleChange}
         onMultiChange={handleMultiChange}
-        media_props={{ files, prevFiles, clearUpload, getInputProps, getRootProps }}
+        media_props={{
+            files,
+            prevFiles: <ItemPrevFiles inputs={inputs} onCoverChange={handleChange} onGalleryChange={(index) => setInputs({
+                ...inputs,
+                gallery: inputs.gallery.filter((item, i) => i !== index)
+            })} />,
+            clearUpload,
+            getInputProps,
+            getRootProps
+        }}
     />
 }
 
 
 export default ItemUpdate
 
-
-// const prevFiles = inputs.gallery.map((item, index) => <div key={index} className="item-upload-wrapper">
-// <Image className="itemUpload__img itemUpdate-prevImg" src={item} alt="file" />
-// {item === inputs.coverImage ? <i className="itemUpdate-cover itemUpload-footer fas fa-shield-alt">cover</i>
-//     : <> <CustomButton
-//         btn_class="btn-click itemUpdate__overlay-btn"
-//         btn_otherProps={{
-//             title: "set as a cover",
-//             name: "coverImage",
-//             value: item
-//         }}
-//         onClick={handleChange}>cover</CustomButton>
-//         <i title="delete image" className="fa fa-close itemUpload-footer" onClick={() => setInputs({
-//             ...inputs,
-//             gallery: inputs.gallery.filter((item, i) => i !== index)
-//         })} />
-//     </>}
-// </div>)

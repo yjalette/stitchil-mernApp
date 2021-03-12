@@ -1,6 +1,7 @@
 .exploreHeader {
     height: 600px;
-    overflow: hidden;
+
+    /* overflow: hidden; */
     background-color: var(--main-color-light);
     padding: 50px;
 }

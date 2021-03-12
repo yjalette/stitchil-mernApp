@@ -1,26 +1,29 @@
 import React from 'react'
-import { useParams } from 'react-router-dom'
+import { useHistory, useParams } from 'react-router-dom'
 import { useMutation } from '@apollo/react-hooks';
 
 import ItemForm from './ItemForm';
-import { initState, transformInputs, validate } from "./helpers"
+import { transformInputs, validate } from "./helpers"
 import useForm from '../../custom_hooks/useForm';
 import useUpload from '../../custom_hooks/useUpload';
-import CustomButton from '../../layout/button/CustomButton';
+import { initState_item } from '../../constants/initStates';
+import { CREATE } from './graphql/mutations';
 
-const ItemCreate = ({ mutation, addItemCache }) => {
+const ItemCreate = () => {
     const { section } = useParams();
-    const { inputs, setInputs, handleChange, handleMultiChange, handleSubmit, editMode, setEditMode, errors, setErrors } = useForm(initState[section], onSubmit);
+    const { push, goBack } = useHistory();
+    const { inputs, setInputs, handleChange, handleMultiChange, handleSubmit, setEditMode, errors, setErrors } = useForm(initState_item, onSubmit);
     const { files, clearUpload, getRootProps, getInputProps, uploadError } = useUpload(3000000, 5);
-    const [post, { error }] = useMutation(mutation, {
+    const [post, { error }] = useMutation(CREATE, {
         onCompleted: async data => {
-            await addItemCache(data[`create_${section}_item`]);
+            // await addItemCache(data.create_item);
             // why async to clear
-            await clearForm()
+            push(`/item/gigs/${data.create_item._id}`)
+            handleClose()
         }
     });
 
-    async function clearForm() {
+    async function handleClose() {
         clearUpload();
         setInputs({});
         setErrors({});
@@ -33,17 +36,18 @@ const ItemCreate = ({ mutation, addItemCache }) => {
             ...errors,
             form_error: `${emptyInputs.join(", ")} can't be empty`
         })
-        if (!uploadError && emptyInputs.length === 0) await post({ variables: { itemInput: transformInputs[section](inputs), files } });
+        if (!uploadError && emptyInputs.length === 0) {
+            return await post({ variables: { itemInput: transformInputs(inputs), files, group: section } });
+        }
     }
 
-    if (!editMode) return <CustomButton btn_class="btn-icon float-right" icon="fas fa-plus" onClick={() => setEditMode(true)}></CustomButton>
+
     return <ItemForm
         form_title="Create"
         inputs={inputs}
         errors={errors}
-        initState={initState[section]}
         onSubmit={handleSubmit}
-        onClose={() => clearForm()}
+        onClose={() => goBack()}
         onChange={handleChange}
         onMultiChange={handleMultiChange}
         media_props={{ files, uploadError, clearUpload, getInputProps, getRootProps }}

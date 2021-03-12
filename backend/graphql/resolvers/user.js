@@ -1,4 +1,5 @@
 const User = require("../../models/user");
+const Item = require("../../models/item");
 const { comparePwd, createPwd, verifyJWT } = require("../../helpers/creds");
 const { uploadToCloud, deleteSingleFile } = require("../../helpers/uploadToCloud");
 const { unauthorized_error,
@@ -10,15 +11,17 @@ const { unauthorized_error,
     update_success,
     login_redirect } = require("../../consts/client_msg");
 
-
 module.exports = {
     Query: {
-        userProfile: async (_, { username }, req) => {
-            return await User.findOne({ username })
+        profile: async (_, { username }, req) => {
+            const user = await User.findOne({ username })
                 .populate({ path: 'designer' })
-                .populate({ path: 'gigs' })
-                .populate({ path: 'portfolio' })
                 .populate({ path: "reviews", populate: "sender", options: { sort: { createdAt: -1 } } })
+            return {
+                intro: user,
+                portfolio: await Item.find({ creator: user._id, group: "portfolio" }),
+                gigs: await Item.find({ creator: user._id, group: "gigs" })
+            }
         },
         userAccount: async (_, args, { userId }) => userId ? await User.findById(userId) : new Error('user is not authorized')
     },

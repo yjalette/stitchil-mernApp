@@ -4,6 +4,7 @@ const Chat = require("../../models/chat");
 module.exports = {
     Query: {
         chats: async (_, { }, req) => {
+            await Chat.deleteMany();
             try {
                 // select most recent message
                 return await Chat.find({ members: { $in: req.userId } })

@@ -21,9 +21,18 @@ label, .formLabel {
     width: 100%;
 }
 
+.field-wrapper .dropdown-menu {
+    background-color: var(--light-gray-color);
+}
+
+.field-wrapper .dropdown-menu a {
+    color: black;
+}
+
 .customSelect option {
     background-color: var(--main-color);
     color: var(--secondary-color);
+    z-index: 2000;
 }
 
 .user-input, .rbt-input {
@@ -94,6 +103,6 @@ label, .formLabel {
     cursor: pointer;
 }
 
-.multipleInput .dropdown-menu {
+/* .multipleInput .dropdown-menu {
     overflow-x: hidden !important;
-}
+} */

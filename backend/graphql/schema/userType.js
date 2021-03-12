@@ -3,40 +3,24 @@ const { gql } = require("apollo-server-express");
 
 module.exports = gql`
 
-
-type UserProfile {   
+type ProfileIntro {
     username: String
     fullname: String
     country: [String]
     languages: [String]
+    role: String
+    rating: Int
     profileImage: String
     coverImage: String
-    role: String
     lastSeen: String
+    designer: DesignerResume
 }
 
 type Profile {
-    username: String
-    fullname: String
-    country: [String]
-    languages: [String]
-    profileImage: String
-    coverImage: String
-    role: String
-    rating: Int
-    lastSeen: String
-    designer: DesignerResume
-    gigs: [Gig]
-    portfolio: [PortfolioItem]
+    intro: ProfileIntro
+    gigs: [Item]
+    portfolio: [Item]
     reviews: [Message]
-}
-
-type DesignerResume {
-    styles: [String]
-    skills: [String]
-    experience: [String]
-    education: [String]
-    about: String
 }
 
 type Account {
@@ -85,7 +69,7 @@ type Location {
 
 type Query {   
     userAccount: Account
-    userProfile(username: String): Profile  
+    profile(username: String): Profile  
 }
 
 type Mutation {    

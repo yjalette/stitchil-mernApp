@@ -115,3 +115,29 @@ export const section_mutation = {
     }
 }
 
+export const item_mutation = {
+    CREATE: gql`
+        mutation Create_Item($itemInput: ItemInput, $files: [Upload], $group: String ){
+            create_item(itemInput: $itemInput, files: $files, group: $group){
+                _id
+                group
+                title
+                description
+                coverImage
+                gallery
+                occasion
+                category
+                garment
+                active
+                keywords
+                createdAt
+            }
+        }`,
+    UPDATE: gql`mutation Update_Item($itemInput: ItemInput, $files: [Upload] ){
+            update_gigs_item(itemInput: $itemInput, files: $files)
+        }
+    `,
+    DELETE: gql`mutation Delete_Item($itemId: ID){
+        delete_item(itemId: $itemId)
+      }`
+}

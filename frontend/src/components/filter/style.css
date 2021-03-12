@@ -1,31 +1,26 @@
-.filterByOptions, .filterParams, .filterByOptions__price {
+.filterByOptions-box, .filterParams-box, .filterByOptions__price {
     display: flex;
-
-    /* width: 100%; */
 }
 
-.filterByOptions, .filterParams {
+.filterByOptions-box, .filterParams-box {
     width: 100%;
 }
 
-.filterByOptions {
+.filterByOptions-box {
+    z-index: 2000;
     justify-content: space-between;
 }
 
-.filterParams {
-    justify-content: flex-start;
+.filterParams-box {
+    justify-content: center;
 }
 
-.filterByOptions__options .customDropdown + .customDropdown {
+.filterByOptions__options-box .customDropdown + .customDropdown {
     margin-left: .5em;
 }
 
-.filterByOptions .customDropdown__btn {
+.filterByOptions-box .customDropdown__btn {
     background-color: transparent;
-}
-
-.filterByOptions .customDropdown__body {
-    background-color: var(--light-gray-color);
 }
 
 .filterParams__item {
@@ -53,6 +48,11 @@
 
 .filterByKeywords:focus-within {
     width: calc(100% - 35px );
+}
 
-    /* border-color: var(--accent-color); */
+.filterGrid__header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }

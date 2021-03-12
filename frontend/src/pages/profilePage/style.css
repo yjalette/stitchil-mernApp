@@ -1,3 +1,8 @@
+.profile-page .sectionHeader__title {
+    margin-bottom: 0;
+    margin-right: .5em;
+}
+
 .profileHeader {
     position: relative;
     border: none;
@@ -60,7 +65,7 @@
     z-index: 1000;
 }
 
-.profileIntro .listItem {
+.profileIntro-box .listItem {
     margin: .5rem 0;
 }
 
@@ -72,14 +77,21 @@
     content: "speaks ";
 }
 
-.profile-section {
+/* .profile-rightCol {
     padding: 0;
     min-height: 300px;
     background-color: var(--main-color);
+} */
+
+.profile-rightCol .sectionHeader {
+    padding: var(--padding-box);
 }
 
-.profile-section .sectionHeader {
-    padding: var(--padding-box);
+.profile-rightComlun .boxWrapper {
+    min-height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .profileTitle {
@@ -88,9 +100,8 @@
     width: auto;
 }
 
-.pageWrapper-profile .sectionHeader__title {
-    margin-bottom: 0;
-    margin-right: .5em;
+.profileCreate-btn {
+    align-self: flex-end;
 }
 
 .reviewCreate__header {
@@ -106,7 +117,7 @@
     justify-content: space-between;
 }
 
-.profileChat .sectionWrapper-messages {
+.profileChat .messages-section {
     padding: 0;
     align-items: flex-start;
 }

@@ -7,11 +7,10 @@ export const EXPLORE_GIGS_QUERY = gql`
                 _id
                 title
                 coverImage
-                price
                 category
-                styles
-                fabrics
-                delivery
+                garment 
+                occasion
+                style
                 creator {
                     username
                     profileImage

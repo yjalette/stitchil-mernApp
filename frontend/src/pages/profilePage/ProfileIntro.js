@@ -4,7 +4,7 @@ import SectionHeader from '../../layout/SectionHeader';
 import BoxWrapper from '../../layout/BoxWrapper';
 import ProfileDesignerInfo from './ProfileDesignerInfo';
 
-const ProfileIntro = ({ profile }) => console.log(profile) || (
+const ProfileIntro = ({ profile }) => profile ? (
     <>
         <BoxWrapper className="profileIntro">
             <SectionHeader title={`About ${profile.username}`} />
@@ -23,7 +23,7 @@ const ProfileIntro = ({ profile }) => console.log(profile) || (
             <ProfileDesignerInfo values={profile.designer} />
         </BoxWrapper>}
     </>
-)
+) : null
 export default ProfileIntro
 
 

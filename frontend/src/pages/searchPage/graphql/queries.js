@@ -7,10 +7,10 @@ export const SEARCH_ITEMS_QUERY = gql`
                 _id
                 title
                 coverImage
-                price
                 category
-                styles
-                fabrics
+                style
+                garment
+                occasion
                 delivery
                 creator {
                     username

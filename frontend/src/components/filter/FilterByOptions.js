@@ -3,25 +3,19 @@ import { useState, useEffect } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import queryString from 'query-string';
 
-import CustomButton from '../../layout/button/CustomButton';
 import CustomDropdown from '../../layout/CustomDropdown';
 import SwitchCheckBox from '../inputs/SwitchCheckBox';
-import { initState_search } from "../../constants/initStates";
 import options from "../../constants/options"
-import "./style.css"
-import SectionWrapper from '../../layout/SectionWrapper';
 import BoxWrapper from '../../layout/BoxWrapper';
+import FilterParams from './FilterParams';
+import { initState_search } from "../../constants/initStates";
+import "./style.css"
 
 const FilterByOptions = () => {
     const { push } = useHistory();
     const { search } = useLocation();
     const searchParam = new URLSearchParams(search);
     const [defaultFilters, setDefaultFilters] = useState(initState_search);
-    const [selectedParam, setSelectedParam] = useState({});
-
-    useEffect(() => {
-        if (search) setSelectedParam(queryString.parse(search))
-    }, [search])
 
     const handleSelect = ({ target }) => {
         const { name, value } = target;
@@ -37,26 +31,27 @@ const FilterByOptions = () => {
         push({ search: searchParam.toString() })
     }
 
-    const deleteOptionParam = async ({ target }) => {
+    const deleteMultiParam = async ({ target }) => {
         const { name, value } = target;
-        const newState = { ...selectedParam, [name]: selectedParam[name].filter(p => p !== value) }
-        setSelectedParam(newState)
         setDefaultFilters({ ...defaultFilters, [name]: [...defaultFilters[name], value] })
-        push({ search: queryString.stringify(newState) })
+        push({ search: queryString.stringify({ ...searchParam, [name]: searchParam.getAll(name).filter(el => el !== value) }) })
     }
 
     const deleteParam = ({ target }) => {
         const { name } = target;
-        setSelectedParam({ ...setSelectedParam, [name]: null })
         setDefaultFilters({ ...defaultFilters, [name]: initState_search[name] })
         searchParam.delete(name);
+
         push({ search: searchParam.toString() })
     }
+
+
 
     return (
         <>
             <BoxWrapper box_class="filterByOptions">
-                <CustomDropdown items={defaultFilters.styles} btn_title="styles" btn_class="fa fa-caret-down" onClick={handleSelect} />
+                {/* <CustomDropdown items={defaultFilters.style} btn_title="style" btn_class="fa fa-caret-down" onClick={handleSelect} /> */}
+                <CustomDropdown items={defaultFilters.garment} btn_title="garment" btn_class="fa fa-caret-down" onClick={handleSelect} />
                 <CustomDropdown items={defaultFilters.category} btn_title="category" btn_class="fa fa-caret-down" onClick={handleSelect} />
                 <section className="filterByOptions__price">
                     <span className="clickElem mr-2">price</span>
@@ -66,32 +61,13 @@ const FilterByOptions = () => {
                 </section>
                 <SwitchCheckBox label="worldwide" value={defaultFilters.worldwide} />
             </BoxWrapper>
-            {Object.values(selectedParam).length > 0 && <BoxWrapper box_class="filterParams">
-                {Object.keys(selectedParam).map((paramKey) => {
-                    if (!selectedParam[paramKey]) return null
-                    if (Array.isArray(selectedParam[paramKey])) return selectedParam[paramKey].map(el => paramBox(paramKey, el, deleteOptionParam))
-                    return paramBox(paramKey, selectedParam[paramKey], deleteParam)
-                })}
-            </BoxWrapper>}
+            <FilterParams selectedParam={{}} deleteMultiParam={deleteMultiParam} deleteParam={deleteParam} />
+
         </>
     )
 }
 
-function paramBox(paramKey, paramVal, onChange) {
-    return (
-        <CustomButton
-            key={Math.random() * 100}
-            btn_class="btn-icon-text filterParams__item"
-            onClick={onChange}
-            icon="fas fa-times"
-            btn_otherProps={{
-                value: paramVal,
-                name: paramKey
-            }}
-        >{paramVal}</CustomButton>
 
-    )
-}
 
 
 export default FilterByOptions;

@@ -13,7 +13,7 @@ const CustomDropdown = ({ items, btn_name, btn_class, btn_title, menu_align, men
                     variant=""
                     name={btn_name || btn_title}
                     value={item}
-                    className={`customDropdown__item`}
+                    className="customDropdown__item"
                     onClick={onClick}>{item}</Dropdown.Item>)}
             </Dropdown.Menu>
         </Dropdown >

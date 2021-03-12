@@ -12,7 +12,10 @@ const ItemSum = ({ itemId, header, highlights, coverImage, sideMenu, creator }) 
         <Card className="itemSum">
             <Card.Header>
                 <Card.Title className="itemSum__title" >
-                    <CustomButton btn_class="btn-icon-text" icon="fas fa-angle-double-right" onClick={() => push(`/view-${section || "gigs"}-item/${itemId}`)}>
+                    <CustomButton
+                        btn_class="btn-icon-text"
+                        icon="fas fa-angle-double-right"
+                        onClick={() => push(`/item/${section || "gigs"}/${itemId}`)}>
                         {header.title}
                     </CustomButton>
                 </Card.Title>
@@ -29,7 +32,9 @@ const ItemSum = ({ itemId, header, highlights, coverImage, sideMenu, creator }) 
                     </div>
                 </Container>
             </Card.Body>
-            <Card.Footer className="itemSum__footer" >{highlights.map((item, index) => <ListItem key={index} {...item} />)}</Card.Footer>
+            <Card.Footer className="itemSum__footer" >
+                {highlights.map((item, index) => <ListItem key={index} {...item} />)}
+            </Card.Footer>
         </Card>
     )
 }

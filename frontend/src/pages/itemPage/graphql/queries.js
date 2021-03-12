@@ -1,19 +1,20 @@
 
 import gql from 'graphql-tag';
 
-export const VIEW_GIGS_ITEM_QUERY = gql`
-query view_gigs_item($id: ID){
-    view_gigs_item(id: $id) {
+export const ITEM_QUERY = gql`
+query item($itemId: ID){
+    item(itemId: $itemId) {
         _id
+        group
         title
         description
         coverImage
         gallery
-        price
-        delivery
+       service
+       occasion
+       garment
         category
-        styles
-        fabrics
+        style
         keywords
         createdAt
         

@@ -8,8 +8,8 @@ import FilterResultGrid from '../../components/filter/FilterResultGrid';
 import FilterByOptions from '../../components/filter/FilterByOptions';
 
 const SearchData = () => {
+    const total = useRef(null);
     const [values, setValues] = useState([]);
-    const total = useRef();
     const { search } = useLocation();
     const { keywords } = useParams();
 

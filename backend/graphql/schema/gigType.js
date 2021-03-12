@@ -8,9 +8,27 @@ type GigResult {
     total: Int
 }
 
+type Gig {
+    _id: ID
+    title: String
+    description: String
+    category: [String]
+    style: [String]
+    garment: [String]
+    occasion: [String]
+    coverImage: String
+    gallery: [String]
+    delivery: Int
+    keywords: [String]
+    creator: AuthData
+    createdAt: String
+    updatedAt: String
+}
+
 input Filters {
     category: [String]
-    styles: [String]
+    garment: [String]
+    style: [String]
     worldwide: Boolean
     keywords: String
     min: String

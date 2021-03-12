@@ -10,6 +10,7 @@
 
 .sectionWrapper {
     width: 100%;
+    min-height: 100%;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -58,6 +59,10 @@
     content: ":";
 }
 
+.customDropdown__body {
+    background-color: var(--light-gray-color);
+}
+
 .customDropdown__btn {
     text-transform: lowercase;
     font-size: var(--sm-fonts);
@@ -65,6 +70,7 @@
     color: var(--light-gray-color);
     line-height: 1.3em;
     letter-spacing: .1em;
+    font-weight: normal;
 }
 
 .customDropdown__btn:before {
@@ -231,7 +237,11 @@
     background-position: center;
 }
 
-@media only screen and (max-width: 1200px) {}
+@media only screen and (max-width: 1600px) {
+    .pageWrapper {
+        width: 80%;
+    }
+}
 
 @media only screen and (max-width: 1024px) {
     .roundCard {

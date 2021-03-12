@@ -2,9 +2,7 @@ import React, { useState } from 'react';
 import ChatHistory from './ChatHistory'
 import FormSearch from '../../components/inputs/FormSearch'
 import SectionWrapper from '../../layout/SectionWrapper';
-import BoxWrapper from '../../layout/BoxWrapper';
 import MessageData from '../../components/message/MessageData';
-import { useToggle } from '../../custom_hooks/useToggle';
 import CustomAlert from '../../layout/CustomAlert';
 
 const ChatGrid = ({ chats, navigateChat }) => {

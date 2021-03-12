@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 
 import ProfileContext from './../../context/Profile-context';
 import CustomButton from './../../layout/button/CustomButton';
@@ -15,21 +15,30 @@ import messages from '../../constants/messages'
 
 const ProfileSection = ({ values, updateItemCache, addItemCache, deleteItemCache }) => {
     const { section } = useParams();
+    const { push } = useHistory()
     const { logged_in_user } = useContext(ProfileContext);
 
     if (section === "reviews") return <ProfileReviews values={values || []} addItemCache={addItemCache} />
+
     return (
         <>
             {logged_in_user && values && values.length > 5 ?
                 <CustomPopover content="max 6 items" trigger="click" placement="left-end" popover_class="warning">
-                    <CustomButton btn_class="btn-icon float-right" icon="fas fa-plus"></CustomButton>
+                    <CustomButton btn_class="btn-icon profileCreate-btn" icon="fas fa-plus"></CustomButton>
                 </CustomPopover>
-                : <ItemCreate addItemCache={addItemCache} mutation={section_mutation[section].CREATE} />}
+                : <CustomButton
+                    btn_class="btn-icon profileCreate-btn"
+                    icon="fas fa-plus"
+                    btn_otherProps={{
+                        title: "create"
+                    }}
+                    onClick={() => push(`/create-item/${section}`)} />}
+
             <ItemList items={values} getProps={(item, index) => {
                 return {
                     itemId: item._id,
                     header: { title: item.title },
-                    coverImage: item.coverImage || item.gallery[0],
+                    coverImage: item.coverImage,
                     highlights: highlights(item, section),
                     sideMenu: (<>
                         {logged_in_user ?
@@ -44,6 +53,7 @@ const ProfileSection = ({ values, updateItemCache, addItemCache, deleteItemCache
                     </>)
                 }
             }} />
+
         </>
     )
 }

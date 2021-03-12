@@ -15,7 +15,6 @@ const AccountData = () => {
         if (data) setValues(data.userAccount);
     }, [data]);
 
-    console.log(data)
     return (
         <>
             <BoxWrapper>

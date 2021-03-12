@@ -1,7 +1,7 @@
 export const highlights = (item, section) => {
     if (section === "gigs") return [
-        { field: "delivery", content: `${item.delivery} days` },
-        { field: "price starts at", content: `$${item.price}` }
+        { field: "category", content: item.category },
+        { field: "style", content: item.style }
     ]
     if (section === "portfolio") return [
         { field: "title", content: item.title },

@@ -9,7 +9,6 @@ const ThumbGallery = ({ items, img_class }) => {
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
     return (
         <>
-
             <Swiper
                 thumbs={{ swiper: thumbsSwiper }}
                 spaceBetween={50}
@@ -17,12 +16,14 @@ const ThumbGallery = ({ items, img_class }) => {
                 navigation
                 pagination={{ clickable: true }}
                 scrollbar={{ draggable: true }}
-                onSwiper={(swiper) => console.log(swiper)}
+                // onSwiper={(swiper) => console.log(swiper)}
                 onSlideChange={() => console.log('slide change')}
             >
-                {items.map((item, i) => <SwiperSlide key={i} className={`${img_class} swiperSlide`} style={{ backgroundImage: `url(${item})` }}> </SwiperSlide>)}
-
+                {items.map((item, i) => <SwiperSlide
+                    key={i} className={`${img_class} swiperSlide`}
+                    style={{ backgroundImage: `url(${item})` }}> </SwiperSlide>)}
             </Swiper>
+
             <Swiper
                 onSwiper={setThumbsSwiper}
                 watchSlidesVisibility
@@ -31,7 +32,9 @@ const ThumbGallery = ({ items, img_class }) => {
                 slideToClickedSlide={true}
 
             >
-                {items.map((item, i) => <SwiperSlide key={i} className={`${img_class}-thumb swiperThumb`} style={{ backgroundImage: `url(${item})` }}> </SwiperSlide>)}
+                {items.map((item, i) => <SwiperSlide key={i}
+                    className={`${img_class}-thumb swiperThumb`}
+                    style={{ backgroundImage: `url(${item})` }}> </SwiperSlide>)}
             </Swiper>
 
         </>
