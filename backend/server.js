@@ -13,8 +13,9 @@ module.exports = new ApolloServer({
         if (err.message.startsWith("userError: ")) throw new Error(err.message)
         else throw new Error(err.message)
     },
-    context: async ({ req }) => {
+    context: async ({ req, res }) => {
         return {
+            res,
             error: req.error,
             isUser: req.isAuth,
             userId: req.userId

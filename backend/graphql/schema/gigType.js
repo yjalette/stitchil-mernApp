@@ -41,11 +41,9 @@ type Bid {
     updatedAt: String
 }
 
-
 type Query { 
     view_gigs_item(id: ID): Gig
-    explore_gigs(filters: Filters, page: Int): GigResult 
-    search_gigs(filters: Filters, page: Int): GigResult               
+    explore_gigs(filters: Filters, keywords: [String], page: Int): GigResult             
 }
 
 type Mutation {

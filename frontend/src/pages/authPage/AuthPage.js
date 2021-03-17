@@ -10,8 +10,6 @@ const AuthPage = ({ history, auth_type, children }) => {
     const { left_link, right_link, title } = form_content[auth_type];
     const handleRedirect = (url) => history.push(`/auth/${url}`)
     const handleCloseModal = () => history.push(`/`)
-    // console.log(auth_type)
-    // debugger
     return (
         <CustomModal
             modal_class="auth"

@@ -1,40 +1,41 @@
 const Gig = require("../../models/gig");
 const Item = require("../../models/item");
+/**
+ * @param {Object} filters 
+ * @param {string} name
+ * @returns {Object[]}
+ */
+
+
+// function makeFiltersQuery(filters, names) {
+//     return names.reduce((res, name) => {
+//         const value = filters[name];
+//         if (value && typeof value !== "undefined") {
+//             res.push({ $in: value })
+//         }
+//         else return {}
+//     }, [])
+// }
 
 module.exports = {
     Query: {
-        explore_gigs: async (_, { filters, page }, req) => {
-            if (filters && Object.values(filters).length > 0) {
-                const items = await Item.find({
-                    $and: [
-                        { category: filters.category && filters.category.length > 0 ? { $in: filters.category } : { $exists: true } },
-                        { garment: filters.garment && filters.garment.length > 0 ? { $in: filters.garment } : { $exists: true } },
-                        // { style: filters.style && filters.style.length > 0 ? { $in: filters.style } : { $exists: true } },
-                        // { price: { $lt: Number(filters.max) || 1000, $gt: Number(filters.min) || 1 } }
-                    ]
-                })
+
+        explore_gigs: async (_, { filters, page }, { res }) => {
+            if (!filters || Object.values(filters).length < 1) {
+                const items = await Item.find()
+                    .populate({ path: "creator", select: "username country" })
+                    .sort({ createdAt: -1 })
+                    .limit(10)
+                return { items }
+            }
+            else {
+                const items = await Item.find(createFilterQuery(filters))
                     .populate({ path: "creator", select: "username country" })
                     .sort({ createdAt: -1 })
                     .limit(10)
                 return { items, total: items.length }
             }
 
-            return { items: await Item.find().populate({ path: "creator", select: "username country" }).sort({ createdAt: -1 }).limit(10) }
-        },
-        search_gigs: async (_, { filters, page }, req) => {
-            const items = await Item.find(
-                {
-                    $text: { $search: filters.keywords },
-                    $and: [
-                        { category: filters.category && filters.category.length > 0 ? { $in: filters.category } : { $exists: true } },
-                        { garment: filters.garment && filters.garment.length > 0 ? { $in: filters.garment } : { $exists: true } },
-                        // { style: filters.style && filters.style.length > 0 ? { $in: filters.style } : { $exists: true } },
-                        // { price: { $lt: Number(filters.max) || 1000, $gt: Number(filters.min) || 1 } }
-                    ]
-                },
-                { projection: { score: { $meta: "textScore" } } },
-            ).sort({ score: { $meta: "textScore" } })
-            return { items, total: items.length }
         },
         view_gigs_item: async (_, { id }, req) => {
             return await Gig.findById(id);
@@ -42,6 +43,22 @@ module.exports = {
     }
 }
 
+function createFilterQuery(filters) {
+    const query = {}
+    if (filters.keywords) query['$text'] = {
+        $search: filters.keywords
+    }
+    else {
+        query['$and'] = Object.keys(filters).map(name => {
+            const value = filters[name];
+            if (name === 'min' || name === 'max') {
+                return { 'price': { $lte: value || 1000, $gte: value || 0 } }
+            }
+            else return value && { [name]: { $in: value } }
+        })
+    }
+    return query
+}
 
 
 

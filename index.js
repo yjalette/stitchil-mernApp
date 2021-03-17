@@ -4,23 +4,19 @@ const http = require('http');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const path = require('path');
-
-require('dotenv').config();
-
+const cookieParser = require('cookie-parser')
 const apolloServer = require('./backend/server.js');
 const connect = require('./backend/connect.js')
 const isAuth = require('./backend/middleware/is-auth');
 
+require('dotenv').config();
 
-// const origin = process.env.NODE_ENV === 'production' ? "https://www.stitchil.com" : "http://localhost:3000";
-
-// console.log("origin---->", origin)
-
-app.use(bodyParser.json());
-
-app.use(cors({ credentials: true }));
+// app.use(bodyParser.json());
+const origin = process.env.NODE_ENV === 'production' ? "https://www.stitchil.com" : "http://localhost:3000";
+app.use(cors({ credentials: true, origin, exposedHeaders: ["set-cookie"] }));
 
 //middleware user auth check
+app.use(cookieParser());
 app.use(isAuth);
 apolloServer.applyMiddleware({ app, path: "/graphql", cors: false });
 
@@ -31,6 +27,7 @@ app.use((req, res, next) => {
     if (req.method === 'OPTIONS') res.sendStatus(200);
     next();
 });
+
 
 const server = http.createServer(app)
 

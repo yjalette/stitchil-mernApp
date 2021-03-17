@@ -5,8 +5,11 @@ import { setContext } from 'apollo-link-context';
 import { onError } from "apollo-link-error";
 import introspectionQueryResultData from './graphql/fragmentTypes.json';
 
+const uri = process.env.NODE_ENV === "production" ? "https://www.stitchil.com/graphql" : "http://localhost:5000/graphql"
+
 const httpLink = createUploadLink({
-    uri: process.env.NODE_ENV === "production" ? "https://www.stitchil.com/graphql" : "http://localhost:5000/graphql"
+    uri,
+    credentials: 'include'
 });
 
 const fragmentMatcher = new IntrospectionFragmentMatcher({
@@ -14,6 +17,7 @@ const fragmentMatcher = new IntrospectionFragmentMatcher({
 });
 
 const authLink = setContext((_, { headers }) => {
+    console.log(headers)
     const token = localStorage.getItem('token') ? (JSON.parse(localStorage.getItem('token')) || {}) : null;
     return {
         headers: {

@@ -4,9 +4,7 @@ import FormSearch from '../inputs/FormSearch';
 
 const FilterByKeywords = () => {
     const { push } = useHistory();
-
-    const findItems = keywords => push(`/search/${keywords.toString()}`)
-
+    const findItems = keywords => push(`/explore?keywords=${keywords.toString()}`)
     return <FormSearch handleSearch={findItems} />
 }
 

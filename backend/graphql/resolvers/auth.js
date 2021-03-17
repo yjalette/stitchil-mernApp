@@ -3,15 +3,21 @@ const { sendEmail } = require("../../helpers/nodemailer")
 const { generateJWT, comparePwd, createPwd } = require("../../helpers/creds");
 const { server_error, notUser_error, wrongPwd_error, emailTaken_error, usernameTaken_error } = require("../../consts/client_msg");
 
+
 module.exports = {
     Query: {
-        login: async (_, { email, password, googleAuth, verifiedEmail }) => {
+        login: async (_, { email, password, googleAuth, verifiedEmail }, { res }) => {
             const user = await User.findOne({ email });
             if (!user) return notUser_error;
             if (!googleAuth && !await comparePwd(password, user.password)) return wrongPwd_error;
             if (verifiedEmail) await user.updateOne({ $set: { verifiedEmail } });
             await user.updateOne({ lastSeen: new Date() });
-            return { token: generateJWT(user._id, email), username: user.username, role: user.role, googleAuth };
+            const token = generateJWT(user._id, email)
+            res.cookie("token", token, {
+                httpOnly: true,
+                // maxAge: 1000 * 60 * 60 * 24
+            })
+            return { token, username: user.username, role: user.role, googleAuth };
         },
         checkIfExists: async ({ email }, req) => {
             const user = await User.findOne({ email }).lean();

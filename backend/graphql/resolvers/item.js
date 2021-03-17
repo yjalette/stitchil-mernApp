@@ -9,7 +9,6 @@ module.exports = {
     },
     Mutation: {
         create_item: async (_, { itemInput, files, group }, { userId }) => {
-            console.log(itemInput)
             if (!userId) throw new Error("unauthenticated");
             const newItem = await new Item({
                 ...itemInput,

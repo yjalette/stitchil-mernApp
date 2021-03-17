@@ -2,17 +2,27 @@
     display: flex;
 }
 
-.filterByOptions-box, .filterParams-box {
-    width: 100%;
-}
-
 .filterByOptions-box {
+    height: 100%;
+    flex-direction: column;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 20%;
     z-index: 2000;
     justify-content: space-between;
 }
 
-.filterParams-box {
-    justify-content: center;
+.filterByOptions-box .customDropdown__body {
+    padding: var(--padding-elem);
+}
+
+.filterByOptions-box .customDropdown__item label {
+    color: inherit;
+}
+
+.filterByOptions-box .customDropdown__item input {
+    width: auto;
 }
 
 .filterByOptions__options-box .customDropdown + .customDropdown {
@@ -21,6 +31,19 @@
 
 .filterByOptions-box .customDropdown__btn {
     background-color: transparent;
+}
+
+.filterByOptions__price-min::before {
+    content: "\f062";
+}
+
+.filterByOptions__price-max::before {
+    content: "\f063";
+}
+
+.filterParams-box {
+    justify-content: center;
+    width: 100%;
 }
 
 .filterParams__item {
