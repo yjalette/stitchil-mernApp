@@ -8,12 +8,13 @@ import FormGroup from '../inputs/FormGroup';
 import FormInput from '../inputs/FormInput';
 import FormTypeahead from '../inputs/FormTypeahead';
 
-const ItemOverviewForm = ({ init, inputs, onChange, onMultiChange, onSubmit }) => {
+const ItemOverviewForm = ({ form_msg, init, inputs, onChange, onMultiChange, onSubmit }) => {
     console.log(inputs)
     return (
         <CustomForm
+            form_msg={form_msg}
             form_class="itemForm-overview"
-            submitTitle="save"
+            submitTitle={inputs._id ? "update" : "save & continue"}
             onSubmit={onSubmit}>
             {Object.keys(init).map((label, index) => {
                 let input_component;

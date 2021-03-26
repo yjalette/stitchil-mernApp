@@ -9,7 +9,6 @@ const useForm = (initState, submit) => {
     const toggleEditMode = () => setEditMode(editMode ? false : true);
 
     const handleChange = ({ target }) => {
-
         setInputs({
             ...inputs,
             [target.name]: target.value

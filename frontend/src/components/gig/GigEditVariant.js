@@ -4,10 +4,12 @@ import useForm from '../../custom_hooks/useForm'
 import { GIG_UPDATE_VARIANT_MUTATION } from './graphql/mutations'
 import GigFormVariant from './GigFormVariant'
 import CustomButton from '../../layout/button/CustomButton'
+import { useParams } from 'react-router'
 
 const initState = { fabric: [], color: [], price: 0, delivery: 0 }
 
-const GigEditVariant = ({ variant, itemId }) => {
+const GigEditVariant = ({ variant }) => {
+    const { itemId } = useParams()
     const [post] = useMutation(GIG_UPDATE_VARIANT_MUTATION);
     const { inputs, setInputs, handleChange, handleMultiChange, handleSubmit, editMode, setEditMode } = useForm(initState, onSubmit);
 
@@ -28,7 +30,7 @@ const GigEditVariant = ({ variant, itemId }) => {
     if (!editMode) return <CustomButton
         onClick={() => setEditMode(true)}
         btn_class="btn-icon"
-        icon="fas fa-pencil-alt" />
+        icon="fas fa-edit float-right" />
 
     return <GigFormVariant
         inputs={inputs}

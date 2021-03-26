@@ -14,7 +14,8 @@ import CustomButton from '../../layout/button/CustomButton'
 
 const initState = { fabric: [], color: [], price: 0, delivery: 0 }
 
-const GigAddVariant = ({ itemId }) => {
+const GigAddVariant = () => {
+    const { itemId } = useParams()
     const [post] = useMutation(GIG_CREATE_VARIANT_MUTATION);
     const { inputs, handleChange, handleMultiChange, handleSubmit, editMode, setEditMode } = useForm(initState, onSubmit);
 

@@ -18,7 +18,7 @@ const ProfileSection = ({ values, addItemCache }) => {
 
     return (
         <>
-            {logged_in_user && values && values.length > 10 ?
+            {logged_in_user && values && values.length > 20 ?
                 <CustomPopover content="max 6 items" trigger="click" placement="left-end" popover_class="warning">
                     <CustomButton btn_class="btn-icon profileCreate-btn" icon="fas fa-plus"></CustomButton>
                 </CustomPopover>
@@ -28,7 +28,7 @@ const ProfileSection = ({ values, addItemCache }) => {
                     btn_otherProps={{
                         title: "create"
                     }}
-                    onClick={() => push(`/${section}/profile-item/create/`)} />}
+                    onClick={() => push(`/profile-item/${section}/create/`)} />}
 
             <ItemList items={values} getProps={(item, index) => {
                 return {
@@ -44,7 +44,7 @@ const ProfileSection = ({ values, addItemCache }) => {
                                 btn_otherProps={{
                                     title: "edit"
                                 }}
-                                onClick={() => push(`/profile-item/${section}/update/${item._id}/`)} />
+                                onClick={() => push(`/profile-${section}-item/update/${item._id}/overview/`)} />
                             :
                             <CustomPopover content={messages.demo} trigger="click" placement="left-end" popover_class="warning">
                                 <CustomButton btn_class="btn-icon" icon="fa fa-heart" />

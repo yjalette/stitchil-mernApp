@@ -28,9 +28,9 @@ const ItemUpload = ({ action, handleResponse, otherVars, children }) => {
 
     return (
         <div className="itemUpload">
-            <span className="formLabel">upload
+            {/* <span className="formLabel">upload
                 <span className="text-muted ml-2">(max 5 uploads)</span>
-            </span>
+            </span> */}
             <div className="error">{uploadError}</div>
             <div className="itemUpload__list">
                 {children}
@@ -49,6 +49,7 @@ const ItemUpload = ({ action, handleResponse, otherVars, children }) => {
                         title="click to upload"
                         src="https://res.cloudinary.com/dgxa9gpta/image/upload/v1602093311/Icons/upload-icon_eqsr6c.svg"
                         className="itemUpload__icon" alt="icon upload" />
+                    <span className="text-muted ml-2">(max 5 uploads)</span>
                 </div>
 
             </div>

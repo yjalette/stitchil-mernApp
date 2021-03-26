@@ -3,7 +3,8 @@ import ItemFormWrapper from '../items/ItemFormWrapper'
 import ItemGalleryUpdate from '../items/ItemGalleryUpdate'
 import ItemOverviewUpdate from '../items/ItemOverviewUpdate'
 import GigData from './GigData'
-import GigDataVariants from './GigDataVariants'
+import GigPublish from './GigPublish'
+import GigVariantGrid from './GigVariantGrid'
 
 const GigDraft = () => {
     return (
@@ -19,16 +20,17 @@ const GigDraft = () => {
 
 
 function getProps(data) {
+    const { item, variants } = data;
     return {
         isDisabled: (form_name) => {
-            if (form_name !== "overview" && !data.item) return true
+            if (form_name !== "overview" && !item) return true
             else return false
         },
         forms: {
-            "overview": <ItemOverviewUpdate item={data.item} />,
-            "images": <ItemGalleryUpdate prevFiles={data.item && data.item.gallery} />,
-            "variants": <GigDataVariants />,
-            "publish": <GigDataVariants />
+            "overview": <ItemOverviewUpdate item={item} />,
+            "images": <ItemGalleryUpdate prevFiles={item && item.gallery} />,
+            "variants": <GigVariantGrid variants={variants} />,
+            "publish": item && <GigPublish overview={item} images={item.gallery} variants={variants} />
         }
     }
 }

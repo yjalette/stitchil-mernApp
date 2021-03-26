@@ -235,20 +235,25 @@
     height: 100%;
 }
 
-.itemFormWrapper-col:first-child {
-    /* width: 15em; */
+/* .itemFormWrapper-col:first-child {
     border-right: 1px solid var(--light-gray-color);
 }
 
 .itemFormWrapper__nav {
     flex-direction: column;
-}
+} */
 
 .itemFormWrapper__nav .customButton {
     /* line-height: 5em; */
     letter-spacing: .15ch;
     word-spacing: .5ch;
     margin: .5em 0;
+}
+
+.itemFormWrapper .customAlert {
+    background-color: transparent;
+    color: var(--light-green-color);
+    border: none;
 }
 
 /* .itemFormWrapper .itemGrid__body-box {

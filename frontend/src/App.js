@@ -42,14 +42,14 @@ const settingsComponents = [
 
 const profileComponents = [
   { path: "/profile/:username/:section", children: <ProfileData /> },
-  { path: "/:group/profile-item/create/", children: <ProfileNewItem /> },
+  { path: "/profile-item/:group/create/", children: <ProfileNewItem /> },
 ]
 
 const profileItemComponents = [
   // { path: "/:group/create/portfolio-item/", children: <ProductCreate /> },
   // { path: "/update/portfolio-item/:itemId/", children: <ProductUpdate /> },
-  { path: "/profile-item/gigs/update/:itemId/", children: <GigUpdate /> },
-  { path: "/profile-item/gigs/draft/:itemId/", children: <GigDraft /> },
+  { path: "/profile-gigs-item/update/:itemId/:currForm/", children: <GigUpdate /> },
+  { path: "/profile-gigs-item/draft/:itemId/:currForm/", children: <GigDraft /> },
 ]
 
 class App extends Component {

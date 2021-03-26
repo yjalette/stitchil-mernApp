@@ -1,10 +1,9 @@
 import React from 'react';
-import { Container } from 'react-bootstrap';
 import ItemToggle from '../components/items/ItemToggle';
 import './style.css'
 
 const ListItem = ({ field, icon, content, maxWords, item_class }) => (
-    <Container className={`listItem ${item_class}`}>
+    <div className={`listItem ${item_class}`}>
         {field && <span className="listItem__field">{field}</span>}
         {icon && <i className={`${icon} listItem__icon`} alt="list icon" />}
         {content ? !maxWords ?
@@ -14,7 +13,7 @@ const ListItem = ({ field, icon, content, maxWords, item_class }) => (
                 <ItemToggle>{content.slice(maxWords, content.length)}</ItemToggle>
             </span>
             : <></>}
-    </Container>
+    </div>
 )
 
 export default ListItem
