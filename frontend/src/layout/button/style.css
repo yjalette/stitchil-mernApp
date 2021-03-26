@@ -127,13 +127,17 @@
 
 .btn-text {
     background-color: transparent;
-    text-decoration: underline;
     color: var(--accent-color);
 }
 
-.btn-text:disabled {
-    color: var(--light-gray-color);
-    text-decoration: none !important;
+.btn-text:disabled, .btn-click:disabled {
+    /* color: var(--secondary-color); */
+    opacity: .6;
+}
+
+.customButton.active {
+    color: var(--light-green-color);
+    border: none;
 }
 
 .btn-form {

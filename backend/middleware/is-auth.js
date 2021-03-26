@@ -3,14 +3,11 @@ const jwt = require('jsonwebtoken');
 var cookie = require('cookie');
 
 module.exports = (req, res, next) => {
-    const authHeader = req.get('Authorization');
-    const token = cookie.parse(req.get("Cookie")).token
-    if (!authHeader) {
-        req.isAuth = false;
-        return next();
-    }
-    // const token = authHeader.split(' ')[1];
+    const cookies = req.get("Cookie");
+    const token = cookies ? cookie.parse(cookies).token : '';
+
     if (!token || token === '') {
+        console.log("here")
         req.isAuth = false;
         return next();
     }

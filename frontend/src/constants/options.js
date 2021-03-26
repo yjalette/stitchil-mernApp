@@ -13,7 +13,18 @@ export default {
     service: ["sewing", "altering", "knitting", "crocheting"],
     occasion: ["evening", "outdoor", "vacation", "work", "wedding", "everyday"],
     price: { min: Array.from(Array(10).keys(), x => x * 50), max: Array.from(Array(10).keys(), x => x * 50 + 50) },
-
+    color: ["white", "gray", "blue", "green", "red", "orange", "violet", "indigo", "yellow ", "black"],
+    pattern: [
+        "brocade",
+        "checkered",
+        "chevron",
+        "chinoiserie",
+        "chintz",
+        "damask",
+        "ditsy",
+        "polka dot"
+    ],
+    fabric: ["wool", "cotton", "denim", "silk", "linen", "leather", "polyester", "viscose", "crepe", "jersey", "chiffon"],
     country: getNames(),
     languages
 }

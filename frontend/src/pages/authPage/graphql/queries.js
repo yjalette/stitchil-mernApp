@@ -1,16 +1,14 @@
 import gql from 'graphql-tag';
 
 export const LOGIN_QUERY = gql`
-    query Login($email: String!, $password: String, $verifiedEmail: Boolean, $googleAuth: Boolean) {
-        login(email: $email, password: $password, verifiedEmail: $verifiedEmail, googleAuth: $googleAuth){
-            ... on Login {
-                token
-                role
+    query Login($email: String!, $password: String, $remember: Boolean, $verifiedEmail: Boolean, $googleAuth: Boolean) {
+        login(email: $email, password: $password, remember: $remember, verifiedEmail: $verifiedEmail, googleAuth: $googleAuth){
+            ... on AuthData {
                 username
+                role
                 googleAuth
                
             }
-
             ... on Error {
                 message 
                 code 

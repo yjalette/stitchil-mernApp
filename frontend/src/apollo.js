@@ -7,6 +7,7 @@ import introspectionQueryResultData from './graphql/fragmentTypes.json';
 
 const uri = process.env.NODE_ENV === "production" ? "https://www.stitchil.com/graphql" : "http://localhost:5000/graphql"
 
+
 const httpLink = createUploadLink({
     uri,
     credentials: 'include'
@@ -16,13 +17,14 @@ const fragmentMatcher = new IntrospectionFragmentMatcher({
     introspectionQueryResultData
 });
 
+
 const authLink = setContext((_, { headers }) => {
     console.log(headers)
     const token = localStorage.getItem('token') ? (JSON.parse(localStorage.getItem('token')) || {}) : null;
     return {
         headers: {
             ...headers,
-            authorization: token ? `Bearer ${token} ` : "",
+            authorization: "",
         }
     }
 });
@@ -39,5 +41,7 @@ export const client = new ApolloClient({
         addTypename: true
     })
 });
+
+
 
 

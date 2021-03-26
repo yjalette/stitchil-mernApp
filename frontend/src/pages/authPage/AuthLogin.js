@@ -11,17 +11,18 @@ import AuthContext from '../../context/Auth-context';
 import GoogleButton from './AuthGoogleBtn';
 import { LOGIN_QUERY } from './graphql/queries';
 import FormGroup from '../../components/inputs/FormGroup';
+import FormCheckBox from '../../components/inputs/FormCheckBox';
 
 const AuthLogin = ({ verifiedEmail }) => {
     const { setUser } = useContext(AuthContext);
     const { push } = useHistory()
-    const [getData, { data }] = useLazyQuery(LOGIN_QUERY, {
+    const [getData] = useLazyQuery(LOGIN_QUERY, {
         onCompleted: data => {
             if (data && data.login.code) setErrors({ form_error: data.login.message });
-            if (data.login.token) return onSuccess(data.login, setUser, push)
+            if (data.login.username) return onSuccess(data.login, setUser, push)
         }
     });
-    const { inputs, errors, setErrors, handleChange, handleSubmit } = useForm({ email: "", password: "" }, onSubmit);
+    const { inputs, errors, setErrors, handleChange, handleSubmit } = useForm({ email: "", password: "", remember: true }, onSubmit);
 
     const responseGoogle = (response) => {
         if (response.profileObj.email) getData({ variables: { email: response.profileObj.email, googleAuth: true } });
@@ -40,7 +41,7 @@ const AuthLogin = ({ verifiedEmail }) => {
                         label={label}
                         input_component={<FormInput
                             input_props={{
-                                type: label === "email" ? "email" : "text",
+                                type: label,
                                 name: label,
                                 onChange: handleChange,
                                 value: inputs[label],
@@ -48,10 +49,7 @@ const AuthLogin = ({ verifiedEmail }) => {
                             }}
                         />} />
                 ))}
-                {/* <Container className="text-light flex-center justify-content-start">
-                    <Form.Label>remeber me</Form.Label>
-                    <Form.Check label=" " type="radio" />
-                </Container> */}
+                <FormCheckBox label="remember" type="switch" value={inputs.remember} onChange={handleChange} />
             </CustomForm>
             {!verifiedEmail && <GoogleButton responseGoogle={responseGoogle} />}
         </>

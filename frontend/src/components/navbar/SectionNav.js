@@ -13,7 +13,7 @@ const SectionNav = ({ currSection, items }) => {
     }
 
     return (
-        <Nav fill variant="tabs" activeKey={activeComponent} className="sectionNav" onSelect={e => handleClick(e)}>
+        <Nav activeKey={activeComponent} className="sectionNav" onSelect={e => handleClick(e)}>
             {items.map(item => item && <Nav.Link key={item} eventKey={item} className="sectionNav__item">{item}</Nav.Link>)}
         </Nav>
     )

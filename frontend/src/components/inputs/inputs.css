@@ -44,7 +44,7 @@ label, .formLabel {
     border-radius: var(--border-radius);
 }
 
-.user-input-required::placeholder {
+.user-input:required::placeholder {
     color: blue;
     content: "*****";
 }

@@ -15,6 +15,19 @@ export const initState_search = {
     worldwide: true
 }
 
-export const initState_item = { title: "", description: "", service: [], category: [], garment: [], style: [], occasion: [], keywords: [] }
+export const initState_item = { title: "", service: [], category: [], garment: [], style: [], description: "", keywords: [] }
 
+
+export const initState_gig = { price: 0, delivery: 0, variants: true };
+
+
+export const initState_product = { for_sale: false, price: 0, accepting_offers: false };
+
+export const initState_item_description = { description: "", keywords: [] }
+export const initState_item_options = { title: "", service: [], category: [], garment: [], style: [] }
+
+export const initState_overview = {
+    "gigs": { title: "", service: [], category: [], garment: [], style: [], description: "", keywords: [] },
+    "portfolio": { title: "", category: [], garment: [], description: "", keywords: [] }
+}
 

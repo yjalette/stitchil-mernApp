@@ -4,16 +4,12 @@ import { useHistory, useParams } from 'react-router-dom';
 import ProfileContext from './../../context/Profile-context';
 import CustomButton from './../../layout/button/CustomButton';
 import { highlights } from './helpers';
-import { section_mutation } from "./graphql/mutations";
 import ProfileReviews from './ProfileReviews';
-import ItemCreate from '../../components/items/ItemCreate';
-import ItemDelete from '../../components/items/ItemDelete';
-import ItemUpdate from '../../components/items/ItemUpdate';
 import ItemList from '../../components/items/ItemList';
 import CustomPopover from '../../layout/CustomPopover';
 import messages from '../../constants/messages'
 
-const ProfileSection = ({ values, updateItemCache, addItemCache, deleteItemCache }) => {
+const ProfileSection = ({ values, addItemCache }) => {
     const { section } = useParams();
     const { push } = useHistory()
     const { logged_in_user } = useContext(ProfileContext);
@@ -22,7 +18,7 @@ const ProfileSection = ({ values, updateItemCache, addItemCache, deleteItemCache
 
     return (
         <>
-            {logged_in_user && values && values.length > 5 ?
+            {logged_in_user && values && values.length > 10 ?
                 <CustomPopover content="max 6 items" trigger="click" placement="left-end" popover_class="warning">
                     <CustomButton btn_class="btn-icon profileCreate-btn" icon="fas fa-plus"></CustomButton>
                 </CustomPopover>
@@ -32,7 +28,7 @@ const ProfileSection = ({ values, updateItemCache, addItemCache, deleteItemCache
                     btn_otherProps={{
                         title: "create"
                     }}
-                    onClick={() => push(`/create-item/${section}`)} />}
+                    onClick={() => push(`/${section}/profile-item/create/`)} />}
 
             <ItemList items={values} getProps={(item, index) => {
                 return {
@@ -42,10 +38,13 @@ const ProfileSection = ({ values, updateItemCache, addItemCache, deleteItemCache
                     highlights: highlights(item, section),
                     sideMenu: (<>
                         {logged_in_user ?
-                            <>
-                                <ItemUpdate item={item} index={index} updateItemCache={updateItemCache} mutation={section_mutation[section].UPDATE} />
-                                <ItemDelete itemId={item._id} deleteItemCache={deleteItemCache} mutation={section_mutation[section].DELETE} />
-                            </>
+                            <CustomButton
+                                btn_class="btn-icon profileCreate-btn"
+                                icon="fas fa-pencil-alt"
+                                btn_otherProps={{
+                                    title: "edit"
+                                }}
+                                onClick={() => push(`/profile-item/${section}/update/${item._id}/`)} />
                             :
                             <CustomPopover content={messages.demo} trigger="click" placement="left-end" popover_class="warning">
                                 <CustomButton btn_class="btn-icon" icon="fa fa-heart" />

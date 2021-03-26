@@ -1,25 +1,21 @@
 const express = require('express');
 const app = express();
 const http = require('http');
-const bodyParser = require('body-parser');
 const cors = require('cors');
 const path = require('path');
 const cookieParser = require('cookie-parser')
 const apolloServer = require('./backend/server.js');
 const connect = require('./backend/connect.js')
 const isAuth = require('./backend/middleware/is-auth');
-
+const origin = require('./backend/consts/origin');
 require('dotenv').config();
 
-// app.use(bodyParser.json());
-const origin = process.env.NODE_ENV === 'production' ? "https://www.stitchil.com" : "http://localhost:3000";
-app.use(cors({ credentials: true, origin, exposedHeaders: ["set-cookie"] }));
-
-//middleware user auth check
+// cookies headers
 app.use(cookieParser());
+app.use(cors({ credentials: true, origin, exposedHeaders: ["set-cookie"] }));
+//middleware user auth check
 app.use(isAuth);
 apolloServer.applyMiddleware({ app, path: "/graphql", cors: false });
-
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Methods', 'POST,GET,OPTIONS');
@@ -28,8 +24,7 @@ app.use((req, res, next) => {
     next();
 });
 
-
-const server = http.createServer(app)
+const server = http.createServer(app);
 
 // connect to db
 connect()
@@ -45,13 +40,6 @@ connect()
         const PORT = process.env.PORT || 5000;
         server.listen(PORT, () => console.log(`app's running on ${PORT} `));
     })
-
-
-
-
-
-
-
 
 
 

@@ -13,12 +13,16 @@ const gigSchema = new Schema({
                 type: Number,
                 required: false
             },
-            fabrics: {
+            fabric: {
                 type: Array,
                 required: false
             },
-            colors: {
+            color: {
                 type: Array,
+                required: false
+            },
+            delivery: {
+                type: Number,
                 required: false
             }
         }

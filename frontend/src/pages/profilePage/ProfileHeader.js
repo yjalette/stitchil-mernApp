@@ -1,10 +1,9 @@
 import React, { useContext } from 'react'
-import { Container, Image, OverlayTrigger, Popover } from 'react-bootstrap'
+import { Container, Image } from 'react-bootstrap'
 import ProfileImage from './ProfileImage';
 import ProfileContext from '../../context/Profile-context';
 import GroupButton from '../../layout/button/GroupButton';
 import ProfileMessage from './ProfileMessage';
-import AuthContext from '../../context/Auth-context';
 import PictureFlag from '../../components/pictures/PictureFlag';
 import CustomButton from '../../layout/button/CustomButton';
 import CustomPopover from '../../layout/CustomPopover';
@@ -14,6 +13,7 @@ const defaultImg = "https://res.cloudinary.com/dgxa9gpta/image/upload/v160210510
 
 const ProfileHeader = ({ coverImage, profileImage, fullname, country }) => {
     const { logged_in_user } = useContext(ProfileContext);
+
     if (!logged_in_user) {
         return (
             <>

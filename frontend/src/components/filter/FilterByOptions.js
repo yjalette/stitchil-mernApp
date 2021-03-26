@@ -1,11 +1,10 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { useHistory, useLocation, useParams } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import queryString from 'query-string';
 
 import CustomDropdown from '../../layout/CustomDropdown';
 import SwitchCheckBox from '../inputs/SwitchCheckBox';
-import SelectInput from '../inputs/SelectInput';
 import options from "../../constants/options"
 import BoxWrapper from '../../layout/BoxWrapper';
 import FilterParams from './FilterParams';
@@ -19,25 +18,19 @@ const FilterByOptions = () => {
     const [open, toggle] = useToggle(false);
     const { push } = useHistory();
     const { search } = useLocation();
-    const searchParam = new URLSearchParams(search);
-    const [defaultFilters, setDefaultFilters] = useState(initState_search);
     const [selected, setSelected] = useState({});
 
     useEffect(() => {
-        if (search) {
-            setSelected(queryString.parse(search))
-        }
+        if (search) setSelected(queryString.parse(search))
     }, [search])
 
     const handleSelect = ({ target }) => {
         const { name, value } = target;
         if (target.checked) {
-            setSelected(
-                {
-                    ...selected,
-                    [name]: selected[name] ? [...selected[name], value] : [value]
-                }
-            )
+            setSelected({
+                ...selected,
+                [name]: selected[name] ? [...selected[name], value] : [value]
+            })
         }
         else {
             setSelected({
@@ -49,7 +42,6 @@ const FilterByOptions = () => {
 
     const handlePrice = ({ target }) => {
         const { name, value } = target;
-        console.log(value)
         setSelected({
             ...selected,
             [name]: value
@@ -69,18 +61,18 @@ const FilterByOptions = () => {
     return (
         <>
             <BoxWrapper box_class="filterByOptions">
-                {['garment', 'style', 'category'].map(filter_name => <CustomDropdown
-                    key={filter_name}
-                    items={options[filter_name]}
-                    btn_title={filter_name}
+                {['garment', 'style', 'category'].map(k => <CustomDropdown
+                    key={k}
+                    items={options[k]}
+                    btn_title={k}
                     btn_class="fas fa-caret-down"
                     dropdown_item={(item, i) => <Form.Check
                         key={i}
                         type="checkbox"
                         label={item}
-                        name={filter_name}
+                        name={k}
                         value={item}
-                        checked={selected[filter_name] ? selected[filter_name].includes(item) : false}
+                        checked={selected[k] ? selected[k].includes(item) : false}
                         className="customDropdown__item"
                         onChange={handleSelect} />}
                 />)}

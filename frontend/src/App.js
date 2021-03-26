@@ -7,7 +7,6 @@ import MainNav from './components/navbar/MainNav';
 import ProfilePage from './pages/profilePage/ProfilePage';
 import LandingPage from './pages/homePage/Landing';
 import ExplorePage from './pages/explorePage/ExplorePage';
-import Logout from './components/navbar/Logout';
 import ChatPage from './pages/chatPage/ChatPage';
 import Footer from './components/footer/Footer';
 import SettingsPage from './pages/settingsPage/SettingsPage';
@@ -18,31 +17,40 @@ import AuthForgotPassword from './pages/authPage/AuthForgotPassword';
 import AccountData from './pages/settingsPage/settingsAccount/AccountData';
 import SecurityIndex from './pages/settingsPage/settingsSecurity/SecurityIndex';
 import NotificationIndex from './pages/settingsPage/settingsNotification/NotificationIndex';
-import ItemPage from './pages/itemPage/ItemPage';
-import ItemCreate from './components/items/ItemCreate';
+import AuthLogout from './pages/authPage/AuthLogout';
+import ProfileData from './pages/profilePage/ProfileData';
+import ProfileNewItem from './pages/profilePage/ProfileNewItem';
+import GigDraft from './components/gig/GigDraft';
+import GigUpdate from './components/gig/GigUpdate';
+import ProfileItemPage from './pages/profileItemPage/ProfileItemPage';
 
 const userObj = JSON.parse(localStorage.getItem('user'));
 
 const authComponents = [
-  { auth_type: "login", component: <AuthLogin /> },
-  { auth_type: "verify_email", component: <AuthLogin verifiedEmail={true} /> },
-  { auth_type: "join", component: <AuthJoin /> },
-  { auth_type: "forgot_password", component: <AuthForgotPassword /> },
-  { auth_type: "forgot_password/:token", component: <AuthForgotPassword /> }
+  { auth_type: "login", children: <AuthLogin /> },
+  { auth_type: "verify_email", children: <AuthLogin verifiedEmail={true} /> },
+  { auth_type: "join", children: <AuthJoin /> },
+  { auth_type: "forgot_password", children: <AuthForgotPassword /> },
+  { auth_type: "forgot_password/:token", children: <AuthForgotPassword /> }
 ]
 
 const settingsComponents = [
-  { section: "account", component: <AccountData /> },
-  { section: "security", component: <SecurityIndex /> },
-  { section: "notifications", component: <NotificationIndex /> },
+  { section: "account", children: <AccountData /> },
+  { section: "security", children: <SecurityIndex /> },
+  { section: "notifications", children: <NotificationIndex /> },
 ]
 
-const itemComponents = [
-  { path: `/item/gigs/:itemId`, children: null },
-  { path: `/item/portfolio/:itemId`, children: null },
-  { path: "/create-item/:section", children: <ItemCreate /> },
+const profileComponents = [
+  { path: "/profile/:username/:section", children: <ProfileData /> },
+  { path: "/:group/profile-item/create/", children: <ProfileNewItem /> },
 ]
 
+const profileItemComponents = [
+  // { path: "/:group/create/portfolio-item/", children: <ProductCreate /> },
+  // { path: "/update/portfolio-item/:itemId/", children: <ProductUpdate /> },
+  { path: "/profile-item/gigs/update/:itemId/", children: <GigUpdate /> },
+  { path: "/profile-item/gigs/draft/:itemId/", children: <GigDraft /> },
+]
 
 class App extends Component {
   state = { user: userObj || null };
@@ -66,41 +74,58 @@ class App extends Component {
           <AuthContext.Provider value={authValues}>
             <MainNav />
             <Route exact path="/" component={LandingPage} />
+            <Route path="/homepage/:section" component={LandingPage} />
             <Route path="/explore" component={ExplorePage} />
             <Route path="/explore/:filter" component={ExplorePage} />
-            {authComponents.map(elem => (
-              <Route key={elem.auth_type} path={`/auth/${elem.auth_type}`} component={() => (
-                <AuthPage auth_type={elem.auth_type}>
-                  {elem.component}
-                </AuthPage>
-              )}>
+            {/* <Route path="/profile/:username/:section" component={() => (
+              <ProfilePage><ProfileData /></ProfilePage>
+            )} /> */}
+            <Route exact path="/chats/" component={ChatPage} />
+            <Route path="/messages/:username" component={ChatPage} />
+            <Route path="/logout" component={AuthLogout} />
+            {authComponents.map((elem, i) => (
+              <Route
+                key={i}
+                path={`/auth/${elem.auth_type}`}
+                component={() => (
+                  <AuthPage auth_type={elem.auth_type}>
+                    {elem.children}
+                  </AuthPage>
+                )}>
               </Route>
             ))}
             <Switch>
-              {settingsComponents.map(elem => (
-                <Route key={elem.section} path={`/settings/${elem.section}`}>
-                  <SettingsPage section={elem.section}>
-                    {elem.component}
-                  </SettingsPage>
+              {settingsComponents.map((elem, i) => (
+                <Route
+                  key={i}
+                  path={`/settings/${elem.section}`}
+                  component={() => (
+                    <SettingsPage section={elem.section}>
+                      {elem.children}
+                    </SettingsPage>
+                  )}
+                >
                 </Route>
               ))}
-              {itemComponents.map((elem, i) => (
+              {profileComponents.map((elem, i) => (
                 <Route key={i} path={elem.path} component={() => (
-                  <ItemPage >{elem.children}</ItemPage>
+                  <ProfilePage>{elem.children}</ProfilePage>
                 )}>
                 </Route>
               ))}
 
-              <Route path="/homepage/:section" component={LandingPage} />
-              <Route path="/profile/:username/:section" component={ProfilePage} />
-              <Route exact path="/chats/" component={ChatPage} />
-              <Route path="/messages/:username" component={ChatPage} />
-              <Route path="/logout" component={Logout} />
+              {profileItemComponents.map((elem, i) => (
+                <Route key={i} path={elem.path} component={() => (
+                  <ProfileItemPage>{elem.children}</ProfileItemPage>
+                )}>
+                </Route>
+              ))}
+
             </Switch>
             <Footer />
           </AuthContext.Provider>
         </Router>
-      </div>
+      </div >
     );
   }
 }

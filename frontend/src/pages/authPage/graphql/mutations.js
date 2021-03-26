@@ -25,14 +25,12 @@ export const SIGNUP_MUTATION = gql`
             ... on Confirmation {
                 emailSent
             }
-            ... on AuthData {
-                token                
+            ... on AuthData { 
+                username             
                 role
-                username
                 googleAuth
                   
             }
-
             ... on Error {
                 message 
                 code 
@@ -42,3 +40,10 @@ export const SIGNUP_MUTATION = gql`
     }
         }     
 `;
+
+
+export const LOGOUT_MUTATION = gql`
+        mutation{
+            logout
+        }
+`

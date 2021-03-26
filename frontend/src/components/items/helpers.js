@@ -10,7 +10,15 @@ import { isObjEmpty } from '../../helpers/formHelper';
 
 export const transformInputs = (inputs) => {
     if (inputs.keywords && inputs.keywords.length !== 0) inputs.keywords = inputs.keywords.map(elem => elem.keywords || elem)
-    return { ...inputs, __typename: undefined, createdAt: undefined, updatedAt: undefined, likes: undefined }
+    return {
+        ...inputs,
+        __typename: undefined,
+        coverImage: undefined,
+        gallery: undefined,
+        createdAt: undefined,
+        updatedAt: undefined,
+        likes: undefined
+    }
 }
 
 export const validate = (inputs) => {
@@ -27,6 +35,7 @@ export const input_props = (label, value, onChange) => ({
     onChange,
     required: label !== "description" && label !== "keywords"
 })
+
 
 
 

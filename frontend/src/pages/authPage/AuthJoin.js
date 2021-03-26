@@ -29,7 +29,7 @@ const AuthJoin = () => {
                 name: label,
                 value: inputs[label],
                 onChange: label !== "country" ? handleChange : handleMultiChange,
-                validate: validate_form,
+                // validate: validate_form,
                 required: true
             }
         },
@@ -93,7 +93,7 @@ const AuthJoin = () => {
 
     function onCompleted(data) {
         if (data && data.createUser.code) setErrors({ form_error: data.createUser.message });
-        if (data.createUser.token) return onSuccess(data.createUser, setUser, push);
+        if (data.createUser.username) return onSuccess(data.createUser, setUser, push);
         if (data.createUser.emailSent) {
             setMsg("We have sent an email with a confirmation link. In order to complete the sign-up process, please click the confirmation link");
             setInputs(initState_join);
@@ -112,18 +112,3 @@ const AuthJoin = () => {
 
 export default React.memo(AuthJoin)
 
-
-// const form_parts = [
-//     <>
-//         <FormInput {...props("email")} />
-//         <Password {...props("password")} />
-//         <Password {...props("confirm_password")} />
-//         <GoogleButton responseGoogle={responseGoogle} />
-//     </>
-//     ,
-//     <>
-//         <FormInput {...props("fullname")} />
-//         <FormInput {...props("username")} />
-//         <FormTypeahead label="country" required={true} error={errors.country} selected={inputs.country} onChange={handleMultiChange} />
-//         <SelectInput {...props("role")} options={["designer", "buyer"]} required={true} />
-//     </>]

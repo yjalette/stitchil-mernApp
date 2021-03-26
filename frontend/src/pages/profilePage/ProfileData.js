@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { useQuery } from '@apollo/react-hooks';
 
 import './style.css';
-import ProfilePageContext from '../../context/Profile-context';
 import ProfileGrid from './ProfileGrid';
 import { PROFILE_QUERY } from './graphql/queries';
 import LoadingSpinner from '../../components/LoadingSpinner';
+import { useParams } from 'react-router';
 
-const ProfileData = ({ logged_in_user, section, username }) => {
+const ProfileData = () => {
+    const { username, section } = useParams()
+    console.log(username)
     const { data, updateQuery } = useQuery(PROFILE_QUERY, { variables: { username } });
     const [values, setValues] = useState({});
 
@@ -47,15 +49,11 @@ const ProfileData = ({ logged_in_user, section, username }) => {
 
     if (!data) return <LoadingSpinner />
 
-    console.log(values)
+    if (!values.intro) return <></>
 
     const sectionProps = { updateItemCache: handleUpdate, addItemCache: handleNewItem, deleteItemCache: handleDeleteItem };
 
-    return (
-        <ProfilePageContext.Provider value={{ logged_in_user, updateQuery }}>
-            {values.intro && <ProfileGrid resData={values} section={section} sectionProps={sectionProps} />}
-        </ProfilePageContext.Provider>
-    )
+    return <ProfileGrid resData={values} section={section} sectionProps={sectionProps} />
 
 }
 

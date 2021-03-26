@@ -1,6 +1,6 @@
 const { ApolloServer } = require("apollo-server-express");
-const resolvers = require("./graphql/resolvers/index");
-const typeDefs = require("./graphql/schema/indexType");
+const resolvers = require("./graphql/resolverIndex");
+const typeDefs = require("./graphql/schemaIndex");
 
 module.exports = new ApolloServer({
     typeDefs,
