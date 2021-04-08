@@ -31,6 +31,18 @@ const itemSchema = new Schema({
         type: Array,
         required: false
     },
+    color: {
+        type: Array,
+        required: false
+    },
+    fabric: {
+        type: Array,
+        required: false
+    },
+    price: {
+        type: Number,
+        required: false
+    },
     coverImage: {
         type: String,
         required: false

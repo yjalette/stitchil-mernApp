@@ -12,11 +12,11 @@ const MessageGrid = ({ messages, children }) => {
     return (
         <>
             <div className="messages">
-                {messages.length > 0 ? messages
+                {messages && messages.length > 0 ? messages
                     // .sort((a, b) => a.createdAt - b.createdAt)
-                    .map((msg, i) => console.log(msg.sender.username === user.username) || (
+                    .map((msg, i) => (
                         <div className="messages__msg__wrapper" key={i}>
-                            < MessageItem item={msg} comp_class={`${msg.sender.username === user.username && "messageItem-user"}`} />
+                            < MessageItem item={msg} comp_class={`${msg.sender === user.username && "messageItem-user"}`} />
                         </div>
                     ))
                     :

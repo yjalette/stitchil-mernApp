@@ -136,19 +136,20 @@
     text-align: center;
 }
 
-.customAlert__content::before {
+.customAlert .alert-heading::after {
     font-family: "Font Awesome 5 Free";
     font-weight: 900;
-    font-size: var(--md-fonts);
-    margin-right: .3rem;
+    font-size: var(--sm-fonts);
+    margin-left: .3rem;
 }
 
-.alert-danger .customAlert__content::before {
+.customAlert.alert-danger .customAlert__content::after {
     content: "\f071";
 }
 
-.alert-success .customAlert__content::before {
+.customAlert.alert-success .alert-heading::after {
     content: "\f058";
+    color: var(--green-color);
 }
 
 .customAlert.clear {

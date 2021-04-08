@@ -57,16 +57,7 @@ export const DELETE_GIGS_ITEM_MUTATION = gql`
           }
       `;
 
-export const LIKE_PortfolioItem_MUTATION = gql`
-    mutation LikePortfolioItem($docId: ID, $username: String){
-        likePortfolioItem(docId: $docId, username: $username)
-    }
-`
-// export const CREATE_MESSAGE_MUTATION = gql`
-//         mutation CreateMessage($message: String, $recipient: String){
-//             createMessage(message: $message, recipient: $recipient)
-//         }
-// `
+
 export const section_mutation = {
     gigs: {
         CREATE: gql`

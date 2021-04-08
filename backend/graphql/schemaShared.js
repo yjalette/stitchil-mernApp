@@ -18,7 +18,7 @@ type AuthData {
 
 type PortfolioItem {
     _id: ID
-    imageUrl: String
+    url: String
     coverImage: String
     gallery: [String]
     title: String
@@ -42,8 +42,8 @@ type Message {
     _id: String
     docId: String
     message: String
-    sender: AuthData
-    recipient: AuthData
+    sender: String
+    recipient: String
     createdAt: String
 }
 

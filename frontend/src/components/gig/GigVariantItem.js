@@ -1,8 +1,26 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import BoxWrapper from '../../layout/BoxWrapper'
 import ListItem from '../../layout/ListItem'
+import GigEditVariant from './GigEditVariant';
 
 const GigVariantItem = ({ variant, children }) => {
+    const [values, setValues] = useState({});
+
+    useEffect(() => {
+        if (values) setValues(variant)
+    }, [variant])
+
+    const addNewVariant = newVar => {
+        setValues([
+            ...values,
+            newVar
+        ])
+    }
+
+    const updateVariant = async variant => {
+        setValues(variant)
+    }
+
     return (
         <div className="gigVariant">
             {Object.keys(variant).map((label, i) => {
@@ -11,6 +29,7 @@ const GigVariantItem = ({ variant, children }) => {
                 return <ListItem key={i} field={label} content={variant[label]} />
             })}
             {children}
+            {/* <GigEditVariant variant={variant} updateVariant={updateVariant} /> */}
         </div>
 
     )

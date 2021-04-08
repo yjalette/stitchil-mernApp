@@ -38,10 +38,14 @@ export default {
     mutation update_item_overview($itemInput: ItemInput, $itemId: ID){
         update_item_overview(itemInput: $itemInput, itemId: $itemId) 
 }`,
+    PUBLISH: gql`
+mutation publish_item($itemId: ID){
+    publish_item(itemId: $itemId) 
+}`,
 
     DELETE: gql`
-mutation delete_Item($itemId: ID){
-    delete_item(itemId: $itemId)
+mutation delete_Item($itemId: ID, $group: String){
+    delete_item(itemId: $itemId, group: $group)
   }`,
     CREATE_GALLERY: gql`
   mutation create_item_gallery($itemId: ID, $files: [Upload]){

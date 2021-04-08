@@ -15,6 +15,7 @@ export const transformInputs = (inputs) => {
         __typename: undefined,
         coverImage: undefined,
         gallery: undefined,
+        active: undefined,
         createdAt: undefined,
         updatedAt: undefined,
         likes: undefined

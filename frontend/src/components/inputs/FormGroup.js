@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Form } from 'react-bootstrap';
 
 const FormGroup = ({ label, tooltip, required, error, input_component }) => {
@@ -11,4 +11,4 @@ const FormGroup = ({ label, tooltip, required, error, input_component }) => {
     )
 }
 
-export default FormGroup
+export default memo(FormGroup)

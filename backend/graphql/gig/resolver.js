@@ -9,7 +9,7 @@ const Item = require("../../models/item");
 module.exports = {
     Query: {
         gig: async (_, { itemId }, { userId }) => {
-            return await Gig.findOne({ item: itemId }).populate("item")
+            return await Gig.findOne({ item: itemId }).populate({ path: "item" })
         },
         explore_gigs: async (_, { filters, page }, { res }) => {
             const query = filters && Object.values(filters).length > 0 ? createFilterQuery(filters) : {}
@@ -36,7 +36,10 @@ module.exports = {
         },
         update_gig_variant: async (_, { variantInput, itemId }, { userId }) => {
             if (!userId) throw new Error("unauthenticated");
-            await Gig.findOneAndUpdate({ "variants._id": variantInput._id }, { $set: { "variants.$": variantInput } })
+            await Gig.updateOne(
+                { "variants._id": variantInput._id },
+                { $set: { "variants.$": variantInput } }
+            )
             return true
         }
     }

@@ -23,12 +23,14 @@ export const GIG_QUERY = gql`
                         coverImage
                         gallery
                         garment
+                        active
                         group
                         category
                         occasion
                         keywords
                     }
                     variants {
+                        _id
                         color
                         fabric
                         price

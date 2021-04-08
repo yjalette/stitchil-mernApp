@@ -1,11 +1,9 @@
 import React from 'react'
-import { useParams } from 'react-router'
-
 import ItemFormUpload from '../items/ItemFormUpload'
 import ItemFormWrapper from '../items/ItemFormWrapper'
 import ItemOverviewCreate from '../items/ItemOverviewCreate'
 
-const ProductCreate = () => {
+const ProductDraft = () => {
     return (
         <ItemFormWrapper form_steps={
             {
@@ -16,4 +14,4 @@ const ProductCreate = () => {
     )
 }
 
-export default ProductCreate
+export default ProductDraft

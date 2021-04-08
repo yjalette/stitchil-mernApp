@@ -9,12 +9,7 @@ const ChatGrid = ({ chats, navigateChat }) => {
     const [notFound, setNotFound] = useState(false);
 
     const handleFindChat = chatMember => {
-        const isChat = chats.find(chat => chat.members.find(member => member.username === chatMember))
-        if (isChat) return navigateChat(chatMember);
-        else {
-            setNotFound(true)
-            setTimeout(() => setNotFound(false), 5000)
-        }
+        return navigateChat(chatMember);
     }
     return (
         <>

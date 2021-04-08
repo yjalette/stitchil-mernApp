@@ -9,8 +9,8 @@ const cloud_config = cloudinary.config({
 });
 
 
-async function deleteSingleFile(imageUrl) {
-    const file = await File.findOne({ imageUrl });
+async function deleteSingleFile(url) {
+    const file = await File.findOne({ url });
     await cloudinary.v2.uploader.destroy(file.public_id, async (error) => error ? new Error("deleting file error", error) : await file.deleteOne())
 }
 
@@ -39,7 +39,7 @@ async function uploadToCloud({ file, public_id }) {
 async function saveFile(item, file, docId) {
     const result = await uploadToCloud({ file, public_id: `${docId}/${item._id}` });
     try {
-        item.imageUrl = result.url;
+        item.url = result.url;
         item.save();
     } catch (error) {
         throw new Error(error)
@@ -48,12 +48,14 @@ async function saveFile(item, file, docId) {
     return true;
 }
 
-async function singleUpload(file, docId) {
+async function singleUpload(file, docId, creator) {
     try {
-        const upload = await uploadToCloud({ file, public_id: `${docId}/${Math.floor(Math.random() * 100) + 1}` })
+        const upload = await uploadToCloud({ file, public_id: `${creator}/${Math.floor(Math.random() * 100) + 1}` })
         await new File({
+            docId,
+            creator,
             public_id: upload.public_id,
-            imageUrl: upload.url,
+            url: upload.url,
             createdAt: new Date()
         }).save();
         return upload.url
@@ -64,7 +66,7 @@ async function singleUpload(file, docId) {
 }
 
 async function multiUpload(files, userId) {
-    return Promise.all(await files.map(async file => await singleUpload(file, userId)));
+    return Promise.all(await files.map(async file => await singleUpload(file, docId, userId)));
 
 }
 exports.multiUpload = multiUpload;

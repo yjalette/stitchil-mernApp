@@ -23,6 +23,7 @@ import ProfileNewItem from './pages/profilePage/ProfileNewItem';
 import GigDraft from './components/gig/GigDraft';
 import GigUpdate from './components/gig/GigUpdate';
 import ProfileItemPage from './pages/profileItemPage/ProfileItemPage';
+import GigData from './components/gig/GigData';
 
 const userObj = JSON.parse(localStorage.getItem('user'));
 
@@ -48,8 +49,8 @@ const profileComponents = [
 const profileItemComponents = [
   // { path: "/:group/create/portfolio-item/", children: <ProductCreate /> },
   // { path: "/update/portfolio-item/:itemId/", children: <ProductUpdate /> },
-  { path: "/profile-gigs-item/update/:itemId/:currForm/", children: <GigUpdate /> },
-  { path: "/profile-gigs-item/draft/:itemId/:currForm/", children: <GigDraft /> },
+  // { path: "/profile-gigs-item/update/:itemId/:currForm/", children: <GigData compReceiver={(props) => <GigUpdate />} /> },
+  { path: "/profile-item/gig/draft/:itemId/:currForm/", children: <GigDraft /> },
 ]
 
 class App extends Component {

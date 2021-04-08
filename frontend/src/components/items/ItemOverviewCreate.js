@@ -7,9 +7,12 @@ import mutations from './graphql/mutations';
 import { transformInputs } from './helpers'
 import ItemOverviewForm from './ItemOverviewForm';
 import CustomButton from '../../layout/button/CustomButton';
+import CustomModal from '../../layout/CustomModal';
+import { item_group } from './constants'
 
 const ItemOverviewCreate = () => {
-    const { group } = useParams()
+    const { section } = useParams()
+    const group = item_group[section];
     const { push } = useHistory()
     const {
         inputs,
@@ -24,15 +27,14 @@ const ItemOverviewCreate = () => {
     } = useForm(initState_overview[group], onSubmit);
 
     const [post] = useMutation(mutations["CREATE"], {
-        onCompleted: async data => {
-            setMsg(<>
-                Success!
-                <CustomButton
-                    btn_class="btn-text ml-2"
-                    onClick={() => push(`/profile-${group}-item/draft/${data.create_item_overview}/images/`)}>
-                    Next Step: Images
-                </CustomButton>
-            </>)
+        onCompleted: data => {
+            if (data.create_item_overview) {
+                const itemId = data.create_item_overview
+                setMsg("Success!");
+                setTimeout(() => {
+                    push(`/profile-item/${group}/draft/${itemId}/images/`)
+                }, 3000)
+            }
         }
     });
 
@@ -49,7 +51,14 @@ const ItemOverviewCreate = () => {
     }
 
     return (
-        <>
+        <CustomModal
+            modal_title="create a new item"
+            modal_size="md"
+            btn_class="btn-icon fas fa-plus profileCreate-btn"
+            btn_otherProps={{
+                title: "create"
+            }}
+        >
             <ItemOverviewForm
                 form_msg={msg}
                 init={initState_overview[group]}
@@ -58,7 +67,7 @@ const ItemOverviewCreate = () => {
                 onMultiChange={handleMultiChange}
                 onSubmit={handleSubmit}
             />
-        </>
+        </CustomModal>
     )
 }
 

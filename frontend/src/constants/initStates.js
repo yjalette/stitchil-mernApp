@@ -27,7 +27,7 @@ export const initState_item_description = { description: "", keywords: [] }
 export const initState_item_options = { title: "", service: [], category: [], garment: [], style: [] }
 
 export const initState_overview = {
-    "gigs": { title: "", service: [], category: [], garment: [], style: [], description: "", keywords: [] },
-    "portfolio": { title: "", category: [], garment: [], description: "", keywords: [] }
+    "gig": { title: "", service: [], category: [], garment: [], style: [], description: "", keywords: [] },
+    "product": { title: "", category: [], garment: [], description: "", keywords: [] }
 }
 

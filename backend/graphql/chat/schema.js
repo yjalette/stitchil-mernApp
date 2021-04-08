@@ -4,9 +4,12 @@ const { gql } = require("apollo-server-express");
 module.exports = gql`
 
 type Chat {
-    _id: ID
-    members: [Member]
-    messages: [Message]
+    _id: String
+    chatId: String
+    lastMessage: String
+    member: String
+    updatedAt: String
+    chatImg: String
 }
 
 type Member {

@@ -82,6 +82,7 @@ export const PROFILE_QUERY = gql`
              }
                 portfolio {
                     _id
+                    group
                     title
                     description
                     coverImage
@@ -92,11 +93,13 @@ export const PROFILE_QUERY = gql`
                     occasion
                     keywords
                     updatedAt
+                    active
                 }  
 
                 gigs {
                     _id
                     title
+                    group
                     description
                     style
                     coverImage
@@ -105,6 +108,7 @@ export const PROFILE_QUERY = gql`
                     category
                     occasion
                     keywords
+                    active
                     updatedAt
                 }
 

@@ -250,31 +250,26 @@
     margin: .5em 0;
 }
 
-.itemFormWrapper .customAlert {
+.itemFormWrapper .customAlert:not(.alert-danger) {
     background-color: transparent;
     color: var(--light-green-color);
     border: none;
 }
 
-/* .itemFormWrapper .itemGrid__body-box {
-    display: flex;
-    flex-direction: column;
-} */
-
-/* .itemGrid__nav .customButton::first-letter {
-    border: 1px solid currentColor;
-    padding: 1ch;
-} */
+.itemFormWrapper a[value="delete"] {
+    color: var(--red-color);
+}
 
 .itemForm-overview .field-wrapper:not(.group-title, .group-description, .group-keywords) {
     display: inline-block;
     width: 50%;
 }
 
-/* .itemFormWrapper .boxWrapper > * {
-    width: 100%;
-    height: 100%;
-} */
+.itemForm-delete .btn-form {
+    background-color: var(--red-color);
+    box-shadow: var(--box-shadow-red);
+    margin: auto;
+}
 
 @media (max-width: 1679px) {}
 

@@ -1,8 +1,12 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const fileSchema = new Schema({
+const gallerySchema = new Schema({
     public_id: {
+        type: String,
+        required: false
+    },
+    docId: {
         type: String,
         required: false
     },
@@ -10,24 +14,15 @@ const fileSchema = new Schema({
         type: String,
         required: false
     },
-    cover: {
+    coverImage: {
         type: Boolean,
-        required: false
-    },
-    creator: {
-        type: Schema.Types.ObjectId,
-        ref: 'User'
-    },
-    docId: {
-        type: String,
         required: false
     },
     createdAt: {
         type: Date,
         required: false
     }
-}
-)
+})
 
 
-module.exports = mongoose.model('File', fileSchema)
+module.exports = mongoose.model('File', gallerySchema)

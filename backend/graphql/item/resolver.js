@@ -6,6 +6,7 @@ const { deleteFiles, multiUpload } = require("../../helpers/uploadToCloud");
 module.exports = {
     Query: {
         item: async (_, { itemId }, req) => {
+
             return await Item.findById(itemId)
         }
     },
@@ -33,10 +34,9 @@ module.exports = {
             }
         },
         create_item_gallery: async (_, { files, itemId }, { userId }) => {
-            console.log(files)
             if (!userId) throw new Error("unauthenticated");
             const item = await Item.findById(itemId)
-            item.gallery = item.gallery.concat(await multiUpload(files, userId))
+            item.gallery = item.gallery.concat(await multiUpload(files, item._id, userId))
             await item.save();
             return true
         },
@@ -45,35 +45,38 @@ module.exports = {
             const item = await Item.findById(itemId)
             if (coverImage) item.coverImage = coverImage
             if (gallery) {
-                await deleteFiles(item.gallery.filter(elem => !gallery.includes(elem)))
+                await deleteFiles(item.gallery
+                    .filter(elem => !gallery.includes(elem)))
                 item.gallery = gallery
             }
             if (files) {
-                item.gallery = item.gallery.concat(await multiUpload(files, userId))
+                item.gallery = item.gallery
+                    .concat(await multiUpload(files, itemId, userId))
             }
             await item.save();
-            return true
+            return item.gallery
         },
         update_item: async (_, { itemInput }, { userId }) => {
             if (!userId) throw new Error("unauthenticated");
-            return await Item.findByIdAndUpdate(itemInput._id, { $set: { ...itemInput, updatedAt: new Date() } });
+            return await Item.findByIdAndUpdate(itemInput._id, {
+                $set: { ...itemInput, updatedAt: new Date() }
+            });
         },
-        // update_item: async (_, { itemInput, files }, { userId }) => {
-        //     if (!userId) throw new Error("unauthenticated");
-        //     const item = await Item.findById(itemInput._id);
-        //     if (itemInput.gallery.length < item.gallery.length) await deleteFiles(item.gallery.filter(elem => !itemInput.gallery.includes(elem)))
-        //     if (files) item.gallery = item.gallery.concat(await multiUpload(files, userId))
-        //     else await item.updateOne({ $set: { ...itemInput, updatedAt: new Date() } });
-        //     await item.save();
-        //     return true;
-        // },
+        publish_item: async (_, { itemId }, { userId }) => {
+            if (!userId) throw new Error("unauthenticated");
+            await Item.findByIdAndUpdate(itemId, { active: true })
+            return true
+        },
         delete_item: async (_, { itemId }, { userId }) => {
             if (!userId) throw new Error("unauthenticated");
+            const item = await Item.findById(itemId);
             try {
-                const item = await Item.findById(itemId);
+                if (item.group === "gigs") await Gig.deleteOne({ item: itemId })
+                else if (item.group === "portfolio") await Product.deleteOne({ item: itemId })
                 await deleteFiles(item.gallery);
                 await item.deleteOne();
                 return true;
+
             } catch (error) {
                 throw new Error(error)
             }
@@ -89,6 +92,6 @@ async function createDoc(itemId, group) {
         createdAt: new Date(),
         updatedAt: new Date()
     }
-    if (group === "gigs") return await new Gig(newDoc).save()
-    if (group === "portfolio") return await new Product(newDoc).save()
+    if (group === "gig") return await new Gig(newDoc).save()
+    if (group === "product") return await new Product(newDoc).save()
 }

@@ -15,5 +15,5 @@ const FormInput = ({ input_props }) => {
     )
 }
 
-export default FormInput;
+export default React.memo(FormInput);
 

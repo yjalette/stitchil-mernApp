@@ -14,12 +14,12 @@ import CustomButton from '../../layout/button/CustomButton'
 
 const initState = { fabric: [], color: [], price: 0, delivery: 0 }
 
-const GigAddVariant = () => {
+const GigAddVariant = ({ addVariantCache, addNewVariant }) => {
     const { itemId } = useParams()
     const [post] = useMutation(GIG_CREATE_VARIANT_MUTATION);
     const { inputs, handleChange, handleMultiChange, handleSubmit, editMode, setEditMode } = useForm(initState, onSubmit);
 
-    function onSubmit() {
+    async function onSubmit() {
         if (inputs.price) inputs.price = parseInt(inputs.price)
         if (inputs.delivery) inputs.delivery = parseInt(inputs.delivery)
         post({
@@ -28,6 +28,7 @@ const GigAddVariant = () => {
                 itemId
             }
         })
+        await addNewVariant(inputs)
         setEditMode(false)
     }
     if (!editMode) return <CustomButton

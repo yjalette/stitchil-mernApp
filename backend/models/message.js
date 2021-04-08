@@ -18,10 +18,6 @@ const messageSchema = new Schema({
         type: String,
         required: false
     },
-    rating: {
-        type: Number,
-        required: false
-    },
     seen: {
         type: Boolean,
         required: false

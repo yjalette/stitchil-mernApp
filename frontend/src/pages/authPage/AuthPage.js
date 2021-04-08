@@ -8,8 +8,9 @@ import CustomModal from '../../layout/CustomModal';
 
 const AuthPage = ({ history, auth_type, children }) => {
     const { left_link, right_link, title } = form_content[auth_type];
+
     const handleRedirect = (url) => history.push(`/auth/${url}`)
-    const handleCloseModal = () => history.push(`/`)
+    const onModalClose = () => history.push(`/`)
     return (
         <CustomModal
             modal_class="auth"
@@ -32,7 +33,7 @@ const AuthPage = ({ history, auth_type, children }) => {
                 </>
             )}
             displayWithoutBtn
-            onClose={handleCloseModal}
+            onClose={onModalClose}
         >
             {children}
         </CustomModal>

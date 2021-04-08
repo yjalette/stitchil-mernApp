@@ -26,7 +26,7 @@ module.exports = {
                 const user = new User({
                     ...userInput,
                     password: !userInput.googleAuth ? await createPwd(userInput.password) : null,
-                    verifiedEmail: userInput.googleAuth ? true : false,
+                    // verifiedEmail: userInput.googleAuth ? true : false,
                     createdAt: new Date()
                 }).save();
 
@@ -35,16 +35,14 @@ module.exports = {
                     return authorizeUser(res, token, null, { username, role, googleAuth });
                 }
 
-                const emailSent = await sendEmail({
+                return await sendEmail({
                     subject: "Welcome To Stitchil!",
                     template: 'registration',
                     context: {
                         name: userInput.fullname,
                         link: 'http://localhost:3000/auth/verify_email'
                     }
-                });
-
-                return emailSent;
+                });;
 
             } catch (error) {
                 throw new ("errr->", error)

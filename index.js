@@ -8,6 +8,8 @@ const apolloServer = require('./backend/server.js');
 const connect = require('./backend/connect.js')
 const isAuth = require('./backend/middleware/is-auth');
 const origin = require('./backend/consts/origin');
+const { execute, subscribe, schema } = require('graphql');
+const { SubscriptionServer } = require('subscriptions-transport-ws');
 require('dotenv').config();
 
 // cookies headers
@@ -16,6 +18,7 @@ app.use(cors({ credentials: true, origin, exposedHeaders: ["set-cookie"] }));
 //middleware user auth check
 app.use(isAuth);
 apolloServer.applyMiddleware({ app, path: "/graphql", cors: false });
+
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Methods', 'POST,GET,OPTIONS');
@@ -38,7 +41,18 @@ connect()
             })
         }
         const PORT = process.env.PORT || 5000;
-        server.listen(PORT, () => console.log(`app's running on ${PORT} `));
+        server.listen(PORT, () => {
+            console.log(`app's running on ${PORT} `)
+            new SubscriptionServer({
+                execute,
+                subscribe,
+                schema
+            }, {
+                server: server,
+                path: '/subscriptions',
+            });
+        }
+        );
     })
 
 

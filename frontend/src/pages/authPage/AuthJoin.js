@@ -20,7 +20,16 @@ import FormGroup from '../../components/inputs/FormGroup';
 const AuthJoin = () => {
     const { push } = useHistory()
     const { setUser } = useContext(AuthContext);
-    const { inputs, setInputs, handleChange, handleMultiChange, handleSubmit, errors, setErrors, setMsg, msg } = useForm(initState_join, onSubmit);
+    const {
+        inputs,
+        setInputs,
+        handleChange,
+        handleMultiChange,
+        handleSubmit,
+        errors,
+        setErrors,
+        setMsg,
+        msg } = useForm(initState_join, onSubmit);
     const [post] = useMutation(SIGNUP_MUTATION, { onCompleted });
 
     const props = useCallback(
@@ -29,7 +38,6 @@ const AuthJoin = () => {
                 name: label,
                 value: inputs[label],
                 onChange: label !== "country" ? handleChange : handleMultiChange,
-                // validate: validate_form,
                 required: true
             }
         },
@@ -37,15 +45,47 @@ const AuthJoin = () => {
     )
 
     const form_inputs = [
-        { label: "email", input_component: <FormInput input_props={{ ...props("email"), type: "email" }} /> },
-        { label: "fullname", input_component: <FormInput input_props={{ ...props("fullname") }} /> },
-        { label: "username", input_component: <FormInput input_props={{ ...props("username") }} /> },
-        { label: "country", input_component: <FormTypeahead {...props("country")} /> },
-        { label: "role", input_component: <SelectInput input_props={{ ...props("role") }} options={["designer", "buyer"]} /> },
+        {
+            label: "email",
+            input_component: <FormInput
+                input_props={{
+                    ...props("email"),
+                    onBlur: () => validate_form("email", inputs.email),
+                    type: "email"
+                }} />
+        },
+        {
+            label: "fullname",
+            input_component: <FormInput
+                input_props={{
+                    ...props("fullname")
+                }} />
+        },
+        {
+            label: "username",
+            input_component: <FormInput
+                input_props={{
+                    ...props("username"),
+                    onBlur: () => validate_form("username", inputs.username)
+                }} />
+        },
+        {
+            label: "country",
+            input_component: <FormTypeahead {
+                ...props("country")
+            }
+            />
+        },
+        {
+            label: "role",
+            input_component: <SelectInput
+                input_props={{ ...props("role") }}
+                options={["designer", "buyer"]} />
+        },
     ].map((input) => <FormGroup
         key={input.label}
         label={input.label}
-        errors={errors[input.label]}
+        error={errors[input.label]}
         input_component={input.input_component}
     />)
 
@@ -73,13 +113,19 @@ const AuthJoin = () => {
         }
     }
 
-    function validate_form(obj) {
-        const error_input = validate(obj);
+    function validate_form(name, value) {
+        const error_input = validate(name, value);
         if (error_input) setErrors({ ...errors, ...error_input });
-        else if (!error_input) setErrors({});
+        else if (!error_input) {
+            const newErrors = { ...errors };
+            delete newErrors[name]
+            setErrors(newErrors)
+        };
     }
+    console.log(errors)
 
     function onSubmit() {
+        console.log(errors)
         if (Object.keys(errors).length === 0) {
             post({
                 variables: {
@@ -88,8 +134,6 @@ const AuthJoin = () => {
             })
         }
     }
-
-    console.log(inputs.role)
 
     function onCompleted(data) {
         if (data && data.createUser.code) setErrors({ form_error: data.createUser.message });
@@ -102,7 +146,11 @@ const AuthJoin = () => {
 
     return (
         <>
-            <CustomForm form_class="authJoin" form_error={errors.form_error} form_msg={msg} onSubmit={handleSubmit}>
+            <CustomForm
+                form_class="authJoin"
+                form_error={errors.form_error}
+                form_msg={msg}
+                onSubmit={handleSubmit}>
                 {!inputs.googleAuth ? activeSlide : slides[1]}
             </CustomForm>
             {!inputs.googleAuth && buttons}

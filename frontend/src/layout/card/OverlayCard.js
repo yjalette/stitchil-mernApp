@@ -10,7 +10,7 @@ const OverlayCard = ({ card_props, onClick }) => console.log(card_props) || (
             </button>
             {card_props.header}
         </Card.Header>
-        {card_props.imageUrl && <Card.Img src={card_props.imageUrl} className="overlayCard__img" alt="card image" />}
+        {card_props.url && <Card.Img src={card_props.url} className="overlayCard__img" alt="card image" />}
         {/* <Card.ImgOverlay className="overlayCard__container">
          
         </Card.ImgOverlay> */}

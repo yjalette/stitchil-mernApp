@@ -7,9 +7,7 @@ import mutations from './graphql/mutations';
 import { transformInputs } from './helpers'
 import ItemOverviewForm from './ItemOverviewForm';
 
-
-
-const ItemOverviewUpdate = ({ item }) => {
+const ItemOverviewUpdate = ({ item, updateQuery }) => {
     const init = item && item.group ? initState_overview[item.group] : {}
     const {
         inputs,
@@ -22,7 +20,16 @@ const ItemOverviewUpdate = ({ item }) => {
 
     const [post] = useMutation(mutations["UPDATE"], {
         onCompleted: async data => {
-            console.log(data)
+            // console.log(client)
+            updateQuery((prev, res) => {
+                return {
+                    ...prev,
+                    gig: {
+                        ...prev.gig,
+                        item: inputs
+                    }
+                }
+            })
         }
     });
 
@@ -40,8 +47,6 @@ const ItemOverviewUpdate = ({ item }) => {
             variables: { itemInput: transformInputs(inputs), itemId: item._id }
         });
     }
-
-    console.log(inputs)
 
     return (
         <>

@@ -22,7 +22,7 @@ const ProfileReviews = ({ values, addItemCache }) => {
         }
     }, [user]);
 
-    const handleReview = async review => {
+    const onMessageSent = async review => {
         await addItemCache(review);
         toggle();
     }
@@ -38,7 +38,7 @@ const ProfileReviews = ({ values, addItemCache }) => {
             </div>
             {open && <ReviewCreate
                 mutation={CREATE_REVIEW_MUTATION}
-                onMessageSent={handleReview}
+                onMessageSent={onMessageSent}
                 otherVariables={{ recipient: username, rating }}>
                 <section className="reviewCreate__header">
                     <UserAvatar profileImage={user.profileImage} username={user.username} />

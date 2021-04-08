@@ -16,6 +16,10 @@
     text-shadow: var(--text-shadow);
 }
 
+.btn-click.red {
+    color: var(--red-color);
+}
+
 .btn-click:hover {
     animation: clickButtonAnim 2s ease-in-out;
 }
@@ -188,21 +192,21 @@
     opacity: 1;
 }
 
-.btn-form-cancel {
+.btn-form.cancel {
     margin-right: .8rem;
     background-color: var(--red-color);
     box-shadow: var(--box-shadow-red);
     text-shadow: var(--text-shadow-red);
 }
 
-.btn-form-cancel::after {
+.btn-form.cancel::after {
     content: "\f00d";
     width: 100%;
     font-family: "Font Awesome 5 Free";
     font-weight: 900;
 }
 
-.btn-form-cancel:hover {
+.btn-form.cancel:hover {
     background-color: var(--red-color);
     box-shadow: var(--box-shadow-red);
 }

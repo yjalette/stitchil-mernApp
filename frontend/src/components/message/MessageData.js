@@ -13,12 +13,12 @@ import SectionWrapper from '../../layout/SectionWrapper';
 
 const MessageData = () => {
     const { user } = useContext(AuthContext)
-    const { username } = useParams()
+    const { username, chatId } = useParams()
     const [getData, { data, updateQuery }] = useLazyQuery(MESSAGES_QUERY);
     const [values, setValues] = useState([])
 
     useEffect(() => {
-        if (username && getData) getData({ variables: { username } })
+        if (username && getData) getData({ variables: { member: username, chatId } })
     }, [username, getData]);
 
     useEffect(() => {
@@ -29,7 +29,12 @@ const MessageData = () => {
         return {
             messages: [
                 ...prev.messages,
-                { ...newMsg.createMessage, sender: { ...newMsg.createMessage.sender, username: user.username } }
+                {
+                    ...newMsg.createMessage,
+                    sender: {
+                        ...newMsg.createMessage.sender
+                    }
+                }
             ]
         }
     })

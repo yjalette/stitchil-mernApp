@@ -22,14 +22,16 @@ const ChatData = () => {
     useEffect(() => {
         if (data) {
             setChats(data.chats);
-            if (data.chats[0]) {
-                navigateChat(data.chats[0].members.find(member => member.username !== user.username).username)
-            }
+            // if (data.chats[0]) {
+            //     navigateChat(data.chats[0].members
+            //         .find(member => member.username !== user.username).username)
+            // }
         }
     }, [data])
 
 
 
+    console.log(data)
     if (loading) return <LoadingSpinner />
 
     // const handleNewMessage = (data, { docId }) => updateQuery(prev => {

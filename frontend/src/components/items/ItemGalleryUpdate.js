@@ -4,7 +4,7 @@ import { Image } from "react-bootstrap";
 import CustomButton from '../../layout/button/CustomButton';
 import ItemUpload from './ItemUpload';
 
-const ItemGalleryUpdate = ({ prevFiles, coverImage }) => {
+const ItemGalleryUpdate = ({ prevFiles, coverImage, updateQuery }) => {
     const [newCover, setNewCover] = useState("");
     const [gallery, setGallery] = useState([]);
 
@@ -17,12 +17,15 @@ const ItemGalleryUpdate = ({ prevFiles, coverImage }) => {
         setGallery(gallery.filter(img => img !== url))
     }
 
-    if (!prevFiles || prevFiles.length < 1) return <ItemUpload action="create" />
+    if (!prevFiles || prevFiles.length < 1) return <ItemUpload action="create" updateQuery={updateQuery} />
 
     return (
-        <ItemUpload action="update" otherVars={{
-            gallery
-        }}>
+        <ItemUpload
+            action="update"
+            updateQuery={updateQuery}
+            otherVars={{
+                gallery
+            }}>
             {gallery && gallery.map((item, index) => {
                 return (
                     <div key={index} className={`${item === newCover && "item-cover"} item-upload-wrapper`}>

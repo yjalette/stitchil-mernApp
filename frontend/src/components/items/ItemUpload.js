@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useMutation } from '@apollo/react-hooks';
 import { Image } from "react-bootstrap";
 import { useParams } from 'react-router';
@@ -8,15 +8,28 @@ import PictureZoom from '../pictures/PictureZoom';
 import CustomButton from '../../layout/button/CustomButton';
 import useUpload from '../../custom_hooks/useUpload';
 
-const ItemUpload = ({ action, handleResponse, otherVars, children }) => {
+const ItemUpload = ({ action, otherVars, children, updateQuery }) => {
     const { itemId } = useParams();
-    const [post] = useMutation(mutations[`${action}_gallery`.toUpperCase()], {
-        onCompleted: (data) => handleResponse && handleResponse(data)
-    });
     const { files, clearUpload, getRootProps, getInputProps, uploadError } = useUpload(3000000, 5);
+    const [post] = useMutation(mutations[`${action}_gallery`.toUpperCase()], {
+        onCompleted: async (data) => {
+            await updateQuery(prev => {
+                return {
+                    gig: {
+                        ...prev.gig,
+                        item: {
+                            ...prev.gig.item,
+                            "gallery": data.update_item_gallery
+                        }
+                    }
+                }
+            })
+        }
+
+    })
+
 
     const handleSave = () => {
-        console.log(otherVars, files)
         post({
             variables: {
                 itemId,
@@ -37,7 +50,7 @@ const ItemUpload = ({ action, handleResponse, otherVars, children }) => {
                 {files && files.map((file, index) =>
                     < div key={index} className="item-upload-wrapper">
 
-                        <PictureZoom elem_class="itemUpload__img" imageUrl={URL.createObjectURL(file)} />
+                        <PictureZoom elem_class="itemUpload__img" url={URL.createObjectURL(file)} />
                         <CustomButton
                             btn_class="fas fa-times btn-icon-text btn-red pt-1"
                             onClick={() => clearUpload(index)} />

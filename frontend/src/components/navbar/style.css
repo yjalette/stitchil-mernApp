@@ -84,7 +84,8 @@
 .sectionNav__item.active {
     color: var(--light-green-color) !important;
     pointer-events: none;
-    order: -1;
+
+    /* order: -1; */
 }
 
 .sectionNav .active:after {

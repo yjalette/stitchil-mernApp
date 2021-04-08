@@ -9,7 +9,6 @@ import FormInput from '../inputs/FormInput';
 import FormTypeahead from '../inputs/FormTypeahead';
 
 const ItemOverviewForm = ({ form_msg, init, inputs, onChange, onMultiChange, onSubmit }) => {
-    console.log(inputs)
     return (
         <CustomForm
             form_msg={form_msg}
@@ -28,7 +27,7 @@ const ItemOverviewForm = ({ form_msg, init, inputs, onChange, onMultiChange, onS
                 else if (label === "description") input_component = <FormInput
                     input_props={{
                         name: label,
-                        value: inputs[label],
+                        value: inputs[label] || "",
                         as: "textarea",
                         maxLength: 50,
                         placeholder: "max 50 char",
@@ -39,7 +38,7 @@ const ItemOverviewForm = ({ form_msg, init, inputs, onChange, onMultiChange, onS
                 else input_component = <FormInput
                     input_props={{
                         name: label,
-                        value: inputs[label],
+                        value: inputs[label] || "",
                         onChange
                     }}
                 />

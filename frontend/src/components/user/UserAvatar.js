@@ -6,7 +6,7 @@ import "./style.css";
 
 const UserAvatar = ({ profileImage, username, rating, history }) => (
     <div className="userAvatar">
-        {profileImage && <PictureThumb imageUrl={profileImage} />}
+        {profileImage && <PictureThumb url={profileImage} />}
         <span className="userAvatar__username ml-2" onClick={() => history.push(`/profile/${username}/gigs`)}>@{username}</span>
         {rating &&
             <div className="userAvatar__rank ml-2">
