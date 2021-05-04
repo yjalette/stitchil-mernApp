@@ -4,7 +4,6 @@ const chatResolver = require('./chat/resolver');
 const contactResolver = require('./contact/resolver');
 const userResolver = require('./user/resolver');
 const gigResolver = require('./gig/resolver');
-const messageResolver = require('./message/resolver');
 const commentResolver = require('./comment/resolver');
 const designerResolver = require('./designer/resolver');
 const itemResolver = require('./item/resolver');
@@ -17,7 +16,6 @@ const resolvers = {
         // ...designerResolver.Query,
         ...userResolver.Query,
         ...chatResolver.Query,
-        ...messageResolver.Query,
         ...commentResolver.Query,
         ...itemResolver.Query
     },
@@ -27,10 +25,12 @@ const resolvers = {
         ...userResolver.Mutation,
         ...contactResolver.Mutation,
         ...chatResolver.Mutation,
-        ...messageResolver.Mutation,
         ...commentResolver.Mutation,
         ...itemResolver.Mutation,
         ...gigResolver.Mutation
+    },
+    Subscription: {
+        ...chatResolver.Subscription
     },
     AuthResult,
     Response: {

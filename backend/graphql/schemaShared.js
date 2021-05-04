@@ -37,16 +37,6 @@ type Comment{
     createdAt: String
 }
 
-
-type Message {
-    _id: String
-    docId: String
-    message: String
-    sender: String
-    recipient: String
-    createdAt: String
-}
-
 type Failure {
     code: Int
     type: String

@@ -1,10 +1,12 @@
 import React from 'react'
-import MessageData from '../../components/message/MessageData';
+import { useParams } from 'react-router';
+import ChatMessageSend from '../../components/chat/ChatMessageSend';
 import { useToggle } from '../../custom_hooks/useToggle';
 import CustomButton from '../../layout/button/CustomButton';
 import CustomModal from '../../layout/CustomModal'
 
 const ProfileMessage = () => {
+    const { username } = useParams()
     const [open, toggle] = useToggle(false);
 
     if (!open) return <CustomButton
@@ -21,7 +23,7 @@ const ProfileMessage = () => {
             displayWithoutBtn={true}
             onClose={() => toggle()}
         >
-            <MessageData />
+            <ChatMessageSend member={username} />
         </CustomModal>
     )
 }

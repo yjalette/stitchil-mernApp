@@ -102,6 +102,7 @@
 
 .profileCreate-btn {
     align-self: flex-end;
+    margin: auto 0;
 }
 
 .reviewCreate__header {
@@ -148,7 +149,7 @@
     }
 
     .profileHeader {
-        height: 250px;
+        height: 220px;
     }
 
     .profileHeader__rightCol {
@@ -179,4 +180,12 @@
     }
 }
 
-@media (max-width: 576px) {}
+@media (max-width: 576px) {
+    .profile-rightComlun {
+        padding: 1rem 0;
+    }
+
+    .profile-rightComlun .boxWrapper {
+        min-height: 200px;
+    }
+}

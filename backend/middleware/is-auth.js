@@ -7,7 +7,6 @@ module.exports = (req, res, next) => {
     const token = cookies ? cookie.parse(cookies).token : '';
 
     if (!token || token === '') {
-        console.log("here")
         req.isAuth = false;
         return next();
     }

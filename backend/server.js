@@ -1,7 +1,7 @@
 const { ApolloServer } = require("apollo-server-express");
 const resolvers = require("./graphql/resolverIndex");
 const typeDefs = require("./graphql/schemaIndex");
-const { PubSub } = require('graphql-subscriptions');
+const { PubSub, withFilter } = require('graphql-subscriptions');
 const pubsub = new PubSub();
 
 module.exports = new ApolloServer({
@@ -10,24 +10,39 @@ module.exports = new ApolloServer({
     debug: true,
     introspection: true,
     playground: process.env.NODE_ENV !== "production",
-    subscriptions: {
-        path: '/subscriptions'
+    context: async ({ req, res, connection }) => {
+        if (connection) {
+            // Operation is a Subscription
+            return {
+                pubsub
+            };
+        } else {
+            return {
+                res,
+                pubsub,
+                error: req.error,
+                // isUser: req.isAuth,
+                userId: req.userId
+            }
+        }
+
     },
+    // subscriptions: {
+    //     // path: '/subscriptions',
+    //     onConnect: async (connectionParams, webSocket, context) => {
+    //         console.log('Client connected', connectionParams);
+    //     },
+    //     onDisconnect: (webSocket, context) => {
+    //         console.log('Client disconnected')
+    //     },
+    // },
     formatError: err => {
+        console.log("err!!!!---->", err)
+        // console.log("err2!!!!---->", err.extensions.exception.stacktrace)
         if (err.message.startsWith("TokenExpiredError: ")) throw new Error('token');
         if (err.message.startsWith("userError: ")) throw new Error(err.message)
         else throw new Error(err.message)
     },
-    context: async ({ req, res }) => {
-        return {
-            res,
-            pubsub,
-            error: req.error,
-            isUser: req.isAuth,
-            userId: req.userId
-        }
-
-    }
 });
 
 

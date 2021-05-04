@@ -1,10 +1,22 @@
 const Message = require("../../models/message");
 const Chat = require("../../models/chat");
+const User = require("../../models/user");
 const { getObjectId } = require("../../helpers/transform");
+const { withFilter, postController } = require('graphql-subscriptions');
+
+// const chat_messages = []
+const subscribers = [];
+const onMessagesUpdates = (fn) => subscribers.push(fn);
 
 module.exports = {
     Query: {
-        chats: async (_, { }, { userId }) => {
+        chat_messages: async (_, { chatId }, { userId }) => {
+            if (!userId) throw new Error("unauthenticated");
+            return await Message.find({ chatId })
+                .populate({ path: "sender", select: "username -_id" })
+        },
+        chat_rooms: async (_, args, { userId }) => {
+            if (!userId) throw new Error("unauthenticated");
             const chats = await Chat.aggregate([
                 {
                     $match:
@@ -17,8 +29,7 @@ module.exports = {
                 },
                 {
                     "$unwind": {
-                        "path": "$members",
-                        // "includeArrayIndex": "arrayIndex"
+                        "path": "$members"
                     }
                 },
                 {
@@ -31,10 +42,6 @@ module.exports = {
                         "localField": "messages",
                         "foreignField": "_id",
                         "as": "lastMessage",
-                        // "pipeline": [
-                        //     { $sort: { 'createdAt': 1 } },
-                        //     { $limit: 1 }
-                        // ],
                     }
                 },
                 {
@@ -79,10 +86,7 @@ module.exports = {
                         },
                         "updatedAt": {
                             "$first": "$lastMessage.createdAt"
-                        },
-                        // "chatId": {
-                        //     "first": "$member.fullname"
-                        // },
+                        }
                     }
                 },
                 {
@@ -97,123 +101,127 @@ module.exports = {
                 }
 
             ])
+            // console.log("chat rooms---->", chats)
             return chats
         },
     },
     Mutation: {
-        updateChat: async (_, { message, docId }, { userId }) => {
-            if (!userId) throw new Error("unauthenticated");
-            const newMessage = await Message({
+        send_chat_message: async (_, { message, recipient, chatId }, { userId, pubsub }) => {
+            const sender = await User.findById(userId, { _id: 0, username: 1 })
+            const newMessage = new Message({
                 message,
                 sender: userId,
                 createdAt: new Date()
-            }).save();
-            await Chat.findByIdAndUpdate(docId, { $push: { messages: newMessage._id } });
-            return newMessage
+            })
+            if (chatId) newMessage.chatId = chatId;
+            else if (!chatId && recipient) {
+                const user2 = await User.findOne({ username: recipient }, { _id: 1 });
+                const members = [userId, user2._id];
+                const chat = await Chat.findOne({ members })
+                if (chat) newMessage.chatId = chat._id;
+                else {
+                    const newChat = createChat(members);
+                    newMessage.chatId = newChat._id;
+                }
+            }
+            try {
+                await newMessage.save();
+                const result = {
+                    ...newMessage._doc,
+                    sender
+                }
+                pubsub.publish('CHAT_MESSAGES', {
+                    chat_messages: result
+                });
+                return result
+            } catch (error) {
+                throw Error(error)
+            }
+
         },
-        deleteChat: async ({ chatId, msgId }, { userId }) => {
+        delete_chat_message: async (_, { messageId }, { userId }) => {
+            if (!userId) throw new Error("unauthenticated");
+            console.log(messageId)
+            try {
+                await Message.findByIdAndDelete(messageId)
+                return true;
+            } catch (error) {
+                throw new Error(error)
+            }
+        },
+        delete_chat: async (_, { chatId }, { userId }) => {
             if (!userId) throw new Error("unauthenticated");
             try {
-                if (msgId) {
-                    const chat = await Chat.findById(chatId);
-                    const fileToUpdate = await chat.messages.id(msgId);
-                    await fileToUpdate.remove();
-                    chat.save();
-                }
-                else await Chat.findById(chatId).deleteOne();
+                await Chat.findById(chatId).deleteOne();
                 return true;
             } catch (error) {
                 throw new Error(error)
             }
 
+        },
+    },
+    Subscription: {
+        // chat_messages: {
+        //     subscribe: (_, { chatId }, { pubsub }) => console.log(chatId) && pubsub.asyncIterator(['CHAT_MESSAGES'])
+        // },
+        chat_messages: {
+            subscribe: withFilter(
+                (_, { chatId }, { pubsub }) => {
+                    console.log("tut--->", chatId)
+                    // onMessagesUpdates(() => pubsub.publish(chatId, { chat_messages: latest }));
+                    return pubsub.asyncIterator(['CHAT_MESSAGES'])
+                },
+                ({ chat_messages }, { chatId }, context) => {
+                    console.log("payt", chat_messages.chatId, "var----> ", chatId)
+                    // console.log(chat_messages.chatId === chatId)
+                    return chat_messages.chatId === chatId;
+                },
+            )
         }
-    }
+    },
 
 
 }
 
+async function createChat(members) {
+    return await new Chat({
+        members,
+        createdAt: new Date()
+    }).save();
+}
 
-// chats: async (_, { }, { userId }) => {
-//     try {
-//         // select most recent message
-//         return await Chat.find({ members: { $in: userId } })
-//             .populate({ path: 'members', select: 'username profileImage' })
-//             .populate({ path: 'messages', populate: 'sender', options: { $sort: { "messages$createdAt": 1 } } })
-//     } catch (error) {
-//         throw new Error(error)
-//     }
+
+// subscribe: withFilter(
+//     (_, { chatId }, { pubsub }) => {
+//         const latest = chat_messages.filter(msg => msg.chatId && msg.chatId === chatId)
+//         // console.log("sub chatid--->", latest, chat_messages)
+//         // const channel = Math.random().toString(36).slice(2, 15);
+//         onMessagesUpdates(() => pubsub.publish(chatId, { chat_messages: latest }));
+//         setTimeout(() => pubsub.publish(chatId, { chat_messages: latest }), 0);
+//         return pubsub.asyncIterator(chatId);
+//     },
+//     (payload, { chatId }, context) => {
+//         console.log("payt", payload, "var----> ", chatId)
+//         return true;
+//     },
+// )
+
+
+// create_chat: async (_, { message, recipient }, { userId }) => {
+//     if (!userId) throw new Error("unauthenticated");
+//     const user2 = await User.findOne({ username: recipient })
+//     const newMessage = await Message({
+//         message,
+//         sender: userId,
+//         recipient: user2._id,
+//         createdAt: new Date()
+//     }).save();
+//     await new Chat({
+//         members: [userId, user2._id],
+//         messages: newMessage._id,
+//         createdAt: new Date()
+//     }).save();
+//     return newMessage
 // },
-
-// try {
-//     const chats = await Message.aggregate([
-//         {
-//             $match: {
-//                 $or: query
-//             }
-//         },
-//         {
-//             "$group": {
-//                 "_id": "$recipient",
-//                 "sender": {
-//                     "$first": "$sender"
-//                 },
-//                 "recipient": {
-//                     "$first": "$recipient"
-//                 },
-//                 "lastMessage": {
-//                     "$first": "$message"
-//                 },
-//                 "createdAt": {
-//                     "$first": "$createdAt"
-//                 }
-//             }
-//         },
-//         {
-//             "$sort": {
-//                 "createdAt": -1
-//             }
-//         },
-//         {
-//             "$lookup": {
-//                 "from": "users",
-//                 "localField": "sender",
-//                 "foreignField": "_id",
-//                 "as": "sender"
-//             }
-//         },
-//         {
-//             "$unwind": {
-//                 "path": "$sender",
-//                 "preserveNullAndEmptyArrays": true
-//             }
-//         },
-//         {
-//             "$lookup": {
-//                 "from": "users",
-//                 "localField": "recipient",
-//                 "foreignField": "_id",
-//                 "as": "recipient"
-//             }
-//         },
-//         {
-//             "$unwind": {
-//                 "path": "$recipient",
-//                 "preserveNullAndEmptyArrays": true
-//             }
-//         },
-//         {
-//             "$project": {
-//                 "_id": 1,
-//                 "lastMessage": 1,
-//                 "createdAt": 1,
-//                 "sender.profileImage": 1,
-//                 "sender.username": 1,
-//                 "recipient.profileImage": 1,
-//                 "recipient.username": 1,
-//                 "chatImg": 1
-//             }
-//         }
-
-//     ])
 
 

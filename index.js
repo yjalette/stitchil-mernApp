@@ -8,8 +8,6 @@ const apolloServer = require('./backend/server.js');
 const connect = require('./backend/connect.js')
 const isAuth = require('./backend/middleware/is-auth');
 const origin = require('./backend/consts/origin');
-const { execute, subscribe, schema } = require('graphql');
-const { SubscriptionServer } = require('subscriptions-transport-ws');
 require('dotenv').config();
 
 // cookies headers
@@ -27,7 +25,8 @@ app.use((req, res, next) => {
     next();
 });
 
-const server = http.createServer(app);
+const ws = http.createServer(app);
+apolloServer.installSubscriptionHandlers(ws);
 
 // connect to db
 connect()
@@ -41,19 +40,14 @@ connect()
             })
         }
         const PORT = process.env.PORT || 5000;
-        server.listen(PORT, () => {
+        ws.listen(PORT, () => {
             console.log(`app's running on ${PORT} `)
-            new SubscriptionServer({
-                execute,
-                subscribe,
-                schema
-            }, {
-                server: server,
-                path: '/subscriptions',
-            });
         }
         );
+
     })
+
+
 
 
 

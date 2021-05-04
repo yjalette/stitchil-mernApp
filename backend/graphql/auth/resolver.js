@@ -14,7 +14,6 @@ module.exports = {
             await user.updateOne({ lastSeen: new Date() });
             const token = generateJWT(user._id, email)
             return authorizeUser(res, token, null, { username: user.username, role: user.role, googleAuth });
-            // return { token: generateJWT(), username: user.username, role: user.role, googleAuth };
         }
     },
     Mutation: {

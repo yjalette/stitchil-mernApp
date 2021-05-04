@@ -163,7 +163,7 @@ ul {
 }
 
 .gradient-text {
-    background: linear-gradient(300deg, var(--green-color), var(--light-green-color));
+    background: linear-gradient(200deg, var(--light-green-color), var(--green-color));
     background-clip: text;
     color: transparent;
     width: 100%;

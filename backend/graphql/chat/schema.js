@@ -4,6 +4,19 @@ const { gql } = require("apollo-server-express");
 module.exports = gql`
 
 type Chat {
+    _id: ID
+   messages: [Message]
+}
+
+type Message {
+    _id: ID
+    docId: String
+    message: String
+    sender: Member
+    createdAt: String
+}
+
+type ChatRoom {
     _id: String
     chatId: String
     lastMessage: String
@@ -17,15 +30,22 @@ type Member {
     profileImage: String
 }
 
-type Query {        
-    chats: [Chat]
+type Query {  
+    chat_messages(chatId: ID): [Message]      
+    chat_rooms: [ChatRoom]
 }
 
 type Mutation {  
-    updateChat(message: String,  docId: String): Message   
-    deleteMessage(itemId: ID): Boolean 
-    deleteChat(chatId: ID, msgId: ID): Boolean 
+    send_chat_message(message: String, recipient: String, chatId: ID): Message   
+    delete_chat(chatId: ID, msgId: ID): Boolean 
+    delete_chat_message(messageId: ID): Boolean  
 }
+
+type Subscription {
+    chat(chatId: ID): Chat
+    chat_messages(chatId: ID): Message    
+}
+
 
 `;
 

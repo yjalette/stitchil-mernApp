@@ -114,10 +114,7 @@ export const PROFILE_QUERY = gql`
 
                 reviews {
                     _id
-                    sender{
-                        profileImage
-                        username
-                    }
+                   
                     message
                     createdAt
                 }

@@ -2,6 +2,10 @@
     text-transform: lowercase;
 }
 
+.customButton.red {
+    color: var(--red-color);
+}
+
 .btn-click {
     color: var(--accent-color);
     font-size: var(--sm-fonts);
@@ -14,10 +18,6 @@
     padding: var(--padding-elem);
     animation: none;
     text-shadow: var(--text-shadow);
-}
-
-.btn-click.red {
-    color: var(--red-color);
 }
 
 .btn-click:hover {
@@ -74,6 +74,10 @@
     animation: btn-icon-anim 1s infinite alternate ease-in-out;
 }
 
+.btn-icon.active {
+    border: none;
+}
+
 @keyframes btn-icon-anim {
     25% {
         transform: rotate(90deg);
@@ -110,22 +114,13 @@
     margin-left: .5em;
 }
 
-/* .btn-icon-text.btn-icon {
-    background-color: var(--green-color);
-    justify-content: flex-start;
-}
-
-.btn-icon-text.btn-icon::before {
-    margin-left: 1.5rem;
-} */
-
-.btn-icon-red {
+.btn-icon-red, .btn-icon.red {
     background-color: var(--red-color);
     box-shadow: var(--box-shadow-red);
     text-shadow: var(--text-shadow-red);
 }
 
-.btn-icon-text.btn-red {
+.btn-icon-text.red {
     color: var(--red-color);
 }
 

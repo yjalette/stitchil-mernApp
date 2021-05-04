@@ -7,7 +7,6 @@ import MainNav from './components/navbar/MainNav';
 import ProfilePage from './pages/profilePage/ProfilePage';
 import LandingPage from './pages/homePage/Landing';
 import ExplorePage from './pages/explorePage/ExplorePage';
-import ChatPage from './pages/chatPage/ChatPage';
 import Footer from './components/footer/Footer';
 import SettingsPage from './pages/settingsPage/SettingsPage';
 import AuthPage from './pages/authPage/AuthPage';
@@ -21,9 +20,8 @@ import AuthLogout from './pages/authPage/AuthLogout';
 import ProfileData from './pages/profilePage/ProfileData';
 import ProfileNewItem from './pages/profilePage/ProfileNewItem';
 import GigDraft from './components/gig/GigDraft';
-import GigUpdate from './components/gig/GigUpdate';
 import ProfileItemPage from './pages/profileItemPage/ProfileItemPage';
-import GigData from './components/gig/GigData';
+import ChatRoomsPage from './pages/chatRoomsPage/ChatRoomsPage';
 
 const userObj = JSON.parse(localStorage.getItem('user'));
 
@@ -81,8 +79,8 @@ class App extends Component {
             {/* <Route path="/profile/:username/:section" component={() => (
               <ProfilePage><ProfileData /></ProfilePage>
             )} /> */}
-            <Route exact path="/chats/" component={ChatPage} />
-            <Route path="/messages/:username" component={ChatPage} />
+            <Route exact path="/chats/" component={ChatRoomsPage} />
+            <Route path="/messages/:username/" component={ChatRoomsPage} />
             <Route path="/logout" component={AuthLogout} />
             {authComponents.map((elem, i) => (
               <Route

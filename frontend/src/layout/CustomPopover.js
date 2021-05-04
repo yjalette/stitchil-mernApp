@@ -3,7 +3,6 @@ import { OverlayTrigger, Popover } from 'react-bootstrap';
 import "./style.css";
 
 class CustomPopover extends Component {
-
     render() {
         const { trigger, placement, title, content, children, popover_class } = this.props;
         return (

@@ -1,31 +1,39 @@
 import React from 'react';
 import { Navbar, Nav, Image } from 'react-bootstrap';
 import { useLocation, useHistory } from 'react-router-dom';
-
+import "./style.css";
 import SignOutLinks from './SignOutLinks';
 import SignInLinks from './SignInLinks';
 import AuthContext from '../../context/Auth-context';
 import FilterByKeywords from '../filter/FilterByKeywords';
-import "./style.css";
+import CustomButton from '../../layout/button/CustomButton';
+import { useToggle } from '../../custom_hooks/useToggle';
 
 const MainNav = () => {
+  const [openUserNav, toggleUserNav] = useToggle(false);
   const { pathname } = useLocation();
-  const { push } = useHistory();
-  const customClass = pathname === "/" || pathname.includes("explore") ? "main-nav-dark" : "main-nav-light"
+  const customClass = pathname === "/" || pathname.includes("explore") ? "mainNav-dark" : "mainNav-light";
+  const respMenuClass = `mainNav-user-resp-btn ${openUserNav ? "btn-icon-text fas fa-window-close" : "btn-icon hide"}`
   return (
     <AuthContext.Consumer>
-      {context => {
+      {({ user }) => {
         return (
-          <Navbar collapseOnSelect expand="sm" className={`main-nav flex-center ${customClass}`}>
-            <Nav className="main-nav__menu">
-              {/* <Navbar.Brand href="/" to="/">
-                <Image src="https://res.cloudinary.com/dgxa9gpta/image/upload/v1602104662/logo/logo_jr1las.svg" alt="logo" className="logo" />
-              </Navbar.Brand> */}
-              <Nav.Link href="/" className="main-menu__link link-home">home</Nav.Link>
-              <Nav.Link href="/explore" className="main-menu__link link-explore">explore</Nav.Link>
-              <FilterByKeywords />
+          <Navbar collapseOnSelect expand="sm" className={`mainNav ${customClass}`}>
+            {!openUserNav && <Nav className="mainNav-general">
+              <Nav.Link href="/" className="link-home">home</Nav.Link>
+              <Nav.Link href="/explore" className="link-explore">explore</Nav.Link>
+              {/* <FilterByKeywords /> */}
+            </Nav>}
+            <Nav className={`mainNav-user ${openUserNav ? "open" : "hide"}`}>
+              {user ?
+                <SignInLinks username={user.username} user={user} />
+                :
+                <SignOutLinks />}
             </Nav>
-            {context && context.user ? <SignInLinks username={context.user.username} user={context.user} /> : <SignOutLinks />}
+            <CustomButton
+              btn_class={respMenuClass}
+              onClick={() => toggleUserNav()}
+            >{!openUserNav && user.username.slice(0, 1)}</CustomButton>
           </Navbar>
         )
       }}

@@ -54,7 +54,7 @@ const ItemOverviewCreate = () => {
         <CustomModal
             modal_title="create a new item"
             modal_size="md"
-            btn_class="btn-icon fas fa-plus profileCreate-btn"
+            btn_class="btn-icon-text fas fa-plus profileCreate-btn"
             btn_otherProps={{
                 title: "create"
             }}

@@ -8,7 +8,7 @@ import ProfileReviews from './ProfileReviews';
 import ItemList from '../../components/items/ItemList';
 import CustomPopover from '../../layout/CustomPopover';
 import messages from '../../constants/messages'
-import ItemOverviewCreate from '../../components/items/ItemOverviewCreate';
+
 
 const ProfileSection = ({ values, addItemCache }) => {
     const { logged_in_user } = useContext(ProfileContext);
@@ -22,20 +22,7 @@ const ProfileSection = ({ values, addItemCache }) => {
     }
     return (
         <>
-            {logged_in_user
-                && values
-                && values.length > 20 ?
-                <CustomPopover
-                    content="max 6 items"
-                    trigger="click"
-                    placement="left-end"
-                    popover_class="warning">
-                    <CustomButton
-                        btn_class="btn-icon profileCreate-btn"
-                        icon="fas fa-plus" />
-                </CustomPopover>
-                :
-                <ItemOverviewCreate />}
+
             <ItemList items={values} getProps={(item, i) => {
                 return {
                     itemId: item._id,

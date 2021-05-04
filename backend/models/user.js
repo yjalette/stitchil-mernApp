@@ -51,14 +51,6 @@ const userSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Designer'
     },
-    gigs: [{
-        type: Schema.Types.ObjectId,
-        ref: 'Gig'
-    }],
-    portfolio: [{
-        type: Schema.Types.ObjectId,
-        ref: 'Portfolio'
-    }],
     reviews: [{
         type: Schema.Types.ObjectId,
         ref: 'Message'

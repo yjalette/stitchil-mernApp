@@ -3,7 +3,7 @@ import { InputGroup, Button } from 'react-bootstrap';
 import CustomForm from '../../layout/CustomForm';
 import FormInput from '../inputs/FormInput';
 
-const MessageForm = ({ inputs, onSubmit, onChange, children, msg_class }) => (
+const ChatMessageForm = ({ inputs, onSubmit, onChange, children, msg_class }) => (
     <>
         {children}
         <CustomForm form_class={`${msg_class} messageForm`} submitTitle="send" onSubmit={onSubmit}>
@@ -26,7 +26,7 @@ const MessageForm = ({ inputs, onSubmit, onChange, children, msg_class }) => (
     </>
 )
 
-export default MessageForm;
+export default ChatMessageForm;
 
 
 
