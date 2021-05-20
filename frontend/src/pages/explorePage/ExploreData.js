@@ -1,8 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { useLazyQuery, useQuery } from '@apollo/react-hooks';
+import { useLazyQuery } from '@apollo/react-hooks';
 import { useLocation } from 'react-router-dom';
 import queryString from 'query-string';
-
 import { EXPLORE_GIGS_QUERY } from './graphql/queries'
 import ExploreGrid from './ExploreGrid';
 
@@ -18,7 +17,11 @@ const ExploreData = () => {
 
     useEffect(() => {
         if (location && getData) {
-            getData({ variables: { filters: location.search ? queryString.parse(location.search) : {} } })
+            getData({
+                variables: {
+                    filters: location.search ? queryString.parse(location.search) : {}
+                }
+            })
         }
     }, [location])
 
@@ -29,7 +32,10 @@ const ExploreData = () => {
         }
     }, [data]);
 
-    return <ExploreGrid items={values} total={total.current} loadMoreData={refetch} />
+    return <ExploreGrid
+        items={values}
+        total={total.current}
+        loadMoreData={refetch} />
 }
 
 export default ExploreData

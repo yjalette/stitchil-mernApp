@@ -1,17 +1,38 @@
 import React from 'react'
-import ItemFormUpload from '../items/ItemFormUpload'
+import ItemDelete from '../items/ItemDelete'
 import ItemFormWrapper from '../items/ItemFormWrapper'
-import ItemOverviewCreate from '../items/ItemOverviewCreate'
+import ItemGalleryUpdate from '../items/ItemGalleryUpdate'
+import ItemOverviewUpdate from '../items/ItemOverviewUpdate'
+import ProductData from './ProductData'
 
 const ProductDraft = () => {
     return (
-        <ItemFormWrapper form_steps={
-            {
-                "overview": <ItemOverviewCreate group="portfolio" />,
-                "gallery": <ItemFormUpload action="create" />
-            }
-        } />
+        <>
+            {/* <ItemFormWrapper
+                {...getProps(props)} /> */}
+            <ProductData
+                compReceiver={props =>
+                    <ItemFormWrapper
+                        {...getProps(props)} />}
+            />
+        </>
     )
+}
+
+function getProps({ values, updateQuery }) {
+    const { item } = values;
+    return {
+        isDisabled: (form_name) => {
+            if (form_name !== "overview" && !item) return true
+            else if (["publish"].includes(form_name) && item.gallery.length < 1) return true
+            else return false
+        },
+        forms: {
+            "overview": <ItemOverviewUpdate item={item && item} updateQuery={updateQuery} />,
+            "images": <ItemGalleryUpdate prevFiles={item && item.gallery} updateQuery={updateQuery} />,
+            "delete": <ItemDelete group="gigs" />
+        }
+    }
 }
 
 export default ProductDraft

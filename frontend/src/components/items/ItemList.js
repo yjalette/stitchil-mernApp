@@ -6,8 +6,10 @@ import "./style.css"
 const ItemList = ({ items, getProps }) => {
     if (!items || items.length < 1) {
         return (
-            <CustomAlert alert_heading="0 items" alert_variant="light" alert_class="itemAlert clear">
-                <i className="fas fa-angry"></i>
+            <CustomAlert
+                alert_variant="light"
+                alert_class="itemAlert clear text-center">
+                no items yet
             </CustomAlert>
         )
     }

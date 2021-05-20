@@ -1,36 +1,35 @@
-import React, { useEffect } from 'react'
+import React, { useState } from 'react'
 import { useMutation } from '@apollo/react-hooks';
 import { useParams, useHistory } from 'react-router';
 import { initState_overview } from '../../constants/initStates';
+import { newItem } from './constants'
+import { isNotEmpty } from '../../validation/is_obj_empty';
+import { transformInputs } from './helpers'
 import useForm from '../../custom_hooks/useForm';
 import mutations from './graphql/mutations';
-import { transformInputs } from './helpers'
 import ItemOverviewForm from './ItemOverviewForm';
-import CustomButton from '../../layout/button/CustomButton';
 import CustomModal from '../../layout/CustomModal';
-import { item_group } from './constants'
+import ActionStatus from '../notification/ActionStatus';
 
 const ItemOverviewCreate = () => {
     const { section } = useParams()
-    const group = item_group[section];
+    const group = newItem[section].group;
+    const [saved, setSaved] = useState(false)
     const { push } = useHistory()
     const {
         inputs,
-        setInputs,
         handleChange,
         handleMultiChange,
         handleSubmit,
         errors,
         setErrors,
-        msg,
-        setMsg
     } = useForm(initState_overview[group], onSubmit);
 
     const [post] = useMutation(mutations["CREATE"], {
         onCompleted: data => {
             if (data.create_item_overview) {
                 const itemId = data.create_item_overview
-                setMsg("Success!");
+                setSaved(true)
                 setTimeout(() => {
                     push(`/profile-item/${group}/draft/${itemId}/images/`)
                 }, 3000)
@@ -38,31 +37,38 @@ const ItemOverviewCreate = () => {
         }
     });
 
-
     function onSubmit() {
-        // const emptyInputs = validate(inputs);
-        // if (emptyInputs.length > 0) return setErrors({
-        //     ...errors,
-        //     form_error: `${emptyInputs.join(", ")} can't be empty`
-        // })
-        post({
-            variables: { itemInput: transformInputs(inputs), group }
-        });
+        const notValid = Object.keys(inputs).find(k => !isNotEmpty(inputs[k]))
+        if (notValid) return setErrors({
+            ...errors,
+            form_error: `all fields must be filled`
+        })
+
+        else {
+            post({
+                variables: {
+                    itemInput: transformInputs(inputs),
+                    group
+                }
+            });
+            return setErrors({})
+        }
     }
 
     return (
         <CustomModal
-            modal_title="create a new item"
-            modal_size="md"
+            modal_title={`${section} - new item`}
+            modal_size={newItem[section].modal_size}
             btn_class="btn-icon-text fas fa-plus profileCreate-btn"
             btn_otherProps={{
                 title: "create"
             }}
         >
+            {saved && <ActionStatus status="success" />}
             <ItemOverviewForm
-                form_msg={msg}
                 init={initState_overview[group]}
                 inputs={inputs}
+                errors={errors}
                 onChange={handleChange}
                 onMultiChange={handleMultiChange}
                 onSubmit={handleSubmit}

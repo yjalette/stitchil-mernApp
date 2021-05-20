@@ -18,7 +18,6 @@ const GigUpdate = () => {
     )
 }
 
-
 function getProps(data) {
     return {
         forms: {

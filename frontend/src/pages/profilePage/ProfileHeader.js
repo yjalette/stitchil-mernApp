@@ -41,7 +41,7 @@ const ProfileHeader = ({ coverImage, profileImage, fullname, country }) => {
         <>
             <ProfileImage src={coverImage} image_type="coverImage" />
             <Container className="profileHeader__content">
-                <Container className="profileHeader__overlay profileImage-wrapper ">
+                <Container className="profileHeader__overlay p-img ">
                     <ProfileImage src={profileImage} image_type="profileImage" />
                 </Container>
                 <Container className="profileHeader__rightCol">

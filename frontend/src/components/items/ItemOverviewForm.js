@@ -1,17 +1,21 @@
-import { useMutation } from '@apollo/react-hooks';
-import React, { useEffect } from 'react'
-import { useParams } from 'react-router';
-import { initState_item_overview } from '../../constants/initStates';
-import useForm from '../../custom_hooks/useForm';
+import React from 'react'
 import CustomForm from '../../layout/CustomForm';
 import FormGroup from '../inputs/FormGroup';
 import FormInput from '../inputs/FormInput';
 import FormTypeahead from '../inputs/FormTypeahead';
 
-const ItemOverviewForm = ({ form_msg, init, inputs, onChange, onMultiChange, onSubmit }) => {
+const ItemOverviewForm = ({
+    form_msg,
+    errors,
+    init,
+    inputs,
+    onChange,
+    onMultiChange,
+    onSubmit }) => {
     return (
         <CustomForm
             form_msg={form_msg}
+            form_error={errors && errors.form_error}
             form_class="itemForm-overview"
             submitTitle={inputs._id ? "update" : "save & continue"}
             onSubmit={onSubmit}>

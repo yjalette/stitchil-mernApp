@@ -46,7 +46,8 @@
     margin: 1rem 0;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+
+    /* justify-content: flex-end; */
     width: auto;
 }
 
@@ -76,6 +77,7 @@
 
 .btn-icon.active {
     border: none;
+    opacity: .8;
 }
 
 @keyframes btn-icon-anim {

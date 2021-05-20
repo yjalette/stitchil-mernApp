@@ -17,10 +17,6 @@ const GigVariantItem = ({ variant, children }) => {
         ])
     }
 
-    const updateVariant = async variant => {
-        setValues(variant)
-    }
-
     return (
         <div className="gigVariant">
             {Object.keys(variant).map((label, i) => {

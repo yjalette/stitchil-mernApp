@@ -9,13 +9,20 @@ const cloud_config = cloudinary.config({
 });
 
 
-async function deleteSingleFile(url) {
-    const file = await File.findOne({ url });
-    await cloudinary.v2.uploader.destroy(file.public_id, async (error) => error ? new Error("deleting file error", error) : await file.deleteOne())
+async function deleteSingleFile(param) {
+    const file = await File.findOne(param);
+    console.log("file--->", file)
+    if (file) {
+        await cloudinary.v2.uploader
+            .destroy(file.public_id, async (error) => error ?
+                new Error("deleting file error", error)
+                :
+                await file.deleteOne())
+    }
 }
 
-async function deleteFiles(files) {
-    return files.forEach(file => deleteSingleFile(file))
+async function deleteFiles(urls) {
+    return urls.forEach(url => deleteSingleFile({ url }))
 }
 
 async function uploadToCloud({ file, public_id }) {
@@ -65,7 +72,7 @@ async function singleUpload(file, docId, creator) {
 
 }
 
-async function multiUpload(files, userId) {
+async function multiUpload(files, docId, userId) {
     return Promise.all(await files.map(async file => await singleUpload(file, docId, userId)));
 
 }

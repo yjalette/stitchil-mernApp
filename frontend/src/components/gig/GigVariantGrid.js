@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import BoxWrapper from '../../layout/BoxWrapper'
+import { Col, Row } from 'react-bootstrap'
+import "./style.css"
 import SectionWrapper from '../../layout/SectionWrapper'
 import GigAddVariant from './GigAddVariant'
 import GigEditVariant from './GigEditVariant'
@@ -17,7 +18,10 @@ const GigVariantGrid = ({ variants, updateQuery }) => {
             return {
                 gig: {
                     ...prev.gig,
-                    "variants": [newVariant, ...prev.gig.variants]
+                    "variants": [
+                        newVariant,
+                        ...prev.gig.variants
+                    ]
                 }
             }
         })
@@ -39,15 +43,20 @@ const GigVariantGrid = ({ variants, updateQuery }) => {
 
     return (
         <>
-            <GigAddVariant addNewVariant={addNewVariant} />
-            <SectionWrapper section_class="gig-variants">
-                {values && values.length > 0 && values.map((variant, index) => (
-                    <BoxWrapper key={index}>
-                        <GigVariantItem variant={variant}>
-                            <GigEditVariant variant={variant} index={index} updateCacheVariant={updateCacheVariant} />
-                        </GigVariantItem>
-                    </BoxWrapper>
-                ))}
+            <SectionWrapper section_class="gigVariants">
+                <GigAddVariant addNewVariant={addNewVariant} />
+                <Row>
+                    {values && values.length > 0 && values.map((variant, index) => (
+                        <Col xl={3} lg={4} sm={12} key={index} className="gigVariant-wrapper">
+                            <GigVariantItem variant={variant}>
+                                <GigEditVariant
+                                    index={index}
+                                    variant={variant}
+                                    updateCacheVariant={updateCacheVariant} />
+                            </GigVariantItem>
+                        </Col>
+                    ))}
+                </Row>
             </SectionWrapper>
 
         </>

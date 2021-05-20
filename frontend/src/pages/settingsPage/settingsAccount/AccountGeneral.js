@@ -1,19 +1,33 @@
 import React, { useEffect } from 'react';
 import { useMutation } from '@apollo/react-hooks';
-
+import { UPDATE_GENERAL_MUTATION } from '../graphql/mutations';
+import { general_initstate } from './initStates';
+import { handleResponse } from '../../../helpers/dataHelper';
 import useForm from '../../../custom_hooks/useForm';
 import FormTypeahead from '../../../components/inputs/FormTypeahead';
 import FormInput from '../../../components/inputs/FormInput';
-import { handleResponse } from '../../../helpers/dataHelper';
 import CustomForm from '../../../layout/CustomForm'
-import { UPDATE_GENERAL_MUTATION } from '../graphql/mutations';
 import FormGroup from '../../../components/inputs/FormGroup';
+import ActionStatus from '../../../components/notification/ActionStatus';
 
 const AccountGeneral = ({ currValues }) => {
+    const {
+        inputs,
+        setInputs,
+        handleChange,
+        handleMultiChange,
+        msg,
+        setMsg,
+        errors,
+        setErrors,
+        handleSubmit } = useForm(general_initstate, onSubmit);
     const [post, { error, data }] = useMutation(UPDATE_GENERAL_MUTATION, {
-        onCompleted: data => handleResponse(data.updateGeneral, handleSuccess, handleFailure)
+        onCompleted: data => {
+            if (data) {
+                handleResponse(data.updateGeneral, handleSuccess, handleFailure)
+            }
+        }
     });
-    const { inputs, setInputs, handleChange, handleMultiChange, errors, setErrors, setMsg, msg, handleSubmit } = useForm({ fullname: "", country: [], languages: [] }, onSubmit);
 
     useEffect(() => {
         if (currValues) setInputs(currValues);
@@ -30,18 +44,30 @@ const AccountGeneral = ({ currValues }) => {
     }
 
     function onSubmit() {
-        if (Object.keys(errors).length === 0) post({ variables: inputs });
+        if (Object.keys(errors).length === 0) {
+            return post({ variables: inputs });
+        }
     }
 
     return (
-        <CustomForm form_msg={msg} form_error={errors.form_error} onSubmit={handleSubmit}>
+        <CustomForm
+            form_msg={msg}
+            form_error={errors.form_error} onSubmit={handleSubmit}>
+            {error && <ActionStatus status="error" />}
             <FormGroup label="fullname" input_component={<FormInput input_props={{
                 name: "fullname",
                 onChange: handleChange,
-                value: inputs["fullname"]
+                value: inputs.fullname || ""
             }} />} />
-            <FormGroup label="languages" input_component={<FormTypeahead name="languages" value={inputs["languages"]} multiple={true} onChange={handleMultiChange} />} />
-            <FormGroup label="country" input_component={<FormTypeahead name="country" value={inputs["country"]} onChange={handleMultiChange} />} />
+            <FormGroup label="languages" input_component={<FormTypeahead
+                name="languages"
+                value={inputs.languages}
+                multiple={true}
+                onChange={handleMultiChange} />} />
+            <FormGroup label="country" input_component={<FormTypeahead
+                name="country"
+                value={inputs.country}
+                onChange={handleMultiChange} />} />
         </CustomForm>
     )
 

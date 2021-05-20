@@ -44,8 +44,8 @@ mutation publish_item($itemId: ID){
 }`,
 
     DELETE: gql`
-mutation delete_Item($itemId: ID, $group: String){
-    delete_item(itemId: $itemId, group: $group)
+mutation delete_Item($itemId: ID){
+    delete_item(itemId: $itemId)
   }`,
     CREATE_GALLERY: gql`
   mutation create_item_gallery($itemId: ID, $files: [Upload]){

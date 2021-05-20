@@ -1,5 +1,4 @@
 import React from 'react'
-import { useLocation } from 'react-router'
 import ItemDelete from '../items/ItemDelete'
 import ItemFormWrapper from '../items/ItemFormWrapper'
 import ItemGalleryUpdate from '../items/ItemGalleryUpdate'
@@ -32,11 +31,11 @@ function getProps({ values, updateQuery }) {
             else return false
         },
         forms: {
-            "overview": <ItemOverviewUpdate item={item && item} updateQuery={updateQuery} />,
-            "images": <ItemGalleryUpdate prevFiles={item && item.gallery} updateQuery={updateQuery} />,
+            "overview": item && <ItemOverviewUpdate item={item} updateQuery={updateQuery} />,
+            "images": item && <ItemGalleryUpdate prevFiles={item.gallery} updateQuery={updateQuery} group="gig" />,
             "variants": <GigVariantGrid variants={variants} updateQuery={updateQuery} />,
-            "publish": <GigReview overview={item && item} images={item && item.gallery} variants={variants} />,
-            "delete": <ItemDelete group="gigs" />
+            "publish": item && <GigReview overview={item} images={item.gallery} variants={variants} />,
+            "delete": <ItemDelete group="gig" />
         }
     }
 }

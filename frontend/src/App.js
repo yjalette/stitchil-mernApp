@@ -73,13 +73,13 @@ class App extends Component {
           <AuthContext.Provider value={authValues}>
             <MainNav />
             <Route exact path="/" component={LandingPage} />
-            <Route path="/homepage/:section" component={LandingPage} />
+            <Route path="/homepage/:section/" component={LandingPage} />
             <Route path="/explore" component={ExplorePage} />
-            <Route path="/explore/:filter" component={ExplorePage} />
+            <Route path="/explore/:filter/" component={ExplorePage} />
             {/* <Route path="/profile/:username/:section" component={() => (
               <ProfilePage><ProfileData /></ProfilePage>
             )} /> */}
-            <Route exact path="/chats/" component={ChatRoomsPage} />
+            <Route exact path="/messages/" component={ChatRoomsPage} />
             <Route path="/messages/:username/" component={ChatRoomsPage} />
             <Route path="/logout" component={AuthLogout} />
             {authComponents.map((elem, i) => (
@@ -112,14 +112,12 @@ class App extends Component {
                 )}>
                 </Route>
               ))}
-
               {profileItemComponents.map((elem, i) => (
                 <Route key={i} path={elem.path} component={() => (
                   <ProfileItemPage>{elem.children}</ProfileItemPage>
                 )}>
                 </Route>
               ))}
-
             </Switch>
             <Footer />
           </AuthContext.Provider>

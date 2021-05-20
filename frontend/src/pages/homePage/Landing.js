@@ -4,9 +4,7 @@
 import React, { useEffect } from 'react';
 import { Element, animateScroll as scroll, scroller } from 'react-scroll';
 import { useHistory, useParams } from 'react-router-dom';
-
 import './style.css'
-
 import HomePage from './HomePage';
 import HeroBox from './HeroBox';
 
@@ -18,21 +16,25 @@ const onScroll = (elem) => scroller.scrollTo(elem.toString(), {
 
 const Landing = () => {
     const { push } = useHistory();
-    const { page } = useParams();
+    const { section } = useParams();
 
     useEffect(() => {
-        if (page) return onScroll(page)
-    }, [page])
+        if (section) return onScroll(section)
+    }, [section])
 
-    const handleClick = param => push(`/homepage/${param}`);
+    const handleClick = param => push(`/homepage/${param}/`);
 
+    if (section) {
+        return (
+            <Element name={section.toString()}>
+                <HomePage display={section} />
+            </Element>
+        )
+    }
     return (
         <div className="landing">
             <HeroBox onClick={handleClick} />
-            {page && <Element name={page.toString()}>
-                <HomePage display={page} />
-            </Element>}
-            {page === "about" && <HomePage />}
+            {section === "about" && <HomePage />}
         </div>
     )
 };

@@ -4,12 +4,9 @@ import BoxWrapper from '../../../layout/BoxWrapper'
 
 const SecurityIndex = () => {
     return (
-        <>
-            <BoxWrapper>
-                <SecurityPassword />
-            </BoxWrapper>
-
-        </>
+        <BoxWrapper>
+            <SecurityPassword />
+        </BoxWrapper>
     )
 }
 

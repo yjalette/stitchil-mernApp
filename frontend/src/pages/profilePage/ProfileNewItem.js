@@ -1,6 +1,5 @@
 import React from 'react'
 import { useParams } from 'react-router'
-import ItemFormWrapper from '../../components/items/ItemFormWrapper'
 import ItemOverviewCreate from '../../components/items/ItemOverviewCreate'
 import { useToggle } from '../../custom_hooks/useToggle'
 import CustomButton from '../../layout/button/CustomButton'
@@ -11,9 +10,9 @@ export const forms = {
     "portfolio": { "gallery": <> </>, "options": <></>, "publish": <></> }
 }
 
-const isFormDisabled = (form_name) => {
-    return form_name !== "overview" ? true : false
-}
+// const isFormDisabled = (form_name) => {
+//     return form_name !== "overview" ? true : false
+// }
 
 const ProfileNewItem = () => {
     const { group } = useParams();

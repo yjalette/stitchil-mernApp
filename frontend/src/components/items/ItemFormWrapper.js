@@ -2,13 +2,12 @@ import React, { useEffect } from 'react'
 import { Row, Col } from 'react-bootstrap'
 import { useParams } from 'react-router'
 import useSlides from '../../custom_hooks/useSlides'
-import SectionHeader from '../../layout/SectionHeader'
 import SectionWrapper from '../../layout/SectionWrapper'
 import SectionNav from '../navbar/SectionNav'
 
 const ItemFormWrapper = ({ forms, isDisabled }) => {
     const { currForm } = useParams();
-    const { activeSlide, setActiveIndex, activeIndex } = useSlides(
+    const { activeSlide, setActiveIndex } = useSlides(
         0, Object.values(forms)
         , { pagination: true });
 
@@ -31,7 +30,6 @@ const ItemFormWrapper = ({ forms, isDisabled }) => {
                     />
                 </Col>
                 <Col xl={10} lg={8} md={7} className="itemFormWrapper-col">
-                    {/* <SectionHeader title={Object.keys(forms)[activeIndex]} /> */}
                     {activeSlide}
                 </Col>
             </Row>

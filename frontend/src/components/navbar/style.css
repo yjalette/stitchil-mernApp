@@ -9,10 +9,12 @@
 }
 
 .mainNav-general {
-    /* width: 100%; */
-    justify-content: flex-start;
-    align-items: center;
     flex-direction: row;
+}
+
+.mainNav-user {
+    width: 100%;
+    justify-content: flex-end;
 }
 
 .mainNav-general .nav-link, .dropdown__button {
@@ -30,19 +32,8 @@
     width: 180px;
 }
 
-.dropdown-toggle::after {
+/* .dropdown-toggle::after {
     display: none;
-}
-
-/* .nav-icon-btn {
-    padding: 1em !important;
-    border-radius: 50%;
-    width: 25px;
-    height: 25px;
-    margin: auto .6em;
-    background-color: var(--green-color);
-    box-shadow: 0 0 0 4px var(--green-color), 2px 1px 6px 4px rgba(10, 10, 0, 0.5);
-    text-shadow: -1px -1px var(--green-color);
 } */
 
 .mainNav .customDropdown__body {
@@ -129,7 +120,7 @@
 }
 
 .mainNav-user-resp-btn {
-    display: none;
+    visibility: hidden;
 }
 
 .mainNav .searchForm {
@@ -186,19 +177,18 @@
         width: 100px;
     }
 
-    .mainNav-user {
+    /* .mainNav-user {
         display: flex;
-    }
+    } */
 
     .mainNav-user {
+        width: auto;
         flex-direction: row;
     }
 
     .mainNav-user-resp-btn {
-        display: flex;
+        visibility: visible;
     }
-
-    .mainNav-user-resp-btn::after {}
 
     .mainNav-user.hide {
         display: none;

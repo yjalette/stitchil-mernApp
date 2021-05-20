@@ -1,18 +1,17 @@
 import React from 'react'
 import { Row, Col } from 'react-bootstrap'
-
 import "./style.css"
 import ThumbGallery from '../../layout/ThumbGallery'
-import PictureZoom from '../pictures/PictureZoom'
 import BoxWrapper from '../../layout/BoxWrapper'
 import ListItem from '../../layout/ListItem'
-import ItemUpdate from '../../components/items/ItemUpdate';
 
 const ItemDetails = ({ item }) => {
     return (
         <Row className="itemDetails w-100">
             <Col lg={8} className="itemDetails__col itemDetails-gallery">
-                {item.gallery && <ThumbGallery items={item.gallery} img_class="itemImg" />}
+                {item.gallery && <ThumbGallery
+                    items={item.gallery}
+                    img_class="itemImg" />}
             </Col>
             <Col lg={4} className="itemDetails__col itemDetails-content">
                 <BoxWrapper>

@@ -10,41 +10,74 @@ import useForm from './../../custom_hooks/useForm';
 import CustomButton from './../../layout/button/CustomButton';
 import FormTypeahead from './../../components/inputs/FormTypeahead';
 import CustomForm from './../../layout/CustomForm';
+import CustomModal from '../../layout/CustomModal';
+import FormGroup from '../../components/inputs/FormGroup';
+import ButtonEdit from '../../layout/button/ButtonEdit';
 
 const ProfileDesignerInfo = ({ values }) => {
-    const [post, { error, data }] = useMutation(UPDATE_DESIGNER_MUTATION)
+    const [post] = useMutation(UPDATE_DESIGNER_MUTATION)
     const { logged_in_user } = useContext(ProfileContext);
-    const { inputs, setInputs, handleMultiChange, handleClear, handleSubmit, editMode, toggleEditMode } = useForm(initState_designer, onSubmit);
+    const {
+        inputs,
+        setInputs,
+        handleMultiChange,
+        handleCancel,
+        handleSubmit,
+        editMode,
+        toggleEditMode } = useForm(initState_designer, onSubmit);
 
     useEffect(() => {
         if (values) setInputs(values);
     }, [values, setInputs])
 
-
     function onSubmit() {
-        post({ variables: { designerInput: { ...inputs, __typename: undefined } } });
+        post({
+            variables: {
+                designerInput: {
+                    ...inputs,
+                    __typename: undefined
+                }
+            }
+        });
         toggleEditMode();
     }
 
-    if (editMode && logged_in_user) return (
-        <CustomForm form_class="designer__form" onSubmit={handleSubmit} onCancel={handleClear} submitTitle="save" >
-            {Object.keys(initState_designer).map((label, index) => <FormTypeahead
-                key={index}
-                name={label}
-                onChange={handleMultiChange}
-                value={inputs[label]}
-                multiple={label !== "experience"}
-                allowNew={label === "education"}
-            />)}
-        </CustomForm>
+    if (editMode) return (
+        <CustomModal
+            modal_title="edit designer info"
+            modal_size="md"
+            onClose={handleCancel}
+            displayWithoutBtn
+        >
+            <CustomForm
+                form_class="designer__form"
+                submitTitle="save"
+                onSubmit={handleSubmit}
+                onCancel={handleCancel}  >
+                {Object.keys(initState_designer)
+                    .map((label, index) => <FormGroup
+                        key={index}
+                        label={label}
+                        input_component={
+                            <FormTypeahead
+                                name={label}
+                                onChange={handleMultiChange}
+                                value={inputs[label]}
+                                multiple={label !== "experience"}
+                                allowNew={label === "education"}
+                            />}
+                    />)}
+            </CustomForm>
+        </CustomModal>
     )
     return (
         <>
             <SectionHeader title="Designer Info">
-                {logged_in_user && <CustomButton onClick={toggleEditMode} icon="fas fa-pencil-alt" btn_class="btn-icon" />}
+                {logged_in_user && <ButtonEdit onClick={toggleEditMode} />}
             </SectionHeader>
             <div className="profileSection__content">
-                {Object.keys(initState_designer).map(field => <ListItem key={field}
+                {Object.keys(initState_designer).map(field => <ListItem
+                    key={field}
                     field={`${field}`}
                     content={inputs[field]} />)}
             </div>

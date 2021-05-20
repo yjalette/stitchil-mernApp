@@ -8,9 +8,9 @@ import Tagline from '../../layout/Tagline';
 import RoundCard from '../../layout/card/RoundCard';
 
 
-const HomePage = ({ display }) => (
+const HomePage = ({ display }) => console.log(display) || (
     <div className="homepage">
-        <Tagline title={tagLines[display]["Unique Everything"]} />
+        {/* <Tagline title={tagLines[display]["Unique Everything"]} /> */}
         {/* <ExploreMenu /> */}
         <Tagline title={tagLines[display]["How It Works"]} />
         <Row className="flex-center justify-content-around section-wrapper">

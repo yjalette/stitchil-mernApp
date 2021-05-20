@@ -1,12 +1,11 @@
 const Item = require("../../models/item");
 const Product = require("../../models/product");
 const Gig = require("../../models/gig");
-const { deleteFiles, multiUpload } = require("../../helpers/uploadToCloud");
+const { deleteSingleFile, multiUpload } = require("../../helpers/uploadToCloud");
 
 module.exports = {
     Query: {
         item: async (_, { itemId }, req) => {
-
             return await Item.findById(itemId)
         }
     },
@@ -27,7 +26,12 @@ module.exports = {
         update_item_overview: async (_, { itemInput, itemId }, { userId }) => {
             if (!userId) throw new Error("unauthenticated");
             try {
-                await Item.findByIdAndUpdate(itemId, { $set: { ...itemInput, updatedAt: new Date() } })
+                await Item.findByIdAndUpdate(itemId, {
+                    $set: {
+                        ...itemInput,
+                        updatedAt: new Date()
+                    }
+                })
                 return true
             } catch (error) {
                 console.log(error)
@@ -44,9 +48,10 @@ module.exports = {
             if (!userId) throw new Error("unauthenticated");
             const item = await Item.findById(itemId)
             if (coverImage) item.coverImage = coverImage
-            if (gallery) {
-                await deleteFiles(item.gallery
-                    .filter(elem => !gallery.includes(elem)))
+            if (item.gallery) {
+                await item.gallery
+                    .filter(elem => !gallery.includes(elem))
+                    .forEach(url => deleteSingleFile({ url }))
                 item.gallery = gallery
             }
             if (files) {
@@ -71,9 +76,9 @@ module.exports = {
             if (!userId) throw new Error("unauthenticated");
             const item = await Item.findById(itemId);
             try {
-                if (item.group === "gigs") await Gig.deleteOne({ item: itemId })
-                else if (item.group === "portfolio") await Product.deleteOne({ item: itemId })
-                await deleteFiles(item.gallery);
+                if (item.group === "gig") await Gig.deleteOne({ item: itemId })
+                else if (item.group === "product") await Product.deleteOne({ item: itemId })
+                item.gallery.forEach(url => deleteSingleFile({ url }))
                 await item.deleteOne();
                 return true;
 

@@ -1,3 +1,15 @@
+.newVar-btn {
+    padding-bottom: 3rem;
+
+    /* align-self: flex-start; */
+}
+
+.gigVariant-wrapper {
+    padding: 1rem;
+    margin: 1rem;
+    background-color: var(--main-color-light);
+}
+
 .content-section.gigPublish {
     flex-direction: row;
     flex-wrap: wrap;
@@ -36,8 +48,12 @@
     padding-top: .5em;
 }
 
-.gigPublish__thumb {
+.gigPublish .thumb {
     width: 100px;
     height: 100px;
     object-fit: cover;
+}
+
+.gigPublish .images-box {
+    display: flex;
 }

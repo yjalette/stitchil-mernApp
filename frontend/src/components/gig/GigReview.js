@@ -39,8 +39,7 @@ const GigReview = (props) => {
                         {overview
                             && Object.values(overview).length > 0
                             && Object.keys(overview)
-                                .map((field, index) => displayOverviewItem(overview, field))
-                        }
+                                .map((field, index) => displayOverviewItem(overview, field))}
                     </BoxWrapper>
                     {displayHeader("images", handleClick)}
                     <BoxWrapper box_class="images">
@@ -50,7 +49,7 @@ const GigReview = (props) => {
                             images.map((url, index) => <PictureZoom
                                 key={index}
                                 url={url}
-                                elem_class="gigPublish__thumb" />)
+                                elem_class="thumb" />)
                             :
                             displayAlert("images")
                         }
