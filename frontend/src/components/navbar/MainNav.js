@@ -24,7 +24,7 @@ const MainNav = () => {
               {/* <FilterByKeywords /> */}
             </Nav>}
             <Nav className={`mainNav-user ${openUserNav ? "open" : "hide"}`}>
-              {user ? <SignInLinks username={user.username} /> : <SignOutLinks />}
+              {user && user.username ? <SignInLinks username={user.username} /> : <SignOutLinks />}
             </Nav>
             <CustomButton
               btn_class={respMenuClass}
