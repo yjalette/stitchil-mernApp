@@ -1,6 +1,0 @@
-{
-    "watch": [
-        "backend/*",
-        "index.js"
-    ]
-}
