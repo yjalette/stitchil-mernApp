@@ -1,0 +1,25 @@
+/* .commentGrid {
+    height: 100%;
+} */
+
+.commentItem__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.commentItem .messageItem__body {
+    padding: .2rem 1rem;
+}
+
+.commentCreate {
+    flex-direction: column;
+    margin-top: 2rem;
+    padding: 2rem .2rem;
+    border-radius: 10px;
+}
+
+.commentCreate .label {
+    display: none;
+}

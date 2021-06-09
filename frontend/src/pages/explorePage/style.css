@@ -1,0 +1,34 @@
+.exploreHeader {
+    height: 600px;
+
+    /* overflow: hidden; */
+    background-color: var(--main-color-light);
+    padding: 50px;
+}
+
+.exploreHeader__col {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.exploreHeader-content {
+    font-size: 3rem;
+}
+
+@media only screen and (max-width: 1200px) {}
+
+@media only screen and (max-width: 1024px) {
+    .exploreHeader {
+        height: 100%;
+    }
+
+    .explore__heroimage {
+        width: 500px;
+    }
+}
+
+@media (max-width: 768px) {}
+
+@media (max-width: 480px) {}

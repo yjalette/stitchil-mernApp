@@ -1,0 +1,59 @@
+.newVar-btn {
+    padding-bottom: 3rem;
+
+    /* align-self: flex-start; */
+}
+
+.gigVariant-wrapper {
+    padding: 1rem;
+    margin: 1rem;
+    background-color: var(--main-color-light);
+}
+
+.content-section.gigPublish {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+
+.content-section.gigPublish .boxWrapper {
+    width: 100%;
+}
+
+/* .content-section.gigPublish .sectionHeader {
+    padding: 1rem;
+} */
+
+.content-section.gigPublish .sectionHeader__title {
+    color: var(--light-green-color);
+    font-weight: lighter;
+    font-size: 1em;
+}
+
+.content-section.gigPublish .listItem {
+    width: auto;
+}
+
+.content-section.gigPublish .listItem + .listItem {
+    margin-left: .5rem;
+}
+
+.content-section.gigPublish .listItem:not(:last-child)::after {
+    content: ", ";
+    color: var(--light-gray-color);
+}
+
+.content-section.gigPublish .gigVariant:not(:nth-child(1)) {
+    border-top: 1px dashed rgba(255, 255, 255, 0.452);
+    padding-top: .5em;
+}
+
+.gigPublish .thumb {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+
+.gigPublish .images-box {
+    display: flex;
+}
