@@ -1,8 +1,0 @@
-.userAvatar {
-    display: flex;
-    cursor: pointer;
-}
-
-.userAvatar__username {
-    color: var(--accent-color);
-}
