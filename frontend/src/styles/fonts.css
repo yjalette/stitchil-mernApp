@@ -1,0 +1,59 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=Karla&display=swap");
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    letter-spacing: 1px;
+    word-spacing: 0.5px;
+    text-transform: capitalize;
+    line-height: 1.6em;
+}
+
+h1, h2, h3, h4 {
+    font-weight: bold;
+}
+
+p, span, ul, a {
+    font-family: var(--font-body);
+    letter-spacing: var(--letter-spacing);
+    word-spacing: var(--word-spacing);
+}
+
+h1 {
+    font-size: 2em;
+}
+
+h2 {
+    font-size: 1.5em;
+    color: var(--green-color);
+}
+
+h3 {
+    font-size: 1.17em;
+    line-height: 120%;
+    color: var(--light-gray-color);
+}
+
+h4 {
+    /* width: 100%; */
+    position: relative;
+    padding: var(--padding-box);
+    overflow: hidden;
+    margin: 0;
+}
+
+h5 {
+    font-size: .83em;
+    line-height: 120%;
+    clear: both;
+    color: var(--white-color);
+    padding: var(--padding-elem);
+}
+
+h6 {
+    font-size: .75em;
+    color: var(--light-gray-color);
+    opacity: .95;
+    padding: var(--padding-elem);
+}

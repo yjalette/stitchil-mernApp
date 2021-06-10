@@ -1,0 +1,10 @@
+.settings-page .boxWrapper {
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.settings__password {
+    background-color: var(--main-color);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+}

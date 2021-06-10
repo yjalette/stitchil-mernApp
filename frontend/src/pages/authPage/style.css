@@ -1,0 +1,36 @@
+.authJoin {
+    display: flex;
+    flex-direction: column;
+}
+
+.auth__google-wrapper {
+    width: 100%;
+    order: 2;
+    margin: .5rem auto;
+}
+
+.auth__google-btn {
+    overflow: hidden;
+    flex-direction: row-reverse;
+    border-radius: var(--border-radius);
+}
+
+.authJoin .btn-form {
+    order: 2;
+    width: 90px;
+    align-self: flex-end;
+    margin: 0 1rem 1rem 0;
+}
+
+.authJoin .formSteps__buttons {
+    display: block;
+    margin: .5rem;
+}
+
+.authJoin .btn-forward {
+    margin: auto;
+}
+
+.auth__google-wrapper ~ .customForm__groupButton {
+    display: none;
+}
