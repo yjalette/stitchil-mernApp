@@ -25,8 +25,8 @@ const ItemOverviewForm = ({
                     name={label}
                     value={inputs[label]}
                     onChange={onMultiChange}
-                    multiple={label === "keywords"}
-                    allowNew={label === "keywords"}
+                // multiple={label === "keywords"}
+                // allowNew={label === "keywords"}
                 />
                 else if (label === "description") input_component = <FormInput
                     input_props={{
@@ -43,12 +43,14 @@ const ItemOverviewForm = ({
                     input_props={{
                         name: label,
                         value: inputs[label] || "",
+                        maxLength: label === "title" ? 25 : 50,
                         onChange
                     }}
                 />
                 return <FormGroup
                     key={index}
                     label={label}
+                    required
                     input_component={input_component}
                 />
             })}

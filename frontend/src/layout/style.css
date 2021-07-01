@@ -227,6 +227,19 @@
     width: 100%;
 }
 
+.customForm.saved .btn-form::after {
+    content: "\f058";
+    font-family: "Font Awesome 5 Free";
+    font-size: var(--sm-fonts);
+    font-weight: 900;
+    color: currentColor;
+    margin-left: .5em;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+}
+
 .customForm__groupButton {
     justify-content: flex-end;
 }
@@ -240,6 +253,74 @@
     min-height: 200px;
     background-size: cover;
     background-position: center;
+}
+
+.customMenu {
+    width: 100%;
+    border-bottom: 1px solid var(--light-green-color);
+    text-align: center;
+    margin: auto;
+    justify-content: space-evenly;
+}
+
+.customMenu.vertical {
+    max-width: 15ch;
+    min-height: 100vh;
+    border-right: 1px solid var(--light-green-color);
+    border-bottom: none;
+    flex-direction: column;
+    justify-content: flex-start;
+    text-align: right;
+}
+
+.customMenu__item {
+    padding: .75rem;
+    position: relative;
+    color: var(--accent-color);
+    margin: 0;
+}
+
+.customMenu__item:hover {
+    color: var(--light-green-color) !important;
+}
+
+.customMenu .active, .customMenu__item:hover {
+    background-color: transparent !important;
+}
+
+.customMenu__item.active {
+    color: var(--light-green-color) !important;
+    pointer-events: none;
+}
+
+.customMenu .active::after, .customMenu .active::before {
+    position: absolute;
+    content: '';
+}
+
+.customMenu .active:after {
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 100px;
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+    border-bottom: 12px solid var(--light-green-color);
+    bottom: 0;
+}
+
+.customMenu.vertical .active::after {
+    display: none;
+}
+
+.customMenu.vertical .active::before {
+    top: 50%;
+    transform: translateY(-50%);
+    height: 0;
+    right: 0;
+    border-top: 12px solid transparent;
+    border-bottom: 12px solid transparent;
+    border-right: 12px solid var(--light-green-color);
 }
 
 @media only screen and (max-width: 1600px) {

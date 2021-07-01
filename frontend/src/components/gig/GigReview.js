@@ -8,19 +8,18 @@ import SectionHeader from '../../layout/SectionHeader'
 import SectionWrapper from '../../layout/SectionWrapper'
 import ItemPublish from '../items/ItemPublish'
 import PictureZoom from '../pictures/PictureZoom'
-import GigVariantItem from './GigVariantItem'
 import "./style.css"
 
 const GigReview = (props) => {
-    const { overview, images, variants } = props;
+    const { overview, images } = props;
     const { currForm } = useParams()
     const { pathname } = useLocation()
     const { push } = useHistory();
 
     const validate = () => {
-        if (!variants || !images) return false
+        if (!images) return false
         else {
-            return variants.length > 0 && images.length > 0
+            return images.length > 0
         }
 
     }
@@ -28,8 +27,6 @@ const GigReview = (props) => {
     const handleClick = ({ target }) => {
         return push(pathname.replace(currForm, target.name));
     }
-
-
     return (
         <>
             <ItemPublish validate={validate}>
@@ -54,7 +51,7 @@ const GigReview = (props) => {
                             displayAlert("images")
                         }
                     </BoxWrapper>
-                    {displayHeader("variants", handleClick)}
+                    {/* {displayHeader("variants", handleClick)}
                     <BoxWrapper box_class="variants">
                         {variants
                             && variants.length > 0
@@ -65,7 +62,7 @@ const GigReview = (props) => {
                             :
                             displayAlert("variants")
                         }
-                    </BoxWrapper>
+                    </BoxWrapper> */}
                 </SectionWrapper>
             </ItemPublish>
         </>

@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/react-hooks';
-import { Image } from "react-bootstrap";
+import { Image, Container } from "react-bootstrap";
 import { useParams } from 'react-router';
 import { useToggle } from '../../custom_hooks/useToggle';
 import mutations from './graphql/mutations';
 import PictureZoom from '../pictures/PictureZoom';
 import CustomButton from '../../layout/button/CustomButton';
 import useUpload from '../../custom_hooks/useUpload';
-import BoxWrapper from '../../layout/BoxWrapper';
 import ItemFormNextStep from './ItemFormNextStep';
 import ActionStatus from '../notification/ActionStatus';
 
@@ -34,11 +33,11 @@ const ItemUpload = ({ action, gallery, children, group }) => {
     }
     return (
         <>
-            <BoxWrapper>
+            <Container>
                 {saved && <ActionStatus status="success" />}
                 {error && <ActionStatus status="error" />}
-            </BoxWrapper>
-            <BoxWrapper>
+            </Container>
+            <Container>
                 <div className="itemUpload">
                     <div className="error">{uploadError}</div>
                     <div className="itemUpload__list">
@@ -65,7 +64,7 @@ const ItemUpload = ({ action, gallery, children, group }) => {
                     >save </CustomButton>
                 </div>
                 {saved && <ItemFormNextStep group={group} />}
-            </BoxWrapper>
+            </Container>
         </>
     )
 }

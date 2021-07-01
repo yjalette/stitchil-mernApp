@@ -12,6 +12,8 @@ import ButtonEdit from '../../layout/button/ButtonEdit';
 import SectionHeader from '../../layout/SectionHeader';
 import ItemOverviewCreate from '../../components/items/ItemOverviewCreate';
 import dateHelper from '../../helpers/dateHelper';
+import BoxWrapper from '../../layout/BoxWrapper';
+import ListItem from '../../layout/ListItem';
 
 const ProfileItems = ({ values }) => {
     const { logged_in_user } = useContext(ProfileContext);
@@ -20,6 +22,7 @@ const ProfileItems = ({ values }) => {
 
     const handleEdit = item => {
         return push(`/profile-item/${item.group}/draft/${item._id}/overview/`)
+        // return push(`/profile-item/${item.group}/view/${item._id}/`)
     }
 
     const activeValues = values && values.filter(val => val.active === true);
@@ -28,20 +31,24 @@ const ProfileItems = ({ values }) => {
     return (
         <>
             <SectionHeader title={`${section} (${activeValues.length})`} >
-                {logged_in_user
-                    && values
-                    && values.length > 20 ?
-                    <CustomPopover
-                        content="max 6 items"
-                        trigger="click"
-                        placement="left-end"
-                        popover_class="warning">
-                        <CustomButton
-                            btn_class="btn-icon-text profileCreate-btn"
-                            icon="fas fa-plus" />
-                    </CustomPopover>
-                    :
-                    <ItemOverviewCreate />}
+                {logged_in_user &&
+                    <>
+                        {values && values.length > 20 ?
+
+                            <CustomPopover
+                                content="max 6 items"
+                                trigger="click"
+                                placement="left-end"
+                                popover_class="warning">
+                                <CustomButton
+                                    btn_class="btn-icon-text profileCreate-btn"
+                                    icon="fas fa-plus" />
+                            </CustomPopover>
+                            :
+                            <ItemOverviewCreate />
+                        }
+                    </>
+                }
             </SectionHeader>
             <ItemList items={activeValues} getProps={(item, i) => {
                 return {
@@ -70,13 +77,17 @@ const ProfileItems = ({ values }) => {
             }} />
             {logged_in_user && <>
                 <SectionHeader title={`Drafts (${draftValues.length})`} />
-                {draftValues.map((item, index) => <CustomButton
-                    key={index}
-                    onClick={() => handleEdit(item)}
-                    btn_class="btn-text profileSection_draft_btn">
-                    {item.title}
-                    <span>{dateHelper(item.updatedAt)}</span>
-                </CustomButton>)}
+                {draftValues.map((item, index) => (
+                    <BoxWrapper key={index} box_class="profileSection_draft">
+                        <ListItem field={item.title} content={dateHelper(item.updatedAt)} item_class="profileSection_draft_wrapper" >
+                            <CustomButton
+                                onClick={() => handleEdit(item)}
+                                icon={"fa fa-edit"}
+                                btn_class="btn-icon profileSection_draft_btn">
+                            </CustomButton>
+                        </ListItem>
+                    </BoxWrapper>
+                ))}
             </>}
         </>
     )
@@ -84,3 +95,18 @@ const ProfileItems = ({ values }) => {
 
 export default ProfileItems;
 
+
+// {logged_in_user
+//     && values
+//     && values.length > 20 ?
+//     <CustomPopover
+//         content="max 6 items"
+//         trigger="click"
+//         placement="left-end"
+//         popover_class="warning">
+//         <CustomButton
+//             btn_class="btn-icon-text profileCreate-btn"
+//             icon="fas fa-plus" />
+//     </CustomPopover>
+//     :
+//     <ItemOverviewCreate />}

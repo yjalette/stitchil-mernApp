@@ -18,10 +18,11 @@ import SecurityIndex from './pages/settingsPage/settingsSecurity/SecurityIndex';
 import NotificationIndex from './pages/settingsPage/settingsNotification/NotificationIndex';
 import AuthLogout from './pages/authPage/AuthLogout';
 import ProfileData from './pages/profilePage/ProfileData';
-import ProfileNewItem from './pages/profilePage/ProfileNewItem';
 import GigDraft from './components/gig/GigDraft';
 import ProfileItemPage from './pages/profileItemPage/ProfileItemPage';
 import ChatRoomsPage from './pages/chatRoomsPage/ChatRoomsPage';
+import ProductDraft from './components/product/ProductDraft';
+import GigView from './components/gig/GigView';
 
 const userObj = JSON.parse(localStorage.getItem('user'));
 
@@ -40,8 +41,7 @@ const settingsComponents = [
 ]
 
 const profileComponents = [
-  { path: "/profile/:username/:section", children: <ProfileData /> },
-  { path: "/profile-item/:group/create/", children: <ProfileNewItem /> },
+  { path: "/profile/:username/:section", children: <ProfileData /> }
 ]
 
 const profileItemComponents = [
@@ -49,6 +49,8 @@ const profileItemComponents = [
   // { path: "/update/portfolio-item/:itemId/", children: <ProductUpdate /> },
   // { path: "/profile-gigs-item/update/:itemId/:currForm/", children: <GigData compReceiver={(props) => <GigUpdate />} /> },
   { path: "/profile-item/gig/draft/:itemId/:currForm/", children: <GigDraft /> },
+  { path: "/profile-item/gig/view/:itemId/", children: <GigView /> },
+  { path: "/profile-item/product/draft/:itemId/:currForm/", children: <ProductDraft /> },
 ]
 
 class App extends Component {

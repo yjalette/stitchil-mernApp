@@ -15,8 +15,10 @@ const GigData = ({ compReceiver }) => {
         if (data) setValues(data.gig)
     }, [data])
 
+    // if (!data || !data.gig) return <div>loading ...</div>
 
     const result = compReceiver({ values, updateQuery })
+
     return result
 }
 

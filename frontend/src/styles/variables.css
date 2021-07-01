@@ -24,7 +24,7 @@
     --gradient-text: linear-gradient(300deg, var(--green-color), var(--light-green-color));
     --border: 1.5px dashed var(--light-gray-color);
     --border-radius: 10px;
-    --padding-elem: .5em;
+    --padding-elem: .25em;
     --padding-box: 1.5rem;
     --padding-section: 2rem;
     --box-shadow: 0 0 0 4px var(--green-color), 2px 1px 6px 4px rgba(10, 10, 0, 0.5);

@@ -221,8 +221,13 @@
     border: none;
 } */
 
-.itemFormWrapper a[value="delete"] {
+.itemForm-section a[value="delete"] {
     color: var(--red-color);
+}
+
+.itemForm-box {
+    min-height: 700px;
+    width: 100%;
 }
 
 .itemForm-overview .field-wrapper:not(.group-title, .group-description, .group-keywords) {
@@ -234,6 +239,14 @@
     background-color: var(--red-color);
     box-shadow: var(--box-shadow-red);
     margin: auto;
+}
+
+.itemPublish__buttons {
+    align-items: flex-end;
+}
+
+.itemPublish__buttons button + button {
+    margin-left: 2em;
 }
 
 @media (max-width: 1679px) {}

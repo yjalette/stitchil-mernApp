@@ -4,7 +4,6 @@ import ItemFormWrapper from '../items/ItemFormWrapper'
 import ItemGalleryUpdate from '../items/ItemGalleryUpdate'
 import ItemOverviewUpdate from '../items/ItemOverviewUpdate'
 import GigData from './GigData'
-import GigVariantGrid from './GigVariantGrid'
 
 const GigUpdate = () => {
     return (
@@ -23,7 +22,7 @@ function getProps(data) {
         forms: {
             "overview": <ItemOverviewUpdate item={data.item} />,
             "images": <ItemGalleryUpdate prevFiles={data.item && data.item.gallery} />,
-            "variants": <GigVariantGrid variants={data && data.item && data.item.variants} />,
+            // "packages": ,
             "delete": <ItemDelete group="gigs" />
         }
     }

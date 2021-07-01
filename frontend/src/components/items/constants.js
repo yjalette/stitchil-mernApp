@@ -1,6 +1,6 @@
 export const form_names = {
-    "gig": ["overview", "images", "variants", "publish"],
-    "product": ["overview", "gallery", "options", "publish"]
+    "gig": ["overview", "images", "packages", "publish"],
+    "product": ["overview", "images", "options", "publish"]
 }
 
 export const item_group = {

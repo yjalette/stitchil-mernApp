@@ -40,7 +40,7 @@ import gql from 'graphql-tag';
 //                     delivery
 //                     category
 //                     styles
-//                     fabrics
+//                     swatches
 //                     keywords
 //                     createdAt
 //                 }
@@ -91,7 +91,6 @@ export const PROFILE_QUERY = gql`
                     garment
                     category
                     occasion
-                    keywords
                     updatedAt
                     active
                 }  
@@ -107,7 +106,6 @@ export const PROFILE_QUERY = gql`
                     garment
                     category
                     occasion
-                    keywords
                     active
                     updatedAt
                 }

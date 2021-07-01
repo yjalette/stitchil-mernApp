@@ -17,7 +17,6 @@ type Item {
     style: [String]
     coverImage: String
     gallery: [String]
-    keywords: [String]
     active: Boolean 
     creator: AuthData
     createdAt: String
@@ -34,7 +33,6 @@ input ItemInput {
     garment: [String]
     style: [String]
     occasion: [String]
-    keywords: [String]
 }
 
 type DesignerResume {

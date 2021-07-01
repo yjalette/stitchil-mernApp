@@ -12,7 +12,8 @@
     letter-spacing: .5x;
     background-color: transparent;
     border: 1px solid currentColor;
-    border-radius: var(--border-radius);
+
+    /* border-radius: var(--border-radius); */
     width: 100%;
     max-width: 100px;
     padding: var(--padding-elem);
@@ -150,12 +151,12 @@
     font-size: var(--sm-fonts);
     line-height: 1.3em;
     border: 1px dashed currentColor;
-    border-radius: var(--border-radius);
+    border-radius: 0;
     box-shadow: var(--box-shadow);
     text-shadow: var(--text-shadow);
 }
 
-.btn-form::after {
+/* .btn-form::after {
     content: "\f00c";
     font-family: "Font Awesome 5 Free";
     font-size: var(--sm-fonts);
@@ -167,9 +168,10 @@
     font-variant: normal;
     text-rendering: auto;
     -webkit-font-smoothing: antialiased;
-}
+} */
 
 .btn-form:hover, .btn-form:focus, .btn-form:active {
+    background-color: var(--green-color);
     box-shadow: var(--box-shadow);
     text-shadow: var(--text-shadow);
     border: none;

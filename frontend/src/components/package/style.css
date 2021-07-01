@@ -1,0 +1,54 @@
+.packageForm-box {
+    width: 100%;
+}
+
+.packageForm__grid {
+    display: inline-grid;
+    grid-column-gap: 0;
+}
+
+.packageForm__grid .group-price, .packageForm__grid .group-delivery {
+    grid-row-start: 1;
+}
+
+.packageForm__grid .group-price {
+    grid-column-start: 1;
+    grid-column-end: 2;
+}
+
+.packageForm__grid .group-delivery {
+    grid-column-start: 2;
+    grid-column-end: 3;
+}
+
+.packageForm__grid .group-description {
+    grid-row-start: 2;
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+
+.packageForm .customAlert {
+    order: 1;
+}
+
+.packageForm .groupButton {
+    order: 2;
+}
+
+.packageFormSwatches .form-group {
+    display: flex;
+    align-items: center;
+}
+
+.packageFormSwatches__img {
+    width: 20px;
+    height: 20px;
+}
+
+.packageFormSwatches__btn {
+    color: inherit;
+}
+
+/* .packageFormSwatches .form-group .formLabel:first-child {
+    margin-right: .2em;
+} */

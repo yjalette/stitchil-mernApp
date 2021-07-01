@@ -15,6 +15,14 @@ const useForm = (initState, submit) => {
         });
     }
 
+    const handleBooleanChange = ({ target, currentTarget }) => {
+        console.log(target.checked, target.value)
+        setInputs({
+            ...inputs,
+            [target.name]: target.checked
+        })
+    }
+
     const handleMultiChange = (name, value) => {
         setInputs({
             ...inputs,
@@ -45,6 +53,7 @@ const useForm = (initState, submit) => {
         setInputs,
         handleChange,
         handleMultiChange,
+        handleBooleanChange,
         handleSubmit,
         handleCancel,
         handleClear,

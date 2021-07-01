@@ -21,6 +21,7 @@ const ProductDraft = () => {
 
 function getProps({ values, updateQuery }) {
     const { item } = values;
+    console.log(values)
     return {
         isDisabled: (form_name) => {
             if (form_name !== "overview" && !item) return true

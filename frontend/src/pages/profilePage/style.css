@@ -90,7 +90,7 @@
     padding: var(--padding-box);
 }
 
-.profile-rightComlun .boxWrapper {
+.profile-rightComlun > .boxWrapper {
     min-height: 300px;
     display: flex;
     flex-direction: column;
@@ -140,13 +140,19 @@
     display: none;
 }
 
+.profileSection_draft_wrapper .listItem__field::after {
+    content: "";
+}
+
 .profileSection_draft_btn {
-    display: flex;
-    justify-content: space-between;
+    display: inline-flex;
+    float: right;
+
+    /* justify-content: space-between;
     padding: 2rem;
     text-align: left;
     background-color: var(--main-color-dark);
-    border-radius: var(--border-radius);
+    border-radius: var(--border-radius); */
 }
 
 @media (max-width: 992px) {
@@ -201,7 +207,7 @@
         padding: 1rem 0;
     }
 
-    .profile-rightComlun .boxWrapper {
+    .profile-rightComlun > .boxWrapper {
         min-height: 200px;
     }
 }

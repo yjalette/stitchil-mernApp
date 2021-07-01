@@ -1,3 +1,5 @@
+import gql from 'graphql-tag';
+
 export const PRODUCT_QUERY = gql`
         query Product($itemId: ID){
             product(itemId: $itemId) {      
@@ -6,14 +8,12 @@ export const PRODUCT_QUERY = gql`
                         _id
                         title
                         description
-                        style
                         coverImage
                         gallery
                         garment
                         active
                         group
                         category
-                        keywords
                     }
                   
                     updatedAt

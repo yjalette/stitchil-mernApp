@@ -9,6 +9,7 @@ import CustomAlert from '../../layout/CustomAlert'
 import { useToggle } from '../../custom_hooks/useToggle'
 import BoxWrapper from '../../layout/BoxWrapper'
 import GroupButton from '../../layout/button/GroupButton'
+import ItemDelete from './ItemDelete'
 
 const ItemPublish = ({ children, validate }) => {
     const [published, setPublished] = useToggle(false)
@@ -43,15 +44,19 @@ const ItemPublish = ({ children, validate }) => {
     return (
         <>
             {children}
-            <BoxWrapper >
+            {/* <BoxWrapper > */}
+            <GroupButton group_class="itemPublish__buttons">
+                <ItemDelete group="gig" />
                 <CustomButton
-                    btn_class="btn-click float-right"
+                    btn_class="btn-click"
                     btn_otherProps={{
                         disabled: !published && !validate()
                     }}
                     onClick={handleClick}
                 >publish</CustomButton>
-            </BoxWrapper>
+            </GroupButton>
+
+            {/* </BoxWrapper> */}
         </>
     )
 }

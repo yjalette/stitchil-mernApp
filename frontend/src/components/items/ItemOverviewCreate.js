@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useMutation } from '@apollo/react-hooks';
 import { useParams, useHistory } from 'react-router';
 import { initState_overview } from '../../constants/initStates';
@@ -18,12 +18,20 @@ const ItemOverviewCreate = () => {
     const { push } = useHistory()
     const {
         inputs,
+        setInputs,
         handleChange,
         handleMultiChange,
         handleSubmit,
         errors,
         setErrors,
-    } = useForm(initState_overview[group], onSubmit);
+    } = useForm({}, onSubmit);
+
+    useEffect(() => {
+        if (section) {
+            console.log(section)
+            setInputs(initState_overview[group])
+        }
+    }, [section])
 
     const [post] = useMutation(mutations["CREATE"], {
         onCompleted: data => {
@@ -37,13 +45,14 @@ const ItemOverviewCreate = () => {
         }
     });
 
+    console.log(inputs)
     function onSubmit() {
         const notValid = Object.keys(inputs).find(k => !isNotEmpty(inputs[k]))
+        console.log(notValid, Object.keys(errors))
         if (notValid) return setErrors({
             ...errors,
-            form_error: `all fields must be filled`
+            form_error: `All fields must be filled`
         })
-
         else {
             post({
                 variables: {

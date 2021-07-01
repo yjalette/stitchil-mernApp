@@ -7,24 +7,10 @@ const gigSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Item'
     },
-    variants: [
+    packages: [
         {
-            price: {
-                type: Number,
-                required: false
-            },
-            fabric: {
-                type: Array,
-                required: false
-            },
-            color: {
-                type: Array,
-                required: false
-            },
-            delivery: {
-                type: Number,
-                required: false
-            }
+            type: Schema.Types.ObjectId,
+            ref: 'Package'
         }
     ],
     creator: {

@@ -3,14 +3,15 @@ import { useMutation } from '@apollo/react-hooks';
 import { initState_overview } from '../../constants/initStates';
 import { transformInputs } from './helpers';
 import { useToggle } from '../../custom_hooks/useToggle';
+import { isNotEmpty } from '../../validation/is_obj_empty';
 import useForm from '../../custom_hooks/useForm';
 import mutations from './graphql/mutations';
 import ItemOverviewForm from './ItemOverviewForm';
 import ActionStatus from '../notification/ActionStatus';
 
 const ItemOverviewUpdate = ({ item, updateQuery }) => {
-    const init = item && item.group ? initState_overview[item.group] : {};
     const [saved, setSaved] = useToggle(false);
+    const init = item ? initState_overview[item.group] : {};
     const {
         inputs,
         setInputs,
@@ -18,7 +19,7 @@ const ItemOverviewUpdate = ({ item, updateQuery }) => {
         handleMultiChange,
         handleSubmit,
         errors,
-        setErrors } = useForm(init, onSubmit);
+        setErrors } = useForm({}, onSubmit);
 
     const [post, { error }] = useMutation(mutations["UPDATE"], {
         onCompleted: async data => {
@@ -26,8 +27,8 @@ const ItemOverviewUpdate = ({ item, updateQuery }) => {
                 await updateQuery((prev, res) => {
                     return {
                         ...prev,
-                        gig: {
-                            ...prev.gig,
+                        [inputs.group]: {
+                            ...prev[inputs.group],
                             item: inputs
                         }
                     }
@@ -41,13 +42,15 @@ const ItemOverviewUpdate = ({ item, updateQuery }) => {
         if (item) setInputs(item)
     }, [item])
 
+    console.log(inputs)
+
     function onSubmit() {
-        // const emptyInputs = validate(inputs);
-        // if (emptyInputs.length > 0) return setErrors({
-        //     ...errors,
-        //     form_error: `${emptyInputs.join(", ")} can't be empty`
-        // })
-        post({
+        const notValid = Object.keys(init).find(k => !isNotEmpty(inputs[k]))
+        if (notValid) return setErrors({
+            ...errors,
+            form_error: `All fields must be filled`
+        })
+        else post({
             variables: {
                 itemInput: transformInputs(inputs), itemId: item._id
             }

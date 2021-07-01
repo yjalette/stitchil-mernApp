@@ -9,6 +9,7 @@ import CustomForm from '../../layout/CustomForm';
 import { useToggle } from '../../custom_hooks/useToggle';
 import { item_section } from './constants';
 import BoxWrapper from '../../layout/BoxWrapper';
+import CustomModal from '../../layout/CustomModal';
 
 const ItemDelete = ({ group }) => {
     const { user } = useContext(AuthContext)
@@ -31,22 +32,29 @@ const ItemDelete = ({ group }) => {
         post({ variables: { itemId } });
     }
 
+
     return (
-        <SectionWrapper section_class="item delete">
-            <BoxWrapper>
-                {!idDeleted ?
-                    <>
-                        <h5>Do you want to delete this item?</h5>
+        <CustomModal
+            modal_size="sm"
+            modal_title="delete item"
+            btn_class="btn-click red"
+            btn_title="delete"
+
+        >
+            {!idDeleted ?
+                <>
+                    <h5>Do you want to delete this item?
                         <CustomForm
                             form_class="itemForm-delete"
                             submitTitle="delete"
                             onSubmit={handleDelete}
                         />
-                    </>
-                    :
-                    <h5>Item was successfully deleted. You are being redirected to your profile page</h5>}
-            </BoxWrapper>
-        </SectionWrapper>
+                    </h5>
+
+                </>
+                :
+                <h5>Item was successfully deleted. You are being redirected to your profile page</h5>}
+        </CustomModal>
     )
 
 }

@@ -7,7 +7,7 @@ const SwitchCheckBox = ({ label, value, onChange }) => (
         type="switch"
         id="custom-switch"
         label={label}
-        onChange={(e) => console.log(e.target.checked) || onChange}
+        onChange={({ target }) => console.log(target)}
         checked={value ? value : true}
         custom
     />

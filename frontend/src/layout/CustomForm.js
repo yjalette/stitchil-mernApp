@@ -11,6 +11,7 @@ const CustomForm = ({
     form_msg,
     form_error,
     submitTitle,
+    cancelTitle,
     onSubmit,
     onCancel,
     children }) => (
@@ -22,7 +23,7 @@ const CustomForm = ({
         {form_msg && <CustomAlert>{form_msg} </CustomAlert>}
         {children}
         <GroupButton group_class="customForm__groupButton">
-            {onCancel && <CustomButton onClick={onCancel} btn_class="btn-form cancel">cancel</CustomButton>}
+            {onCancel && <CustomButton onClick={onCancel} btn_class="btn-form cancel">{cancelTitle || "cancel"}</CustomButton>}
             <Button
                 type="submit"
                 className="btn-form"

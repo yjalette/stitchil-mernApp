@@ -1,15 +1,3 @@
-.newVar-btn {
-    padding-bottom: 3rem;
-
-    /* align-self: flex-start; */
-}
-
-.gigVariant-wrapper {
-    padding: 1rem;
-    margin: 1rem;
-    background-color: var(--main-color-light);
-}
-
 .content-section.gigPublish {
     flex-direction: row;
     flex-wrap: wrap;
@@ -56,4 +44,9 @@
 
 .gigPublish .images-box {
     display: flex;
+}
+
+.gigGrid__gallery .swiperSlide {
+    width: 100%;
+    height: 450px;
 }

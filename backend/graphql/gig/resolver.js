@@ -9,6 +9,7 @@ const Item = require("../../models/item");
 module.exports = {
     Query: {
         gig: async (_, { itemId }, { userId }) => {
+            // const gigs = await Gig.find({ "variants": { $exists: true, $not: { $size: 0 } } }
             return await Gig.findOne({ item: itemId }).populate({ path: "item" })
         },
         explore_gigs: async (_, { filters, page }, { res }) => {
@@ -22,26 +23,22 @@ module.exports = {
         },
         view_gigs_item: async (_, { id }, req) => {
             return await Gig.findById(id);
-        },
-        gig_variants: async (_, { itemId }, req) => {
-            const gig = await Gig.findOne({ item: itemId })
-            return gig ? gig.variants : []
         }
     },
     Mutation: {
-        create_gig_variant: async (_, { variantInput, itemId }, { userId }) => {
-            if (!userId) throw new Error("unauthenticated");
-            await Gig.findOneAndUpdate({ item: itemId }, { $push: { variants: variantInput } })
-            return true
-        },
-        update_gig_variant: async (_, { variantInput, itemId }, { userId }) => {
-            if (!userId) throw new Error("unauthenticated");
-            await Gig.updateOne(
-                { "variants._id": variantInput._id },
-                { $set: { "variants.$": variantInput } }
-            )
-            return true
-        }
+        // create_gig_variant: async (_, { variantInput, itemId }, { userId }) => {
+        //     if (!userId) throw new Error("unauthenticated");
+        //     await Gig.findOneAndUpdate({ item: itemId }, { $push: { variants: variantInput } })
+        //     return true
+        // },
+        // update_gig_variant: async (_, { variantInput, itemId }, { userId }) => {
+        //     if (!userId) throw new Error("unauthenticated");
+        //     await Gig.updateOne(
+        //         { "variants._id": variantInput._id },
+        //         { $set: { "variants.$": variantInput } }
+        //     )
+        //     return true
+        // }
     }
 }
 

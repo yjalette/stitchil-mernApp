@@ -6,7 +6,9 @@ const { deleteSingleFile, multiUpload } = require("../../helpers/uploadToCloud")
 module.exports = {
     Query: {
         item: async (_, { itemId }, req) => {
-            return await Item.findById(itemId)
+            const item = await Item.findById(itemId)
+            console.log(item)
+            return item
         }
     },
     Mutation: {

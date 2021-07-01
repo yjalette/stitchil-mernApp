@@ -1,0 +1,41 @@
+.swatchLibrary-section {
+    padding: 0;
+}
+
+.swatchLibrary__img, .swatchUpload__img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+
+.swatchLibrary__create-box, .swatchLibrary-box {
+    height: 200px;
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.swatchLibrary-section, .swatchLibrary-popover-box {
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.swatchLibrary-popover {
+    z-index: 10000;
+    max-width: 150px;
+}
+
+.swatchLibrary-popover-box .listItem {
+    width: auto;
+}
+
+.swatchLibrary-popover-box .listItem:not(:last-child)::after {
+    content: ",";
+    margin-right: .25em;
+}
+
+.swatchLibrary-popover-box .listItem span {
+    color: var(--main-color);
+}

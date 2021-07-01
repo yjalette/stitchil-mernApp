@@ -14,7 +14,6 @@ query item($itemId: ID){
        garment
         category
         style
-        keywords
         createdAt
         
     }
