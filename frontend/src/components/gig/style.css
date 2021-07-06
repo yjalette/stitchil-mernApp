@@ -6,6 +6,7 @@
 
 .content-section.gigPublish .boxWrapper {
     width: 100%;
+    margin-left: .5rem;
 }
 
 /* .content-section.gigPublish .sectionHeader {
@@ -19,11 +20,8 @@
 }
 
 .content-section.gigPublish .listItem {
-    width: auto;
-}
-
-.content-section.gigPublish .listItem + .listItem {
-    margin-left: .5rem;
+    /* width: auto;
+    margin-left: .5rem; */
 }
 
 .content-section.gigPublish .listItem:not(:last-child)::after {

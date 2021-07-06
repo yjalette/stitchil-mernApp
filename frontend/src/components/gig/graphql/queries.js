@@ -19,6 +19,15 @@ export const GIG_QUERY = gql`
                         category
                         occasion
                     }
+                    packages {
+                        _id
+                        itemId
+                        type
+                        swatches 
+                        price
+                        delivery
+                        description
+                    }
                     updatedAt
         }  
     }

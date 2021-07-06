@@ -6,11 +6,21 @@ import { initState_package } from '../../constants/initStates'
 import useForm from '../../custom_hooks/useForm'
 import PackageForm from './PackageForm'
 
-const PackageCreate = ({ type, addNewPackageCache }) => {
+const PackageCreate = ({ type, updateQuery }) => {
     const { itemId } = useParams()
     const [post] = useMutation(PACKAGE_CREATE_MUTATION, {
         onCompleted: data => {
-            if (data) addNewPackageCache(data.create_package)
+            if (data) {
+                const newPackage = data.create_package;
+                updateQuery(prev => {
+                    return {
+                        gig: {
+                            ...prev.gig,
+                            packages: [...prev.gig.packages, newPackage]
+                        }
+                    }
+                })
+            }
         }
     });
     const { inputs,

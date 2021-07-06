@@ -4,7 +4,6 @@ import CustomForm from '../../layout/CustomForm'
 import FormGroup from '../inputs/FormGroup'
 import FormInput from '../inputs/FormInput'
 import FormTypeahead from '../inputs/FormTypeahead'
-import FormCheckBox from '../inputs/FormCheckBox'
 import CustomModal from '../../layout/CustomModal'
 import SwatchUpload from './SwatchUpload'
 import "./style.css"
@@ -16,7 +15,7 @@ const SwatchForm = ({ inputs, onSubmit, onChange, onMultiChange, handleUpload, h
             modal_size="md"
             modal_title={`${inputs._id ? "update" : "create"} swatch`}
             modal_class="swatchForm__modal"
-            btn_class={`${inputs._id ? `btn-icon fas fa-edit` : "btn-icon-text fas fa-plus"}`}
+            btn_class={`${inputs._id ? `btn-icon-plain fas fa-edit` : "btn-icon-text fas fa-plus"}`}
             btn_title={inputs._id ? `` : "swatch"}
             timeOut={closeModal && 3000}
         >

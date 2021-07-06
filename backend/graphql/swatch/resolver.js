@@ -10,7 +10,7 @@ module.exports = {
     Query: {
         swatches: async (_, { ids }, { userId }) => {
             const swatches = await Swatch.find({ _id: { $in: ids } })
-            console.log(swatches)
+            // console.log(swatches)
             return swatches
         },
         swatch_library: async (_, { }, { userId }) => {

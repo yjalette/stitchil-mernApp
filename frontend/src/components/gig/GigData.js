@@ -6,7 +6,7 @@ import { GIG_QUERY } from './graphql/queries'
 const GigData = ({ compReceiver }) => {
     const { itemId } = useParams()
     const [values, setValues] = useState({})
-    const { data, updateQuery } = useQuery(GIG_QUERY, {
+    const { data, updateQuery, loading } = useQuery(GIG_QUERY, {
         variables: { itemId },
         skip: !itemId
     });
@@ -15,7 +15,7 @@ const GigData = ({ compReceiver }) => {
         if (data) setValues(data.gig)
     }, [data])
 
-    // if (!data || !data.gig) return <div>loading ...</div>
+    if (loading) return <div>loading ...</div>
 
     const result = compReceiver({ values, updateQuery })
 

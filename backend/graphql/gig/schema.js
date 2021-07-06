@@ -11,7 +11,7 @@ type GigResult {
 type Gig {
     _id: ID
     item: Item
-    packages: [ID]
+    packages: [Package]
     creator: AuthData
     createdAt: String
     updatedAt: String

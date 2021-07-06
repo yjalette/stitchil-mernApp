@@ -7,6 +7,8 @@
 }
 
 .itemUpload__list {
+    min-height: 50vh;
+    height: 100%;
     width: 100%;
     display: flex;
     flex-wrap: wrap;
@@ -58,7 +60,7 @@
     margin: .5rem;
 }
 
-.itemUpload__img, .itemUpload__img__wrapper {
+.itemUpload__img, .itemUpload__img__wrapper, .itemUpload__icon {
     width: 150px;
     height: 150px;
     object-fit: cover;
@@ -66,9 +68,7 @@
 }
 
 .itemUpload__icon {
-    width: 70px;
-    height: 70px;
-    margin: auto;
+    padding: 2em;
 }
 
 .item-cover {
@@ -242,7 +242,7 @@
 }
 
 .itemPublish__buttons {
-    align-items: flex-end;
+    justify-content: flex-end;
 }
 
 .itemPublish__buttons button + button {

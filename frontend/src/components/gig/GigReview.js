@@ -11,7 +11,7 @@ import PictureZoom from '../pictures/PictureZoom'
 import "./style.css"
 
 const GigReview = (props) => {
-    const { overview, images } = props;
+    const { overview, images, packages } = props;
     const { currForm } = useParams()
     const { pathname } = useLocation()
     const { push } = useHistory();
@@ -40,8 +40,7 @@ const GigReview = (props) => {
                     </BoxWrapper>
                     {displayHeader("images", handleClick)}
                     <BoxWrapper box_class="images">
-                        {images
-                            && images.length > 0
+                        {images && images.length > 0
                             ?
                             images.map((url, index) => <PictureZoom
                                 key={index}
@@ -51,18 +50,18 @@ const GigReview = (props) => {
                             displayAlert("images")
                         }
                     </BoxWrapper>
-                    {/* {displayHeader("variants", handleClick)}
-                    <BoxWrapper box_class="variants">
-                        {variants
-                            && variants.length > 0
+                    {displayHeader("packages", handleClick)}
+                    <BoxWrapper box_class="packages">
+                        {packages
+                            && packages.length > 0
                             ?
-                            variants.map((variant, index) => <GigVariantItem
-                                key={index}
-                                variant={variant} />)
+                            packages.map((pack, index) => <div key={index}>
+                                <ListItem key={index} field={pack.type} content="active" />
+                            </div>)
                             :
-                            displayAlert("variants")
+                            displayAlert("packages")
                         }
-                    </BoxWrapper> */}
+                    </BoxWrapper>
                 </SectionWrapper>
             </ItemPublish>
         </>
@@ -75,10 +74,10 @@ function displayHeader(title, onClick) {
     return (
         <SectionHeader title={title}>
             <CustomButton
-                btn_class="btn-icon ml-3"
-                icon="fas fa-pencil-alt"
+                btn_class="btn-icon-plain fas fa-pencil-alt my-auto"
                 btn_otherProps={{
-                    name: title
+                    name: title,
+                    title: `edit ${title}`
                 }}
                 onClick={onClick}
             ></CustomButton>

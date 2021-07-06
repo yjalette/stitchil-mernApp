@@ -68,7 +68,7 @@ const ItemOverviewCreate = () => {
         <CustomModal
             modal_title={`${section} - new item`}
             modal_size={newItem[section].modal_size}
-            btn_class="btn-icon-text fas fa-plus profileCreate-btn"
+            btn_class="btn-icon-plain fas fa-plus profileCreate-btn"
             btn_otherProps={{
                 title: "create"
             }}

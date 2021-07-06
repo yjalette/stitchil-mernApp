@@ -69,8 +69,7 @@ const ProfileItems = ({ values }) => {
                                     placement="left-end"
                                     popover_class="warning">
                                     <CustomButton
-                                        btn_class="btn-icon"
-                                        icon="fa fa-heart" />
+                                        icon="btn-icon fa fa-heart" />
                                 </CustomPopover>}
                         </>)
                 }
@@ -79,11 +78,13 @@ const ProfileItems = ({ values }) => {
                 <SectionHeader title={`Drafts (${draftValues.length})`} />
                 {draftValues.map((item, index) => (
                     <BoxWrapper key={index} box_class="profileSection_draft">
-                        <ListItem field={item.title} content={dateHelper(item.updatedAt)} item_class="profileSection_draft_wrapper" >
+                        <ListItem
+                            field={item.title}
+                            content={dateHelper(item.updatedAt)}
+                            item_class="profileSection_draft_wrapper" >
                             <CustomButton
                                 onClick={() => handleEdit(item)}
-                                icon={"fa fa-edit"}
-                                btn_class="btn-icon profileSection_draft_btn">
+                                btn_class="btn-icon-plain fas fa-edit profileSection_draft_btn">
                             </CustomButton>
                         </ListItem>
                     </BoxWrapper>

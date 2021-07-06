@@ -48,7 +48,7 @@ const CustomModal = ({
                 <Modal.Title>{modal_title}</Modal.Title>
                 <CustomButton
                     onClick={handleClose}
-                    btn_class="btn-close customModal__btn-close" />
+                    btn_class="btn-icon-plain fas fa-times customModal__btn-close" />
             </Modal.Header>
             <Modal.Body scrollable="true"> {children}</Modal.Body>
             {modal_footer && <Modal.Footer className="customModal__footer">{modal_footer}</Modal.Footer>}

@@ -2,7 +2,15 @@ import gql from 'graphql-tag';
 
 export const PACKAGE_UPDATE_MUTATION = gql`
     mutation update_package($packageInput: PackageInput, $itemId: ID){
-        update_package(packageInput: $packageInput, itemId: $itemId) 
+        update_package(packageInput: $packageInput, itemId: $itemId) {
+            _id
+            itemId
+            type
+            swatches 
+            price
+            delivery
+            description
+        }
 }     
 `;
 

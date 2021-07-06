@@ -15,13 +15,12 @@ module.exports = {
                 ...packageInput,
                 itemId
             }).save();
-            await Gig.findOneAndUpdate({ itemId }, { $push: { packages: package._id } })
+            await Gig.findOneAndUpdate({ item: itemId }, { $push: { packages: package._id } })
             return package
         },
         update_package: async (_, { packageInput }, { userId }) => {
             if (!userId) throw new Error("unauthenticated");
-            await Package.updateOne({ _id: packageInput._id }, packageInput)
-            return true
+            return await Package.findOneAndUpdate({ _id: packageInput._id }, packageInput, { new: true })
         }
     }
 }

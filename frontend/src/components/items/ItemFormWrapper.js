@@ -7,6 +7,7 @@ import SectionWrapper from '../../layout/SectionWrapper'
 import SectionNav from '../navbar/SectionNav'
 
 const ItemFormWrapper = ({ forms, isDisabled }) => {
+    console.log(forms)
     const { currForm } = useParams();
     const { activeSlide, setActiveIndex } = useSlides(
         0, Object.values(forms)

@@ -6,6 +6,7 @@ import { useToggle } from '../../custom_hooks/useToggle';
 import mutations from './graphql/mutations';
 import PictureZoom from '../pictures/PictureZoom';
 import CustomButton from '../../layout/button/CustomButton';
+import CustomPopover from '../../layout/CustomPopover';
 import useUpload from '../../custom_hooks/useUpload';
 import ItemFormNextStep from './ItemFormNextStep';
 import ActionStatus from '../notification/ActionStatus';
@@ -49,14 +50,14 @@ const ItemUpload = ({ action, gallery, children, group }) => {
                                     btn_class="fas fa-times btn-icon-text btn-red pt-1"
                                     onClick={() => clearUpload(index)} />
                             </div>)}
-                        {<div {...getRootProps()} className="item-upload-wrapper">
+                        <div {...getRootProps()} className="item-upload-wrapper">
                             <input {...getInputProps({ className: 'dropzone' })} multiple={true} />
                             <Image
-                                title="click to upload"
+                                title="upload (max 5 images)"
                                 src="https://res.cloudinary.com/dgxa9gpta/image/upload/v1602093311/Icons/upload-icon_eqsr6c.svg"
-                                className="itemUpload__icon" alt="icon upload" />
-                            <span className={`${overLimit ? "error" : "text-muted"} ml-2`}>max 5 uploads</span>
-                        </div>}
+                                className="itemUpload__icon " alt="icon upload" />
+                            {/* <span className={`${overLimit ? "error" : "text-muted"} ml-2`}>max 5 uploads</span> */}
+                        </div>
                     </div>
                     <CustomButton
                         btn_class="btn-form float-right"

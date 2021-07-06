@@ -37,6 +37,17 @@ type Comment{
     createdAt: String
 }
 
+type Package {
+    _id: ID
+    type: String
+    itemId: ID
+    price: Int
+    delivery: Int
+    swatches: [ID]
+    description: String
+}
+
+
 type Failure {
     code: Int
     type: String

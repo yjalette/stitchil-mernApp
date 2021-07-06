@@ -31,10 +31,10 @@ const ItemPublish = ({ children, validate }) => {
         return (
             <>
                 <CustomAlert variant="success" >
-                    Item was successfully published
+                    Item was successfully published!
                 </CustomAlert>
                 <CustomButton
-                    btn_class="btn-click d-flex m-auto"
+                    btn_class="btn-click flex-center"
                     onClick={handleClick}
                 >view item</CustomButton>
             </>

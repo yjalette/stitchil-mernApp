@@ -7,7 +7,7 @@ import PackageForm from './PackageForm'
 import { initState_package } from '../../constants/initStates'
 import { useToggle } from '../../custom_hooks/useToggle'
 
-const PackageUpdate = ({ item, updateCache }) => {
+const PackageUpdate = ({ item, updateQuery }) => {
     const { itemId } = useParams()
     const { inputs,
         setInputs,
@@ -19,7 +19,21 @@ const PackageUpdate = ({ item, updateCache }) => {
     const [post] = useMutation(PACKAGE_UPDATE_MUTATION, {
         onCompleted: data => {
             if (data) {
-                updateCache(inputs)
+                console.log(data)
+                updateQuery(prev => {
+                    const updated_package = data.update_package
+                    console.log(prev)
+                    const newState = [...prev.gig.packages]
+                    const index = newState.findIndex(val => val.type === updated_package.type);
+                    newState.splice(index, 1, updated_package)
+                    return {
+                        gig: {
+                            ...prev.gig,
+                            packages: newState
+                        }
+                    }
+                })
+                // updateCache(inputs)
                 toggle(true)
             }
         }

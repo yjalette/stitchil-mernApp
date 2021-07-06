@@ -7,7 +7,7 @@ import PackageCreate from './PackageCreate'
 import PackageUpdate from './PackageUpdate'
 import "./style.css"
 
-const PackageGrid = ({ values, updateCache, addNewPackageCache }) => {
+const PackageGrid = ({ values, updateQuery }) => {
     const forms = ["basic", "standard", "premium"]
     const { activeSlide, setActiveIndex, activeIndex } = useSlides(
         0, forms
@@ -20,7 +20,7 @@ const PackageGrid = ({ values, updateCache, addNewPackageCache }) => {
 
     return (
         <>
-            <SectionWrapper section_class="gigVariants">
+            <SectionWrapper section_class="packages">
                 <Row className="w-100">
                     <Col xl={3} sm={3}>
                         <CustomMenu
@@ -31,11 +31,12 @@ const PackageGrid = ({ values, updateCache, addNewPackageCache }) => {
                         />
                     </Col>
                     <Col xl={9} sm={9}>
-                        {values && values.length > 0 && values.find(val => console.log(val) || val.type === activeSlide)
+                        {values && values.length > 0
+                            && values.find(val => val.type === activeSlide)
                             ?
-                            <PackageUpdate item={values[activeIndex]} updateCache={updateCache} />
+                            <PackageUpdate item={values[activeIndex]} updateQuery={updateQuery} />
                             :
-                            <PackageCreate type={activeSlide} addNewPackageCache={addNewPackageCache} />}
+                            <PackageCreate type={activeSlide} updateQuery={updateQuery} />}
                     </Col>
                 </Row>
             </SectionWrapper>
