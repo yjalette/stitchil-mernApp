@@ -12,16 +12,23 @@
     letter-spacing: .5x;
     background-color: transparent;
     border: 1px solid currentColor;
-
-    /* border-radius: var(--border-radius); */
-    width: 100%;
-    max-width: 100px;
+    max-width: 15ch;
+    min-width: 100px;
     padding: var(--padding-elem);
     animation: none;
     text-shadow: var(--text-shadow);
 }
 
-.btn-click:hover {
+.btn-click.selected {
+    background-color: var(--green-color);
+}
+
+.btn-click.preferable {
+    background-color: var(--accent-color);
+    color: var(--main-color);
+}
+
+.btn-click:not(:disabled):hover {
     animation: clickButtonAnim 2s ease-in-out;
 }
 
@@ -113,9 +120,6 @@
 
 .btn-icon-text:not(.btn-star) {
     flex-direction: row-reverse;
-
-    /* background-color: var(--green-color); */
-    /* justify-content: flex-start; */
 }
 
 .btn-icon-text:not(.btn-star)::before {
@@ -138,8 +142,7 @@
 }
 
 .btn-text:disabled, .btn-click:disabled {
-    /* color: var(--secondary-color); */
-    opacity: .6;
+    opacity: .3;
 }
 
 .btn-text:hover, .btn-icon-text:hover {
@@ -154,7 +157,7 @@
 .btn-form {
     min-width: 80px;
     margin: .3em;
-    padding: .2em .4em;
+    padding: .5em .7em;
     background-color: var(--green-color);
     color: var(--white-color);
     font-size: var(--sm-fonts);

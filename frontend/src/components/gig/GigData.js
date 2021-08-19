@@ -1,25 +1,28 @@
 import { useQuery } from '@apollo/react-hooks'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
+import GigContext from '../../context/Gig-context'
 import { GIG_QUERY } from './graphql/queries'
 
-const GigData = ({ compReceiver }) => {
+const GigData = ({ children }) => {
     const { itemId } = useParams()
-    const [values, setValues] = useState({})
+    const [gig, setGig] = useState({})
     const { data, updateQuery, loading } = useQuery(GIG_QUERY, {
         variables: { itemId },
         skip: !itemId
     });
 
     useEffect(() => {
-        if (data) setValues(data.gig)
+        if (data) setGig(data.gig)
     }, [data])
 
-    if (loading) return <div>loading ...</div>
+    if (loading || !data) return <div>loading ...</div>
 
-    const result = compReceiver({ values, updateQuery })
-
-    return result
+    return (
+        <GigContext.Provider value={{ gig, setGig, updateQuery }}>
+            {children}
+        </GigContext.Provider>
+    )
 }
 
 export default GigData

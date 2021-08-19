@@ -13,6 +13,12 @@ const gigSchema = new Schema({
             ref: 'Package'
         }
     ],
+    shipping_options: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Shipping'
+        }
+    ],
     creator: {
         type: Schema.Types.ObjectId,
         ref: 'User'

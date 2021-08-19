@@ -37,14 +37,64 @@ type Comment{
     createdAt: String
 }
 
+type Item {
+    _id: ID
+    group: String
+    title: String
+    description: String
+    service: [String]
+    category: [String]
+    garment: [String]
+    occasion: [String]
+    style: [String]
+    coverImage: String
+    gallery: [String]
+    active: Boolean 
+    creator: AuthData
+    createdAt: String
+    updatedAt: String
+}
+
 type Package {
     _id: ID
-    type: String
     itemId: ID
+    type: String
     price: Int
     delivery: Int
-    swatches: [ID]
+    fabrics: [Fabric]
     description: String
+}
+
+type Shipping {
+    _id: ID
+    itemId: ID
+    shippingCarrier: String
+    mailClass: String
+    shippingPrice: Int
+    freeShipping: Boolean
+}
+
+type Order {
+    _id: ID
+    item: Item
+    buyer: AuthData
+    seller: AuthData
+    package: Package
+    fabric: Fabric
+    shipping: Shipping
+    shippingAddress: Address
+    orderStatus: String
+    createdAt: String
+}
+
+type Address {
+    _id: ID
+    address1: String
+    address2: String 
+    city: String
+    state: String
+    zip: Int
+    country: String
 }
 
 
@@ -71,7 +121,6 @@ type Error {
     field: String
     message: String
 }
-
 
 
 `;

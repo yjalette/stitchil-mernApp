@@ -225,7 +225,7 @@
     color: var(--red-color);
 }
 
-.itemForm-box {
+.boxWrapper--itemForm {
     min-height: 700px;
     width: 100%;
 }

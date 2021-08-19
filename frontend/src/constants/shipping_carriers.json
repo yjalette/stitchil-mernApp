@@ -1,0 +1,22 @@
+{
+    "USPS": [
+        "Priority Mail Express",
+        "Priority Mail",
+        "First-Class Mail",
+        "Parcel Select Ground"
+    ],
+    "UPS": [
+        "UPS Ground",
+        "UPS Two Day",
+        "UPS Express"
+    ],
+    "FEDEX": [
+        "FedEx First Overnight",
+        "FedEx Priority Overnight",
+        "FedEx Standard Overnight",
+        "FedEx 2Day® A.M",
+        "FedEx 2Day",
+        "FedEx Home Delivery",
+        "FedEx Ground"
+    ]
+}

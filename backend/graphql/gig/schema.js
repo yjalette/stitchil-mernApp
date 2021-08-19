@@ -12,6 +12,7 @@ type Gig {
     _id: ID
     item: Item
     packages: [Package]
+    shipping_options: [Shipping]
     creator: AuthData
     createdAt: String
     updatedAt: String

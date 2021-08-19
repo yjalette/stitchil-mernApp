@@ -6,7 +6,12 @@ query packages($itemId: ID){
             _id
             itemId
             type
-            swatches 
+            fabrics {
+                name
+                color
+                content
+                image
+            }
             price
             delivery
             description

@@ -40,8 +40,8 @@
     "react-scripts": "^4.0.0",
     "react-scroll": "^1.8.1",
     "react-star-rating-component": "^1.4.1",
-    "subscriptions-transport-ws": "^0.9.18",
-    "swiper": "^6.4.10",
+    "subscriptions-transport-ws": "^0.10.0",
+    "swiper": "^6.8.2",
     "typescript": "^4.0.2",
     "use-position": "0.0.8",
     "zipcodes": "^8.0.0"

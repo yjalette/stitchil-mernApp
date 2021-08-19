@@ -4,12 +4,12 @@ import "./style.css";
 
 class CustomPopover extends Component {
     render() {
-        const { trigger, placement, title, content, children, popover_class } = this.props;
+        const { trigger, placement, title, content, children, popover_class, mod_class } = this.props;
         return (
             <OverlayTrigger
                 trigger={trigger}
                 placement={placement}
-                overlay={<Popover className={`customPopover ${popover_class}`}>
+                overlay={<Popover className={`customPopover customPopover--${mod_class} ${popover_class}`}>
                     {title && <Popover.Title className="customPopover__title" as="h3">{title}</Popover.Title>}
                     <Popover.Content className="customPopover__content">{content}</Popover.Content>
                 </Popover>}>

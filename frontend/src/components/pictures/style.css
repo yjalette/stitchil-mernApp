@@ -9,11 +9,10 @@
     background-repeat: no-repeat;
 }
 
-.thumb-img {
-    height: 25px;
-    width: 25px;
+.thumb {
+    height: 100px;
+    width: 100px;
     object-fit: cover;
-    margin: auto .1em;
 }
 
 .zoom-img__wrapper {

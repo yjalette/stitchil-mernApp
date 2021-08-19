@@ -1,4 +1,4 @@
-.profile-page .sectionHeader__title {
+.pageWrapper--profile .sectionHeader__title {
     margin-bottom: 0;
     margin-right: .5em;
 }
@@ -74,7 +74,7 @@
     z-index: 1000;
 }
 
-.profileIntro-box .listItem {
+.boxWrapper--profileIntro .listItem {
     margin: .5rem 0;
 }
 

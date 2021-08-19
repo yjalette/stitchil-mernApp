@@ -5,9 +5,9 @@ import ThumbGallery from '../../layout/ThumbGallery'
 import BoxWrapper from '../../layout/BoxWrapper'
 import ListItem from '../../layout/ListItem'
 
-const ItemDetails = ({ item }) => {
+const ItemDetails = ({ item, children }) => {
     return (
-        <Row className="itemDetails w-100">
+        <Row className="itemDetails">
             <Col lg={8} className="itemDetails__col itemDetails-gallery">
                 {item.gallery && <ThumbGallery
                     items={item.gallery}
@@ -23,7 +23,7 @@ const ItemDetails = ({ item }) => {
                     <ListItem field="style" content={item.style} />
                     <ListItem field="occasion" content={item.occasion} />
                 </BoxWrapper>
-                {/* <ItemUpdate item={item} /> */}
+                {children}
             </Col>
         </Row>
     )

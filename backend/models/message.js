@@ -18,6 +18,16 @@ const messageSchema = new Schema({
         type: String,
         required: false
     },
+    attachments: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'File'
+        }
+    ],
+    type: {
+        type: String,
+        required: false
+    },
     seen: {
         type: Boolean,
         required: false

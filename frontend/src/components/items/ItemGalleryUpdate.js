@@ -25,6 +25,7 @@ const ItemGalleryUpdate = ({ prevFiles, group, updateQuery }) => {
             action="update"
             group={group}
             gallery={gallery}
+            updateQuery={updateQuery}
         >
             {gallery && gallery.map((item, index) => {
                 return (

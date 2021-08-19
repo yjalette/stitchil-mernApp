@@ -38,7 +38,7 @@ export const CREATE_GIGS_ITEM_MUTATION = gql`
             delivery
             category
             styles
-            swatches
+            fabrics
             createdAt
         }
     }

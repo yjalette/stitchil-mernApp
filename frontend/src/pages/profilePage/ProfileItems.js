@@ -8,7 +8,6 @@ import ProfileReviews from './ProfileReviews';
 import ItemList from '../../components/items/ItemList';
 import CustomPopover from '../../layout/CustomPopover';
 import messages from '../../constants/messages'
-import ButtonEdit from '../../layout/button/ButtonEdit';
 import SectionHeader from '../../layout/SectionHeader';
 import ItemOverviewCreate from '../../components/items/ItemOverviewCreate';
 import dateHelper from '../../helpers/dateHelper';
@@ -27,14 +26,13 @@ const ProfileItems = ({ values }) => {
 
     const activeValues = values && values.filter(val => val.active === true);
     const draftValues = logged_in_user && values && values.filter(val => val.active === false);
-
+    console.log(values)
     return (
         <>
             <SectionHeader title={`${section} (${activeValues.length})`} >
                 {logged_in_user &&
                     <>
                         {values && values.length > 20 ?
-
                             <CustomPopover
                                 content="max 6 items"
                                 trigger="click"
@@ -61,7 +59,9 @@ const ProfileItems = ({ values }) => {
                     sideMenu: (
                         <>
                             {logged_in_user ?
-                                <ButtonEdit onClick={() => handleEdit(item)} />
+                                <CustomButton
+                                    onClick={() => handleEdit(item)}
+                                    btn_class=" fas fa-edit btn-icon-plain profileCreate-btn" />
                                 :
                                 <CustomPopover
                                     content={messages.demo}
@@ -69,7 +69,7 @@ const ProfileItems = ({ values }) => {
                                     placement="left-end"
                                     popover_class="warning">
                                     <CustomButton
-                                        icon="btn-icon fa fa-heart" />
+                                        btn_class="btn-icon fa fa-heart" />
                                 </CustomPopover>}
                         </>)
                 }
@@ -77,7 +77,7 @@ const ProfileItems = ({ values }) => {
             {logged_in_user && <>
                 <SectionHeader title={`Drafts (${draftValues.length})`} />
                 {draftValues.map((item, index) => (
-                    <BoxWrapper key={index} box_class="profileSection_draft">
+                    <BoxWrapper key={index} mod_class="profileSection_draft">
                         <ListItem
                             field={item.title}
                             content={dateHelper(item.updatedAt)}

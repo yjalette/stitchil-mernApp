@@ -11,9 +11,9 @@ import messages from "../../constants/messages";
 
 const defaultImg = "https://res.cloudinary.com/dgxa9gpta/image/upload/v1602105102/background/buttons_nd9vx1.jpg"
 
-const ProfileHeader = ({ coverImage, profileImage, fullname, country }) => {
-    const { logged_in_user } = useContext(ProfileContext);
-
+const ProfileHeader = () => {
+    const { state, logged_in_user } = useContext(ProfileContext);
+    const { coverImage, profileImage, fullname, country } = state.intro
     if (!logged_in_user) {
         return (
             <>

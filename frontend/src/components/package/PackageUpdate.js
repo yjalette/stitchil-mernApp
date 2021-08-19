@@ -42,24 +42,24 @@ const PackageUpdate = ({ item, updateQuery }) => {
         if (item) setInputs(item)
     }, [item])
 
-    const handleNewSwatch = newSwatch => {
-        console.log(newSwatch)
+    const handleNewFabric = newFabric => {
+        console.log(newFabric)
         setInputs({
             ...inputs,
-            swatches: [...inputs.swatches, newSwatch._id],
+            fabrics: [...inputs.fabrics, newFabric],
         })
     }
 
-    const handleDeleteSwatch = id => {
+    const handleDeleteFabric = id => {
         setInputs({
             ...inputs,
-            swatches: inputs.swatches.filter(swatchId => swatchId !== id)
+            fabrics: inputs.fabrics.filter(fabric => fabric._id !== id)
         })
     }
 
     async function onSubmit() {
-        const { price, delivery, description, swatches } = inputs;
-        if (!price || price === 0 || !delivery || delivery === 0 || description === "" || swatches.length === 0) {
+        const { price, delivery, description, fabrics } = inputs;
+        if (!price || price === 0 || !delivery || delivery === 0 || description === "" || fabrics.length === 0) {
             return setErrors({
                 form_error: "all fields must be filled"
             })
@@ -71,6 +71,7 @@ const PackageUpdate = ({ item, updateQuery }) => {
                 variables: {
                     packageInput: {
                         ...inputs,
+                        fabrics: inputs.fabrics.map(fab => fab._id),
                         __typename: undefined
                     },
                     itemId
@@ -85,8 +86,8 @@ const PackageUpdate = ({ item, updateQuery }) => {
         errors={errors}
         saved={saved}
         onChange={handleChange}
-        addSwatch={handleNewSwatch}
-        deleteSwatch={handleDeleteSwatch}
+        addFabric={handleNewFabric}
+        deleteFabric={handleDeleteFabric}
         onSubmit={handleSubmit}
     />
 }

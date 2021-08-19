@@ -21,14 +21,14 @@ const ItemFormWrapper = ({ forms, isDisabled }) => {
     }, [currForm])
 
     return (
-        <SectionWrapper section_class="itemForm">
+        <SectionWrapper mod_class="itemForm">
             <SectionNav
                 items={Object.keys(forms)}
                 isDisabled={isDisabled}
                 currSection={currForm}
             // nav_class="vertical"
             />
-            <BoxWrapper box_class="itemForm">
+            <BoxWrapper mod_class="itemForm">
                 {activeSlide}
             </BoxWrapper>
         </SectionWrapper>

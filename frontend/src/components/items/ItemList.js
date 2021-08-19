@@ -4,6 +4,7 @@ import ItemSum from './ItemSum'
 import "./style.css"
 
 const ItemList = ({ items, getProps }) => {
+    console.log("here")
     if (!items || items.length < 1) {
         return (
             <CustomAlert

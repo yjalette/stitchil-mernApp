@@ -1,15 +1,12 @@
 import React from 'react';
-import { Form } from 'react-bootstrap';
+import { Form, Select } from 'react-bootstrap';
 import './inputs.css';
 
-const SelectInput = ({ input_props, defaultValue, options }) => (
-    <div className="customSelect__wrapper " >
-        <Form.Control as="select" {...input_props} className="customSelect user-input">
-            <option value="" defaultValue>{defaultValue ? defaultValue : "select"}</option>
-            {options.map(opt => <option key={opt} value={opt} className="dropdown-item" >{opt}</option>)}
-        </Form.Control>
-        <span className="customSelect__arrow"></span>
-    </div>
+const SelectInput = ({ input_props, defaultValue, options, disabled }) => (
+    <Form.Control as="select" {...input_props} className="customSelect user-input">
+        {/* <option value="" className="dropdown-item default" defaultValue>{defaultValue ? defaultValue : "select"}</option> */}
+        {options.map((opt, i) => <option key={opt + i} value={opt} className="dropdown-item" disabled={disabled}>{opt}</option>)}
+    </Form.Control>
 )
 
 export default SelectInput

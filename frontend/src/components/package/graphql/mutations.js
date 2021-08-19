@@ -6,7 +6,12 @@ export const PACKAGE_UPDATE_MUTATION = gql`
             _id
             itemId
             type
-            swatches 
+            fabrics {
+                name
+                color
+                content
+                image
+            }
             price
             delivery
             description
@@ -20,7 +25,12 @@ export const PACKAGE_CREATE_MUTATION = gql`
             _id
             itemId
             type
-            swatches 
+            fabrics {
+                name
+                color
+                content
+                image
+            }
             price
             delivery
             description

@@ -6,7 +6,6 @@ import ListItem from '../../layout/ListItem';
 import UserAvatar from '../user/UserAvatar';
 
 const ItemSum = ({ itemId, header, highlights, coverImage, sideMenu, creator }) => {
-    const { section } = useParams();
     const { push } = useHistory();
     return (
         <Card className="itemSum">
@@ -15,7 +14,7 @@ const ItemSum = ({ itemId, header, highlights, coverImage, sideMenu, creator }) 
                     <CustomButton
                         btn_class="btn-icon-text"
                         icon="fas fa-angle-double-right"
-                        onClick={() => push(`/item/${section || "gigs"}/${itemId}`)}>
+                        onClick={() => push(`/profile-item/gigs/view/${itemId}`)}>
                         {header.title}
                     </CustomButton>
                 </Card.Title>

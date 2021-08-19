@@ -9,7 +9,7 @@ input PackageInput {
     type: String
     price: Int
     delivery: Int
-    swatches: [String]
+    fabrics: [String]
     description: String
 }
 

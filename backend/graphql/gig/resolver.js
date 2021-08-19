@@ -1,6 +1,7 @@
 const Gig = require("../../models/gig");
 const Item = require("../../models/item");
-const Product = require("../../models/product");
+const Shipping = require("../../models/shipping");
+const Address = require("../../models/address");
 /**
  * @param {Object} filters 
  * @param {string} name
@@ -10,7 +11,17 @@ const Product = require("../../models/product");
 module.exports = {
     Query: {
         gig: async (_, { itemId }, { userId }) => {
-            return await Gig.findOne({ item: itemId }).populate({ path: "item" }).populate({ path: "packages" })
+            const gig = await Gig.findOne({ item: itemId })
+                .populate({ path: "item" })
+                .populate({
+                    path: "packages", populate: {
+                        path: "fabrics"
+                    }
+                })
+                .populate({
+                    path: "shipping_options"
+                })
+            return gig
         },
         explore_gigs: async (_, { filters, page }, { res }) => {
             const query = filters && Object.values(filters).length > 0 ? createFilterQuery(filters) : {}

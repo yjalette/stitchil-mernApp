@@ -8,7 +8,7 @@ import './style.css'
 const ExplorePage = () => {
     const { user } = useContext(AuthContext);
     return (
-        <PageWrapper page_class="explore">
+        <PageWrapper >
             <ExploreHeader />
             <ExploreData />
         </PageWrapper>

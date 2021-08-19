@@ -10,18 +10,23 @@
 
 .sectionWrapper {
     width: 100%;
-    min-height: 100%;
+
+    /* height: 100%; */
     display: flex;
     align-items: center;
     flex-direction: column;
-    padding: var(--padding-section);
+    padding: var(--padding-section) 0;
+}
+
+.sectionWrapper + .sectionWrapper {
+    padding-top: 0;
 }
 
 .sectionHeader {
     width: 100%;
     display: flex;
     align-items: center;
-    padding: var(--padding-box);
+    padding: var(--padding-box) 0;
 }
 
 .sectionHeader__title {
@@ -32,13 +37,14 @@
     background-color: var(--main-color);
     filter: brightness(0.95);
     padding: var(--padding-box);
+    max-width: 100%;
 }
 
 .listItem {
     max-width: 100%;
+    width: 75ch;
     display: inline-block;
     line-height: 1.7em;
-    width: 75ch;
 }
 
 .listItem__field, .listItem__icon {
@@ -64,10 +70,11 @@
 }
 
 .customDropdown__btn {
-    text-transform: lowercase;
-    font-size: var(--sm-fonts);
-    font-family: inherit;
     color: var(--light-gray-color);
+    background-color: transparent;
+    font-size: var(--sm-fonts);
+    text-transform: lowercase;
+    font-family: inherit;
     line-height: 1.3em;
     letter-spacing: .1em;
     font-weight: normal;
@@ -78,6 +85,15 @@
     font-weight: 900;
     margin: auto .3rem;
     color: var(--accent-color);
+}
+
+.customDropdown__body .dropdown-item {
+    font-size: 90%;
+    text-align: center;
+}
+
+.customDropdown__body .dropdown-item:not(:last-child) {
+    border-bottom: 1px solid gray;
 }
 
 .imageButton__img {
@@ -257,6 +273,8 @@
 
 .customMenu {
     width: 100%;
+
+    /* border-top: 1px solid var(--light-green-color); */
     border-bottom: 1px solid var(--light-green-color);
     text-align: center;
     margin: auto;
@@ -305,8 +323,8 @@
     height: 100px;
     border-left: 12px solid transparent;
     border-right: 12px solid transparent;
-    border-bottom: 12px solid var(--light-green-color);
-    bottom: 0;
+    border-top: 12px solid var(--light-green-color);
+    top: 0;
 }
 
 .customMenu.vertical .active::after {
@@ -321,6 +339,15 @@
     border-top: 12px solid transparent;
     border-bottom: 12px solid transparent;
     border-right: 12px solid var(--light-green-color);
+}
+
+.customAccord {
+    /* display: flex; */
+    padding: 3em;
+}
+
+.customAccord__title {
+    cursor: pointer;
 }
 
 @media only screen and (max-width: 1600px) {
@@ -354,9 +381,9 @@
         height: 300px;
     }
 
-    .roundCard:hover {
+    /* .roundCard:hover {
         transform: scale(1.2);
-    }
+    } */
 
     .customModal .modal__form {
         padding: 0;

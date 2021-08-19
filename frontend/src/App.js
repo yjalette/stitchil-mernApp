@@ -23,6 +23,11 @@ import ProfileItemPage from './pages/profileItemPage/ProfileItemPage';
 import ChatRoomsPage from './pages/chatRoomsPage/ChatRoomsPage';
 import ProductDraft from './components/product/ProductDraft';
 import GigView from './components/gig/GigView';
+import OrderPage from './pages/orderPage/OrderPage';
+import OrderCreate from './pages/orderPage/OrderCreate';
+import OrderData from './pages/orderPage/OrderData';
+import OrderConfirm from './pages/orderPage/OrderConfirm';
+import DashboardPage from './pages/dashboardPage/DashboardPage';
 
 const userObj = JSON.parse(localStorage.getItem('user'));
 
@@ -45,12 +50,14 @@ const profileComponents = [
 ]
 
 const profileItemComponents = [
-  // { path: "/:group/create/portfolio-item/", children: <ProductCreate /> },
-  // { path: "/update/portfolio-item/:itemId/", children: <ProductUpdate /> },
-  // { path: "/profile-gigs-item/update/:itemId/:currForm/", children: <GigData compReceiver={(props) => <GigUpdate />} /> },
   { path: "/profile-item/gig/draft/:itemId/:currForm/", children: <GigDraft /> },
-  { path: "/profile-item/gig/view/:itemId/", children: <GigView /> },
+  { path: "/profile-item/gigs/view/:itemId/", children: <GigView /> },
   { path: "/profile-item/product/draft/:itemId/:currForm/", children: <ProductDraft /> },
+]
+
+const orderComponents = [
+  { path: "/order-create/:itemId/", children: <OrderCreate /> },
+  { path: "/order/pending/:orderId/", children: <OrderConfirm /> },
 ]
 
 class App extends Component {
@@ -80,7 +87,8 @@ class App extends Component {
             <Route path="/explore/:filter/" component={ExplorePage} />
             <Route exact path="/messages/" component={ChatRoomsPage} />
             <Route path="/messages/:username/" component={ChatRoomsPage} />
-            <Route path="/logout" component={AuthLogout} />
+            <Route path="/dashboard/" component={DashboardPage} />
+            <Route path="/logout/" component={AuthLogout} />
             {authComponents.map((elem, i) => (
               <Route
                 key={i}
@@ -117,6 +125,14 @@ class App extends Component {
                 )}>
                 </Route>
               ))}
+
+              {orderComponents.map((elem, i) => (
+                <Route key={i} path={elem.path} component={() => (
+                  <OrderPage>{elem.children}</OrderPage>
+                )}>
+                </Route>
+              ))}
+
             </Switch>
             <Footer />
           </AuthContext.Provider>

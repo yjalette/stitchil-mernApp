@@ -1,0 +1,62 @@
+.sectionWrapper--orderForm {
+    align-items: flex-start;
+}
+
+.sectionWrapper--orderForm .btn-click {
+    width: 100%;
+    float: right;
+}
+
+.customAccord--orderForm {
+    width: 100%;
+    padding: 1rem;
+}
+
+.customAccord--orderForm .customAccord__body {
+    padding: 0em 3em;
+}
+
+/* .customAccord--orderForm .customAccord__body.show {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+} */
+
+.fabricItem--orderPackage {
+    display: inline;
+}
+
+.orderPackage .listItem {
+    margin: .5em 0;
+}
+
+.orderForm__total > * {
+    margin: 0 .3em;
+}
+
+.orderSummary__img {
+    max-height: 400px;
+    max-width: 100%;
+    object-fit: cover;
+}
+
+.sectionWrapper--orderForm .boxWrapper--address, .boxWrapper--orderShipping {
+    width: 100%;
+}
+
+.sectionWrapper--orderForm .boxWrapper--address {
+    justify-content: space-between;
+}
+
+.boxWrapper--orderShipping .btn-click {
+    min-width: 100%;
+    padding-block: 1em;
+}
+
+.orderListTable {
+    text-align: center;
+}
+
+.orderSummary__cont + .orderSummary__cont {
+    margin-top: 1em;
+}

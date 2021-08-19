@@ -1,46 +1,46 @@
-import React from 'react'
-import ItemFormWrapper from '../items/ItemFormWrapper'
+import React, { useContext } from 'react'
+import GigContext from '../../context/Gig-context'
 import ItemGalleryUpdate from '../items/ItemGalleryUpdate'
 import ItemOverviewUpdate from '../items/ItemOverviewUpdate'
-import PackageGrid from '../package/PackageGrid'
+import PackageFormWrapper from '../package/PackageFormWrapper'
+import ShippingGrid from '../shipping/ShippingGrid'
 import GigData from './GigData'
-import GigReview from './GigReview'
+import GigFormWrapper from './GigFormWrapper'
 
 const GigDraft = () => {
     return (
         <>
-            <GigData
-                compReceiver={props =>
-                    <ItemFormWrapper
-                        {...getProps(props)}
-                    />}
-            />
+            <GigData>
+                <GigWrapper />
+            </GigData>
         </>
     )
 }
 
-function getProps({ values, updateQuery }) {
-    const { item, packages } = values;
-    const forms = {
-        "overview": item && <ItemOverviewUpdate item={item} updateQuery={updateQuery} />,
-        "images": item && <ItemGalleryUpdate prevFiles={item.gallery} updateQuery={updateQuery} group="gig" />,
-        "packages": item && item.gallery && <PackageGrid values={packages} updateQuery={updateQuery} />
+function GigWrapper() {
+    const { gig, updateQuery } = useContext(GigContext);
+    const { item, packages, shipping_options } = gig;
+    const isDisabled = form_name => {
+        if (form_name !== "overview" && !item) return true
+        if (form_name === "packages" && item.gallery.length === 0) return true
+        if (form_name === "shipping" && packages.length === 0) return true
+        if (form_name === "publish" && shipping_options.length === 0) return true
+        else return false
     }
-    return item && item.active ?
-        forms
-        :
-        {
-            forms: {
-                ...forms,
-                "publish": packages && <GigReview overview={item} images={item.gallery} packages={packages} />
-            },
-            isDisabled: form_name => {
-                if (form_name !== "overview" && !item) return true
-                if (form_name === "packages" && item.gallery.length === 0) return true
-                if (form_name === "publish" && packages.length === 0) return true
-                else return false
-            }
-        }
+
+    if (!gig || !item) return <div></div>
+    return (
+        <GigFormWrapper forms={{
+            "overview": <ItemOverviewUpdate item={item} updateQuery={updateQuery} />,
+            "images": <ItemGalleryUpdate prevFiles={item.gallery} updateQuery={updateQuery} group="gig" />,
+            "packages": item.gallery && <PackageFormWrapper packages={packages} updateQuery={updateQuery} />,
+            "shipping": item.gallery && <ShippingGrid shipping_options={shipping_options} updateQuery={updateQuery} />
+        }}
+            isDisabled={isDisabled}
+
+        />
+    )
 }
+
 
 export default GigDraft

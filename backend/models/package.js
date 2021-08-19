@@ -14,10 +14,10 @@ const packageSchema = new Schema({
         type: Number,
         required: false
     },
-    swatches: [
+    fabrics: [
         {
             type: Schema.Types.ObjectId,
-            ref: 'Swatch'
+            ref: 'Fabric'
         }
     ],
     delivery: {

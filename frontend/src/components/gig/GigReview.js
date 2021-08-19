@@ -11,7 +11,8 @@ import PictureZoom from '../pictures/PictureZoom'
 import "./style.css"
 
 const GigReview = (props) => {
-    const { overview, images, packages } = props;
+    const { overview, images, packages, shipping } = props;
+    console.log(props)
     const { currForm } = useParams()
     const { pathname } = useLocation()
     const { push } = useHistory();
@@ -30,16 +31,16 @@ const GigReview = (props) => {
     return (
         <>
             <ItemPublish validate={validate}>
-                <SectionWrapper section_class="gigPublish content">
+                <SectionWrapper mod_class="gigPublish content">
                     {displayHeader("overview", handleClick)}
-                    <BoxWrapper box_class="overview">
+                    <BoxWrapper mod_class="overview">
                         {overview
                             && Object.values(overview).length > 0
                             && Object.keys(overview)
                                 .map((field, index) => displayOverviewItem(overview, field))}
                     </BoxWrapper>
                     {displayHeader("images", handleClick)}
-                    <BoxWrapper box_class="images">
+                    <BoxWrapper mod_class="images">
                         {images && images.length > 0
                             ?
                             images.map((url, index) => <PictureZoom
@@ -51,12 +52,24 @@ const GigReview = (props) => {
                         }
                     </BoxWrapper>
                     {displayHeader("packages", handleClick)}
-                    <BoxWrapper box_class="packages">
+                    <BoxWrapper mod_class="packages">
                         {packages
                             && packages.length > 0
                             ?
                             packages.map((pack, index) => <div key={index}>
                                 <ListItem key={index} field={pack.type} content="active" />
+                            </div>)
+                            :
+                            displayAlert("packages")
+                        }
+                    </BoxWrapper>
+                    {displayHeader("shipping", handleClick)}
+                    <BoxWrapper mod_class="shipping">
+                        {shipping
+                            && shipping.length > 0
+                            ?
+                            shipping.map((opt, index) => <div key={index}>
+                                <ListItem key={index} field={opt.mailClass} content={`$${opt.shippingPrice}`} />
                             </div>)
                             :
                             displayAlert("packages")
@@ -74,7 +87,7 @@ function displayHeader(title, onClick) {
     return (
         <SectionHeader title={title}>
             <CustomButton
-                btn_class="btn-icon-plain fas fa-pencil-alt my-auto"
+                btn_class="btn-icon-plain fas fa-edit ml-2 mb-2"
                 btn_otherProps={{
                     name: title,
                     title: `edit ${title}`

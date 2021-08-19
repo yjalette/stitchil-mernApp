@@ -1,0 +1,7 @@
+.boxWrapper--shipping {
+    display: flex;
+}
+
+.boxWrapper--shipping.new {
+    justify-content: center;
+}

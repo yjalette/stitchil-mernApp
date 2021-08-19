@@ -5,7 +5,7 @@ import "./style.css"
 
 const ChatRoomsPage = () => {
     return (
-        <PageWrapper page_class="chatRooms">
+        <PageWrapper mod_class="chatRooms">
             <ChatRoomsData />
         </PageWrapper>
     )

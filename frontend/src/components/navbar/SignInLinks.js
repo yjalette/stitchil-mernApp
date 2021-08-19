@@ -1,15 +1,8 @@
 import React, { memo } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import CustomButton from '../../layout/button/CustomButton';
+import displayItems from './helpers/displayItems';
 import "./style.css";
-
-const items = (username) => [
-  { icon: "fas fa-user", value: `/profile/${username}/gigs` },
-  { icon: "fa fa-comment", value: `/messages/` },
-  { icon: "fas fa-cog", value: `/settings/account` },
-  // { icon: "fa fa-bell", value: `/` },
-  { icon: "fas fa-sign-out-alt", value: `/logout` }
-]
 
 const SignInLinks = memo(
   ({ username }) => {
@@ -17,14 +10,16 @@ const SignInLinks = memo(
     const { pathname } = useLocation();
     return (
       <>
-        {items && items(username).map((item) => {
-          const btn_class = `${pathname.includes(item.value) && "active"} btn-icon mx-2`
+        {displayItems && displayItems(username).map((item) => {
+          const btn_class = `${pathname.includes(item.url) && "active"} ${item.icon} btn-icon mx-2`
           return (
             <CustomButton
-              key={item.value}
-              icon={item.icon}
+              key={item.url}
               btn_class={btn_class}
-              onClick={() => push(item.value)}
+              btn_otherProps={{
+                title: item.title
+              }}
+              onClick={() => push(item.url)}
             />
           )
         })}

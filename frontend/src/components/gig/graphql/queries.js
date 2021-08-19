@@ -23,10 +23,24 @@ export const GIG_QUERY = gql`
                         _id
                         itemId
                         type
-                        swatches 
+                        fabrics {
+                            _id
+                            name
+                            content
+                            color
+                            image
+                        }
                         price
                         delivery
                         description
+                    }
+                    shipping_options {
+                        _id
+                        itemId
+                        shippingCarrier
+                        shippingPrice
+                        mailClass
+                        freeShipping
                     }
                     updatedAt
         }  

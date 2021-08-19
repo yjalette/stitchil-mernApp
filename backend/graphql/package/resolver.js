@@ -20,7 +20,9 @@ module.exports = {
         },
         update_package: async (_, { packageInput }, { userId }) => {
             if (!userId) throw new Error("unauthenticated");
-            return await Package.findOneAndUpdate({ _id: packageInput._id }, packageInput, { new: true })
+            const package = await Package.findOneAndUpdate({ _id: packageInput._id }, packageInput, { new: true })
+            console.log(package)
+            return package
         }
     }
 }

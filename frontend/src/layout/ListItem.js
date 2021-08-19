@@ -2,8 +2,8 @@ import React from 'react';
 import ItemToggle from '../components/items/ItemToggle';
 import './style.css'
 
-const ListItem = ({ field, icon, content, maxWords, item_class, children }) => (
-    <div className={`listItem ${item_class}`}>
+const ListItem = ({ field, icon, content, maxWords, item_class, children, mod_class }) => (
+    <div className={`listItem listItem--${mod_class} ${item_class}`}>
         {field && <span className="listItem__field">{field}</span>}
         {icon && <i className={`${icon} listItem__icon`} alt="list icon" />}
         {content ? !maxWords ?

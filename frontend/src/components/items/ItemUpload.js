@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useMutation } from '@apollo/react-hooks';
 import { Image, Container } from "react-bootstrap";
 import { useParams } from 'react-router';
@@ -6,21 +6,34 @@ import { useToggle } from '../../custom_hooks/useToggle';
 import mutations from './graphql/mutations';
 import PictureZoom from '../pictures/PictureZoom';
 import CustomButton from '../../layout/button/CustomButton';
-import CustomPopover from '../../layout/CustomPopover';
 import useUpload from '../../custom_hooks/useUpload';
 import ItemFormNextStep from './ItemFormNextStep';
 import ActionStatus from '../notification/ActionStatus';
 
-const ItemUpload = ({ action, gallery, children, group }) => {
+const ItemUpload = ({ action, gallery, children, group, updateQuery }) => {
     const { itemId } = useParams();
     const [saved, setSaved] = useToggle(false);
     const { files, clearUpload, getRootProps, getInputProps, uploadError } = useUpload(3000000, 5);
     const newFiles_qty = files ? files.length : 0;
     const existingFiles_qty = gallery ? gallery.length : 0;
-    const overLimit = newFiles_qty + existingFiles_qty > 5;
+    const overLimit = newFiles_qty + existingFiles_qty >= 5;
     const [post, { error }] = useMutation(mutations[`${action}_gallery`.toUpperCase()], {
         onCompleted: async (data) => {
-            if (data) setSaved(true)
+            if (data) {
+                const gallery = data[`${action}_item_gallery`]
+                updateQuery(prev => {
+                    return {
+                        [group]: {
+                            ...prev[group],
+                            item: {
+                                ...prev[group].item,
+                                gallery
+                            }
+                        }
+                    }
+                })
+                setSaved(true)
+            }
         }
     })
     const handleSave = () => {
@@ -50,14 +63,14 @@ const ItemUpload = ({ action, gallery, children, group }) => {
                                     btn_class="fas fa-times btn-icon-text btn-red pt-1"
                                     onClick={() => clearUpload(index)} />
                             </div>)}
-                        <div {...getRootProps()} className="item-upload-wrapper">
+                        {!overLimit && <div {...getRootProps()} className="item-upload-wrapper">
                             <input {...getInputProps({ className: 'dropzone' })} multiple={true} />
                             <Image
                                 title="upload (max 5 images)"
                                 src="https://res.cloudinary.com/dgxa9gpta/image/upload/v1602093311/Icons/upload-icon_eqsr6c.svg"
                                 className="itemUpload__icon " alt="icon upload" />
                             {/* <span className={`${overLimit ? "error" : "text-muted"} ml-2`}>max 5 uploads</span> */}
-                        </div>
+                        </div>}
                     </div>
                     <CustomButton
                         btn_class="btn-form float-right"

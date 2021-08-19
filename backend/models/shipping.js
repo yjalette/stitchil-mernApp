@@ -2,37 +2,25 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const shippingSchema = new Schema({
-    itemId: {
+    item: {
+        type: Schema.Types.ObjectId,
+        ref: 'Item'
+    },
+    shippingCarrier: {
         type: String,
         required: false
     },
-    countries: {
-        type: Array,
+    mailClass: {
+        type: String,
         required: false
     },
-    processing_time: {
-        type: Array,
+    shippingPrice: {
+        type: Number,
         required: false
     },
-    free_shipping: {
-        domestic: {
-            type: Boolean,
-            required: false
-        },
-        international: {
-            type: Boolean,
-            required: false
-        }
-    },
-    shipping_price: {
-        domestic: {
-            type: Number,
-            required: false
-        },
-        international: {
-            type: Number,
-            required: false
-        }
+    freeShipping: {
+        type: Boolean,
+        required: false
     }
 })
 

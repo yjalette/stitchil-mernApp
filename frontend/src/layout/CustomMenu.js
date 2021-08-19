@@ -11,6 +11,7 @@ const CustomMenu = ({ activeComponent, nav_class, items, handleClick, isDisabled
                 key={item}
                 eventKey={item}
                 value={item}
+                id={item}
                 className="customMenu__item"
                 disabled={isDisabled && isDisabled(item, index)}
                 {...item_props}

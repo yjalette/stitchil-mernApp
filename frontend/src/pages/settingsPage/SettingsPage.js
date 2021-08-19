@@ -6,7 +6,7 @@ import "./style.css";
 import SectionWrapper from '../../layout/SectionWrapper';
 
 const SettingsPage = ({ section, children }) => (
-    <PageWrapper page_class="settings">
+    <PageWrapper mod_class="settings">
         <SectionWrapper>
             <SectionNav currSection={section} items={["account", "security", "notifications"]} />
         </SectionWrapper>

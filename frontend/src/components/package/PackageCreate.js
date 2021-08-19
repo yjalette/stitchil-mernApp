@@ -31,16 +31,17 @@ const PackageCreate = ({ type, updateQuery }) => {
         errors
     } = useForm(initState_package, onSubmit);
 
-    const handleSwatch = newSwatch => {
+    const handleFabric = newFabric => {
+        console.log(newFabric)
         setInputs({
             ...inputs,
-            swatches: [...inputs.swatches, newSwatch._id]
+            fabrics: [...inputs.fabrics, newFabric._id]
         })
     }
 
     async function onSubmit() {
-        const { price, delivery, description, swatches } = inputs;
-        if (price === 0 || delivery === 0 || description === "" || swatches.length === 0) {
+        const { price, delivery, description, fabrics } = inputs;
+        if (price === 0 || delivery === 0 || description === "" || fabrics.length === 0) {
             return setErrors({
                 form_error: "all fields must be filled"
             })
@@ -60,7 +61,7 @@ const PackageCreate = ({ type, updateQuery }) => {
         inputs={inputs}
         errors={errors}
         onChange={handleChange}
-        addSwatch={handleSwatch}
+        addFabric={handleFabric}
         onSubmit={handleSubmit}
     />
 }

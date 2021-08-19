@@ -9,7 +9,7 @@ import Pagination from '../../components/pagination/Pagination';
 const ExploreGrid = ({ items, total, loadMoreData }) => {
     return (
         <>
-            <SectionWrapper section_class="filterGrid">
+            <SectionWrapper >
                 <FilterByOptions />
                 {total && <section className="filterGrid__header">
                     <SectionHeader title={`${total} result${total % 10 == 1 ? "" : "s"}`} />
@@ -32,7 +32,7 @@ const ExploreGrid = ({ items, total, loadMoreData }) => {
                         }
                     }} />
             </SectionWrapper>
-            {total && <SectionWrapper section_class="filterGrid__footer">
+            {total && <SectionWrapper>
                 <Pagination count={total} onClick={loadMoreData} />
             </SectionWrapper>}
         </>

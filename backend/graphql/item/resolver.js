@@ -44,7 +44,7 @@ module.exports = {
             const item = await Item.findById(itemId)
             item.gallery = item.gallery.concat(await multiUpload(files, item._id, userId))
             await item.save();
-            return true
+            return item.gallery
         },
         update_item_gallery: async (_, { gallery, files, coverImage, itemId }, { userId }) => {
             if (!userId) throw new Error("unauthenticated");

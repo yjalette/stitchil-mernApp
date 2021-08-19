@@ -72,32 +72,33 @@
     transition: transform 2s;
 }
 
-.roundCard:hover {
-    transform: scale(1.5);
-    z-index: 5;
+.roundCard__body {
+    padding: 0 2em;
 }
 
-.roundCard__front, .roundCard:hover .roundCard__back {
+.roundCard--front, .roundCard:hover .roundCard--back {
     display: block;
 }
 
-.roundCard__back, .roundCard:hover .roundCard__front {
+.roundCard--back, .roundCard:hover .roundCard--front {
     display: none;
 }
 
 .roundCard__title {
     text-align: center;
-    color: var(--light-green-color);
+    color: var(--green-color);
+    padding: 0;
 }
 
-.roundCard__back .roundCard__title {
+.roundCard--back .roundCard__title {
     color: var(--green-color);
 }
 
 .roundCard__text {
     text-align: center;
     word-wrap: break-word;
-    padding: .8em;
+
+    /* padding: .8em; */
 }
 
 .roundCard__img {

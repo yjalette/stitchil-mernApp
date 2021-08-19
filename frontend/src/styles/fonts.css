@@ -7,12 +7,12 @@ h1, h2, h3, h4, h5, h6 {
     letter-spacing: 1px;
     word-spacing: 0.5px;
     text-transform: capitalize;
-    line-height: 1.6em;
+    line-height: 1.3em;
 }
 
-h1, h2, h3, h4 {
+/* h1, h2, h3, h4 {
     font-weight: bold;
-}
+} */
 
 p, span, ul, a {
     font-family: var(--font-body);

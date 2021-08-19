@@ -7,6 +7,7 @@ const FormTypeahead = ({ name, value, onChange, multiple, allowNew, required }) 
         const result = !allowNew ? newValue : newValue.map(elem => elem[name])
         onChange(name, result)
     }
+
     return (
         < Typeahead
             id={name}
@@ -23,40 +24,6 @@ const FormTypeahead = ({ name, value, onChange, multiple, allowNew, required }) 
         />
     )
 }
-
-// class FormTypeahead extends React.PureComponent {
-
-//     ref = React.createRef();
-
-//     componentDidMount() {
-//         this.ref.current.getElementsByTagName('input')[0].setAttribute("required", "true");
-//     }
-
-//     onchange = (value) => {
-//         const { name, value, allowNew } = this.props;
-//         this.props.onChange(name, !allowNew ? value : value.map(elem => elem[name] || elem))
-//     }
-
-//     render() {
-//         const { name, value, multiple, allowNew } = this.props;
-
-//         return (
-//             <div ref={this.ref}>
-//                 <Typeahead
-//                     id={name}
-//                     labelKey={name}
-//                     onChange={this.onchange}
-//                     options={options[name] || []}
-//                     selected={value && value.length > 0 ? value : []}
-//                     // defaultInputValue={selected && selected.length > 0 ? selected.join(" ") : ""}
-//                     allowNew={allowNew}
-//                     newSelectionPrefix={allowNew && "+ "}
-//                     multiple={multiple}
-//                 />
-//             </div>
-//         )
-//     }
-// }
 
 export default FormTypeahead
 

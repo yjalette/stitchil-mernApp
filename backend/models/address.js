@@ -3,11 +3,11 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const addressSchema = new Schema({
-    address: {
+    address1: {
         type: String,
         required: false
     },
-    apt: {
+    address2: {
         type: String,
         required: false
     },
@@ -20,11 +20,19 @@ const addressSchema = new Schema({
         required: false
     },
     country: {
-        type: Array,
+        type: String,
         required: false
     },
-    zipCode: {
+    zip: {
         type: Number,
+        required: false
+    },
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    },
+    createdAt: {
+        type: Date,
         required: false
     }
 })

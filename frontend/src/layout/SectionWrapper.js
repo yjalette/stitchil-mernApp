@@ -1,8 +1,8 @@
 import React from 'react'
 
-const SectionWrapper = ({ children, section_class }) => {
+const SectionWrapper = ({ children, mod_class }) => {
     return (
-        <section className={`sectionWrapper ${section_class}-section`}>
+        <section className={`sectionWrapper sectionWrapper--${mod_class}`}>
             {children}
         </section>
     )
