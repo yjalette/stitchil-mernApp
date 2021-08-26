@@ -122,6 +122,16 @@ type Error {
     message: String
 }
 
+type Message {
+    _id: ID
+    chatId: ID
+    message: String
+    seen: Boolean
+    sender: AuthData
+    recipient: AuthData
+    createdAt: String
+}
+
 
 `;
 

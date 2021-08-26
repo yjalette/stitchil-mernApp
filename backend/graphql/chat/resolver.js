@@ -5,6 +5,12 @@ const { withFilter } = require('graphql-subscriptions');
 
 module.exports = {
     Query: {
+        chat: async (_, { chatId }, { userId }) => {
+            if (!userId) throw new Error("unauthenticated");
+            const chat = await Chat.findById(chatId).populate({ path: "members" }).populate({ path: "messages" })
+            console.log(chat);
+            return chat
+        },
         chat_rooms: async (_, args, { userId }) => {
             if (!userId) throw new Error("unauthenticated");
             return await Chat.find({ members: { $in: userId }, messages: { $ne: [] } })
@@ -40,6 +46,42 @@ module.exports = {
             const user2 = await User.findOne({ username: to_username });
             if (!user2) throw new Error("user doesn't exist");
             const newMessage = await new Message({
+                message,
+                sender: userId,
+                createdAt: new Date()
+            })
+            if (chatId) {
+                newMessage.chatId = chatId;
+                await Chat.findByIdAndUpdate(chatId, {
+                    $push: { messages: newMessage._id },
+                    updatedAt: new Date()
+                })
+            }
+            if (!chatId) {
+                const newChat = await createChat([userId, user2._id], newMessage._id)
+                newMessage.chatId = newChat._id
+            }
+            await newMessage.save()
+            try {
+                const result = {
+                    ...newMessage._doc,
+                    sender: {
+                        username: from_username
+                    }
+                }
+                pubsub.publish('CHAT_NEW_MESSAGE', { chat_new_message: result });
+                return result
+            } catch (error) {
+                throw Error(error)
+            }
+
+        },
+        sendChatMessage: async (_, { message, to_username, from_username, chatId }, { userId }) => {
+            if (!userId) throw new Error("unauthenticated");
+            const user2 = await User.findOne({ username: to_username });
+            if (!user2) throw new Error("user doesn't exist");
+            const newMessage = await new Message({
+                chatId,
                 message,
                 sender: userId,
                 createdAt: new Date()

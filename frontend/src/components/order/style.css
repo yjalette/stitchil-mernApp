@@ -34,8 +34,25 @@
     margin: 0 .3em;
 }
 
+.boxWrapper--orderSummary {
+    display: grid;
+    grid-template-columns: 15% 85%;
+}
+
+.boxWrapper--orderSummary .container {
+    padding-block: .5em;
+}
+
+.boxWrapper--orderSummary .listItem {
+    width: auto;
+}
+
+.boxWrapper--orderSummary .listItem + .listItem {
+    margin-left: .5em;
+}
+
 .orderSummary__img {
-    max-height: 400px;
+    height: 100%;
     max-width: 100%;
     object-fit: cover;
 }

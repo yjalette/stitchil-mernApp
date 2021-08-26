@@ -6,7 +6,6 @@ import dateHelper from '../../helpers/dateHelper';
 const MessageItem = ({ item }) => {
     const { user } = useContext(AuthContext);
     const logged_in_user = item.sender.username === user.username
-
     return (
         <div className="messageItem__wrapper" >
             <Media className={`messageItem ${logged_in_user && "sender"}`}>

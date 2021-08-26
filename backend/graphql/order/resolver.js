@@ -1,5 +1,6 @@
 const { sendEmail } = require("../../helpers/nodemailer");
 const Order = require("../../models/order");
+const Chat = require("../../models/chat");
 const Item = require("../../models/item");
 
 module.exports = {
@@ -67,14 +68,24 @@ module.exports = {
         },
         confirmOrder: async (_, { orderId }, { userId }) => {
             if (!userId) throw new Error("unauthenticated");
-            const order = await Order.findByIdAndUpdate(orderId, { orderStatus: "active" })
+            const order = await Order.findByIdAndUpdate(orderId,
+                {
+                    orderStatus: "active",
+                })
                 .populate({ path: "item", select: "-_id title" })
-                .populate({ path: "buyer", select: "-_id email" })
+                .populate({ path: "buyer", select: "email" })
 
-            console.log(order)
+
+            const chat = await new Chat({
+                _id: order._id,
+                members: [order.buyer._id, userId],
+                createAt: new Date()
+            })
+            chat.save()
+            console.log(chat)
             if (order) {
                 await sendEmail({
-                    subject: `order ${item.title} confirmed`,
+                    subject: `order ${order.item.title} confirmed`,
                     template: 'new_order',
                     context: {
                         name: order.buyer.email,

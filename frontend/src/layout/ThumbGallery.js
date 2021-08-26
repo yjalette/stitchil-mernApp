@@ -24,7 +24,7 @@ const ThumbGallery = ({ items, img_class }) => {
                     style={{ backgroundImage: `url(${item})` }}> </SwiperSlide>)}
             </Swiper>
 
-            <Swiper
+            {items.length > 1 && <Swiper
                 onSwiper={setThumbsSwiper}
                 watchSlidesVisibility
                 watchSlidesProgress
@@ -35,7 +35,7 @@ const ThumbGallery = ({ items, img_class }) => {
                 {items.map((item, i) => <SwiperSlide key={i}
                     className={`${img_class}-thumb swiperThumb`}
                     style={{ backgroundImage: `url(${item})` }}> </SwiperSlide>)}
-            </Swiper>
+            </Swiper>}
 
         </>
     );

@@ -1,0 +1,9 @@
+.projectGrid .sectionHeader {
+    justify-content: space-between;
+    padding: var(--padding-box);
+    background: var(--main-color-light);
+}
+
+.projectGrid .customDropdown__btn::after {
+    display: none;
+}

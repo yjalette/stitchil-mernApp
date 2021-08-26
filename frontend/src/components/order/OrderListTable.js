@@ -24,10 +24,6 @@ const OrderListTable = ({ orders }) => {
                                     <td
                                         className="clickElem"
                                         onClick={() => push(`/order/${order.orderStatus}/${order._id}/`)}>{order.item.title}</td>
-                                    {/* <td
-                                        className="clickElem"
-                                        onClick={() => push(`/profile/${order.buyer.username}/gigs`)}
-                                    >@{order.buyer.username}</td> */}
                                     <td>{order.orderStatus}</td>
                                     <td>{dateHelper(order.createdAt)}</td>
                                 </tr>

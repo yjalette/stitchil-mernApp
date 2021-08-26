@@ -4,10 +4,10 @@ module.exports = gql`
 
 type Message {
     _id: ID
-    chatId: String
+    chatId: ID
     message: String
-    sender: Member
-    recipient: Member
+    sender: AuthData
+    recipient: AuthData
     createdAt: String
 }
 
@@ -20,17 +20,26 @@ type ChatRoom {
     chatImg: String
 }
 
+type Chat {
+    _id: ID
+    members: [AuthData]
+    messages: [Message]
+    createdAt: String
+}
+
 type Member {
     username: String
     profileImage: String
 }
 
-type Query {      
+type Query {  
+    chat(chatId: ID): Chat    
     chat_rooms: [ChatRoom]
 }
 
 type Mutation {   
     send_chat_message(message: String, to_username: String, from_username: String, chatId: ID): Message   
+    sendChatMessage(message: String, to_username: String, from_username: String, chatId: ID): Message
     delete_chat(chatId: ID, msgId: ID): Boolean 
     delete_chat_message(messageId: ID): Boolean  
 }

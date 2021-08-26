@@ -7,7 +7,7 @@ const CustomAccord = ({ item, eventKey, mod__class }) => {
             className={`customAccord customAccord--${mod__class}`}
             defaultActiveKey="1">
             <Accordion.Toggle
-                as="h4"
+                as="h5"
                 className="btn-text customAccord__title"
                 eventKey={eventKey.toString()}>
                 {item.title}

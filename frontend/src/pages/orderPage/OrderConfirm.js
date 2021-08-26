@@ -5,9 +5,9 @@ import { CONFIRM_ORDER_MUTATION } from './graphql/mutations'
 import OrderContext from '../../context/Order-context'
 import CustomButton from '../../layout/button/CustomButton'
 import OrderData from './OrderData'
-import OrderSummary from './OrderSummary'
 import BoxWrapper from '../../layout/BoxWrapper'
 import SectionWrapper from '../../layout/SectionWrapper'
+import OrderSummary from '../../components/order/OrderSummary'
 
 const OrderConfirm = () => {
     const { orderId } = useParams()
@@ -40,10 +40,7 @@ function OrderDetails() {
     return (
         <div>
             {order && <OrderSummary
-                order_item={order.item}
-                order_package={order.package}
-                order_fabric={order.fabric}
-                order_shipping={order.shipping}
+                {...order}
             />}
         </div>
     )

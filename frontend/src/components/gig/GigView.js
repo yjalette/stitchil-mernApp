@@ -10,14 +10,4 @@ const GigView = () => {
     )
 }
 
-{/* <GigData
-            compReceiver={({ values }) => {
-                return <GigSelect
-                    item={values.item}
-                    package_options={values.packages}
-                    shipping_options={values.shipping_options} />
-            }}
-        /> */}
-
-
 export default GigView

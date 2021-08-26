@@ -28,6 +28,7 @@ import OrderCreate from './pages/orderPage/OrderCreate';
 import OrderData from './pages/orderPage/OrderData';
 import OrderConfirm from './pages/orderPage/OrderConfirm';
 import DashboardPage from './pages/dashboardPage/DashboardPage';
+import ProjectPage from './pages/projectPage/ProjectPage';
 
 const userObj = JSON.parse(localStorage.getItem('user'));
 
@@ -89,6 +90,7 @@ class App extends Component {
             <Route path="/messages/:username/" component={ChatRoomsPage} />
             <Route path="/dashboard/" component={DashboardPage} />
             <Route path="/logout/" component={AuthLogout} />
+            <Route path="/order/active/:orderId" component={ProjectPage} />
             {authComponents.map((elem, i) => (
               <Route
                 key={i}

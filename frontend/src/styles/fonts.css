@@ -30,7 +30,7 @@ h2 {
 }
 
 h3 {
-    font-size: 1.17em;
+    /* font-size: 1.17em; */
     line-height: 120%;
     color: var(--light-gray-color);
 }
@@ -44,7 +44,7 @@ h4 {
 }
 
 h5 {
-    font-size: .83em;
+    /* font-size: .83em; */
     line-height: 120%;
     clear: both;
     color: var(--white-color);
@@ -52,7 +52,7 @@ h5 {
 }
 
 h6 {
-    font-size: .75em;
+    /* font-size: .75em; */
     color: var(--light-gray-color);
     opacity: .95;
     padding: var(--padding-elem);

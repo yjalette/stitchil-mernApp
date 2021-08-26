@@ -7,14 +7,14 @@ import ListItem from '../../layout/ListItem'
 
 const ItemDetails = ({ item, children }) => {
     return (
-        <Row className="itemDetails">
-            <Col lg={8} className="itemDetails__col itemDetails-gallery">
-                {item.gallery && <ThumbGallery
-                    items={item.gallery}
-                    img_class="itemImg" />}
-            </Col>
-            <Col lg={4} className="itemDetails__col itemDetails-content">
-                <BoxWrapper>
+        <BoxWrapper>
+            <Row className="itemDetails">
+                <Col lg={6} className="itemDetails__col itemDetails-gallery">
+                    {item.gallery && <ThumbGallery
+                        items={item.gallery}
+                        img_class="itemImg" />}
+                </Col>
+                <Col lg={6} className="itemDetails__col itemDetails-content">
                     <ListItem field="title" content={item.title} />
                     <ListItem field="description" content={item.description} maxWords="50" />
                     <ListItem field="service" content={item.service} />
@@ -22,10 +22,10 @@ const ItemDetails = ({ item, children }) => {
                     <ListItem field="category" content={item.category} />
                     <ListItem field="style" content={item.style} />
                     <ListItem field="occasion" content={item.occasion} />
-                </BoxWrapper>
-                {children}
-            </Col>
-        </Row>
+                    {children}
+                </Col>
+            </Row>
+        </BoxWrapper>
     )
 }
 

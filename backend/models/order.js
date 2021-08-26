@@ -27,6 +27,10 @@ const orderSchema = new Schema({
         type: String,
         required: false
     },
+    chat: {
+        type: Schema.Types.ObjectId,
+        ref: 'Chat'
+    },
     payment: {
         type: Boolean,
         required: false

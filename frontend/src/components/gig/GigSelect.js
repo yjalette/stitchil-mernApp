@@ -14,14 +14,12 @@ const init = {
 const GigSelect = () => {
     const { push } = useHistory();
     const { gig } = useContext(GigContext);
-    console.log(gig)
     const { item, packages, shipping_options } = gig;
     const { inputs, setInputs, handleSubmit } = useForm(init, onSubmit);
     const { selected_package_type, selected_fabricId, selected_shipping } = inputs;
 
     useEffect(() => {
         if (packages && shipping_options) {
-            console.log(packages)
             setInputs({
                 selected_package_type: packages.find(pack => pack.type === "basic").type,
                 selected_fabricId: packages.find(pack => pack.type === "basic").fabrics[0]._id,
