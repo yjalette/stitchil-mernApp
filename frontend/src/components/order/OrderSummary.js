@@ -2,10 +2,10 @@ import React from 'react'
 import { Container, Image } from 'react-bootstrap'
 import BoxWrapper from '../../layout/BoxWrapper'
 import ListItem from '../../layout/ListItem'
+import UserAvatar from '../user/UserAvatar'
 import "./style.css"
 
 const OrderSummary = ({ item, package: pack, fabric, shipping }) => {
-
     return (
         <BoxWrapper mod_class="orderSummary">
             <div>

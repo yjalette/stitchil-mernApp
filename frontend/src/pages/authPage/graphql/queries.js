@@ -7,7 +7,6 @@ export const LOGIN_QUERY = gql`
                 username
                 role
                 googleAuth
-               
             }
             ... on Error {
                 message 

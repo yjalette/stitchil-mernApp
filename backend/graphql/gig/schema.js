@@ -21,7 +21,6 @@ type Gig {
 input Filters {
     category: [String]
     garment: [String]
-    style: [String]
     worldwide: Boolean
     keywords: String
     min: String

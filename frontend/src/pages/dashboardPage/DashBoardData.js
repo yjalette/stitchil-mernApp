@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useQuery } from '@apollo/react-hooks'
 import { DASHBOARD_QUERY } from './graphql/queries'
 import OrderListTable from '../../components/order/OrderListTable';
+import DashboardTableGigs from './DashboardTableGigs';
 
 const DashBoardData = () => {
     const { data, loading } = useQuery(DASHBOARD_QUERY);
@@ -11,10 +12,10 @@ const DashBoardData = () => {
         if (data) setState(data.dashboard)
     }, [data])
 
-    console.log(data)
     return (
         <div>
             <OrderListTable orders={state.orders} />
+            <DashboardTableGigs gigs={state.listings} />
         </div>
     )
 }

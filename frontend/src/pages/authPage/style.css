@@ -22,14 +22,14 @@
     margin: 0 1rem 1rem 0;
 }
 
-.authJoin .formSteps__buttons {
+/* .authJoin .formSteps__buttons {
     display: block;
     margin: .5rem;
 }
 
 .authJoin .btn-forward {
     margin: auto;
-}
+} */
 
 .auth__google-wrapper ~ .customForm__groupButton {
     display: none;

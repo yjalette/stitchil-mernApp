@@ -13,31 +13,22 @@ module.exports = {
         },
         chat_rooms: async (_, args, { userId }) => {
             if (!userId) throw new Error("unauthenticated");
-            return await Chat.find({ members: { $in: userId }, messages: { $ne: [] } })
+            const chats = Chat.find({ members: { $in: userId } })
                 .populate({
                     path: "members",
-                    match: {
-                        _id: { $ne: userId }
-                    },
-                    select: "username profileImage",
-                })
-                .populate({
-                    path: "messages",
-                    populate: {
-                        path: "sender",
-                        select: "username -_id",
-                    }
-                })
-                .then(chats => chats.map(chat => {
-                    const { username, profileImage } = chat.members[0]
+                    select: "_id username profileImage",
+                    match: { _id: { $ne: userId } }
+                }).then(data => data.map(async chat => {
+                    const lastMessage = await Message.findOne({ chatId: chat._id }).sort({ createdAt: -1 })
                     return {
                         _id: chat._id,
-                        chatId: chat._id,
-                        member: username,
-                        chatImg: profileImage,
-                        lastMessages: chat.messages
+                        lastMessage: lastMessage.message,
+                        member: chat.members[0],
+                        updatedAt: lastMessage.createdAt
                     }
                 }))
+            return chats
+
         }
     },
     Mutation: {
@@ -112,6 +103,38 @@ module.exports = {
             }
 
         },
+        sendQuickChatMessage: async (_, { message, to_username, attachments }, { userId }) => {
+            if (!userId) throw new Error("unauthenticated");
+            const user2 = await User.findOne({ username: to_username });
+            if (!user2) throw new Error("user doesn't exist");
+            const newMessage = await new Message({
+                message,
+                sender: userId,
+                createdAt: new Date()
+            })
+            const chat = await Chat.findOne({ members: [userId, user2._id] })
+            if (chat) newMessage.chatId = chat._id
+
+            if (!chat) {
+                const newChat = await new Chat({
+                    members: [userId, user2._id],
+                    createdAt: new Date()
+                })
+                newMessage.chatId = newChat._id
+            }
+
+            await newMessage.save()
+            try {
+                const result = {
+                    ...newMessage._doc
+                }
+                // pubsub.publish('CHAT_NEW_MESSAGE', { chat_new_message: result });
+                return result
+            } catch (error) {
+                throw Error(error)
+            }
+
+        },
         delete_chat_message: async (_, { messageId }, { userId }) => {
             if (!userId) throw new Error("unauthenticated");
             try {
@@ -156,5 +179,29 @@ async function createChat(members, messageId) {
 }
 
 
-
+// return await Chat.find({ members: { $in: userId }, messages: { $ne: [] } })
+// .populate({
+//     path: "members",
+//     match: {
+//         _id: { $ne: userId }
+//     },
+//     select: "username profileImage",
+// })
+// .populate({
+//     path: "messages",
+//     populate: {
+//         path: "sender",
+//         select: "username -_id",
+//     }
+// })
+// .then(chats => chats.map(chat => {
+//     const { username, profileImage } = chat.members[0]
+//     return {
+//         _id: chat._id,
+//         chatId: chat._id,
+//         member: username,
+//         chatImg: profileImage,
+//         lastMessages: chat.messages
+//     }
+// }))
 

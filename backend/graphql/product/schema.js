@@ -3,18 +3,25 @@ const { gql } = require("apollo-server-express");
 
 module.exports = gql`
 
-type Product {
+
+input ProductInput {
     _id: ID
-    item: Item
-    creator: AuthData
-    createdAt: String
-    updatedAt: String
-}
-type Query { 
-    product(itemId: ID): Product           
+    implementation: String
+    title: String
+    description: String
+    category: [String]
+    garment: String
+    occasion: [String]
 }
 
+type Query {   
+    product(productId: ID): Product  
+}
+
+type Mutation {    
+    createProduct(productInput: ProductInput): ID 
+    updateProduct(productInput: ProductInput): Boolean 
+}
 
 `;
-
 

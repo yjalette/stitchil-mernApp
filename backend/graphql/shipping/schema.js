@@ -5,7 +5,6 @@ module.exports = gql`
 
 input ShippingInput {
     _id: ID
-    itemId: ID
     shippingCarrier: String
     mailClass: String
     shippingPrice: Int
@@ -17,10 +16,10 @@ type Query {
 }
 
 type Mutation {
-    createShipping(shippingInput: ShippingInput, itemId: ID): Shipping 
-    updateShipping(shippingInput: ShippingInput): Shipping 
+    createShipping(shippingInput: ShippingInput, listingId: ID): Shipping 
+    updateShipping(shippingInput: ShippingInput, shippingId: ID): Shipping 
+    deleteShipping(shippingId: ID): Boolean 
 }
-
 
 `;
 

@@ -14,6 +14,10 @@ const shippingResolver = require('./shipping/resolver');
 const orderResolver = require('./order/resolver');
 const addressResolver = require('./address/resolver');
 const dashboardResolver = require('./dashboard/resolver')
+const messageResolver = require('./message/resolver')
+const listingResolver = require('./listing/resolver')
+const fileResolver = require('./file/resolver')
+const variationResolver = require('./variation/resolver')
 
 
 const resolvers = {
@@ -31,7 +35,9 @@ const resolvers = {
         ...shippingResolver.Query,
         ...orderResolver.Query,
         ...addressResolver.Query,
-        ...dashboardResolver.Query
+        ...dashboardResolver.Query,
+        ...messageResolver.Query,
+        ...listingResolver.Query
     },
     Mutation: {
         ...authResolver.Mutation,
@@ -46,10 +52,16 @@ const resolvers = {
         ...fabricResolver.Mutation,
         ...shippingResolver.Mutation,
         ...orderResolver.Mutation,
-        ...addressResolver.Mutation
+        ...addressResolver.Mutation,
+        ...messageResolver.Mutation,
+        ...productResolver.Mutation,
+        ...listingResolver.Mutation,
+        ...fileResolver.Mutation,
+        ...variationResolver.Mutation
     },
     Subscription: {
-        ...chatResolver.Subscription
+        ...chatResolver.Subscription,
+        ...messageResolver.Subscription
     },
     AuthResult,
     Response: {

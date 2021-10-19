@@ -35,8 +35,8 @@ export const ORDER_QUERY = gql`
 `;
 
 export const ORDER_USER_LIST_QUERY = gql`
-    query orderUserList($orderStatus: String){
-        orderUserList(orderStatus: $orderStatus) {
+    query orderUserList($status: String){
+        orderUserList(status: $status) {
             _id
             item {
                 _id
@@ -49,7 +49,7 @@ export const ORDER_USER_LIST_QUERY = gql`
                 username
             }
             createdAt
-
+            status
         }
 }     
 `;

@@ -11,6 +11,10 @@ const itemSchema = new Schema({
         type: String,
         required: false
     },
+    implementation: {
+        type: String,
+        required: false
+    },
     service: {
         type: Array,
         required: false
@@ -24,10 +28,6 @@ const itemSchema = new Schema({
         required: false
     },
     occasion: {
-        type: Array,
-        required: false
-    },
-    style: {
         type: Array,
         required: false
     },

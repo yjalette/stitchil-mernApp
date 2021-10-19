@@ -30,6 +30,13 @@ export const ORDER_QUERY = gql`
                 mailClass
                 shippingPrice
             }
+            buyer {
+                username
+            }
+            seller {
+                username
+            }
+            status
         }
 }     
 `;

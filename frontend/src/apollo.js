@@ -58,7 +58,7 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
             if (message.includes("unauthenticated")) return onLogout()
             else return console.log(`[GraphQL error]: Message: ${message}, Location: ${extensions.code}`)
         })
-    if (networkError) console.log(`[Network error]: ${networkError}`)
+    if (networkError) console.log(`[Network error]: ${Object.values(networkError)}`)
 });
 
 

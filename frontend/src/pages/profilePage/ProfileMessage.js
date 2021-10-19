@@ -1,5 +1,6 @@
 import React from 'react'
 import { useHistory, useParams } from 'react-router';
+import UserSendMessage from '../../components/user/UserSendMessage';
 import { useToggle } from '../../custom_hooks/useToggle';
 import CustomButton from '../../layout/button/CustomButton';
 import CustomModal from '../../layout/CustomModal'
@@ -9,11 +10,16 @@ const ProfileMessage = () => {
     const [open, toggle] = useToggle(false);
     const { push } = useHistory();
 
-    return <CustomButton
-        btn_class="btn-icon"
-        icon="fas fa-envelope"
-        btn_otherProps={{ title: "message" }}
-        onClick={() => push(`/messages/${username}`)} />
+    return (
+        <UserSendMessage to_username={username} />
+    )
+
+
+    // <CustomButton
+    // btn_class="btn-icon"
+    // icon="fas fa-envelope"
+    // btn_otherProps={{ title: "message" }}
+    // onClick={() => push(`/messages/${username}`)} />
 
     // return (
     //     <CustomModal

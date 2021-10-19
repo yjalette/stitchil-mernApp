@@ -1,7 +1,7 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
-import ChatData from '../../components/chat/ChatData'
-import ChatSendMessage from '../../components/chat/ChatSendMessage'
+import MessageListData from '../../components/message/MessageListData'
+import MessageSend from '../../components/message/MessageSend'
 import OrderData from '../../components/order/OrderData'
 import ProjectGrid from './ProjectGrid'
 
@@ -12,10 +12,9 @@ const ProjectData = () => {
             <OrderData>
                 <ProjectGrid />
             </OrderData>
-            <ChatData chatId={orderId}>
-                <ChatSendMessage />
-            </ChatData>
-            {/* <MessageSendForm /> */}
+            <MessageListData chatId={orderId}>
+                <MessageSend chatId={orderId} />
+            </MessageListData>
         </div>
     )
 }

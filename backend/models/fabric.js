@@ -7,26 +7,26 @@ const fabricSchema = new Schema({
         type: String,
         required: false
     },
-    color: {
+    pattern: {
         type: String,
         required: false
     },
-    image: {
-        type: String,
-        required: false
+    imageId: {
+        type: Schema.Types.ObjectId,
+        ref: 'File'
     },
     content: {
         type: String,
         required: false
     },
-    sample: {
+    default: {
         type: Boolean,
         required: false
     },
-    owner: {
+    user: {
         type: Schema.Types.ObjectId,
         ref: 'User'
-    }
+    },
 })
 
 module.exports = mongoose.model('Fabric', fabricSchema)

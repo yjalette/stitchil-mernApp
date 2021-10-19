@@ -10,7 +10,6 @@ export const EXPLORE_GIGS_QUERY = gql`
                 category
                 garment 
                 occasion
-                style
                 creator {
                     username
                     profileImage

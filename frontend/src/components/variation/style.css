@@ -1,0 +1,28 @@
+.variationForm__options {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.variationForm__options > * {
+    line-height: 1.5em;
+}
+
+.variation--optionName:first-child, .variationForm__optionName {
+    margin-left: .5em;
+}
+
+.variationUpdate__optionName:not(:last-child):after {
+    content: ", ";
+}
+
+.optionImage__container {
+    position: relative;
+    width: 100px;
+    height: 100px;
+}
+
+.optionImage__gallery {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}

@@ -1,30 +1,72 @@
-import React from 'react'
-import ItemDelete from '../items/ItemDelete'
-import ItemFormWrapper from '../items/ItemFormWrapper'
-import ItemGalleryUpdate from '../items/ItemGalleryUpdate'
-import ItemOverviewUpdate from '../items/ItemOverviewUpdate'
-import ProductData from './ProductData'
+import React, { useEffect } from 'react'
+import { useMutation } from '@apollo/react-hooks';
+import { initState_product } from '../../constants/initStates';
+import { isNotEmpty } from '../../validation/is_obj_empty';
+import { transformInputs } from './helpers'
+import useForm from '../../custom_hooks/useForm';
+import { UPDATE_PRODUCT_MUTATION } from './graphql/mutations';
+import ProductForm from './ProductForm';
 
-const ProductUpdate = () => {
-    return (
-        <>
-            <ProductData
-                compReceiver={data =>
-                    <ItemFormWrapper
-                        {...getProps(data)} />}
-            />
-        </>
-    )
-}
+const ProductUpdate = ({ product, onCompleted }) => {
+    const {
+        inputs,
+        setInputs,
+        handleChange,
+        handleMultiChange,
+        handleSubmit,
+        errors,
+        setErrors,
+    } = useForm(initState_product || {}, onSubmit);
 
-function getProps(data) {
-    return {
-        forms: {
-            "overview": <ItemOverviewUpdate item={data.item} />,
-            "images": <ItemGalleryUpdate prevFiles={data.item && data.item.gallery} />,
-            "delete": <ItemDelete group="portfolio" />
+    useEffect(() => {
+        if (product) {
+            setInputs(product)
+        }
+    }, [product])
+
+    const [post] = useMutation(UPDATE_PRODUCT_MUTATION, {
+        onCompleted: data => {
+            if (data.updateProduct) {
+                // const productId = data.updateProduct;
+                // onCompleted && onCompleted(productId)
+                // setSaved(true)
+                // setTimeout(() => {
+                //     push(`/profile-item/${group}/draft/${itemId}/images/`)
+                // }, 3000)
+            }
+        }
+    });
+
+    console.log(inputs)
+    function onSubmit() {
+        const notValid = Object.keys(inputs).find(k => !isNotEmpty(inputs[k]))
+        console.log(notValid, Object.keys(errors))
+        if (notValid && notValid !== "occasion") return setErrors({
+            ...errors,
+            form_error: `All fields must be filled`
+        })
+        else {
+            post({
+                variables: {
+                    productInput: transformInputs(inputs)
+                }
+            });
+            return setErrors({})
         }
     }
+
+    return (
+
+        <ProductForm
+            init={initState_product}
+            inputs={inputs}
+            errors={errors}
+            onChange={handleChange}
+            onMultiChange={handleMultiChange}
+            onSubmit={handleSubmit}
+        />
+
+    )
 }
 
 export default ProductUpdate

@@ -1,28 +1,24 @@
 const mongoose = require('mongoose');
+
 const Schema = mongoose.Schema;
 
-const gallerySchema = new Schema({
-    public_id: {
+const attributeSchema = new Schema({
+    attributeName: {
         type: String,
         required: false
     },
-    docId: {
+    attributeValue: {
         type: String,
         required: false
     },
-    url: {
+    note: {
         type: String,
         required: false
     },
-    coverImage: {
-        type: Boolean,
-        required: false
-    },
-    createdAt: {
-        type: Date,
+    listingId: {
+        type: String,
         required: false
     }
 })
 
-
-module.exports = mongoose.model('File', gallerySchema)
+module.exports = mongoose.model('Attribute', attributeSchema)

@@ -14,8 +14,7 @@ import FormCheckBox from '../../components/inputs/FormCheckBox';
 
 const init = { email: "", password: "", remember: true }
 
-const AuthLogin = ({ verifiedEmail }) => {
-    const { auth_type } = useParams();
+const AuthLogin = ({ verifiedEmail, auth_type }) => {
     const { setUser } = useContext(AuthContext);
     const { goBack, push } = useHistory();
     const {
@@ -47,14 +46,18 @@ const AuthLogin = ({ verifiedEmail }) => {
     }
 
     function onSubmit() {
-        getData({ variables: { ...inputs, verifiedEmail } });
+        getData({
+            variables: {
+                ...inputs, verifiedEmail
+            }
+        });
     }
 
     return (
         <>
             <CustomForm
                 form_class="authLogin"
-                form_error={errors.form_error}
+                form_error={errors["form_error"]}
                 onSubmit={handleSubmit}>
                 {["email", "password"].map(label => (
                     // <InputWrapper label={label} />

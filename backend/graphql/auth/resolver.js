@@ -11,6 +11,7 @@ module.exports = {
             if (!user) return notUser_error;
             if (!googleAuth && !await comparePwd(password, user.password)) return wrongPwd_error;
             if (verifiedEmail) await user.updateOne({ $set: { verifiedEmail } });
+            if (!user.verifiedEmail && !verifiedEmail) return { code: 401, message: "Please confirm your email" }
             await user.updateOne({ lastSeen: new Date() });
             const token = generateJWT(user._id, email)
             return authorizeUser(res, token, null, { username: user.username, role: user.role, googleAuth });
@@ -34,7 +35,7 @@ module.exports = {
                     return authorizeUser(res, token, null, { username, role, googleAuth });
                 }
 
-                return await sendEmail({
+                const emailSent = await sendEmail({
                     subject: "Welcome To Stitchil!",
                     template: 'registration',
                     context: {
@@ -42,6 +43,9 @@ module.exports = {
                         link: 'http://localhost:3000/auth/verify_email'
                     }
                 });
+                console.log(emailSent)
+
+                return { emailSent }
 
             } catch (error) {
                 throw new ("errr->", error)

@@ -64,19 +64,12 @@
     padding: .5em;
 }
 
-.fabricItem--gigGrid {
+.gigForms__container {
     display: flex;
+    align-items: center;
+    padding: .5em;
 }
 
-.fabricItem--gigGrid.selected {
-    border: 1px solid var(--accent-color);
+.gigForms__container .groupButton {
+    margin: 0;
 }
-
-/* .fabricItem--gigGrid .fabricItem__img {
-    width: 100px;
-    height: 100px;
-} */
-
-/* .gigGrid__description-section {
-    min-height: auto;
-} */

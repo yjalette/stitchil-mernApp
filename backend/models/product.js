@@ -3,44 +3,62 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const productSchema = new Schema({
-    item: {
-        type: Schema.Types.ObjectId,
-        ref: 'Item'
-    },
-    startingPrice: {
-        type: Number,
+    title: {
+        type: String,
         required: false
     },
-    auction: {
-        type: Boolean,
+    description: {
+        type: String,
         required: false
     },
-    bids: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: 'Bid'
-        }
-    ],
-    likes: [
-        {
+    implementation: {
+        type: String,
+        required: false
+    },
+    garment: {
+        type: String,
+        required: false
+    },
+    category: {
+        type: Array,
+        required: false
+    },
+    occasion: {
+        type: Array,
+        required: false
+    },
+    attributes: {
+        color: {
             type: String,
             required: false
-        }
-    ],
-    createdAt: {
-        type: Date,
-        required: false
+        },
+        fabric: {
+            name: {
+                type: String,
+                required: false
+            },
+            note: {
+                type: String,
+                required: false
+            }
+        },
+        customAttributes: [
+            {
+                attributeName: {
+                    type: String,
+                    required: false
+                },
+                attributeValue: {
+                    type: String,
+                    required: false
+                },
+            }
+        ]
     },
     updatedAt: {
         type: Date,
         required: false
-    },
-    creator: {
-        type: Schema.Types.ObjectId,
-        ref: 'User'
-    },
-}
-)
-
+    }
+})
 
 module.exports = mongoose.model('Product', productSchema)

@@ -20,7 +20,7 @@ const GigGrid = ({
     handleFabric }) => {
     const total = packages && selected_package_type && packages.find(pack => selected_package_type === pack.type).price
     const selected_package = packages && packages.find(pack => pack.type === selected_package_type)
-
+    console.log(selected_package)
     return (
         <Row className="gigGrid">
             <Col xl={6} className="gigGrid__gallery">

@@ -1,7 +1,8 @@
 import React, { useContext } from 'react'
-import { Media } from 'react-bootstrap'
+import { Image, Media } from 'react-bootstrap'
 import AuthContext from '../../context/Auth-context';
 import dateHelper from '../../helpers/dateHelper';
+import PictureZoom from '../pictures/PictureZoom';
 
 const MessageItem = ({ item }) => {
     const { user } = useContext(AuthContext);
@@ -12,6 +13,10 @@ const MessageItem = ({ item }) => {
                 <Media.Body className="messageItem__body">
                     <span className="messageItem__msg">{item.message}</span>
                 </Media.Body>
+                {item.attachments &&
+                    item.attachments.length > 0 &&
+                    item.attachments.map(attach => <PictureZoom ket={attach} url={attach} elem_class="messageItem__thumb" />)
+                }
                 <span className="messageItem__date time_date">{item.createdAt ? dateHelper(item.createdAt) : "just now"} </span>
             </Media>
         </div >

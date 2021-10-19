@@ -7,7 +7,7 @@ module.exports = {
     Query: {
         order: async (_, { orderId }, { userId }) => {
             if (!userId) throw new Error("unauthenticated");
-            console.log(await Order.findById(orderId))
+
             const order = await Order.findById(orderId)
                 .populate({
                     path: "item"
@@ -21,7 +21,13 @@ module.exports = {
                 .populate({
                     path: "shipping"
                 })
-            console.log(order)
+                .populate({
+                    path: "seller"
+                })
+                .populate({
+                    path: "buyer"
+                })
+
             return order
         }
     },
@@ -47,7 +53,7 @@ module.exports = {
                 fabric: fabricId,
                 shipping: shippingId,
                 shippingAddress: shippingAddressId,
-                orderStatus: "pending",
+                status: "pending",
                 createdAt: new Date(),
                 seller: item.creator,
                 buyer: userId
@@ -70,7 +76,7 @@ module.exports = {
             if (!userId) throw new Error("unauthenticated");
             const order = await Order.findByIdAndUpdate(orderId,
                 {
-                    orderStatus: "active",
+                    status: "active",
                 })
                 .populate({ path: "item", select: "-_id title" })
                 .populate({ path: "buyer", select: "email" })
@@ -82,7 +88,8 @@ module.exports = {
                 createAt: new Date()
             })
             chat.save()
-            console.log(chat)
+            await order.save()
+            console.log(order)
             if (order) {
                 await sendEmail({
                     subject: `order ${order.item.title} confirmed`,
@@ -92,6 +99,7 @@ module.exports = {
                         link: `http://localhost:3000/order/${order._id}/`
                     }
                 })
+                return true
             }
 
 

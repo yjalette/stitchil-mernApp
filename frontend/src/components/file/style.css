@@ -1,0 +1,62 @@
+.fileMultiUpdate__wrap {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.fileMultiUpdate {
+    position: relative;
+}
+
+.fileMultiUpdate + .fileMultiUpdate {
+    margin-left: .3em;
+}
+
+.fileMultiUpdate img {
+    width: 70px;
+    height: 70px;
+}
+
+.fileMultiUpdate:hover img {
+    opacity: .3;
+}
+
+.fileMultiUpdate:hover .fileDeleteBtn {
+    display: flex;
+}
+
+.fileDeleteBtn {
+    display: none;
+}
+
+.fileList {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+
+    /* justify-content: center; */
+    /* padding: var(--padding-box); */
+}
+
+.file-upload-wrapper {
+    padding: .5em 0;
+    width: 70px;
+    border-radius: var(--border-radius);
+}
+
+.file-upload-wrapper + .file-upload-wrapper {
+    margin-left: .3em;
+}
+
+.fileUpload__img, .fileUpload__icon {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+}
+
+.fileUpload__icon {
+    background-image: url("https://res.cloudinary.com/dgxa9gpta/image/upload/v1602093311/Icons/upload-icon_eqsr6c.svg");
+    background-size: 70%;
+    background-repeat: no-repeat;
+    background-position: center;
+}

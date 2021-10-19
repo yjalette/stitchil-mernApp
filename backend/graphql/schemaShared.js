@@ -46,7 +46,6 @@ type Item {
     category: [String]
     garment: [String]
     occasion: [String]
-    style: [String]
     coverImage: String
     gallery: [String]
     active: Boolean 
@@ -67,11 +66,22 @@ type Package {
 
 type Shipping {
     _id: ID
-    itemId: ID
+    listingId: ID
     shippingCarrier: String
     mailClass: String
     shippingPrice: Int
     freeShipping: Boolean
+}
+
+type Product {
+    _id: ID
+    title: String
+    description: String
+    implementation: String
+    category: [String]
+    garment: String
+    occasion: [String]
+    updatedAt: String
 }
 
 type Order {
@@ -83,7 +93,7 @@ type Order {
     fabric: Fabric
     shipping: Shipping
     shippingAddress: Address
-    orderStatus: String
+    status: String
     createdAt: String
 }
 
@@ -126,12 +136,21 @@ type Message {
     _id: ID
     chatId: ID
     message: String
+    attachments: [String]
     seen: Boolean
     sender: AuthData
     recipient: AuthData
     createdAt: String
 }
 
+type File {
+    _id: ID
+    public_id: ID
+    docId: ID
+    fileName: String
+    url: String
+
+}
 
 `;
 

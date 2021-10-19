@@ -13,7 +13,6 @@ query item($itemId: ID){
        occasion
        garment
         category
-        style
         createdAt
         
     }

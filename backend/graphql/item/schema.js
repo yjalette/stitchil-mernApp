@@ -11,7 +11,6 @@ input ItemInput {
     description: String
     category: [String]
     garment: [String]
-    style: [String]
     occasion: [String]
 }
 

@@ -16,23 +16,25 @@ export const initState_search = {
 }
 export const initState_item = { title: "", service: [], category: [], garment: [], style: [], description: "" }
 export const initState_gig = { price: 0, delivery: 0 };
-export const initState_product = { for_sale: false, price: 0, accepting_offers: false };
+export const initState_product = { title: "", description: "", implementation: "sewing", category: [], garment: "" }
 // export const initState_item_description = { description: "", keywords: [] }
 export const initState_item_options = { title: "", service: [], category: [], garment: [], style: [] }
 export const initState_overview = {
-    "gig": { title: "", service: [], category: [], garment: [], style: [], description: "" },
-    "product": { title: "", category: [], garment: [], description: "" }
+    "gig": { title: "", description: "", implementation: "", category: [], garment: [] },
+    "product": { title: "", description: "", category: [], garment: [] }
 }
 
-export const initState_overview_new = {
-    "gigs": { title: "", service: [], category: [], garment: [], style: [], description: "" },
-    "portfolio": { title: "", category: [], garment: [], description: "" }
-}
+// export const initState_overview_new = {
+//     "gigs": { title: "", service: [], category: [], garment: [], style: [], description: "" },
+//     "portfolio": { title: "", category: [], garment: [], description: "" }
+// }
 
 export const initState_package = { type: "", fabrics: [], price: 0, delivery: 0, description: "" };
 export const initState_fabric = { name: "", color: "", image: "", content: "" };
 export const initState_swatch = { name: "", color: "", image: "", content: "" };
 export const initState_shipping = { shippingCarrier: "", shippingPrice: 0, mailClass: "", freeShipping: false };
+export const initState_variation = { variationName: "", options: [] }
+export const initState_option = { imageId: "", name: "", note: "", priceIncrease: 0 }
 
 export const initState_location = {
     address: "",

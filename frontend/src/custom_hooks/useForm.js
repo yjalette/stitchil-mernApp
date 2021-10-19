@@ -45,7 +45,8 @@ const useForm = (initState, submit) => {
     }
 
     const handleClear = () => {
-        setInputs(() => initState)
+        setInputs(() => initState);
+        setErrors({});
     }
 
     return {

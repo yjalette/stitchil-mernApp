@@ -13,11 +13,9 @@ type Message {
 
 type ChatRoom {
     _id: String
-    chatId: String
-    lastMessages: [Message]
-    member: String
+    lastMessage: String
+    member: AuthData
     updatedAt: String
-    chatImg: String
 }
 
 type Chat {
@@ -38,6 +36,7 @@ type Query {
 }
 
 type Mutation {   
+    sendQuickChatMessage(message: String, to_username: String, attachments: [Upload]): Message
     send_chat_message(message: String, to_username: String, from_username: String, chatId: ID): Message   
     sendChatMessage(message: String, to_username: String, from_username: String, chatId: ID): Message
     delete_chat(chatId: ID, msgId: ID): Boolean 

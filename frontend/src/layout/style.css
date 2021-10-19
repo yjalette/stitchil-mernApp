@@ -10,8 +10,6 @@
 
 .sectionWrapper {
     width: 100%;
-
-    /* height: 100%; */
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -56,10 +54,6 @@
 .listItem__content {
     color: var(--light-gray-color);
 }
-
-/* .listItem-about {
-    display: inline-block;
-} */
 
 .listItem__field::after {
     content: ":";
@@ -119,17 +113,6 @@
     color: var(--white-color);
 }
 
-/* alerts */
-/* .alertDemo .modal-header {
-    display: none;
-}
-
-.alertDemo__box {
-    background-color: var(--main-color-light);
-    box-shadow: var(--main-color-light);
-    border: 1.5px dashed var(--red-color);
-} */
-
 .customPopover, .customAlert.alert-dismiss {
     z-index: 1040;
     animation: dismissAnim 4s linear 1s forwards;
@@ -149,22 +132,6 @@
 .customAlert {
     width: 100%;
 }
-
-/* .customAlert .alert-heading::after {
-    font-family: "Font Awesome 5 Free";
-    font-weight: 900;
-    font-size: var(--sm-fonts);
-    margin-left: .3rem;
-} */
-
-/* .customAlert.alert-danger .customAlert__content::after {
-    content: "\f071";
-}
-
-.customAlert.alert-success .alert-heading::after {
-    content: "\f058";
-    color: var(--green-color);
-} */
 
 .customAlert.clear {
     background-color: transparent;
@@ -273,8 +240,6 @@
 
 .customMenu {
     width: 100%;
-
-    /* border-top: 1px solid var(--light-green-color); */
     border-bottom: 1px solid var(--light-green-color);
     text-align: center;
     margin: auto;
@@ -342,12 +307,16 @@
 }
 
 .customAccord {
-    /* display: flex; */
-    padding: 3em;
+    padding: 0.5em 3em;
 }
 
 .customAccord__title {
     cursor: pointer;
+    text-decoration: underline;
+}
+
+.customAccord--nested .customAccord__title {
+    font-size: 90%;
 }
 
 @media only screen and (max-width: 1600px) {

@@ -14,6 +14,16 @@ const OrderSummary = ({ item, pack, fabric, shipping }) => {
             <Col lg={9} sm={12}>
                 <BoxWrapper mod_class="orderSummary">
                     <SectionWrapper>
+                        <ListItem
+                            field="buyer"
+                            content={shipping.shippingCarrier}
+                        />
+                        <ListItem
+                            field="seller"
+                            content={shipping.mailClass}
+                        />
+                    </SectionWrapper>
+                    <SectionWrapper>
                         <ListItem field="title" content={item.title} />
                         <ListItem field="description" content={item.description} maxWords="50" />
                         <ListItem field="service" content={item.service} />

@@ -18,6 +18,8 @@ type Query {
 }
 
 type Mutation {
+    createPackage(packageInput: PackageInput, listingId: ID): Package 
+    updatePackage(packageInput: PackageInput, listingId: ID): Package 
     create_package(packageInput: PackageInput, itemId: ID): Package 
     update_package(packageInput: PackageInput, itemId: ID): Package 
 }

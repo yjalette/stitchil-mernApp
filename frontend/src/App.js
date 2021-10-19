@@ -25,16 +25,19 @@ import ProductDraft from './components/product/ProductDraft';
 import GigView from './components/gig/GigView';
 import OrderPage from './pages/orderPage/OrderPage';
 import OrderCreate from './pages/orderPage/OrderCreate';
-import OrderData from './pages/orderPage/OrderData';
-import OrderConfirm from './pages/orderPage/OrderConfirm';
+import OrderConfirm from './components/order/OrderConfirm';
 import DashboardPage from './pages/dashboardPage/DashboardPage';
 import ProjectPage from './pages/projectPage/ProjectPage';
+import MessengerPage from './pages/messengerPage/MessengerPage';
+import GigDraftPage from './pages/gigDraftPage/GigDraftPage';
+import ListingDraftPage from './pages/listingDraftPage/ListingDraftPage';
+import GigUpdate from './components/gig/GigUpdate';
 
 const userObj = JSON.parse(localStorage.getItem('user'));
 
 const authComponents = [
-  { auth_type: "login", children: <AuthLogin /> },
-  { auth_type: "verify_email", children: <AuthLogin verifiedEmail={true} /> },
+  { auth_type: "login", children: <AuthLogin auth_type="login" /> },
+  { auth_type: "verify_email", children: <AuthLogin auth_type="verify_email" verifiedEmail={true} /> },
   { auth_type: "join", children: <AuthJoin /> },
   { auth_type: "forgot_password", children: <AuthForgotPassword /> },
   { auth_type: "forgot_password/:token", children: <AuthForgotPassword /> }
@@ -86,15 +89,22 @@ class App extends Component {
             <Route path="/homepage/:section/" component={LandingPage} />
             <Route path="/explore" component={ExplorePage} />
             <Route path="/explore/:filter/" component={ExplorePage} />
-            <Route exact path="/messages/" component={ChatRoomsPage} />
-            <Route path="/messages/:username/" component={ChatRoomsPage} />
+            <Route exact path="/chat-rooms/" component={ChatRoomsPage} />
+            <Route path="/messages/:chatId/" component={MessengerPage} />
             <Route path="/dashboard/" component={DashboardPage} />
             <Route path="/logout/" component={AuthLogout} />
+            <Route path="/listing/type-make/:listingId/" component={GigDraftPage} />
+            <Route path="/listing/draft/type-make/:listingId/" component={() => (
+              <ListingDraftPage>
+                <GigUpdate />
+              </ListingDraftPage>
+            )} />
+
             <Route path="/order/active/:orderId" component={ProjectPage} />
             {authComponents.map((elem, i) => (
               <Route
                 key={i}
-                path={`/auth/${elem.auth_type}`}
+                path={`/auth/${elem.auth_type}/`}
                 component={() => (
                   <AuthPage auth_type={elem.auth_type}>
                     {elem.children}

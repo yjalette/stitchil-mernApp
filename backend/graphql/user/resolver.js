@@ -1,5 +1,7 @@
 const User = require("../../models/user");
 const Item = require("../../models/item");
+const Message = require("../../models/message");
+const Chat = require("../../models/chat");
 const { comparePwd, createPwd, verifyJWT } = require("../../helpers/creds");
 const { uploadToCloud, deleteSingleFile } = require("../../helpers/uploadToCloud");
 const { unauthorized_error,
@@ -26,6 +28,38 @@ module.exports = {
         userAccount: async (_, args, { userId }) => userId ? await User.findById(userId) : new Error('unauthenticated')
     },
     Mutation: {
+        sendUserMessage: async (_, { message, to_username, attachments }, { userId }) => {
+            if (!userId) throw new Error("unauthenticated");
+            const user2 = await User.findOne({ username: to_username });
+            if (!user2) throw new Error("user doesn't exist");
+            const newMessage = await new Message({
+                message,
+                sender: userId,
+                createdAt: new Date()
+            })
+            const chat = await Chat.findOne({ members: { $all: [userId, user2._id] } })
+            if (chat) newMessage.chatId = chat._id
+
+            if (!chat) {
+                const newChat = await new Chat({
+                    members: [userId, user2._id],
+                    createdAt: new Date()
+                }).save()
+                newMessage.chatId = newChat._id
+            }
+
+            await newMessage.save()
+            try {
+                const result = {
+                    ...newMessage._doc
+                }
+                // pubsub.publish('CHAT_NEW_MESSAGE', { chat_new_message: result });
+                return result
+            } catch (error) {
+                throw Error(error)
+            }
+
+        },
         updateUsername: async (_, username, { userId }) => {
             if (await User.exists(username)) return usernameTaken_error;
             return await handleUpdate(userId, username);

@@ -20,8 +20,8 @@ const messageSchema = new Schema({
     },
     attachments: [
         {
-            type: Schema.Types.ObjectId,
-            ref: 'File'
+            type: String,
+            required: false
         }
     ],
     type: {

@@ -12,6 +12,7 @@ module.exports = new ApolloServer({
     playground: process.env.NODE_ENV !== "production",
     context: async ({ req, res, connection }) => {
         if (connection) {
+            console.log("connection sub-->", connection)
             // Operation is a Subscription
             return {
                 pubsub

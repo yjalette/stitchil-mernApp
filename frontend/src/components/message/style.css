@@ -75,6 +75,11 @@
     padding: .1em;
 }
 
+.messageItem__thumb, .message__img--thumb {
+    width: 25px;
+    height: 25px;
+}
+
 .messageForm {
     max-height: calc(100% - 500px);
     padding: 2em;

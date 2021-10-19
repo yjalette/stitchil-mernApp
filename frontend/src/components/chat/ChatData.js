@@ -24,11 +24,12 @@ const ChatData = ({ chatId, children }) => {
         })
     }
 
+    console.log(state)
     if (loading) return <div> ...loading</div>
 
     return (
-        <ChatContext.Provider value={{ messages: data.chat.messages, chat: state, updateCache }}>
-            <MessageList messages={data.chat.messages} />
+        <ChatContext.Provider value={{ messages: data.chat && data.chat.messages, chat: state, updateCache }}>
+            <MessageList messages={data.chat && data.chat.messages} />
             {children}
         </ChatContext.Provider>
     )

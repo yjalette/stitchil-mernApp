@@ -16,9 +16,27 @@ export const DASHBOARD_QUERY = gql`
                 username
             }
             createdAt
-            orderStatus
+            status
           }
-
+          gigs {
+            _id
+            item {
+                _id
+                title
+                active
+            }
+            createdAt
+          }
+          listings {
+            _id
+            listingType
+            active
+            details {
+                _id
+                title
+            }
+            createdAt
+          }
         }
 }     
 `;

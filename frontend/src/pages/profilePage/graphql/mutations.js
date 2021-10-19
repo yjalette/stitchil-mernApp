@@ -37,7 +37,6 @@ export const CREATE_GIGS_ITEM_MUTATION = gql`
             price
             delivery
             category
-            styles
             fabrics
             createdAt
         }
@@ -70,7 +69,6 @@ export const section_mutation = {
                 price
                 delivery
                 category
-                styles
                 swatches
                 keywords
                 createdAt

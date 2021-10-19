@@ -36,7 +36,7 @@ const AddressForm = ({ inputs, onChange, onMultiChange, onSubmit }) => {
                         value: inputs.address2,
                         placeholder: "Apartment, studio, or floor",
                         onChange: onChange,
-                        required: true
+                        required: false
                     }} />
                 } />
             <Row className="flex-center justify-content-around">

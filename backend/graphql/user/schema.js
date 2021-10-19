@@ -61,6 +61,7 @@ type Query {
     profile(username: String): Profile  
 }
 type Mutation {    
+    sendUserMessage(message: String, to_username: String, attachments: [Upload]): Message
     updateGeneral(country: [String], languages: [String], fullname: String): Response
     updateEmail(email: String): Response
     updateUsername(username: String): Response

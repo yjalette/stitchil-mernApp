@@ -36,9 +36,10 @@ h3 {
 }
 
 h4 {
-    /* width: 100%; */
+    color: var(--light-gray-color);
     position: relative;
-    padding: var(--padding-box);
+
+    /* padding: var(--padding-box); */
     overflow: hidden;
     margin: 0;
 }

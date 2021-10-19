@@ -15,6 +15,8 @@ import FormTypeahead from '../../components/inputs/FormTypeahead';
 import FormInput from '../../components/inputs/FormInput';
 import useSlides from '../../custom_hooks/useSlides';
 import FormGroup from '../../components/inputs/FormGroup';
+import CustomButton from '../../layout/button/CustomButton';
+import CustomAlert from '../../layout/CustomAlert';
 
 const AuthJoin = () => {
     const { push } = useHistory()
@@ -29,7 +31,7 @@ const AuthJoin = () => {
         setErrors,
         setMsg,
         msg } = useForm(initState_join, onSubmit);
-    const [post] = useMutation(SIGNUP_MUTATION, { onCompleted });
+    const [post, { data }] = useMutation(SIGNUP_MUTATION, { onCompleted });
 
     const props = useCallback(
         label => {
@@ -78,8 +80,10 @@ const AuthJoin = () => {
         {
             label: "role",
             input_component: <SelectInput
-                input_props={{ ...props("role") }}
-                options={["designer", "buyer"]} />
+                input_props={{
+                    ...props("role")
+                }}
+                options={["", "designer", "buyer"]} />
         },
     ].map((input) => <FormGroup
         key={input.label}
@@ -88,15 +92,27 @@ const AuthJoin = () => {
         input_component={input.input_component}
     />)
 
-    const { activeSlide, buttons, slides } = useSlides(0, [
+    const { activeSlide, slides, handleForward, handleBackward } = useSlides(0, [
         <>
             {form_inputs[0]}
             <Password {...props("password")} />
             <Password {...props("confirm_password")} />
+            {!inputs.googleAuth &&
+                <CustomButton
+                    btn_class="btn-icon-text fas fa-arrow-right"
+                    onClick={() => handleForward()}>
+                    continue
+                </CustomButton>}
             <GoogleButton responseGoogle={responseGoogle} />
         </>,
-        form_inputs.slice(1)
-
+        <>
+            {form_inputs.slice(1)}
+            <CustomButton
+                btn_class="btn-icon-text fas fa-arrow-left backward"
+                onClick={() => handleBackward()}>
+                back
+            </CustomButton>
+        </>
     ])
 
     function responseGoogle(response) {
@@ -121,10 +137,11 @@ const AuthJoin = () => {
             setErrors(newErrors)
         };
     }
-    console.log(errors)
 
     function onSubmit() {
-        console.log(errors)
+        // if (inputs.role === "") return setErrors({
+        //     role: "role can't be empty"
+        // })
         if (Object.keys(errors).length === 0) {
             post({
                 variables: {
@@ -135,25 +152,33 @@ const AuthJoin = () => {
     }
 
     function onCompleted(data) {
-        if (data && data.createUser.code) setErrors({ form_error: data.createUser.message });
+        // if an error 
+        if (data && data.createUser.code) {
+            setErrors({ form_error: data.createUser.message });
+        }
+        // if googleauth and success
         if (data.createUser.username) return onSuccess(data.createUser, setUser, push);
+        // if success but not googleauth - confirm email
         if (data.createUser.emailSent) {
             setMsg("We have sent an email with a confirmation link. In order to complete the sign-up process, please click the confirmation link");
-            setInputs(initState_join);
         }
+        return setTimeout(clearForm, 5000)
+    }
+
+    function clearForm() {
+        setInputs(initState_join);
+        setErrors({})
+        setMsg("")
     }
 
     return (
-        <>
-            <CustomForm
-                form_class="authJoin"
-                form_error={errors.form_error}
-                form_msg={msg}
-                onSubmit={handleSubmit}>
-                {!inputs.googleAuth ? activeSlide : slides[1]}
-            </CustomForm>
-            {!inputs.googleAuth && buttons}
-        </>
+        <CustomForm
+            form_class="authJoin"
+            form_error={errors["form_error"]}
+            form_msg={msg}
+            onSubmit={handleSubmit}>
+            {!inputs.googleAuth ? activeSlide : slides[1]}
+        </CustomForm>
     )
 }
 

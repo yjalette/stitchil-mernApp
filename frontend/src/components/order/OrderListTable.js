@@ -9,7 +9,14 @@ const OrderListTable = ({ orders }) => {
     return (
         <div>
             <BoxWrapper mod_class="orderListTable">
-                <Table striped borderless hover responsive="md" size="sm" variant="dark" className="orderListTable">
+                <Table
+                    striped
+                    borderless
+                    hover
+                    responsive="md"
+                    size="sm"
+                    variant="dark"
+                    className="orderListTable">
                     <thead>
                         <tr>
                             <th>Order</th>
@@ -18,18 +25,21 @@ const OrderListTable = ({ orders }) => {
                         </tr>
                     </thead>
                     <tbody>
-                        {orders && orders.length > 0 && orders.map((order, i) => {
-                            return (
-                                <tr key={order._id}>
-                                    <td
-                                        className="clickElem"
-                                        onClick={() => push(`/order/${order.orderStatus}/${order._id}/`)}>{order.item.title}</td>
-                                    <td>{order.orderStatus}</td>
-                                    <td>{dateHelper(order.createdAt)}</td>
-                                </tr>
-                            )
-                        })}
-
+                        {orders &&
+                            orders.length > 0 &&
+                            orders.map((order, i) => {
+                                return (
+                                    <tr key={order._id}>
+                                        <td
+                                            className="clickElem"
+                                            onClick={() => push(`/order/${order.status}/${order._id}/`)}>
+                                            {order.item.title}
+                                        </td>
+                                        <td>{order.status}</td>
+                                        <td>{dateHelper(order.createdAt)}</td>
+                                    </tr>
+                                )
+                            })}
                     </tbody>
                 </Table>
             </BoxWrapper>

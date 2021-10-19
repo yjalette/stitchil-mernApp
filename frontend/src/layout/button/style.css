@@ -126,6 +126,15 @@
     margin-left: .5em;
 }
 
+.btn-icon-text.backward {
+    align-self: start;
+    flex-direction: row !important;
+}
+
+.btn-icon-text.backward::before {
+    margin: 0 .5em 0 0;
+}
+
 .btn-icon-red, .btn-icon.red {
     background-color: var(--red-color);
     box-shadow: var(--box-shadow-red);

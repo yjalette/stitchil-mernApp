@@ -5,6 +5,7 @@ import FormInput from '../inputs/FormInput';
 
 const MessageForm = ({ inputs, onSubmit, onChange, children, mod_class }) => (
     <>
+        {children}
         <CustomForm form_class={`messageForm messageForm--${mod_class}`} submitTitle="send" onSubmit={onSubmit}>
             {inputs.subject && <FormInput name="subject" value={inputs.subject} onChange={onChange} />}
             <InputGroup className="messageForm__inputWrap">

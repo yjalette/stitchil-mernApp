@@ -2,7 +2,7 @@ import React from 'react'
 
 const SectionHeader = ({ title, children }) => (
     <div className="sectionHeader">
-        <h3 className="sectionHeader__title title">{title}</h3>
+        <h4 className="sectionHeader__title title">{title}</h4>
         {children}
     </div>
 )

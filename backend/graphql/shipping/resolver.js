@@ -1,5 +1,5 @@
 const Shipping = require("../../models/shipping");
-const Gig = require("../../models/gig");
+const Listing = require("../../models/listing");
 
 module.exports = {
     Query: {
@@ -9,20 +9,32 @@ module.exports = {
         }
     },
     Mutation: {
-        createShipping: async (_, { shippingInput }, { userId }) => {
+        createShipping: async (_, { shippingInput, listingId }, { userId }) => {
             if (!userId) throw new Error("unauthenticated");
-            const { itemId } = shippingInput
             const shipping = await new Shipping({
                 ...shippingInput,
-                item: itemId
+                listingId
             }).save();
             console.log(shipping)
-            await Gig.findOneAndUpdate({ item: itemId }, { $push: { shipping_options: shipping._id } })
+            await Listing.findByIdAndUpdate(listingId, { $push: { shipping_options: shipping._id } })
             return shipping
         },
-        updateShipping: async (_, { shippingInput }, { userId }) => {
+        updateShipping: async (_, { shippingInput, shippingId }, { userId }) => {
             if (!userId) throw new Error("unauthenticated");
-            return await Shipping.findOneAndUpdate({ _id: shippingInput._id }, shippingInput, { new: true })
+            try {
+                return await Shipping.findByIdAndUpdate(shippingId, shippingInput, { new: true })
+            } catch (error) {
+                throw new Error(`update shipping error=====>>>> ${error}`)
+            }
+        },
+        deleteShipping: async (_, { shippingId }, { userId }) => {
+            if (!userId) throw new Error("unauthenticated");
+            try {
+                await Shipping.findByIdAndDelete(shippingId)
+            } catch (error) {
+                throw new Error(`delete shipping error=====>>>> ${error}`)
+            }
+            return true
         }
     }
 }

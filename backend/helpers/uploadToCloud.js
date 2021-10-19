@@ -21,11 +21,24 @@ async function deleteSingleFile(param) {
     }
 }
 
+
+async function deleteFile(id) {
+    // const file = await File.findOne(param);
+    // console.log("file--->", file)
+    return await cloudinary.v2.uploader
+        .destroy(id, async (error) =>
+            error ?
+                new Error("deleting file error", error)
+                :
+                true)
+}
+
 async function deleteFiles(urls) {
     return urls.forEach(url => deleteSingleFile({ url }))
 }
 
 async function uploadToCloud({ file, public_id }) {
+    console.log(file, public_id)
     cloud_config;
     const { createReadStream } = await file;
     const uploadPromise = new Promise((resolve, reject) => {
@@ -36,7 +49,7 @@ async function uploadToCloud({ file, public_id }) {
             if (!public_id || !secure_url) reject("file wasn't save to the cloud", error)
             resolve({ url: secure_url, public_id })
 
-        }, { public_id: public_id.replace(/\s/g, '') });
+        }, public_id);
         readStream.pipe(cloudStream)
     })
     return await uploadPromise;
@@ -82,4 +95,5 @@ exports.singleUpload = singleUpload;
 exports.saveFile = saveFile;
 exports.deleteSingleFile = deleteSingleFile;
 exports.deleteFiles = deleteFiles;
+exports.deleteFile = deleteFile;
 exports.cloud_config = cloud_config;

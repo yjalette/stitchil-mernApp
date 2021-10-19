@@ -11,7 +11,10 @@ const ShippingDetails = ({ shipping, options }) => {
     return (
         <>
             <BoxWrapper mod_class="shippingDetails flex-center">
-                <ListItem field="shipping" icon="fas fa-shipping-fast" content={`${shipping.shippingCarrier} ${shipping.mailClass} +$${shipping.shippingPrice}`} />
+                <ListItem
+                    field="shipping"
+                    icon="fas fa-shipping-fast"
+                    content={`${shipping.shippingCarrier} ${shipping.mailClass} +$${shipping.shippingPrice}`} />
                 {options && <CustomButton
                     onClick={() => toggle()}
                     btn_class="btn-icon-plain fas fa-edit"

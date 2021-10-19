@@ -13,3 +13,17 @@ export const SEND_CHAT_MESSAGE_MUTATION = gql`
             }
         }
 `
+
+export const SEND_MESSAGE_MUTATION = gql`
+        mutation sendMessage($message: String, $attachments: [Upload],  $chatId: ID){
+            sendMessage(message: $message, attachments: $attachments, chatId: $chatId){
+                _id
+                chatId
+                message
+                sender {
+                    username
+                }
+                createdAt
+            }
+        }
+`

@@ -23,6 +23,19 @@ module.exports = {
                 })
             return gig
         },
+        // singleGig: async (_, { gigId }, { userId }) => {
+        //     const gig = await Gig.findById(gigId)
+        //         .populate({ path: "product" })
+        //         .populate({
+        //             path: "packages", populate: {
+        //                 path: "fabrics"
+        //             }
+        //         })
+        //         .populate({
+        //             path: "shipping_options"
+        //         })
+        //     return gig
+        // },
         explore_gigs: async (_, { filters, page }, { res }) => {
             const query = filters && Object.values(filters).length > 0 ? createFilterQuery(filters) : {}
             const items = await Item.find(query)
@@ -37,6 +50,9 @@ module.exports = {
         }
     },
     Mutation: {
+        // createGig: async (_, {gigInput}, req) => {
+
+        // }
         // create_gig_variant: async (_, { variantInput, itemId }, { userId }) => {
         //     if (!userId) throw new Error("unauthenticated");
         //     await Gig.findOneAndUpdate({ item: itemId }, { $push: { variants: variantInput } })

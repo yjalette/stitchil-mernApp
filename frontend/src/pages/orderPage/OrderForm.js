@@ -62,11 +62,11 @@ const OrderForm = ({ inputs, handleChange, onSubmit, errors, item, shipping_opti
                             submitTitle="place"
                         >
                             <Container className="orderForm__total flex-center">
-                                <h3>package ${orderPackage.price}</h3>
-                                <h3>+</h3>
-                                <h3>shipping ${orderShipping.shippingPrice}</h3>
-                                <h3>=</h3>
-                                <h3>order total ${orderPackage.price + orderShipping.shippingPrice}</h3>
+                                <h4>package ${orderPackage.price}</h4>
+                                <h4>+</h4>
+                                <h4>shipping ${orderShipping.shippingPrice}</h4>
+                                <h4>=</h4>
+                                <h4>order total ${orderPackage.price + orderShipping.shippingPrice}</h4>
                             </Container>
                         </CustomForm>
                     </Container>
