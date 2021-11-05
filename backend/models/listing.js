@@ -7,6 +7,12 @@ const listingSchema = new Schema({
         type: String,
         required: false
     },
+    gallery: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'File'
+        }
+    ],
     details: {
         type: Schema.Types.ObjectId,
         ref: 'Product'

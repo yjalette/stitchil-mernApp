@@ -22,13 +22,11 @@ async function deleteSingleFile(param) {
 }
 
 
-async function deleteFile(id) {
-    // const file = await File.findOne(param);
-    // console.log("file--->", file)
+async function deleteFile(publicId) {
     return await cloudinary.v2.uploader
-        .destroy(id, async (error) =>
+        .destroy(publicId, async (error) =>
             error ?
-                new Error("deleting file error", error)
+                new Error("deleting file from cloud error--->", error)
                 :
                 true)
 }

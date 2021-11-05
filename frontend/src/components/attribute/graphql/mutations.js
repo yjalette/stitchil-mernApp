@@ -13,6 +13,17 @@ export const ATRRIBUTES_UPDATE_MUTATION = gql`
     mutation updateAttributes($attributesListInput: [AttributeInput], $listingId: ID){
         updateAttributes(attributesListInput: $attributesListInput, listingId: $listingId) {
             _id
+            attributeName
+            attributeValue
+           
+        }
+}     
+`;
+
+export const ATRRIBUTE_UPDATE_MUTATION = gql`
+    mutation updateAttribute($attributeValue: String, $attributeId: ID){
+        updateAttribute(attributeValue: $attributeValue, attributeId: $attributeId) {
+            _id
            
         }
 }     

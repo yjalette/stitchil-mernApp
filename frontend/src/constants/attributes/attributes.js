@@ -5,45 +5,87 @@ import sleeves from "./sleeve_types";
 import pockets from "./pocket_types";
 import fits from "./fit_types";
 import jacket_types from "./jacket_types";
-
+import fabrics from "../fabrics";
 
 export const attributes = {
-    dress: {
-        neckline_type: necklines,
-        silhouette_type: silhouettes,
-        sleeve_type: sleeves,
-        pocket_type: pockets,
-        fit_type: fits,
-    },
-    jacket: {
-        neckline_type: necklines,
-        sleeve_type: sleeves,
-        pocket_type: pockets,
-        jacket_type: jacket_types
-    },
-    pants: {
-        pocket_type: pockets,
-        fit_type: fits
+    make: {
+        dress: {
+            primary_fabric: {
+                options: fabrics,
+                required: false
+            },
+            secondary_fabric: {
+                options: fabrics,
+                required: false
+            },
+            primary_color: {
+                options: colors,
+                required: false
+            },
+            secondary_color: {
+                options: colors,
+                required: false
+            },
+            neckline_type: {
+                options: necklines,
+                required: false
+            },
+            silhouette_type: {
+                options: silhouettes,
+                required: false
+            },
+            sleeve_type: {
+                options: sleeves,
+                required: false
+            },
+            pocket_type: {
+                options: pockets,
+                required: false
+            }
+        },
+        jacket: {
+            primary_fabric: {
+                options: fabrics,
+                required: false
+            },
+            secondary_fabric: {
+                options: fabrics,
+                required: false
+            },
+            primary_color: {
+                options: colors,
+                required: false
+            },
+            secondary_color: {
+                options: colors,
+                required: false
+            },
+            neckline_type: {
+                options: necklines,
+                required: true
+            },
+            sleeve_type: {
+                options: sleeves,
+                required: false
+            },
+            pocket_type: {
+                options: pockets,
+                required: false
+            },
+            jacket_type: {
+                options: jacket_types,
+                required: false
+            }
+        },
+        pants: {
+            pocket_type: {
+                options: pockets,
+                required: false
+            },
+            fit_type: {
+                options: fits,
+                required: false
+            },
+        }
     }
-}
-
-export const dress = {
-    neckline_type: necklines,
-    silhouette_type: silhouettes,
-    sleeve_type: sleeves,
-    pocket_type: pockets,
-    fit_type: fits,
-}
-
-
-export const jacket = {
-    neckline_type: necklines,
-    sleeve_type: sleeves,
-    pocket_type: pockets,
-    jacket_type: jacket_types
-}
-
-export const pants = {
-    pocket_type: pockets,
-    fit_type: fits
 }

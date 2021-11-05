@@ -4,6 +4,7 @@ import CustomModal from '../../layout/CustomModal'
 import { CREATE_LISTING_MUTATION } from './graphql/mutations'
 import ProductCreate from '../product/ProductCreate'
 import { useHistory } from 'react-router'
+import { attributes } from '../../constants/attributes/attributes'
 
 
 const ListingNew = ({ listingType }) => {
@@ -17,11 +18,15 @@ const ListingNew = ({ listingType }) => {
         }
     })
 
-    const handleListingSave = (productId) => {
+
+    const handleListingSave = (productId, productType) => {
+        const listingAttributes = Object.keys(attributes[listingType][productType])
+        console.log(productId, listingAttributes)
         createListing({
             variables: {
+                productId,
                 listingType,
-                productId
+                listingAttributes
             }
         })
 
@@ -29,12 +34,11 @@ const ListingNew = ({ listingType }) => {
 
     return (
         <CustomModal
+            modal_title={listingType === "make" ? "create a gig" : ""}
+            modal_size="md"
             btn_class="btn-click"
-            btn_title={listingType === "make" ?
-                "create a gig" :
-                ""}
+            btn_title={listingType === "make" ? "create a gig" : ""}
         >
-
             <ProductCreate
                 onCompleted={handleListingSave} />
         </CustomModal>

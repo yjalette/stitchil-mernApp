@@ -18,8 +18,9 @@ input AttributeInput {
 }
 
 type Mutation {
+    createAttribute(attributeInput: AttributeInput, listingId: ID): Attribute
     createAttributes(attributesListInput: [AttributeInput], listingId: ID): [Attribute]
-    updateAttributes(attributesListInput: [AttributeInput]): [Attribute]
+    updateAttribute(attributeValue: String, attributeId: ID): Attribute
     deleteAttributes(attributeId_list: [ID]): Boolean
 }
 

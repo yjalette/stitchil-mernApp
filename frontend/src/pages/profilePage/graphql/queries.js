@@ -20,37 +20,22 @@ export const PROFILE_QUERY = gql`
                     experience
                 }
              }
-                portfolio {
+               
+                listings {
                     _id
-                    group
-                    title
-                    description
-                    coverImage
-                    gallery
-                    garment
-                    category
-                    occasion
-                    updatedAt
-                    active
-                }  
-
-                gigs {
-                    _id
-                    title
-                    group
-                    description
-                    coverImage
-                    gallery
-                    garment
-                    category
-                    occasion
+                    listingType
+                    details {
+                        _id
+                        productType
+                        title
+                        description
+                    }
                     active
                     updatedAt
                 }
 
                 reviews {
-                    _id
-                   
+                    _id      
                     message
                     createdAt
                 }

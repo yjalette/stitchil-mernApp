@@ -18,6 +18,7 @@ const messageResolver = require('./message/resolver')
 const listingResolver = require('./listing/resolver')
 const fileResolver = require('./file/resolver')
 const variationResolver = require('./variation/resolver')
+const attributeResolver = require('./attribute/resolver')
 
 
 const resolvers = {
@@ -57,7 +58,8 @@ const resolvers = {
         ...productResolver.Mutation,
         ...listingResolver.Mutation,
         ...fileResolver.Mutation,
-        ...variationResolver.Mutation
+        ...variationResolver.Mutation,
+        ...attributeResolver.Mutation
     },
     Subscription: {
         ...chatResolver.Subscription,

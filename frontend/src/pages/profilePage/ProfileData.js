@@ -10,7 +10,7 @@ const ProfileData = ({ logged_in_user, children }) => {
     const { username, section } = useParams()
     const { data, error } = useQuery(PROFILE_QUERY, { variables: { username } });
     const [state, setState] = useState({})
-    console.log(state)
+
     useEffect(() => {
         if (data) setState(data.profile);
     }, [data]);

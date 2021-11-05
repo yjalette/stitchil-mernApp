@@ -1,4 +1,5 @@
 import React from 'react'
+import options from '../../constants/options';
 import CustomForm from '../../layout/CustomForm';
 import FormGroup from '../inputs/FormGroup';
 import FormInput from '../inputs/FormInput';
@@ -29,13 +30,21 @@ const ProductForm = ({
                 // multiple={label === "keywords"}
                 // allowNew={label === "keywords"}
                 />
+                else if (label === "productType") input_component = <SelectInput
+                    input_props={{
+                        name: label,
+                        value: inputs[label] || "",
+                        onChange
+                    }}
+                    options={options.productType}
+                />
                 else if (label === "implementation") input_component = <SelectInput
                     input_props={{
                         name: label,
                         value: inputs[label] || "",
                         onChange
                     }}
-                    options={["sewing", "knitting"]}
+                    options={options.implementation}
                 />
                 else if (label === "description") input_component = <FormInput
                     input_props={{

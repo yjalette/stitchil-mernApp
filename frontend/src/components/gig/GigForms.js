@@ -2,9 +2,10 @@ import React, { useContext } from 'react'
 import { Row, Tab, Col, Nav } from 'react-bootstrap'
 import ListingContext from '../../context/Listing-context'
 import BoxWrapper from '../../layout/BoxWrapper'
-import AttributesCreate from '../attributes/AttributesCreate'
+import AttributeUpdate from '../attribute/AttributeUpdate'
 import FileMultiUpdate from '../file/FileMultiUpdate'
 import FileMultiUpload from '../file/FileMultiUpload'
+import GalleryReorder from '../gallery/GalleryReorder'
 import ListingPublish from '../listing/ListingPublish'
 import ProductUpdate from '../product/ProductUpdate'
 import ShippingCreate from '../shipping/ShippingCreate'
@@ -18,6 +19,27 @@ const GigForms = () => {
         state,
         updateQuery } = useContext(ListingContext);
 
+    const addNewPhotosGallery = (newPhotos) => {
+        updateQuery(prev => {
+            return {
+                listing: {
+                    ...prev.listing,
+                    gallery: prev.listing.gallery.concat(newPhotos)
+                }
+            }
+        })
+    }
+    const deletePhotoGallery = id => {
+        updateQuery(prev => {
+            return {
+                listing: {
+                    ...prev.listing,
+                    gallery: prev.listing.gallery.filter(photo => photo._id !== id)
+                }
+            }
+        })
+    }
+    console.log(state)
     if (!state) return <div>...loading</div>;
     return (
         <div>
@@ -30,11 +52,11 @@ const GigForms = () => {
                                 <Nav.Link eventKey="details">Details</Nav.Link>
                             </Nav.Item>
                             <Nav.Item>
-                                <Nav.Link eventKey="gallery">Gallery</Nav.Link>
-                            </Nav.Item>
-                            <Nav.Item>
                                 <Nav.Link
                                     eventKey="attributes">Attributes</Nav.Link>
+                            </Nav.Item>
+                            <Nav.Item>
+                                <Nav.Link eventKey="gallery">Gallery</Nav.Link>
                             </Nav.Item>
                             <Nav.Item>
                                 <Nav.Link
@@ -61,28 +83,41 @@ const GigForms = () => {
                             <Tab.Pane eventKey="details">
                                 <ProductUpdate product={state.details} />
                             </Tab.Pane>
-                            <Tab.Pane eventKey="gallery">
+                            <Tab.Pane eventKey="attributes">
                                 <BoxWrapper>
+                                    <h6>Attributes</h6>
                                     <div className="py-3">
-                                        <h6>Gallery</h6>
-                                        {state.gallery &&
-                                            !!state.gallery.length &&
-                                            <FileMultiUpdate prevFiles={state.gallery} />
-                                        }
-                                    </div>
-                                    <div className="py-3">
-                                        <h6>new uploads</h6>
-                                        <FileMultiUpload docId={state._id} />
+                                        {state.attributes &&
+                                            !!state.attributes.length &&
+                                            state.attributes.map(attribute => <AttributeUpdate
+                                                key={attribute.attributeName}
+                                                attribute={attribute}
+                                                listingType={state.listingType}
+                                                productType={state.details && state.details.productType}
+                                            />)}
                                     </div>
                                 </BoxWrapper>
                             </Tab.Pane>
-                            <Tab.Pane eventKey="attributes">
+                            <Tab.Pane eventKey="gallery">
                                 <BoxWrapper>
                                     <div className="py-3">
-                                        <h6>Attributes</h6>
-                                        <AttributesCreate garment_type="dress" />
+                                        {/* <h6 >
+                                            Gallery
+                                        </h6> */}
+                                        {state.gallery &&
+                                            !!state.gallery.length &&
+                                            <FileMultiUpdate
+                                                docId={state._id}
+                                                onDeleteCompleted={deletePhotoGallery}
+                                                prevFiles={state.gallery} />
+                                        }
                                     </div>
-
+                                    <div className="py-3">
+                                        <h6 className="d-flex align-items-center">
+                                            new uploads
+                                            <FileMultiUpload docId={state._id} onCompleted={addNewPhotosGallery} /></h6>
+                                    </div>
+                                    {/* <GalleryReorder items={state.gallery} /> */}
                                 </BoxWrapper>
                             </Tab.Pane>
                             <Tab.Pane eventKey="variations">

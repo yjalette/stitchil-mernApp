@@ -10,7 +10,7 @@ export default {
     styles: ["classic", "casual", "artsy", "professional", "sporty", "grunge", "bohemian"],
     // category: ["dresses", "suits", "shirts", "pants", "tops", "sweaters", "jackets", "skirts"],
     category: ["eveningwear", "childrenswear", "streetwear", "costume", "bridal", "petwear"],
-    garment: ["dress", "suit", "shirt", "pants", "top", "sweater", "jacket", "skirt", "accessories"],
+    productType: ["dress", "suit", "shirt", "pants", "top", "sweater", "jacket", "skirt", "accessories"],
     implementation: ["sewing", "knitting", "crocheting"],
     occasion: ["evening", "outdoor", "vacation", "work", "wedding", "everyday"],
     price: { min: Array.from(Array(10).keys(), x => x * 50), max: Array.from(Array(10).keys(), x => x * 50 + 50) },

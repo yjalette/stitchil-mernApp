@@ -15,7 +15,7 @@ const productSchema = new Schema({
         type: String,
         required: false
     },
-    garment: {
+    productType: {
         type: String,
         required: false
     },
@@ -26,34 +26,6 @@ const productSchema = new Schema({
     occasion: {
         type: Array,
         required: false
-    },
-    attributes: {
-        color: {
-            type: String,
-            required: false
-        },
-        fabric: {
-            name: {
-                type: String,
-                required: false
-            },
-            note: {
-                type: String,
-                required: false
-            }
-        },
-        customAttributes: [
-            {
-                attributeName: {
-                    type: String,
-                    required: false
-                },
-                attributeValue: {
-                    type: String,
-                    required: false
-                },
-            }
-        ]
     },
     updatedAt: {
         type: Date,

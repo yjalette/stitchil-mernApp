@@ -8,6 +8,7 @@ type Listing {
     listingType: String
     active: Boolean
     details: Product
+    attributes: [Attribute]
     gallery: [File]
     variations: [Variation]
     shipping_options: [Shipping]
@@ -22,7 +23,7 @@ input ListingInput {
     title: String
     description: String
     category: [String]
-    garment: String
+    productType: String
     occasion: [String]
 }
 
@@ -31,8 +32,9 @@ type Query {
 }
 
 type Mutation {    
-    createListing(productId: ID, listingType: String): ID 
+    createListing(productId: ID, listingType: String, listingAttributes: [String]): ID 
     updateListing(listingInput: ListingInput): Boolean 
+    updateListingGallery(newUploads: [Upload], reorderedGalleryIds: [ID], deletedGalleryIds: [ID]): [File] 
     publishListing(listingId: ID): Boolean 
     deleteListing(listingId: ID): Boolean 
 }

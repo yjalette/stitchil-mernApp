@@ -1,7 +1,7 @@
 const User = require("../../models/user");
-const Item = require("../../models/item");
 const Message = require("../../models/message");
 const Chat = require("../../models/chat");
+const Listing = require("../../models/listing");
 const { comparePwd, createPwd, verifyJWT } = require("../../helpers/creds");
 const { uploadToCloud, deleteSingleFile } = require("../../helpers/uploadToCloud");
 const { unauthorized_error,
@@ -18,11 +18,20 @@ module.exports = {
         profile: async (_, { username }, req) => {
             const user = await User.findOne({ username })
                 .populate({ path: 'designer' })
-                .populate({ path: "reviews", populate: "sender", options: { sort: { createdAt: -1 } } })
+                .populate({
+                    path: "reviews",
+                    populate: "sender",
+                    options: {
+                        sort: {
+                            createdAt: -1
+                        }
+                    }
+                })
             return {
                 intro: user,
-                portfolio: await Item.find({ creator: user._id, group: "product" }),
-                gigs: await Item.find({ creator: user._id, group: "gig" })
+                listings: await Listing
+                    .find({ creator: user._id })
+                    .populate({ path: "details" })
             }
         },
         userAccount: async (_, args, { userId }) => userId ? await User.findById(userId) : new Error('unauthenticated')

@@ -9,24 +9,23 @@ export const initState_gigs = { title: "", description: "", styles: [], category
 export const initState_search = {
     style: options.style,
     category: options.category,
-    garment: options.garment,
     min: Array.from(Array(10).keys(), x => x * 50),
     max: Array.from(Array(10).keys(), x => x * 50 + 50),
     worldwide: true
 }
-export const initState_item = { title: "", service: [], category: [], garment: [], style: [], description: "" }
+export const initState_item = { title: "", service: [], category: [], productType: [], style: [], description: "" }
 export const initState_gig = { price: 0, delivery: 0 };
-export const initState_product = { title: "", description: "", implementation: "sewing", category: [], garment: "" }
+export const initState_product = { title: "", description: "", implementation: "sewing", category: [], productType: "" }
 // export const initState_item_description = { description: "", keywords: [] }
-export const initState_item_options = { title: "", service: [], category: [], garment: [], style: [] }
+export const initState_item_options = { title: "", service: [], category: [], productType: [], style: [] }
 export const initState_overview = {
-    "gig": { title: "", description: "", implementation: "", category: [], garment: [] },
-    "product": { title: "", description: "", category: [], garment: [] }
+    "gig": { title: "", description: "", implementation: "", category: [], productType: [] },
+    "product": { title: "", description: "", category: [], productType: [] }
 }
 
 // export const initState_overview_new = {
-//     "gigs": { title: "", service: [], category: [], garment: [], style: [], description: "" },
-//     "portfolio": { title: "", category: [], garment: [], description: "" }
+//     "gigs": { title: "", service: [], category: [], productType: [], style: [], description: "" },
+//     "portfolio": { title: "", category: [], productType: [], description: "" }
 // }
 
 export const initState_package = { type: "", fabrics: [], price: 0, delivery: 0, description: "" };

@@ -10,7 +10,8 @@ import ProfileContext from '../../context/Profile-context';
 
 export const ProfileGrid = memo(
     () => {
-        const { state, section } = useContext(ProfileContext);
+        const { state } = useContext(ProfileContext);
+        console.log(state)
         return (
             <>
                 <section className="profileHeader">
@@ -21,13 +22,12 @@ export const ProfileGrid = memo(
                         <ProfileIntro />
                     </Col>
                     <Col xl={8} lg={7} md={6} sm={12} className="profile__col profile-rightComlun">
-                        <SectionNav
+                        {/* <SectionNav
                             currSection={section}
                             items={["gigs", state.intro.role === "designer" && "portfolio", "reviews"]}
-                        />
+                        /> */}
                         <BoxWrapper>
-                            {section === "reviews" ? <ProfileReviews values={[]} />
-                                : <ProfileItems values={state[section]} />}
+                            <ProfileItems values={state.listings} />
                         </BoxWrapper>
                     </Col>
                 </Row>

@@ -10,7 +10,7 @@ input ProductInput {
     title: String
     description: String
     category: [String]
-    garment: String
+    productType: String
     occasion: [String]
 }
 

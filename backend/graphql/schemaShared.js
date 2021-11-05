@@ -79,7 +79,7 @@ type Product {
     description: String
     implementation: String
     category: [String]
-    garment: String
+    productType: String
     occasion: [String]
     updatedAt: String
 }
@@ -149,6 +149,7 @@ type File {
     docId: ID
     fileName: String
     url: String
+    order: Int
 
 }
 

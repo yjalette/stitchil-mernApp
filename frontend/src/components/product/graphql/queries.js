@@ -10,7 +10,7 @@ export const PRODUCT_QUERY = gql`
                         description
                         coverImage
                         gallery
-                        garment
+                        productType
                         active
                         group
                         category

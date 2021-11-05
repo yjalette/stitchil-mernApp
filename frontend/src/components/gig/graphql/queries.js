@@ -11,7 +11,7 @@ export const GIG_QUERY = gql`
                         description
                         coverImage
                         gallery
-                        garment
+                        productType
                         service
                         active
                         group

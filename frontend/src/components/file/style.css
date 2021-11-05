@@ -11,17 +11,26 @@
     margin-left: .3em;
 }
 
-.fileMultiUpdate img {
+/* .fileMultiUpdate img {
     width: 70px;
     height: 70px;
-}
+} */
 
 .fileMultiUpdate:hover img {
     opacity: .3;
 }
 
-.fileMultiUpdate:hover .fileDeleteBtn {
+/* .fileMultiUpdate:hover .fileDeleteBtn {
     display: flex;
+}
+
+.fileMultiUpdate.cover {
+    position: relative;
+} */
+
+.fileMultiUpdate span {
+    position: absolute;
+    background-color: white;
 }
 
 .fileDeleteBtn {

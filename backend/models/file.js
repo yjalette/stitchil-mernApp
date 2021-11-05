@@ -14,17 +14,13 @@ const fileSchema = new Schema({
         type: String,
         required: false
     },
+    order: {
+        type: Number,
+        required: false
+    },
     url: {
         type: String,
         required: false
-    },
-    cover: {
-        type: Boolean,
-        required: false
-    },
-    creator: {
-        type: Schema.Types.ObjectId,
-        ref: 'User'
     },
     user: {
         type: Schema.Types.ObjectId,

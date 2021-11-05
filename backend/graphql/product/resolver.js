@@ -13,16 +13,11 @@ module.exports = {
             try {
                 const newProduct = await new Product({
                     ...productInput
-                }).save();
-                console.log(newProduct)
+                }).save()
                 return newProduct._id
             } catch (error) {
                 throw new Error(`create product error +====> ${error}`)
             }
-
-
-            // await createDoc(newProduct._id, group)
-
         },
         updateProduct: async (_, { productInput }, { userId }) => {
             if (!userId) throw new Error("unauthenticated");

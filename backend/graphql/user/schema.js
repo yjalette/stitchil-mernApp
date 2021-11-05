@@ -16,8 +16,7 @@ type ProfileIntro {
 }
 type Profile {
     intro: ProfileIntro
-    gigs: [Item]
-    portfolio: [Item]
+    listings: [Listing]
     reviews: [Message]
 }
 type Account {

@@ -12,7 +12,7 @@ export const LISTING_QUERY = gql`
                         title
                         description
                         implementation
-                        garment
+                        productType
                         category
                         occasion
                     }
@@ -20,6 +20,7 @@ export const LISTING_QUERY = gql`
                         _id
                         url
                         public_id
+                        order
                     }
                     variations {
                         _id
@@ -38,6 +39,11 @@ export const LISTING_QUERY = gql`
                         shippingPrice
                         mailClass
                         freeShipping
+                    }
+                    attributes {
+                        _id
+                        attributeName
+                        attributeValue
                     }
                     updatedAt
         }  
