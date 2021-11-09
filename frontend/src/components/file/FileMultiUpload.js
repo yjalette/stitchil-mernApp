@@ -54,18 +54,11 @@ const FileMultiUpload = ({ docId, overLimit, onCompleted }) => {
         )
     }
     return (
-
-        // <Container>
-        //     {saved && <ActionStatus status="success" />}
-        //     {error && <ActionStatus status="error" />}
-        // </Container>
         <>
-
             {!overLimit ?
                 <div {...getRootProps()} className="file-upload-wrapper">
                     <input {...getInputProps({ className: 'dropzone' })} multiple={true} />
-                    {/* <div className="fileUpload__icon">
-                    </div> */}
+
                     <CustomButton
                         btn_class="btn-icon fas fa-upload mx-2"
                         btn_otherProps={{

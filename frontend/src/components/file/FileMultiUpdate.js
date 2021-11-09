@@ -15,28 +15,21 @@ const SortableContainer = sortableContainer(({ children }) => {
 
 const FileMultiUpdate = ({ docId, prevFiles, onDeleteCompleted }) => {
     const [gallery, setGallery] = useState([]);
-    const [editMode, toggleEditMode] = useToggle(false);
     const [reorderedGallery, setReorderedGallery] = useState([])
-    const [post] = useMutation(UPDATE_FILES_MUTATION);
+    const [editMode, toggleEditMode] = useToggle(false);
+    const [post] = useMutation(UPDATE_FILES_MUTATION, {
+        onCompleted: data => {
+            if (data) {
+                toggleEditMode()
+            }
+        }
+    });
 
     useEffect(() => {
         if (prevFiles) setGallery(prevFiles)
     }, [prevFiles]);
 
     const toggleDelete = id => {
-        // console.log(deletedGalleryItems.some(fileId => fileId === id))
-        // if (deletedGalleryItems.some(fileId => fileId === id)) {
-        //     return setDeletedGalleryItems(
-        //         deletedGalleryItems.filter(fileId => fileId !== id)
-        //     )
-        // }
-        // else return setDeletedGalleryItems([
-        //     ...deletedGalleryItems,
-        //     id
-        // ])
-        // // setTimeout(() => {
-        // //     onDeleteCompleted(id)
-        // // }, 5000)
         setGallery(
             gallery.filter(file => file._id !== id)
         )
@@ -118,6 +111,20 @@ const FileMultiUpdate = ({ docId, prevFiles, onDeleteCompleted }) => {
         </div>
     )
 }
+
+// console.log(deletedGalleryItems.some(fileId => fileId === id))
+// if (deletedGalleryItems.some(fileId => fileId === id)) {
+//     return setDeletedGalleryItems(
+//         deletedGalleryItems.filter(fileId => fileId !== id)
+//     )
+// }
+// else return setDeletedGalleryItems([
+//     ...deletedGalleryItems,
+//     id
+// ])
+// // setTimeout(() => {
+// //     onDeleteCompleted(id)
+// // }, 5000)
 
 export default FileMultiUpdate
 
